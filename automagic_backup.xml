@@ -459,7 +459,7 @@ attachment_name=getString("attachment_name");</extras>
   <trigger type="periodic_timer">
     <useDefaultName>false</useDefaultName>
     <name>Periohhdic Timer: every 1m</name>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <frequency>60000</frequency>
     <wakeDevice>true</wakeDevice>
     <fixedTimes>true</fixedTimes>
@@ -17729,7 +17729,7 @@ method: cp_send$spfdb</notecontainer>
   <flow type="flow">
     <name>@ GITHUB UPLOAD</name>
     <group>‎</group>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <actioncontainer id="t1" x="910.0" y="-577.5">Download URL: https://raw.githubusercontent.com/TakahiroEX666/DatabaseAPI/main/tes3 to /storage/emulated/0//bao</actioncontainer>
     <notecontainer id="t2" x="-910.0" y="-367.5" w="140.0" h="105.0">ถ้าจะทับต้องมี sha</notecontainer>
