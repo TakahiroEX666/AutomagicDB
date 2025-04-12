@@ -567,6 +567,16 @@ attachment_name=getString("attachment_name");</extras>
     <ignoreOngoing>false</ignoreOngoing>
     <ignoreGroupSummary>false</ignoreGroupSummary>
   </trigger>
+  <trigger type="user_interface_event">
+    <useDefaultName>true</useDefaultName>
+    <name>UI Event: Window opened package com.android.systemui contains text แชร์หน้าจอ</name>
+    <enabled>true</enabled>
+    <accessibilityEventType>TYPE_WINDOW_STATE_CHANGED</accessibilityEventType>
+    <packageNameFilter>com.android.systemui</packageNameFilter>
+    <textMatchType>CONTAINS_TEXT</textMatchType>
+    <textFilter>แชร์หน้าจอ</textFilter>
+    <removeNonPrintableCharacters>false</removeNonPrintableCharacters>
+  </trigger>
   <trigger type="key_event">
     <useDefaultName>false</useDefaultName>
     <name>V_D</name>
@@ -4594,6 +4604,17 @@ os=callJavaConstructor("java.io.DataOutputStream","DataOutputStream(java.io.Outp
    sleep(20)
 }</script>
   </action>
+  <action type="control_user_interface">
+    <useDefaultName>true</useDefaultName>
+    <name>Control UI: while(not click("แชร์แอปเดียว")) {sleep(20);} sleep(100); while(not click("แชร์ทั้งหน้าจอ")) {sleep(20);} sleep(100); while(not click("แชร์หน้าจอ")) {sleep(20);} sleep(1000);</name>
+    <script>
+while(not click("แชร์แอปเดียว")) {sleep(20);}
+sleep(100);
+while(not click("แชร์ทั้งหน้าจอ")) {sleep(20);}
+sleep(100);
+while(not click("แชร์หน้าจอ")) {sleep(20);}
+sleep(1000);</script>
+  </action>
   <action type="copy_text_to_clipboard">
     <useDefaultName>true</useDefaultName>
     <name>Copy Text to Clipboard: {latlng}</name>
@@ -6999,16 +7020,6 @@ else {
     <keepScreenOn>false</keepScreenOn>
     <enlargeDialogWidth>false</enlargeDialogWidth>
     <keyboardCapitalizeSentences>false</keyboardCapitalizeSentences>
-  </action>
-  <action type="input_speech">
-    <useDefaultName>true</useDefaultName>
-    <name>Input Speech: </name>
-    <showUI>true</showUI>
-    <prompt></prompt>
-    <defineLanguage>false</defineLanguage>
-    <language>en-US</language>
-    <useBluetoothHeadset>true</useBluetoothHeadset>
-    <preferOffline>false</preferOffline>
   </action>
   <action type="script">
     <useDefaultName>false</useDefaultName>
@@ -17519,13 +17530,15 @@ ENCRYPT</actioncontainer>
   </flow>
   <flow type="flow">
     <name>Flow1</name>
-    <enabled>false</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="35.0" y="52.5" />
-    <conditioncontainer id="t2" x="35.0" y="787.5"> Debug Dialog</conditioncontainer>
-    <actioncontainer id="t3" x="-140.0" y="297.5">Input Speech: </actioncontainer>
-    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <group>          ♻️  LOCAL-SYNC</group>
+    <enabled>true</enabled>
+    <executionPolicy>SKIP</executionPolicy>
+    <emergencyStopCount>999999</emergencyStopCount>
+    <triggercontainer id="t1" x="70.0" y="52.5">
+      <trigger>UI Event: Window opened package com.android.systemui contains text แชร์หน้าจอ</trigger>
+    </triggercontainer>
+    <actioncontainer id="t2" x="70.0" y="437.5">Control UI: while(not click("แชร์แอปเดียว")) {sleep(20);} sleep(100); while(not click("แชร์ทั้งหน้าจอ")) {sleep(20);} sleep(100); while(not click("แชร์หน้าจอ")) {sleep(20);} sleep(1000);</actioncontainer>
+    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow10</name>
