@@ -115,6 +115,14 @@ NOW
     <allowInDeviceIdle>true</allowInDeviceIdle>
     <likeAlarmClock>false</likeAlarmClock>
   </trigger>
+  <trigger type="activity_ended">
+    <useDefaultName>true</useDefaultName>
+    <name>Activity Ended: com.shopee.foody.driver.th/com.shopee.foody.driver.popmanager.activity.PopActivity</name>
+    <enabled>false</enabled>
+    <method>CLASSIC</method>
+    <packageNameFilter>com.shopee.foody.driver.th</packageNameFilter>
+    <classNameFilter>com.shopee.foody.driver.popmanager.activity.PopActivity</classNameFilter>
+  </trigger>
   <trigger type="activity_started">
     <useDefaultName>true</useDefaultName>
     <name>Activity Started: com.shopee.foody.driver.th/com.shopee.foody.driver.MainActivity</name>
@@ -516,14 +524,6 @@ attachment_name=getString("attachment_name");</extras>
     <textMatchType>CONTAINS_TEXT</textMatchType>
     <textFilter>คุณต้องการปฏิเสธคำสั่งซื้อใช่ไหม?</textFilter>
     <removeNonPrintableCharacters>false</removeNonPrintableCharacters>
-  </trigger>
-  <trigger type="activity_started">
-    <useDefaultName>false</useDefaultName>
-    <name>SPF-HOME</name>
-    <enabled>false</enabled>
-    <method>CLASSIC</method>
-    <packageNameFilter>com.shopee.foody.driver.th</packageNameFilter>
-    <classNameFilter>com.shopee.foody.driver.MainActivity</classNameFilter>
   </trigger>
   <trigger type="activity_started">
     <useDefaultName>false</useDefaultName>
@@ -4323,7 +4323,7 @@ ENCRYPT</name>
     <useDefaultName>false</useDefaultName>
     <name>BTN-ACCEPT</name>
     <script>
-sleep(3000);
+sleep(15000);
 
 while(getBounds("ยอมรับ(*")!=null) {
 
@@ -15664,11 +15664,11 @@ TAKE, DENY</name>
       <trigger>SPF-NOTIF</trigger>
     </triggercontainer>
     <actioncontainer id="t2" x="315.0" y="-297.5">EXECUTE SENDER</actioncontainer>
-    <actioncontainer id="t3" x="105.0" y="-472.5">PERFORM</actioncontainer>
-    <conditioncontainer id="t4" x="315.0" y="-472.5">CPI-ORD</conditioncontainer>
-    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <conditioncontainer id="t3" x="315.0" y="-472.5">CPI-ORD</conditioncontainer>
+    <actioncontainer id="t4" x="105.00002" y="-437.5">PERFORM</actioncontainer>
     <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#20  SPF DATABASE</name>
@@ -15763,14 +15763,11 @@ bounds = getBoundsById("com.shopee.foody.driver.th:id/btn_text");</notecontainer
     <actioncontainer id="t38" x="105.0" y="-3972.5">2 ROUTE
 CURRENT</actioncontainer>
     <actioncontainer id="t39" x="105.0" y="-3867.5">PRESENT</actioncontainer>
-    <triggercontainer id="t40" x="105.0" y="-4602.5">
-      <trigger>SPF-ICM</trigger>
-    </triggercontainer>
-    <actioncontainer id="t41" x="420.0" y="-3867.5">WGT-DENY</actioncontainer>
-    <actioncontainer id="t42" x="209.99997" y="-3552.5">Script: time="{getDate(),datedformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</actioncontainer>
-    <actioncontainer id="t43" x="209.99995" y="-3447.5">Execute Root Command: screencap -p /storage/emulated/0/Android/application/SPFDB/SCREENSHOT/{time}.png in </actioncontainer>
-    <actioncontainer id="t44" x="420.0" y="-3972.5">ST-TAKE,CANCEL</actioncontainer>
-    <notecontainer id="t45" x="1032.5" y="-3465.0" w="735.0" h="490.0">12.04.2025 13:08:21.008 [#21  INCOMING] Flow continues executing with the next step.
+    <actioncontainer id="t40" x="420.0" y="-3972.5">ST-TAKE,CANCEL</actioncontainer>
+    <actioncontainer id="t41" x="244.99995" y="-3552.5">Script: time="{getDate(),datedformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</actioncontainer>
+    <actioncontainer id="t42" x="244.99998" y="-3447.5">Execute Root Command: screencap -p /storage/emulated/0/Android/application/SPFDB/SCREENSHOT/{time}.png in </actioncontainer>
+    <actioncontainer id="t43" x="420.0" y="-3867.5">WGT-DENY</actioncontainer>
+    <notecontainer id="t44" x="1032.5" y="-3465.0" w="735.0" h="490.0">12.04.2025 13:08:21.008 [#21  INCOMING] Flow continues executing with the next step.
 12.04.2025 13:08:21.008 [#21  INCOMING] Start executing condition 'FOOD? '
 12.04.2025 13:08:21.010 [#21  INCOMING] End executing condition 'FOOD? ' with return value true
 12.04.2025 13:08:21.010 [#21  INCOMING] Flow continues executing with the next step.
@@ -15787,7 +15784,10 @@ CURRENT</actioncontainer>
 12.04.2025 13:08:21.397 [#21  INCOMING] End executing action 'BTN-ACCEPT' and exception sleep(3000) interrupted (Expression: sleep(3000)[line 1])
 12.04.2025 13:08:21.398 [#21  INCOMING] Stop requested, stopping flow execution
 </notecontainer>
-    <actioncontainer id="t46" x="420.0" y="-3657.5">BTN-ACCEPT</actioncontainer>
+    <actioncontainer id="t45" x="420.0" y="-3657.5">BTN-ACCEPT</actioncontainer>
+    <triggercontainer id="t46" x="105.0" y="-4602.5">
+      <trigger>SPF-ICM</trigger>
+    </triggercontainer>
     <connection from="t2" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t13" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -15796,7 +15796,7 @@ CURRENT</actioncontainer>
     <connection from="t22" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t22" to="t23" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t23" to="t25" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t23" to="t44" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t23" to="t40" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
     <connection from="t25" to="t31" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t26" to="t28" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t27" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -15808,14 +15808,14 @@ CURRENT</actioncontainer>
     <connection from="t33" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t37" to="t38" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t38" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t38" to="t44" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t38" to="t40" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t39" to="t34" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t40" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t41" to="t46" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t41" to="t42" type="NORMAL" sourcePosition="WEST" targetPosition="NORTH" />
-    <connection from="t42" to="t43" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t44" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t46" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t40" to="t43" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t41" to="t42" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t43" to="t45" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t43" to="t41" type="NORMAL" sourcePosition="WEST" targetPosition="NORTH" />
+    <connection from="t45" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t46" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#22A  DENY &lt;MAINACT&gt;</name>
@@ -15824,20 +15824,20 @@ CURRENT</actioncontainer>
     <enabled>false</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <triggercontainer id="t1" x="70.0" y="-122.5">
-      <trigger>SPF-HOME</trigger>
-    </triggercontainer>
-    <notecontainer id="t2" x="280.0" y="-122.5" w="140.0" h="105.0">OFF ACTIVITY</notecontainer>
-    <actioncontainer id="t3" x="-105.0" y="192.5">HIDE DENY,DETAIL</actioncontainer>
-    <actioncontainer id="t4" x="70.0" y="192.5">❌
+    <notecontainer id="t1" x="280.0" y="-122.5" w="140.0" h="105.0">OFF ACTIVITY</notecontainer>
+    <actioncontainer id="t2" x="-105.0" y="192.5">HIDE DENY,DETAIL</actioncontainer>
+    <actioncontainer id="t3" x="70.0" y="192.5">❌
 TAKE, DENY</actioncontainer>
-    <actioncontainer id="t5" x="70.0" y="297.5">STOP INC</actioncontainer>
-    <actioncontainer id="t6" x="245.0" y="192.5">CLEAR </actioncontainer>
-    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t1" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t1" to="t2" type="NOTE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t4" x="70.0" y="297.5">STOP INC</actioncontainer>
+    <actioncontainer id="t5" x="245.0" y="192.5">CLEAR </actioncontainer>
+    <triggercontainer id="t6" x="70.0" y="-122.5">
+      <trigger>Activity Ended: com.shopee.foody.driver.th/com.shopee.foody.driver.popmanager.activity.PopActivity</trigger>
+    </triggercontainer>
+    <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t1" type="NOTE" sourcePosition="EAST" targetPosition="WEST" />
   </flow>
   <flow type="flow">
     <name>#22B  DENY &lt;DIALOG&gt;</name>
