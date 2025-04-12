@@ -15875,16 +15875,16 @@ TAKE, DENY</actioncontainer>
     <group>         🧬  MAP SERVICES</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <actioncontainer id="t1" x="2450.0" y="-402.5">BASE-XML </actioncontainer>
-    <actioncontainer id="t2" x="2065.0" y="-402.5">FOOD-RP</actioncontainer>
-    <conditioncontainer id="t3" x="3220.0" y="-997.5">FILE2?</conditioncontainer>
-    <actioncontainer id="t4" x="3220.0" y="-822.5">SQL-CANCEL ัั</actioncontainer>
-    <actioncontainer id="t5" x="2310.0" y="-402.5">BASE-CSV</actioncontainer>
-    <actioncontainer id="t6" x="2310.0" y="157.5">Execute Flows: #33:  LOCATION ENGINE</actioncontainer>
-    <conditioncontainer id="t7" x="2310.0" y="-997.5">EXIST?</conditioncontainer>
-    <actioncontainer id="t8" x="2310.0" y="-857.5">SEL
+    <triggercontainer id="t1" x="2310.0" y="-1452.5" />
+    <actioncontainer id="t2" x="2450.0" y="-402.5">BASE-XML </actioncontainer>
+    <actioncontainer id="t3" x="2065.0" y="-402.5">FOOD-RP</actioncontainer>
+    <conditioncontainer id="t4" x="3220.0" y="-997.5">FILE2?</conditioncontainer>
+    <actioncontainer id="t5" x="3220.0" y="-822.5">SQL-CANCEL ัั</actioncontainer>
+    <actioncontainer id="t6" x="2310.0" y="-402.5">BASE-CSV</actioncontainer>
+    <actioncontainer id="t7" x="2310.0" y="157.5">Execute Flows: #33:  LOCATION ENGINE</actioncontainer>
+    <conditioncontainer id="t8" x="2310.0" y="-997.5">EXIST?</conditioncontainer>
+    <actioncontainer id="t9" x="2310.0" y="-857.5">SEL
 ASSIGN/CC</actioncontainer>
-    <triggercontainer id="t9" x="2310.0" y="-1452.5" />
     <actioncontainer id="t10" x="2590.0" y="-1452.5">UPDATE DB
 API</actioncontainer>
     <notecontainer id="t11" x="3080.0" y="-787.5" w="140.0" h="105.0">ให้อ้างอิงยกเลิก</notecontainer>
@@ -15896,20 +15896,20 @@ API</actioncontainer>
     <actioncontainer id="t17" x="2310.0" y="-192.5">WRITEFILE</actioncontainer>
     <actioncontainer id="t18" x="2310.0" y="-87.5">  OK  </actioncontainer>
     <actioncontainer id="t19" x="2310.0" y="-647.5">FILTER X4+CC</actioncontainer>
-    <connection from="t3" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t2" type="EXCEPTION" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t7" to="t8" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t3" type="EXCEPTION" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t8" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t12" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t14" to="t12" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t15" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t17" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t18" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t19" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t18" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t19" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#33:  LOCATION ENGINE</name>
@@ -16054,74 +16054,74 @@ AUTOFILL</actioncontainer>
     <group>         🧬  MAP SERVICES</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <conditioncontainer id="t1" x="-944.99994" y="-927.5">   OK   </conditioncontainer>
-    <actioncontainer id="t2" x="-945.0" y="-227.49997">RUN SH</actioncontainer>
-    <actioncontainer id="t3" x="-944.99994" y="-752.5">ORS-DIREX</actioncontainer>
-    <actioncontainer id="t4" x="-945.0" y="-507.5">ENCODE</actioncontainer>
-    <actioncontainer id="t5" x="-945.0001" y="-402.50003">SH COMMAND</actioncontainer>
-    <actioncontainer id="t6" x="-945.0" y="227.49966">KML PATH</actioncontainer>
-    <actioncontainer id="t7" x="-944.99994" y="332.49988">RM PATHTEMP</actioncontainer>
-    <actioncontainer id="t8" x="-945.0" y="17.499996">DECODE TXT</actioncontainer>
-    <actioncontainer id="t9" x="-945.0" y="122.49999">KML CMD</actioncontainer>
-    <actioncontainer id="t10" x="-945.0" y="-1067.4999">LATLON MAP</actioncontainer>
-    <actioncontainer id="t11" x="-1330.0" y="-962.5">PATH PROCESS</actioncontainer>
-    <conditioncontainer id="t12" x="-1330.0" y="-752.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t13" x="-1330.0" y="-1067.5">PAST-TIME</actioncontainer>
-    <notecontainer id="t14" x="-1330.0" y="-1172.5" w="140.0" h="35.0">PATH MOCK</notecontainer>
-    <notecontainer id="t15" x="-945.0" y="-1172.5" w="140.0" h="35.0">PATH EXPORT</notecontainer>
-    <actioncontainer id="t16" x="-945.00024" y="-612.5">BASE</actioncontainer>
-    <actioncontainer id="t17" x="1715.0" y="-297.5">Script: response=fromJSON(response); start=response["routes"][0]["steps"][0]["location"]; start="{start[1]},{start[0]}"; end=response["routes"][0]["steps"][ljjength(response["routes"][0]["steps"])-1]["location"]; enfrd="{end[1]},{end[0]}"; waypoint=""; for (i in [0 to length(response["routes"][0]["steps"])-1]) { if(resbbbbponse["routes"][0]["steps"][i]["type"]=="job") { point=response["routes"][0]["steps"][i]["location"]; waypoint=waypoint+"{point[1]},{point[0]}|" } } waypoint=substring(waypoint, 0, length(waypoint)-1); uri = "https://www.google.com/maps/dir/?api=1" + "&amp;origin={start}" + "&amp;destination={end}" + "&amp;waypoints={waypoint}";</actioncontainer>
-    <actioncontainer id="t18" x="1715.0" y="-402.49982">HTTP Request: POST https://api.openrouteservice.org/optimization application/json {route} store in response</actioncontainer>
-    <actioncontainer id="t19" x="1715.0" y="-507.50003">Script: route=newMapFromValues("jobs", newList(),"vehicles",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST")) { addElement(route["jobs"], newMapFromValues( "id", i+1, "service",300, "delivery",newList(2), "location",newList( toNumber(file_text[i][3]), toNumber(file_text[i][2]) ) //"skills",newList(1) )); } } addElement(route["vehicles"],newMapFromValues( "id",1, "profile","driving-car", "start",newList(100.350930,13.745119), "end",newList(100.350930,13.745119), "capacity",newList(1000) )); route=toJSON(route)</actioncontainer>
-    <actioncontainer id="t20" x="350.0" y="-1067.4998">CURRENT-LOC</actioncontainer>
-    <actioncontainer id="t21" x="350.0001" y="-962.5002">IMPORT CSV</actioncontainer>
-    <actioncontainer id="t22" x="349.99997" y="-507.5">DATA-HERE</actioncontainer>
-    <actioncontainer id="t23" x="350.00003" y="-402.49997">HERE OPT-API</actioncontainer>
-    <actioncontainer id="t24" x="349.9999" y="-297.50003">Scripbbjt: nnj</actioncontainer>
-    <actioncontainer id="t25" x="349.99997" y="52.499996">Start Activity: android.intent.action.VIEW {uri} </actioncontainer>
-    <actioncontainer id="t26" x="770.0001" y="-297.50003">Scripbbjt: </actioncontainer>
-    <actioncontainer id="t27" x="770.0" y="-402.49988">HTTP Request: POST https://api.geoapify.com/v1/routeplanner?apiKey=a9ebe60151e245fba58b5cb5b5ae09d7 application/json {route} store in response</actioncontainer>
-    <actioncontainer id="t28" x="770.0" y="-507.50006">Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",120) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</actioncontainer>
-    <actioncontainer id="t29" x="1260.0" y="-507.5">DATA-HERzE</actioncontainer>
-    <actioncontainer id="t30" x="1260.0" y="-402.50024">HTTP Request: POST https://api.longdo.com/route-tsp-v2 application/x-www-form-urlencoded {encodeurl} store in response</actioncontainer>
-    <actioncontainer id="t31" x="1260.0" y="-297.5">Scripjjjt: response=fromJSON(response);</actioncontainer>
-    <notecontainer id="t32" x="490.0" y="-507.5" w="140.0" h="105.0">HERE 
+    <triggercontainer id="t1" x="350.00018" y="-1277.5" />
+    <conditioncontainer id="t2" x="-944.99994" y="-927.5">   OK   </conditioncontainer>
+    <actioncontainer id="t3" x="-945.0" y="-227.49997">RUN SH</actioncontainer>
+    <actioncontainer id="t4" x="-944.99994" y="-752.5">ORS-DIREX</actioncontainer>
+    <actioncontainer id="t5" x="-945.0" y="-507.5">ENCODE</actioncontainer>
+    <actioncontainer id="t6" x="-945.0001" y="-402.50003">SH COMMAND</actioncontainer>
+    <actioncontainer id="t7" x="-945.0" y="227.49966">KML PATH</actioncontainer>
+    <actioncontainer id="t8" x="-944.99994" y="332.49988">RM PATHTEMP</actioncontainer>
+    <actioncontainer id="t9" x="-945.0" y="17.499998">DECODE TXT</actioncontainer>
+    <actioncontainer id="t10" x="-945.0" y="122.5">KML CMD</actioncontainer>
+    <actioncontainer id="t11" x="-945.0" y="-1067.4999">LATLON MAP</actioncontainer>
+    <actioncontainer id="t12" x="-1330.0" y="-962.5">PATH PROCESS</actioncontainer>
+    <conditioncontainer id="t13" x="-1330.0" y="-752.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t14" x="-1330.0" y="-1067.5">PAST-TIME</actioncontainer>
+    <notecontainer id="t15" x="-1330.0" y="-1172.5" w="140.0" h="35.0">PATH MOCK</notecontainer>
+    <notecontainer id="t16" x="-945.0" y="-1172.5" w="140.0" h="35.0">PATH EXPORT</notecontainer>
+    <actioncontainer id="t17" x="-945.00024" y="-612.5">BASE</actioncontainer>
+    <actioncontainer id="t18" x="1715.0" y="-297.5">Script: response=fromJSON(response); start=response["routes"][0]["steps"][0]["location"]; start="{start[1]},{start[0]}"; end=response["routes"][0]["steps"][ljjength(response["routes"][0]["steps"])-1]["location"]; enfrd="{end[1]},{end[0]}"; waypoint=""; for (i in [0 to length(response["routes"][0]["steps"])-1]) { if(resbbbbponse["routes"][0]["steps"][i]["type"]=="job") { point=response["routes"][0]["steps"][i]["location"]; waypoint=waypoint+"{point[1]},{point[0]}|" } } waypoint=substring(waypoint, 0, length(waypoint)-1); uri = "https://www.google.com/maps/dir/?api=1" + "&amp;origin={start}" + "&amp;destination={end}" + "&amp;waypoints={waypoint}";</actioncontainer>
+    <actioncontainer id="t19" x="1715.0" y="-402.49982">HTTP Request: POST https://api.openrouteservice.org/optimization application/json {route} store in response</actioncontainer>
+    <actioncontainer id="t20" x="1715.0" y="-507.5">Script: route=newMapFromValues("jobs", newList(),"vehicles",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST")) { addElement(route["jobs"], newMapFromValues( "id", i+1, "service",300, "delivery",newList(2), "location",newList( toNumber(file_text[i][3]), toNumber(file_text[i][2]) ) //"skills",newList(1) )); } } addElement(route["vehicles"],newMapFromValues( "id",1, "profile","driving-car", "start",newList(100.350930,13.745119), "end",newList(100.350930,13.745119), "capacity",newList(1000) )); route=toJSON(route)</actioncontainer>
+    <actioncontainer id="t21" x="350.0" y="-1067.4998">CURRENT-LOC</actioncontainer>
+    <actioncontainer id="t22" x="350.0001" y="-962.5002">IMPORT CSV</actioncontainer>
+    <actioncontainer id="t23" x="349.99997" y="-507.5">DATA-HERE</actioncontainer>
+    <actioncontainer id="t24" x="350.00003" y="-402.49997">HERE OPT-API</actioncontainer>
+    <actioncontainer id="t25" x="349.9999" y="-297.50003">Scripbbjt: nnj</actioncontainer>
+    <actioncontainer id="t26" x="349.99997" y="52.5">Start Activity: android.intent.action.VIEW {uri} </actioncontainer>
+    <actioncontainer id="t27" x="770.0001" y="-297.50003">Scripbbjt: </actioncontainer>
+    <actioncontainer id="t28" x="770.0" y="-402.49988">HTTP Request: POST https://api.geoapify.com/v1/routeplanner?apiKey=a9ebe60151e245fba58b5cb5b5ae09d7 application/json {route} store in response</actioncontainer>
+    <actioncontainer id="t29" x="770.0" y="-507.50006">Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",120) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</actioncontainer>
+    <actioncontainer id="t30" x="1260.0" y="-507.5">DATA-HERzE</actioncontainer>
+    <actioncontainer id="t31" x="1260.0" y="-402.50024">HTTP Request: POST https://api.longdo.com/route-tsp-v2 application/x-www-form-urlencoded {encodeurl} store in response</actioncontainer>
+    <actioncontainer id="t32" x="1260.0" y="-297.5">Scripjjjt: response=fromJSON(response);</actioncontainer>
+    <notecontainer id="t33" x="490.0" y="-507.5" w="140.0" h="105.0">HERE 
 FINDSEQUENCE2</notecontainer>
-    <notecontainer id="t33" x="910.0" y="-507.5" w="140.0" h="105.0">GEOAPIFY ROUTEPLANNER</notecontainer>
-    <notecontainer id="t34" x="1400.0" y="-507.5" w="140.0" h="105.0">LONGDO
+    <notecontainer id="t34" x="910.0" y="-507.5" w="140.0" h="105.0">GEOAPIFY ROUTEPLANNER</notecontainer>
+    <notecontainer id="t35" x="1400.0" y="-507.5" w="140.0" h="105.0">LONGDO
 TSP</notecontainer>
-    <notecontainer id="t35" x="1855.0" y="-507.5" w="140.0" h="105.0">ORS
+    <notecontainer id="t36" x="1855.0" y="-507.5" w="140.0" h="105.0">ORS
 OPTIMIZATION</notecontainer>
-    <actioncontainer id="t36" x="350.00003" y="-857.5001">SPLITS V2</actioncontainer>
-    <triggercontainer id="t37" x="350.00018" y="-1277.5" />
+    <actioncontainer id="t37" x="350.00003" y="-857.5001">SPLITS V2</actioncontainer>
     <actioncontainer id="t38" x="1260.0" y="17.499985">LONGDO API</actioncontainer>
-    <connection from="t1" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t16" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t18" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t14" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t17" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t19" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t20" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t21" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t20" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t21" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t23" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t24" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t26" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t27" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t28" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t29" to="t30" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t28" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t30" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t31" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t36" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t37" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t31" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t32" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t37" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#39: MANUAL</name>
@@ -17216,25 +17216,25 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <actioncontainer id="t1" x="-34.999992" y="577.5">5s  </actioncontainer>
-    <actioncontainer id="t2" x="140.0" y="577.49994">BATT:</actioncontainer>
-    <conditioncontainer id="t3" x="-34.999996" y="52.499996">CON </conditioncontainer>
-    <actioncontainer id="t4" x="350.00006" y="297.5">STOP: BATT</actioncontainer>
-    <actioncontainer id="t5" x="350.00006" y="192.50003">RM15</actioncontainer>
-    <triggercontainer id="t6" x="-35.0" y="-122.49999">
+    <triggercontainer id="t1" x="-35.0" y="-122.5">
       <trigger>C-DIS</trigger>
       <trigger>C-CON</trigger>
     </triggercontainer>
+    <actioncontainer id="t2" x="-34.999992" y="577.5">5s  </actioncontainer>
+    <actioncontainer id="t3" x="140.0" y="577.49994">BATT:</actioncontainer>
+    <conditioncontainer id="t4" x="-35.0" y="52.5">CON </conditioncontainer>
+    <actioncontainer id="t5" x="350.00006" y="297.5">STOP: BATT</actioncontainer>
+    <actioncontainer id="t6" x="350.00006" y="192.50003">RM15</actioncontainer>
     <conditioncontainer id="t7" x="-35.0" y="262.5">BATTVAR</conditioncontainer>
     <actioncontainer id="t8" x="-35.0" y="402.5">X</actioncontainer>
-    <connection from="t1" to="t7" type="NORMAL" sourcePosition="WEST" targetPosition="WEST" />
-    <connection from="t3" to="t5" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t3" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t7" type="NORMAL" sourcePosition="WEST" targetPosition="WEST" />
+    <connection from="t4" to="t6" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t4" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t7" to="t8" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t8" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>00: BOOT</name>
@@ -17249,8 +17249,8 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <conditioncontainer id="t3" x="70.0" y="332.5"> BOOT ALI</conditioncontainer>
     <actioncontainer id="t4" x="70.0" y="507.5">V_ACCESS</actioncontainer>
     <actioncontainer id="t5" x="70.000015" y="612.5">ACCESSIBILITYS</actioncontainer>
-    <actioncontainer id="t6" x="70.00001" y="822.5">TETHER-ON</actioncontainer>
-    <actioncontainer id="t7" x="70.00001" y="717.5">HOTSPOT://ON</actioncontainer>
+    <actioncontainer id="t6" x="70.0" y="822.5">TETHER-ON</actioncontainer>
+    <actioncontainer id="t7" x="70.0" y="717.5">HOTSPOT://ON</actioncontainer>
     <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
     <connection from="t3" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -17298,24 +17298,28 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <actioncontainer id="t1" x="-1470.0" y="-3307.5">TEMPLATE 
+    <triggercontainer id="t1" x="-910.0" y="-8382.5">
+      <trigger>MULTI</trigger>
+      <trigger>SINGLE</trigger>
+    </triggercontainer>
+    <actioncontainer id="t2" x="-1470.0" y="-3307.5">TEMPLATE 
 HTTP</actioncontainer>
-    <actioncontainer id="t2" x="-1470.0" y="-3202.5">TEMPLATE 
+    <actioncontainer id="t3" x="-1470.0" y="-3202.5">TEMPLATE 
 HTTP / POST</actioncontainer>
-    <conditioncontainer id="t3" x="-1330.0" y="-3062.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t4" x="-1330.0" y="-3482.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
-    <actioncontainer id="t5" x="-1715.0" y="-3132.5">TEMPLATทE 
+    <conditioncontainer id="t4" x="-1330.0" y="-3062.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t5" x="-1330.0" y="-3482.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
+    <actioncontainer id="t6" x="-1715.0" y="-3132.5">TEMPLATทE 
 HTTP</actioncontainer>
-    <actioncontainer id="t6" x="-1610.0" y="-2957.5">TEMPLATE 
+    <actioncontainer id="t7" x="-1610.0" y="-2957.5">TEMPLATE 
 HTTP</actioncontainer>
-    <actioncontainer id="t7" x="-1820.0" y="-2887.5">CONFIG</actioncontainer>
-    <actioncontainer id="t8" x="-1540.0" y="-2852.5">TEMPLATE 
+    <actioncontainer id="t8" x="-1820.0" y="-2887.5">CONFIG</actioncontainer>
+    <actioncontainer id="t9" x="-1540.0" y="-2852.5">TEMPLATE 
 HTTP / POST</actioncontainer>
-    <actioncontainer id="t9" x="-1400.0" y="-2712.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
-    <conditioncontainer id="t10" x="-1470.0" y="-2537.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t11" x="-1400.0" y="-3412.5">TEST
+    <actioncontainer id="t10" x="-1400.0" y="-2712.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
+    <conditioncontainer id="t11" x="-1470.0" y="-2537.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t12" x="-1400.0" y="-3412.5">TEST
 KILLAPPS</actioncontainer>
-    <notecontainer id="t12" x="1627.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK START:
+    <notecontainer id="t13" x="1627.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK START:
 -type: command
 -method: mock_start
 -content: 13.000,100.000
@@ -17323,14 +17327,14 @@ KILLAPPS</actioncontainer>
 |
 |
 |=&gt; *ok</notecontainer>
-    <notecontainer id="t13" x="1942.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK STOP:
+    <notecontainer id="t14" x="1942.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK STOP:
 -type: command
 -method: mock_stop
 -response: true
 |
 |
 |=&gt; *ok</notecontainer>
-    <notecontainer id="t14" x="2257.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK GET:
+    <notecontainer id="t15" x="2257.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK GET:
 -type: command
 -method: mock_get
 -response: true
@@ -17339,14 +17343,14 @@ KILLAPPS</actioncontainer>
 |=&gt; activate
  =&gt; lat, lon
 </notecontainer>
-    <notecontainer id="t15" x="1627.5" y="-7175.0" w="315.0" h="210.0">PUT-BLUETOOTH
+    <notecontainer id="t16" x="1627.5" y="-7175.0" w="315.0" h="210.0">PUT-BLUETOOTH
 -type: command
 -method: put_bluetooth
 -response: true
 |
 |
 |=&gt; *ok</notecontainer>
-    <notecontainer id="t16" x="1627.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SQLITE
+    <notecontainer id="t17" x="1627.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SQLITE
 -type: command
 -method: al_put$sqlite
 -response: true
@@ -17354,69 +17358,65 @@ KILLAPPS</actioncontainer>
 |
 |=&gt; upload sqlite~link 
  =&gt; send link</notecontainer>
-    <notecontainer id="t17" x="1942.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SPFDB
+    <notecontainer id="t18" x="1942.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SPFDB
 -type: command
 -method: al_put$spfdb
 -response: true
 |
 |
 |=&gt; send spfdb</notecontainer>
-    <notecontainer id="t18" x="1942.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-DB
+    <notecontainer id="t19" x="1942.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-DB
 
 type: command
 method: cp_send$spfdb</notecontainer>
-    <notecontainer id="t19" x="1627.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-SQLITE
+    <notecontainer id="t20" x="1627.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-SQLITE
 
 type: job_command
 method: cp_send$spfdb</notecontainer>
-    <notecontainer id="t20" x="1627.5" y="-7595.0" w="315.0" h="210.0">(AL) KILLALL:
+    <notecontainer id="t21" x="1627.5" y="-7595.0" w="315.0" h="210.0">(AL) KILLALL:
 -type: command
 -method: killall
 -response: true
 |
 |
 |=&gt; *ok</notecontainer>
-    <actioncontainer id="t21" x="700.0" y="-6597.5">CP</actioncontainer>
-    <conditioncontainer id="t22" x="700.0" y="-6737.5">NOT ACCESS </conditioncontainer>
-    <conditioncontainer id="t23" x="700.0" y="-6422.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t24" x="-910.0" y="-7122.5">RE?</conditioncontainer>
-    <actioncontainer id="t25" x="-910.0" y="-6982.5">RESPONSE</actioncontainer>
-    <actioncontainer id="t26" x="-700.0" y="-7262.5">TOAST</actioncontainer>
-    <conditioncontainer id="t27" x="665.0" y="-6982.5">INDEX</conditioncontainer>
-    <conditioncontainer id="t28" x="665.0" y="-7052.5">INDEX</conditioncontainer>
-    <actioncontainer id="t29" x="665.0" y="-6877.5">QUERY</actioncontainer>
-    <conditioncontainer id="t30" x="700.0" y="-6772.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t31" x="-910.0" y="-7857.5">IP?</conditioncontainer>
-    <actioncontainer id="t32" x="-700.0" y="-7857.5">00: SERVICES</actioncontainer>
-    <actioncontainer id="t33" x="-910.0" y="-7612.5">CONFIG4</actioncontainer>
-    <actioncontainer id="t34" x="-910.0" y="-7262.5">HTTP SEND</actioncontainer>
-    <actioncontainer id="t35" x="-490.0" y="-7087.5"> WAIT-SEND</actioncontainer>
-    <actioncontainer id="t36" x="-490.0" y="-6982.5">NTFY.ATTACH</actioncontainer>
-    <actioncontainer id="t37" x="-490.0" y="-7262.5">HTTP FILESEND</actioncontainer>
-    <conditioncontainer id="t38" x="-910.0" y="-7437.5">CMD / FILE</conditioncontainer>
-    <triggercontainer id="t39" x="-910.0" y="-8382.5">
-      <trigger>MULTI</trigger>
-      <trigger>SINGLE</trigger>
-    </triggercontainer>
-    <connection from="t21" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t21" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t24" to="t25" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t28" to="t29" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t28" to="t30" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t29" to="t30" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t31" to="t33" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t31" to="t32" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t32" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t33" to="t38" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t26" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t35" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t36" to="t26" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t37" to="t26" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t37" to="t35" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t38" to="t34" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t38" to="t37" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t39" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t22" x="700.0" y="-6597.5">CP</actioncontainer>
+    <conditioncontainer id="t23" x="700.0" y="-6737.5">NOT ACCESS </conditioncontainer>
+    <conditioncontainer id="t24" x="700.0" y="-6422.5">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t25" x="-910.0" y="-7122.5">RE?</conditioncontainer>
+    <actioncontainer id="t26" x="-910.0" y="-6982.5">RESPONSE</actioncontainer>
+    <actioncontainer id="t27" x="-700.0" y="-7262.5">TOAST</actioncontainer>
+    <conditioncontainer id="t28" x="665.0" y="-6982.5">INDEX</conditioncontainer>
+    <conditioncontainer id="t29" x="665.0" y="-7052.5">INDEX</conditioncontainer>
+    <actioncontainer id="t30" x="665.0" y="-6877.5">QUERY</actioncontainer>
+    <conditioncontainer id="t31" x="700.0" y="-6772.5">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t32" x="-910.0" y="-7857.5">IP?</conditioncontainer>
+    <actioncontainer id="t33" x="-700.0" y="-7857.5">00: SERVICES</actioncontainer>
+    <actioncontainer id="t34" x="-910.0" y="-7612.5">CONFIG4</actioncontainer>
+    <actioncontainer id="t35" x="-910.0" y="-7262.5">HTTP SEND</actioncontainer>
+    <actioncontainer id="t36" x="-490.0" y="-7087.5"> WAIT-SEND</actioncontainer>
+    <actioncontainer id="t37" x="-490.0" y="-6982.5">NTFY.ATTACH</actioncontainer>
+    <actioncontainer id="t38" x="-490.0" y="-7262.5">HTTP FILESEND</actioncontainer>
+    <conditioncontainer id="t39" x="-910.0" y="-7437.5">CMD / FILE</conditioncontainer>
+    <connection from="t1" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t23" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t26" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t30" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t31" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t30" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t32" to="t34" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t32" to="t33" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t33" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t34" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t35" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t35" to="t27" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t36" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t37" to="t27" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t38" to="t27" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t38" to="t36" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t39" to="t35" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t39" to="t38" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>13: RECEIVED</name>
@@ -17588,20 +17588,20 @@ method: cp_send$spfdb</notecontainer>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <actioncontainer id="t1" x="69.99999" y="157.5">CAST ENABLE</actioncontainer>
-    <actioncontainer id="t2" x="70.000015" y="332.5">ANYDESK_STATUSBAR</actioncontainer>
-    <actioncontainer id="t3" x="69.99999" y="752.5">H-A</actioncontainer>
-    <triggercontainer id="t4" x="70.0" y="-17.499998">
+    <triggercontainer id="t1" x="70.0" y="-17.5">
       <trigger>CAST</trigger>
     </triggercontainer>
+    <actioncontainer id="t2" x="70.0" y="157.5">CAST ENABLE</actioncontainer>
+    <actioncontainer id="t3" x="70.000015" y="332.5">ANYDESK_STATUSBAR</actioncontainer>
+    <actioncontainer id="t4" x="70.0" y="752.5">H-A</actioncontainer>
     <actioncontainer id="t5" x="69.999985" y="437.49997">MP</actioncontainer>
-    <conditioncontainer id="t6" x="69.99999" y="612.5">DISCONNECT </conditioncontainer>
+    <conditioncontainer id="t6" x="70.0" y="612.5">DISCONNECT </conditioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t6" to="t5" type="FALSE" sourcePosition="WEST" targetPosition="WEST" />
-    <connection from="t6" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>@ GITHUB UPLOAD</name>
@@ -17609,35 +17609,35 @@ method: cp_send$spfdb</notecontainer>
     <group>          ♻️  LOCAL-SYNC</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <conditioncontainer id="t1" x="-69.99998" y="-332.5">SHA?</conditioncontainer>
-    <actioncontainer id="t2" x="245.00009" y="-612.5">SHA IMPORT</actioncontainer>
-    <actioncontainer id="t3" x="244.99994" y="-507.5">GITJ SHA</actioncontainer>
-    <actioncontainer id="t4" x="-70.00001" y="-52.500015">WRITE SHA</actioncontainer>
-    <actioncontainer id="t5" x="-70.00001" y="-157.50003">SHA?</actioncontainer>
-    <actioncontainer id="t6" x="-69.99999" y="-612.5">GITJ</actioncontainer>
-    <actioncontainer id="t7" x="-70.0" y="-507.50006">GIT UPLOAD</actioncontainer>
-    <actioncontainer id="t8" x="-70.000015" y="-1417.5">FLOWLIST</actioncontainer>
-    <actioncontainer id="t9" x="-69.99999" y="-717.5">BASE64
-ENCRYPT</actioncontainer>
-    <conditioncontainer id="t10" x="-69.99999" y="-892.5">DIFF SIZE</conditioncontainer>
-    <actioncontainer id="t11" x="-69.99997" y="-1102.5002">SIZE</actioncontainer>
-    <triggercontainer id="t12" x="-69.99998" y="-1627.5">
+    <triggercontainer id="t1" x="-69.99997" y="-1627.5">
       <trigger>Periohhdic Timer: every 1m</trigger>
     </triggercontainer>
-    <actioncontainer id="t13" x="-69.99998" y="-1312.5">EXPORT</actioncontainer>
-    <connection from="t1" to="t5" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t1" to="t2" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t7" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t5" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <conditioncontainer id="t2" x="-69.99997" y="-332.5">SHA?</conditioncontainer>
+    <actioncontainer id="t3" x="245.00009" y="-612.5">SHA IMPORT</actioncontainer>
+    <actioncontainer id="t4" x="244.99994" y="-507.5">GITJ SHA</actioncontainer>
+    <actioncontainer id="t5" x="-70.0" y="-52.500015">WRITE SHA</actioncontainer>
+    <actioncontainer id="t6" x="-70.0" y="-157.50003">SHA?</actioncontainer>
+    <actioncontainer id="t7" x="-70.0" y="-612.5">GITJ</actioncontainer>
+    <actioncontainer id="t8" x="-70.0" y="-507.50006">GIT UPLOAD</actioncontainer>
+    <actioncontainer id="t9" x="-70.000015" y="-1417.5">FLOWLIST</actioncontainer>
+    <actioncontainer id="t10" x="-70.0" y="-717.5">BASE64
+ENCRYPT</actioncontainer>
+    <conditioncontainer id="t11" x="-70.0" y="-892.5">DIFF SIZE</conditioncontainer>
+    <actioncontainer id="t12" x="-69.99997" y="-1102.5002">SIZE</actioncontainer>
+    <actioncontainer id="t13" x="-69.99997" y="-1312.5">EXPORT</actioncontainer>
+    <connection from="t1" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t6" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t8" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t6" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t10" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Encrypt / Decrypt text</name>
@@ -17651,7 +17651,7 @@ ENCRYPT</actioncontainer>
     <conditioncontainer id="t6" x="-35.0" y="962.5">Expression: if (value != "") { password = value; removeVariable("value"); return true } return false</conditioncontainer>
     <actioncontainer id="t7" x="70.0" y="822.5">Input Dialog: Enter password Password </actioncontainer>
     <conditioncontainer id="t8" x="70.0" y="612.5">Expression: if (value != "") { text = value; removeVariable("value"); return true } return false</conditioncontainer>
-    <actioncontainer id="t9" x="34.999996" y="122.5">Input Dialog:  Single Choice Menu encrypt,decrypt</actioncontainer>
+    <actioncontainer id="t9" x="35.0" y="122.5">Input Dialog:  Single Choice Menu encrypt,decrypt</actioncontainer>
     <actioncontainer id="t10" x="70.0" y="-17.5">Encrypt / Decrypt text</actioncontainer>
     <connection from="t1" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -17668,19 +17668,19 @@ ENCRYPT</actioncontainer>
     <group>          ♻️  LOCAL-SYNC</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <actioncontainer id="t1" x="-35.0" y="297.5">Init Variable Notifications on Statusbar: notifications</actioncontainer>
-    <conditioncontainer id="t2" x="0.0" y="577.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t3" x="175.0" y="227.5">Show Custom Widget Overlay: Overlay 5, ANYDESK_STATUSBAR  Top Left</actioncontainer>
-    <triggercontainer id="t4" x="34.999992" y="-157.50002">
+    <triggercontainer id="t1" x="34.999992" y="-157.50002">
       <trigger>Activity Started: com.shopee.foody.driver.th/com.shopee.foody.driver.MainActivity</trigger>
       <trigger>Command Output: dumpsys media_projection
  (root) contains text </trigger>
     </triggercontainer>
+    <actioncontainer id="t2" x="-35.0" y="297.5">Init Variable Notifications on Statusbar: notifications</actioncontainer>
+    <conditioncontainer id="t3" x="0.0" y="577.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t4" x="175.0" y="227.5">Show Custom Widget Overlay: Overlay 5, ANYDESK_STATUSBAR  Top Left</actioncontainer>
     <actioncontainer id="t5" x="-139.99998" y="17.5">Execute Root Command: dumpsys media_projection
  in </actioncontainer>
     <conditioncontainer id="t6" x="-280.0" y="227.5">Expression: contains(stdout,"null")</conditioncontainer>
-    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
@@ -17831,10 +17831,10 @@ MENU
     <name>Flow3</name>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <actioncontainer id="t1" x="-35.0" y="297.5">Plugin: AFWall+ Taskeeddr plugin Disable AFWall+</actioncontainer>
-    <triggercontainer id="t2" x="70.0" y="52.5" />
+    <triggercontainer id="t1" x="70.0" y="52.5" />
+    <actioncontainer id="t2" x="-35.0" y="297.5">Plugin: AFWall+ Taskeeddr plugin Disable AFWall+</actioncontainer>
     <actioncontainer id="t3" x="140.0" y="297.5">Plugin: AFWall+ Taskeeddr plugin Drrrisable AFWall+</actioncontainer>
-    <connection from="t2" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow6</name>
