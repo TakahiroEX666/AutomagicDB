@@ -158,7 +158,7 @@ NOW
   <trigger type="notification_status_bar_displayed">
     <useDefaultName>false</useDefaultName>
     <name>CHAR</name>
-    <enabled>true</enabled>
+    <enabled>false</enabled>
     <packageNameFilter>com.lalamove.global.driver.sea</packageNameFilter>
     <textMatchField>TEXT</textMatchField>
     <textMatchType>CONTAINS_TEXT</textMatchType>
@@ -273,7 +273,7 @@ NOW
   <trigger type="notification_status_bar_displayed">
     <useDefaultName>false</useDefaultName>
     <name>LATER</name>
-    <enabled>true</enabled>
+    <enabled>false</enabled>
     <packageNameFilter>com.lalamove.global.driver.sea</packageNameFilter>
     <textMatchField>TEXT</textMatchField>
     <textMatchType>CONTAINS_TEXT</textMatchType>
@@ -311,7 +311,7 @@ NOW
   <trigger type="notification_status_bar_displayed">
     <useDefaultName>false</useDefaultName>
     <name>NOW</name>
-    <enabled>true</enabled>
+    <enabled>false</enabled>
     <packageNameFilter>com.lalamove.global.driver.sea</packageNameFilter>
     <textMatchField>TEXT</textMatchField>
     <textMatchType>CONTAINS_TEXT</textMatchType>
@@ -405,28 +405,6 @@ attachment_name=getString("attachment_name");</extras>
     <likeAlarmClock>false</likeAlarmClock>
   </trigger>
   <trigger type="periodic_timer">
-    <useDefaultName>true</useDefaultName>
-    <name>Periodic Timer: every 3m</name>
-    <enabled>false</enabled>
-    <frequency>180000</frequency>
-    <wakeDevice>true</wakeDevice>
-    <fixedTimes>false</fixedTimes>
-    <limitTimeRange>false</limitTimeRange>
-    <weekday>Mon</weekday>
-    <weekday>Tue</weekday>
-    <weekday>Wed</weekday>
-    <weekday>Thu</weekday>
-    <weekday>Fri</weekday>
-    <weekday>Sat</weekday>
-    <weekday>Sun</weekday>
-    <hourFrom>8</hourFrom>
-    <minuteFrom>0</minuteFrom>
-    <hourTo>17</hourTo>
-    <minuteTo>0</minuteTo>
-    <allowInDeviceIdle>false</allowInDeviceIdle>
-    <likeAlarmClock>false</likeAlarmClock>
-  </trigger>
-  <trigger type="periodic_timer">
     <useDefaultName>false</useDefaultName>
     <name>Periohhdic Timer: every 1m</name>
     <enabled>true</enabled>
@@ -451,7 +429,7 @@ attachment_name=getString("attachment_name");</extras>
   <trigger type="quick_settings_tile_selected">
     <useDefaultName>false</useDefaultName>
     <name>QS-D</name>
-    <enabled>true</enabled>
+    <enabled>false</enabled>
     <tileID>TILE_5</tileID>
     <label>DISABLE</label>
     <iconType>BUILTIN</iconType>
@@ -1508,12 +1486,6 @@ contains(exception_message,"sqrt")
 </expression>
   </condition>
   <condition type="battery_level">
-    <useDefaultName>true</useDefaultName>
-    <name>Battery Level: higher than 0%</name>
-    <levelPercentage>0</levelPercentage>
-    <batteryLevelCondition>HIGHER_THAN</batteryLevelCondition>
-  </condition>
-  <condition type="battery_level">
     <useDefaultName>false</useDefaultName>
     <name>BATTVAR</name>
     <levelPercentage>50</levelPercentage>
@@ -1771,11 +1743,6 @@ dy=screen_y-c_y;
 
 
 (dx*dx+dy*dy)&lt;=(radius*radius)</expression>
-  </condition>
-  <condition type="expression">
-    <useDefaultName>true</useDefaultName>
-    <name>Expression: battery_level &gt;= 50</name>
-    <expression>battery_level &gt;= 50</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>true</useDefaultName>
@@ -5029,15 +4996,6 @@ log(subdistrict[i]);
     <skipDisabledFlowsWithoutError>false</skipDisabledFlowsWithoutError>
     <waitForFlowsToFinish>false</waitForFlowsToFinish>
     <returnLocalVariablesToCallingFlow>false</returnLocalVariablesToCallingFlow>
-  </action>
-  <action type="execute_flows">
-    <useDefaultName>true</useDefaultName>
-    <name>Execute Flows: Byte to Hex</name>
-    <includeFlowNamePatternList>Byte to Hex</includeFlowNamePatternList>
-    <excludeFlowNamePatternList></excludeFlowNamePatternList>
-    <skipDisabledFlowsWithoutError>false</skipDisabledFlowsWithoutError>
-    <waitForFlowsToFinish>true</waitForFlowsToFinish>
-    <returnLocalVariablesToCallingFlow>true</returnLocalVariablesToCallingFlow>
   </action>
   <action type="execute_flows">
     <useDefaultName>true</useDefaultName>
@@ -10646,17 +10604,6 @@ bbb="{bb,listformat,comma}";</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
-    <name>Script: if (battery_level &lt;= 35){ inputNumber = ((50-battery_level) +10)*5; } else { inputNumber = (50-battery_level)*5; } inputNumber = 255-inputNumber;</name>
-    <script>if (battery_level &lt;= 35){
-inputNumber = ((50-battery_level) +10)*5;
-}
-else {
-inputNumber = (50-battery_level)*5;
-}
-inputNumber = 255-inputNumber;</script>
-  </action>
-  <action type="script">
-    <useDefaultName>true</useDefaultName>
     <name>Script: if (task == "encrypt") { encrypted = eval((funparam=newList(function, newList(encrypt, text, password)))[0]); } else if (task == "decrypt") { decrypted = eval((funparam=newList(function, newList(decrypt, text, password)))[0]); } for (v in getVariableNames()) {if (NOT matches(v, "global_.*|flow_name|trigger|encrypted|decrypted")) {removeVariable(v)}; }; removeVariable("v");</name>
     <script>if (task == "encrypt") {
 	encrypted = eval((funparam=newList(function, newList(encrypt, text, password)))[0]);
@@ -10689,11 +10636,6 @@ global_lalamove_v6["ZONE"]["block"]=global_temp_district;
 removeVariable("global_temp_district");
 
 setWidgetElementProperty("LISTDISTRICT", "Text_1", "text", "");</script>
-  </action>
-  <action type="script">
-    <useDefaultName>true</useDefaultName>
-    <name>Script: inputNumber = (100-battery_level)*5;</name>
-    <script>inputNumber = (100-battery_level)*5;</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
@@ -11332,55 +11274,6 @@ addElement(route["agents"],newMapFromValues(
 route=toJSON(route)</script>
   </action>
   <action type="script">
-    <useDefaultName>false</useDefaultName>
-    <name>Script: Set Battery Globals</name>
-    <script>global_battery_level=battery_level;
-global_battery_health=battery_health;
-global_battery_percentage=battery_percentage;
-global_battery_plugged=battery_plugged;
-global_battery_present=battery_present;
-global_battery_scale=battery_scale;
-global_battery_status_text = "";
-if (battery_status == 4){
-global_battery_status_text = "discharging";
-} 
-if (battery_status == 2) {
-global_battery_status_text = "charging";
-} 
-if (battery_status == 5) {
-global_battery_status_text = "full";
-} 
-global_battery_technology=battery_technology;
-global_battery_voltage=battery_voltage;
-global_battery_temperature="{battery_temperature,numberformat,0.0}";
-global_battery_temperature=global_battery_temperature/10;
-
-global_battCurrentTime = getDate();
-global_battTimeRemain = 0;
-battDiff = global_battChargedLevel - global_battery_level - 5;
-battTimeDiff = global_battCurrentTime - global_battChargedTime;
-if (battDiff &gt; 0){
-if (battTimeDiff &gt; 0) {
-global_battTimeRemain = global_battery_level * (battTimeDiff / battDiff);
-global_battRemainText = "{global_battTimeRemain, dateformat, kk}h {global_battTimeRemain, dateformat, mm}m";
-}}
-
-if (global_battTimeRemain &gt; 86400000){
-days = global_battTimeRemain / 86400000;
-global_battRemainText = "{days}d+";
-}</script>
-  </action>
-  <action type="script">
-    <useDefaultName>true</useDefaultName>
-    <name>Script: setWidgetElementProperty("BatteryBDIV1", "Ellipse_fill", "outlinecolor", "#ffff{resultString}00");</name>
-    <script>setWidgetElementProperty("BatteryBDIV1", "Ellipse_fill", "outlinecolor", "#ffff{resultString}00");</script>
-  </action>
-  <action type="script">
-    <useDefaultName>true</useDefaultName>
-    <name>Script: setWidgetElementProperty("BatteryBDIV1", "Ellipse_fill", "outlinecolor", "#ff{resultString}ff00");</name>
-    <script>setWidgetElementProperty("BatteryBDIV1", "Ellipse_fill", "outlinecolor", "#ff{resultString}ff00");</script>
-  </action>
-  <action type="script">
     <useDefaultName>true</useDefaultName>
     <name>Script: setWidgetElementProperty("Widget9", "Image_1", "path", "https://mmmap15.longdo.com/mmmap/images/icons/hospital.png");</name>
     <script>setWidgetElementProperty("Widget9", "Image_1", "path", "https://mmmap15.longdo.com/mmmap/images/icons/hospital.png");</script>
@@ -11561,26 +11454,6 @@ removeDuplicateElements(customer_list)</script>
     <useDefaultName>true</useDefaultName>
     <name>Script: trigger="FL_SHP_BALL";</name>
     <script>trigger="FL_SHP_BALL";</script>
-  </action>
-  <action type="script">
-    <useDefaultName>false</useDefaultName>
-    <name>Script: Update Widget (BDIV1)</name>
-    <script>//Force update of widget text items
-setWidgetElementProperty("BatteryBDIV1", "Level", "text", "{global_battery_level}");
-setWidgetElementProperty("BatteryBDIV1", "STATUS", "text", "{global_battery_status_text}");
-setWidgetElementProperty("BatteryBDIV1", "Voltage", "text", "");
-setWidgetElementProperty("BatteryBDIV1", "Temp", "text", "{global_battery_temperature}°");
-setWidgetElementProperty("BatteryBDIV1", "Ellipse_fill", "outlinecolor", "#ff00ff00");
-
-arcind = 3.6*global_battery_level;
-setWidgetElementProperty("BatteryBDIV1", "Ellipse_fill", "sweepangle", arcind);
-
-if (global_battTimeRemain &gt; 0) {
-setWidgetElementProperty("BatteryBDIV1", "Voltage", "text", "{global_battRemainText}");
-} 
-else {
-setWidgetElementProperty("BatteryBDIV1", "Voltage", "text", "...");
-} </script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
@@ -16449,7 +16322,7 @@ NEXT</conditioncontainer>
   <flow type="flow">
     <name>(11)  DISABLE</name>
     <description> </description>
-    <enabled>true</enabled>
+    <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
     <triggercontainer id="t1" x="-315.0" y="-2677.5">
@@ -17689,7 +17562,6 @@ ENCRYPT</actioncontainer>
   </flow>
   <flow type="flow">
     <name>Encrypt / Decrypt text</name>
-    <group>‎</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="70.0" y="-192.5" />
@@ -17700,17 +17572,17 @@ ENCRYPT</actioncontainer>
     <conditioncontainer id="t6" x="-35.0" y="962.5">Expression: if (value != "") { password = value; removeVariable("value"); return true } return false</conditioncontainer>
     <actioncontainer id="t7" x="70.0" y="822.5">Input Dialog: Enter password Password </actioncontainer>
     <conditioncontainer id="t8" x="70.0" y="612.5">Expression: if (value != "") { text = value; removeVariable("value"); return true } return false</conditioncontainer>
-    <actioncontainer id="t9" x="70.0" y="-17.5">Encrypt / Decrypt text</actioncontainer>
-    <actioncontainer id="t10" x="34.999996" y="122.5">Input Dialog:  Single Choice Menu encrypt,decrypt</actioncontainer>
-    <connection from="t1" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t9" x="34.999996" y="122.5">Input Dialog:  Single Choice Menu encrypt,decrypt</actioncontainer>
+    <actioncontainer id="t10" x="70.0" y="-17.5">Encrypt / Decrypt text</actioncontainer>
+    <connection from="t1" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t6" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t7" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t8" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow1</name>
@@ -17734,7 +17606,6 @@ ENCRYPT</actioncontainer>
   </flow>
   <flow type="flow">
     <name>Flow11</name>
-    <group>‎</group>
     <enabled>false</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -17813,7 +17684,6 @@ MENU
   </flow>
   <flow type="flow">
     <name>Flow12</name>
-    <group>‎</group>
     <enabled>false</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -17870,7 +17740,6 @@ MENU
   </flow>
   <flow type="flow">
     <name>Flow3</name>
-    <group>        📍  NAVIGATION</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <actioncontainer id="t1" x="-35.0" y="297.5">Plugin: AFWall+ Taskeeddr plugin Disable AFWall+</actioncontainer>
@@ -17950,7 +17819,6 @@ icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=positi
   <flow type="flow">
     <name>SHOPEE-RESRAURANT</name>
     <description> </description>
-    <group>‎</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="245.0" y="-1522.5">
@@ -18078,19 +17946,17 @@ icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=positi
   <flow type="flow">
     <name>⚙️  KILLAPPS</name>
     <description> </description>
-    <group>‎</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="70.0" y="52.5" />
-    <actioncontainer id="t2" x="70.0" y="192.5">Init Variable Package Info: com.close.hook.ads,droom.sleepIfUCan,com.gombosdev.ampere,apitester.org,com.gmail.heagoo.apkeditor.pro,com.applisto.appcloneR,com.applisto.appcloner,com.begal.appclone,io.github.muntashirakon.AppManager,com.authy.authy,com.bbl.mobilebanking,com.commsource.beautyplus,com.brave.browser,com.openai.chatgpt,com.exlyo.mapmarkes,com.locationchanger,com.tuyware.jsongenie,com.tuyware.jsongenie.premium,com.vibo.jsontool,jp.blogspot.halnablue.csveditor,easynotes.notes.notepad.notebook.privatenotes.note,com.facebook.katana,com.simplemobiletools.gallery.pro,org.lineageos.glimpse,com.yc.gloryfit,com.google.android.googlequicksearchbox,com.android.hotwordenrollment.xgoogle,com.android.hotwordenrollment.okgoogle,com.google.ar.core,com.android.vending,com.grabtaxi.driver2,top.hookvip.pro,com.oasisfeng.island,ktbcs.netbank,com.leavjenn.longshot,com.exlyo.mapmarker,com.luckydroid.droidbase,bin.mt.plus,org.lineageos.twelve,com.muzhroom.maps,tw.nekomimi.nekogram,notion.id,com.pinterest,com.reqable.android,ru.zsbnkbtn.vrxmdizqi,com.shopee.th,rk.android.app.shortcutmaker,me.simpleHook,com.amosmobile.sqlitemasterpro2,org.swiftapps.swiftbackup,com.tinder,app.tracklia,com.workflowy.android,com.android.camera,com.google.android.apps.docs.editors.sheets,com.google.android.calculator,com.google.android.keep into package_info</actioncontainer>
-    <actioncontainer id="t3" x="70.0" y="297.5">Kn</actioncontainer>
-    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t2" x="70.0" y="297.5">Kn</actioncontainer>
+    <actioncontainer id="t3" x="70.0" y="192.5">Init Variable Package Info: com.close.hook.ads,droom.sleepIfUCan,com.gombosdev.ampere,apitester.org,com.gmail.heagoo.apkeditor.pro,com.applisto.appcloneR,com.applisto.appcloner,com.begal.appclone,io.github.muntashirakon.AppManager,com.authy.authy,com.bbl.mobilebanking,com.commsource.beautyplus,com.brave.browser,com.openai.chatgpt,com.exlyo.mapmarkes,com.locationchanger,com.tuyware.jsongenie,com.tuyware.jsongenie.premium,com.vibo.jsontool,jp.blogspot.halnablue.csveditor,easynotes.notes.notepad.notebook.privatenotes.note,com.facebook.katana,com.simplemobiletools.gallery.pro,org.lineageos.glimpse,com.yc.gloryfit,com.google.android.googlequicksearchbox,com.android.hotwordenrollment.xgoogle,com.android.hotwordenrollment.okgoogle,com.google.ar.core,com.android.vending,com.grabtaxi.driver2,top.hookvip.pro,com.oasisfeng.island,ktbcs.netbank,com.leavjenn.longshot,com.exlyo.mapmarker,com.luckydroid.droidbase,bin.mt.plus,org.lineageos.twelve,com.muzhroom.maps,tw.nekomimi.nekogram,notion.id,com.pinterest,com.reqable.android,ru.zsbnkbtn.vrxmdizqi,com.shopee.th,rk.android.app.shortcutmaker,me.simpleHook,com.amosmobile.sqlitemasterpro2,org.swiftapps.swiftbackup,com.tinder,app.tracklia,com.workflowy.android,com.android.camera,com.google.android.apps.docs.editors.sheets,com.google.android.calculator,com.google.android.keep into package_info</actioncontainer>
+    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>⚙️  TAKE-ORDER</name>
     <description> </description>
-    <group>‎</group>
     <enabled>false</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -18180,7 +18046,6 @@ Food
   <flow type="flow">
     <name>❌ CLIPBOARD-CHAT</name>
     <description> </description>
-    <group>‎</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="140.0" y="-1382.5">
@@ -18241,35 +18106,5 @@ setText2ById("com.shopee.foody.driver.th:id/et_text", "text");</notecontainer>
     <connection from="t14" to="t11" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t14" to="t2" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t16" to="t13" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-  </flow>
-  <flow type="flow">
-    <name>❌ UPDATE BATT</name>
-    <description> </description>
-    <group>‎</group>
-    <enabled>false</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="0.0" y="-262.5">
-      <trigger>Periodic Timer: every 3m</trigger>
-    </triggercontainer>
-    <actioncontainer id="t2" x="280.0" y="892.5">Execute Flows: Byte to Hex</actioncontainer>
-    <actioncontainer id="t3" x="280.0" y="1067.5">Script: setWidgetElementProperty("BatteryBDIV1", "Ellipse_fill", "outlinecolor", "#ffff{resultString}00");</actioncontainer>
-    <actioncontainer id="t4" x="280.0" y="682.5">Script: if (battery_level &lt;= 35){ inputNumber = ((50-battery_level) +10)*5; } else { inputNumber = (50-battery_level)*5; } inputNumber = 255-inputNumber;</actioncontainer>
-    <conditioncontainer id="t5" x="0.0" y="507.5">Expression: battery_level &gt;= 50</conditioncontainer>
-    <actioncontainer id="t6" x="0.0" y="332.5">Script: Update Widget (BDIV1)</actioncontainer>
-    <actioncontainer id="t7" x="0.0" y="682.5">Script: inputNumber = (100-battery_level)*5;</actioncontainer>
-    <actioncontainer id="t8" x="0.0" y="892.5">Execute Flows: Byte to Hex</actioncontainer>
-    <actioncontainer id="t9" x="0.0" y="1067.5">Script: setWidgetElementProperty("BatteryBDIV1", "Ellipse_fill", "outlinecolor", "#ff{resultString}ff00");</actioncontainer>
-    <conditioncontainer id="t10" x="0.0" y="-87.5">Battery Level: higher than 0%</conditioncontainer>
-    <actioncontainer id="t11" x="0.0" y="122.5">Script: Set Battery Globals</actioncontainer>
-    <connection from="t1" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t4" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t11" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
 </data>
