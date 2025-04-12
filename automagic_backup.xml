@@ -150,6 +150,16 @@ NOW
     <chargingUSB>true</chargingUSB>
     <chargingWireless>true</chargingWireless>
   </trigger>
+  <trigger type="user_interface_event">
+    <useDefaultName>false</useDefaultName>
+    <name>CAST</name>
+    <enabled>true</enabled>
+    <accessibilityEventType>TYPE_WINDOW_STATE_CHANGED</accessibilityEventType>
+    <packageNameFilter>com.android.systemui</packageNameFilter>
+    <textMatchType>CONTAINS_TEXT</textMatchType>
+    <textFilter>แชร์หน้าจอ</textFilter>
+    <removeNonPrintableCharacters>false</removeNonPrintableCharacters>
+  </trigger>
   <trigger type="clipboard_changed">
     <useDefaultName>false</useDefaultName>
     <name>CC</name>
@@ -566,16 +576,6 @@ attachment_name=getString("attachment_name");</extras>
     <ignoreRegular>false</ignoreRegular>
     <ignoreOngoing>false</ignoreOngoing>
     <ignoreGroupSummary>false</ignoreGroupSummary>
-  </trigger>
-  <trigger type="user_interface_event">
-    <useDefaultName>true</useDefaultName>
-    <name>UI Event: Window opened package com.android.systemui contains text แชร์หน้าจอ</name>
-    <enabled>true</enabled>
-    <accessibilityEventType>TYPE_WINDOW_STATE_CHANGED</accessibilityEventType>
-    <packageNameFilter>com.android.systemui</packageNameFilter>
-    <textMatchType>CONTAINS_TEXT</textMatchType>
-    <textFilter>แชร์หน้าจอ</textFilter>
-    <removeNonPrintableCharacters>false</removeNonPrintableCharacters>
   </trigger>
   <trigger type="key_event">
     <useDefaultName>false</useDefaultName>
@@ -4320,6 +4320,17 @@ for (v in getVariableNames()) {if (NOT matches(v, "global_.*|flow_name|trigger|v
 removeVariable("v");
 removeVariable("sTypeOut");</script>
   </action>
+  <action type="control_user_interface">
+    <useDefaultName>false</useDefaultName>
+    <name>CAST ENABLE</name>
+    <script>
+while(not click("แชร์แอปเดียว")) {sleep(20);}
+sleep(50);
+while(not click("แชร์ทั้งหน้าจอ")) {sleep(20);}
+sleep(50);
+while(not click("แชร์หน้าจอ")) {sleep(20);}
+sleep(1000);</script>
+  </action>
   <action type="execute_root_command">
     <useDefaultName>false</useDefaultName>
     <name>CAT</name>
@@ -4603,17 +4614,6 @@ os=callJavaConstructor("java.io.DataOutputStream","DataOutputStream(java.io.Outp
 
    sleep(20)
 }</script>
-  </action>
-  <action type="control_user_interface">
-    <useDefaultName>true</useDefaultName>
-    <name>Control UI: while(not click("แชร์แอปเดียว")) {sleep(20);} sleep(100); while(not click("แชร์ทั้งหน้าจอ")) {sleep(20);} sleep(100); while(not click("แชร์หน้าจอ")) {sleep(20);} sleep(1000);</name>
-    <script>
-while(not click("แชร์แอปเดียว")) {sleep(20);}
-sleep(100);
-while(not click("แชร์ทั้งหน้าจอ")) {sleep(20);}
-sleep(100);
-while(not click("แชร์หน้าจอ")) {sleep(20);}
-sleep(1000);</script>
   </action>
   <action type="copy_text_to_clipboard">
     <useDefaultName>true</useDefaultName>
@@ -6737,6 +6737,11 @@ else {
     <minimumAccuracy>500</minimumAccuracy>
     <timeoutEnabled>true</timeoutEnabled>
     <timeoutMillis>60000</timeoutMillis>
+  </action>
+  <action type="init_variable_notifications_status_bar">
+    <useDefaultName>true</useDefaultName>
+    <name>Init Variable Notifications on Statusbar: notifications</name>
+    <variable>notifications</variable>
   </action>
   <action type="init_variable_package_info">
     <useDefaultName>true</useDefaultName>
@@ -17469,6 +17474,19 @@ method: cp_send$spfdb</notecontainer>
     <connection from="t10" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
+    <name>@ ANYDESK SUPPORT</name>
+    <description> </description>
+    <group>          ♻️  LOCAL-SYNC</group>
+    <enabled>true</enabled>
+    <executionPolicy>SKIP</executionPolicy>
+    <emergencyStopCount>999999</emergencyStopCount>
+    <triggercontainer id="t1" x="70.0" y="52.5">
+      <trigger>CAST</trigger>
+    </triggercontainer>
+    <actioncontainer id="t2" x="69.99999" y="157.5">CAST ENABLE</actioncontainer>
+    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
     <name>@ GITHUB UPLOAD</name>
     <description> </description>
     <group>          ♻️  LOCAL-SYNC</group>
@@ -17531,14 +17549,13 @@ ENCRYPT</actioncontainer>
   <flow type="flow">
     <name>Flow1</name>
     <group>          ♻️  LOCAL-SYNC</group>
-    <enabled>true</enabled>
-    <executionPolicy>SKIP</executionPolicy>
-    <emergencyStopCount>999999</emergencyStopCount>
-    <triggercontainer id="t1" x="70.0" y="52.5">
-      <trigger>UI Event: Window opened package com.android.systemui contains text แชร์หน้าจอ</trigger>
-    </triggercontainer>
-    <actioncontainer id="t2" x="70.0" y="437.5">Control UI: while(not click("แชร์แอปเดียว")) {sleep(20);} sleep(100); while(not click("แชร์ทั้งหน้าจอ")) {sleep(20);} sleep(100); while(not click("แชร์หน้าจอ")) {sleep(20);} sleep(1000);</actioncontainer>
+    <enabled>false</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <triggercontainer id="t1" x="70.0" y="52.5" />
+    <actioncontainer id="t2" x="-35.0" y="297.5">Init Variable Notifications on Statusbar: notifications</actioncontainer>
+    <conditioncontainer id="t3" x="0.0" y="577.5">     DEBUG    </conditioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow10</name>
