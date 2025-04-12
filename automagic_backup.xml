@@ -115,6 +115,14 @@ NOW
     <allowInDeviceIdle>true</allowInDeviceIdle>
     <likeAlarmClock>false</likeAlarmClock>
   </trigger>
+  <trigger type="activity_started">
+    <useDefaultName>true</useDefaultName>
+    <name>Activity Started: com.shopee.foody.driver.th/com.shopee.foody.driver.MainActivity</name>
+    <enabled>false</enabled>
+    <method>USAGE_STATISTICS</method>
+    <packageNameFilter>com.shopee.foody.driver.th</packageNameFilter>
+    <classNameFilter>com.shopee.foody.driver.MainActivity</classNameFilter>
+  </trigger>
   <trigger type="notification_status_bar_displayed">
     <useDefaultName>false</useDefaultName>
     <name>BOLT </name>
@@ -181,6 +189,23 @@ NOW
     <useDefaultName>false</useDefaultName>
     <name>CLIPBOARD</name>
     <enabled>true</enabled>
+  </trigger>
+  <trigger type="command_output">
+    <useDefaultName>true</useDefaultName>
+    <name>Command Output: dumpsys media_projection
+ (root) contains text </name>
+    <enabled>false</enabled>
+    <command>dumpsys media_projection
+</command>
+    <root>true</root>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <textMatchType>CONTAINS_TEXT</textMatchType>
+    <containedString></containedString>
+    <skipInitialOutput>false</skipInitialOutput>
+    <skipInitialOutputMillis>5000</skipInitialOutputMillis>
+    <keepDeviceAwake>false</keepDeviceAwake>
+    <logOutput>false</logOutput>
   </trigger>
   <trigger type="activity_ended">
     <useDefaultName>false</useDefaultName>
@@ -1726,6 +1751,16 @@ return false</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
+    <name>DISCONNECT </name>
+    <expression>if(contains(stdout,"null")) {
+
+   return true
+}
+sleep(10000);
+return false</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
     <name>EN-CHAT</name>
     <expression>trigger=="EN-CHAT"</expression>
   </condition>
@@ -1775,6 +1810,11 @@ dy=screen_y-c_y;
     <useDefaultName>true</useDefaultName>
     <name>Expression: contains(exception_message,"Unterminated")</name>
     <expression>contains(exception_message,"Unterminated")</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>true</useDefaultName>
+    <name>Expression: contains(stdout,"null")</name>
+    <expression>contains(stdout,"null")</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>true</useDefaultName>
@@ -3501,6 +3541,24 @@ else {
     <keepDeviceAwake>true</keepDeviceAwake>
     <allowWakeupFromDeviceIdle>false</allowWakeupFromDeviceIdle>
   </action>
+  <action type="show_custom_widget_overlay">
+    <useDefaultName>false</useDefaultName>
+    <name>ANYDESK_STATUSBAR</name>
+    <overlayName>ANYDESK_STATUSBAR</overlayName>
+    <widgetName>ANYDESK_STATUSBAR</widgetName>
+    <width></width>
+    <height></height>
+    <gravityType>TOP_LEFT</gravityType>
+    <xOffset>0</xOffset>
+    <yOffset>0</yOffset>
+    <draggable>false</draggable>
+    <opacity>1.00</opacity>
+    <clickable>false</clickable>
+    <stretchToFillArea>false</stretchToFillArea>
+    <showOnTop>true</showOnTop>
+    <noPositionRestriction>false</noPositionRestriction>
+    <useAccessibilityService>true</useAccessibilityService>
+  </action>
   <action type="launch_shortcut">
     <useDefaultName>false</useDefaultName>
     <name>APPS</name>
@@ -4329,7 +4387,7 @@ sleep(50);
 while(not click("แชร์ทั้งหน้าจอ")) {sleep(20);}
 sleep(50);
 while(not click("แชร์หน้าจอ")) {sleep(20);}
-sleep(1000);</script>
+//sleep(1000);</script>
   </action>
   <action type="execute_root_command">
     <useDefaultName>false</useDefaultName>
@@ -5059,6 +5117,20 @@ log(subdistrict[i]);
     <useDefaultName>true</useDefaultName>
     <name>Execute Root Command: cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121 in </name>
     <command>cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
+  </action>
+  <action type="execute_root_command">
+    <useDefaultName>true</useDefaultName>
+    <name>Execute Root Command: dumpsys media_projection
+ in </name>
+    <command>dumpsys media_projection
+</command>
     <user></user>
     <seContext></seContext>
     <workingDirectory></workingDirectory>
@@ -5937,6 +6009,11 @@ namefile="automagic_backup.xml"</script>
     <extras></extras>
     <waitForResult>false</waitForResult>
     <accessResultExtras></accessResultExtras>
+  </action>
+  <action type="hide_custom_widget_overlay">
+    <useDefaultName>false</useDefaultName>
+    <name>H-A</name>
+    <overlayNames>ANYDESK_STATUSBAR</overlayNames>
   </action>
   <action type="http_request">
     <useDefaultName>false</useDefaultName>
@@ -7719,6 +7796,19 @@ callJavaMethod(it, "android.content.Intent", "putExtra(java.lang.String, java.l
 callJavaMethod(getContext(), "android.content.Context", "sendBroadcast(android.content.Intent)", it);
 }
 else {sqrt()}*/</script>
+  </action>
+  <action type="execute_root_command">
+    <useDefaultName>false</useDefaultName>
+    <name>MP</name>
+    <command>dumpsys media_projection
+</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
   </action>
   <action type="execute_flows">
     <useDefaultName>false</useDefaultName>
@@ -12250,6 +12340,24 @@ for (i in [0 to length(shop_list)-1])
     <showOnTop>true</showOnTop>
     <noPositionRestriction>false</noPositionRestriction>
     <useAccessibilityService>false</useAccessibilityService>
+  </action>
+  <action type="show_custom_widget_overlay">
+    <useDefaultName>true</useDefaultName>
+    <name>Show Custom Widget Overlay: Overlay 5, ANYDESK_STATUSBAR  Top Left</name>
+    <overlayName>Overlay 5</overlayName>
+    <widgetName>ANYDESK_STATUSBAR</widgetName>
+    <width></width>
+    <height></height>
+    <gravityType>TOP_LEFT</gravityType>
+    <xOffset>0</xOffset>
+    <yOffset>0</yOffset>
+    <draggable>false</draggable>
+    <opacity>1.00</opacity>
+    <clickable>false</clickable>
+    <stretchToFillArea>false</stretchToFillArea>
+    <showOnTop>true</showOnTop>
+    <noPositionRestriction>false</noPositionRestriction>
+    <useAccessibilityService>true</useAccessibilityService>
   </action>
   <action type="show_custom_widget_overlay">
     <useDefaultName>true</useDefaultName>
@@ -17480,11 +17588,20 @@ method: cp_send$spfdb</notecontainer>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <triggercontainer id="t1" x="70.0" y="52.5">
+    <actioncontainer id="t1" x="69.99999" y="157.5">CAST ENABLE</actioncontainer>
+    <actioncontainer id="t2" x="70.000015" y="332.5">ANYDESK_STATUSBAR</actioncontainer>
+    <actioncontainer id="t3" x="69.999985" y="437.49997">MP</actioncontainer>
+    <conditioncontainer id="t4" x="69.99999" y="612.5">DISCONNECT </conditioncontainer>
+    <actioncontainer id="t5" x="69.99999" y="752.5">H-A</actioncontainer>
+    <triggercontainer id="t6" x="70.0" y="-17.499998">
       <trigger>CAST</trigger>
     </triggercontainer>
-    <actioncontainer id="t2" x="69.99999" y="157.5">CAST ENABLE</actioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t3" type="FALSE" sourcePosition="WEST" targetPosition="WEST" />
+    <connection from="t4" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>@ GITHUB UPLOAD</name>
@@ -17551,11 +17668,20 @@ ENCRYPT</actioncontainer>
     <group>          ♻️  LOCAL-SYNC</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5" />
-    <actioncontainer id="t2" x="-35.0" y="297.5">Init Variable Notifications on Statusbar: notifications</actioncontainer>
-    <conditioncontainer id="t3" x="0.0" y="577.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t1" x="-35.0" y="297.5">Init Variable Notifications on Statusbar: notifications</actioncontainer>
+    <conditioncontainer id="t2" x="0.0" y="577.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t3" x="175.0" y="227.5">Show Custom Widget Overlay: Overlay 5, ANYDESK_STATUSBAR  Top Left</actioncontainer>
+    <triggercontainer id="t4" x="34.999992" y="-157.50002">
+      <trigger>Activity Started: com.shopee.foody.driver.th/com.shopee.foody.driver.MainActivity</trigger>
+      <trigger>Command Output: dumpsys media_projection
+ (root) contains text </trigger>
+    </triggercontainer>
+    <actioncontainer id="t5" x="-139.99998" y="17.5">Execute Root Command: dumpsys media_projection
+ in </actioncontainer>
+    <conditioncontainer id="t6" x="-280.0" y="227.5">Expression: contains(stdout,"null")</conditioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow10</name>
