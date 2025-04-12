@@ -1704,6 +1704,18 @@ else {
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
+    <name>DIFF SIZE</name>
+    <expression>current_size=split(stdout," ")[4];
+
+if(current_size!=global_device["size_flow"]) {
+
+   global_device["size_flow"]=current_size;
+   return true
+}
+return false</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
     <name>EN-CHAT</name>
     <expression>trigger=="EN-CHAT"</expression>
   </condition>
@@ -4831,14 +4843,6 @@ icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=positi
   </action>
   <action type="download_url">
     <useDefaultName>true</useDefaultName>
-    <name>Download URL: https://raw.githubusercontent.com/TakahiroEX666/DatabaseAPI/main/tes3 to /storage/emulated/0//bao</name>
-    <url>https://raw.githubusercontent.com/TakahiroEX666/DatabaseAPI/main/tes3</url>
-    <directory>/storage/emulated/0/</directory>
-    <filename>bao</filename>
-    <showProgress>true</showProgress>
-  </action>
-  <action type="download_url">
-    <useDefaultName>true</useDefaultName>
     <name>Download URL: {staticmap} to /storage/emulated/0/Download/youx</name>
     <url>{staticmap}</url>
     <directory>/storage/emulated/0/Download</directory>
@@ -5010,18 +5014,6 @@ log(subdistrict[i]);
     <useDefaultName>true</useDefaultName>
     <name>Execute Root Command: am start --user 0 -a android.intent.action.VIEW -d content://com.android.externalstorage.documents/document/primary%3Aafile.csv -t text/csv -f 269484035 in </name>
     <command>am start --user 0 -a android.intent.action.VIEW -d content://com.android.externalstorage.documents/document/primary%3Aafile.csv -t text/csv -f 269484035</command>
-    <user></user>
-    <seContext></seContext>
-    <workingDirectory></workingDirectory>
-    <timeout>300000</timeout>
-    <variableStdout>stdout</variableStdout>
-    <variableStderr>stderr</variableStderr>
-    <variableExitCode>exit_code</variableExitCode>
-  </action>
-  <action type="execute_root_command">
-    <useDefaultName>true</useDefaultName>
-    <name>Execute Root Command: base64 -d /storage/emulated/0/base.sqlite in </name>
-    <command>base64 -d /storage/emulated/0/base.sqlite</command>
     <user></user>
     <seContext></seContext>
     <workingDirectory></workingDirectory>
@@ -6163,35 +6155,6 @@ cookie: shopee_token=EDZgG8Wn73Ks2NNYykVsWydXSF4zSB5+TTECHKR8OGZ52rH8Jr76RWPznl9
     <storeInVariable>true</storeInVariable>
     <variable>response</variable>
     <encoding>UTF-8</encoding>
-    <path>/storage/emulated/0/Download/file.bin</path>
-    <followRedirects>true</followRedirects>
-    <skipConnectivityCheck>false</skipConnectivityCheck>
-  </action>
-  <action type="http_request">
-    <useDefaultName>true</useDefaultName>
-    <name>HTTP Request: GET https://api.github.com/repos/TakahiroEX666/AutomagicDB/contents/tes3   store in response</name>
-    <url>https://api.github.com/repos/TakahiroEX666/AutomagicDB/contents/tes3</url>
-    <verifyCertificates>true</verifyCertificates>
-    <basicAuthentication>false</basicAuthentication>
-    <username></username>
-    <clientCert>false</clientCert>
-    <clientCertPath></clientCertPath>
-    <httpMethod>GET</httpMethod>
-    <networkType>DEFAULT</networkType>
-    <httpContentType>X_WWW_FORM_URLENCODED</httpContentType>
-    <contentType>text/plain</contentType>
-    <generalTextData></generalTextData>
-    <formFieldList>Lastname=XYZ,Firstname=ABC</formFieldList>
-    <uploadFieldName>upload_field</uploadFieldName>
-    <uploadFilePath></uploadFilePath>
-    <binaryContentType>application/octet-stream</binaryContentType>
-    <binaryFilePath></binaryFilePath>
-    <timeout>60000</timeout>
-    <setCustomHTTPHeaders>true</setCustomHTTPHeaders>
-    <customHTTPHeaders>Authorization: Bearer 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</customHTTPHeaders>
-    <storeInVariable>true</storeInVariable>
-    <variable>response</variable>
-    <encoding></encoding>
     <path>/storage/emulated/0/Download/file.bin</path>
     <followRedirects>true</followRedirects>
     <skipConnectivityCheck>false</skipConnectivityCheck>
@@ -10057,49 +10020,12 @@ callJavaMethod(xmlSerializer, "org.xmlpull.v1.XmlSerializer", "endDocument()")</
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
-    <name>Script: //decode base64 //decode=callJavaConstructor("java.lang.String", "String(byte[])", callJavaStaticMethod("android.util.Base64", "decode(java.lang.String, int)", string, getJavaStaticField("android.util.Base64", "DEFAULT"))); //encode to base64 encode=callJavaStaticMethod("android.util.Base64", "encodeToString(byte[], int)", callJavaMethod(string, "java.lang.String", "getBytes()"), getJavaStaticField("android.util.Base64", "DEFAULT"))</name>
-    <script>//decode base64
-//decode=callJavaConstructor("java.lang.String", "String(byte[])", callJavaStaticMethod("android.util.Base64", "decode(java.lang.String, int)", string, getJavaStaticField("android.util.Base64", "DEFAULT")));
-
-
-
-//encode to base64
-encode=callJavaStaticMethod("android.util.Base64",
- "encodeToString(byte[], int)", callJavaMethod(string, "java.lang.String", 
-"getBytes()"), getJavaStaticField("android.util.Base64", "DEFAULT"))</script>
-  </action>
-  <action type="script">
-    <useDefaultName>true</useDefaultName>
     <name>Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</name>
     <script>//if(global_device["device"]=="alioth") {sqrt();}
 
 skip=true;
 p1="job_incoming";
 p2="spf";
-</script>
-  </action>
-  <action type="script">
-    <useDefaultName>true</useDefaultName>
-    <name>Script: //path=callJavaConstructor("java.net.URL", "URL(java.lang.String)", "/storage/emulated/0/test.png") xzx=callJavaConstructor("java.io.File", "File(java.lang.String)", "/storage/emulated/0/test.png"); path=callJavaStaticMethod("android.net.Uri", "fromFile(java.io.File)", xzx); b=callJavaStaticMethod("java.nio.file.Paths", "get(java.net.URI)", path); file=callJavaStaticMethod("java.nio.file.Files", "readAllBytes(java.nio.file.Path)", b); c=callJavaMethod(b, "java.util.Base64$Encoder", "encodeToString(byte[])", file); c=callJavaStaticMethod("java.util.Base64", "getEncoder()")</name>
-    <script>//path=callJavaConstructor("java.net.URL", "URL(java.lang.String)", "/storage/emulated/0/test.png")
-
-xzx=callJavaConstructor("java.io.File", "File(java.lang.String)", "/storage/emulated/0/test.png");
-
-path=callJavaStaticMethod("android.net.Uri", "fromFile(java.io.File)", xzx);
-
-
-
-b=callJavaStaticMethod("java.nio.file.Paths", "get(java.net.URI)", path);
-
-file=callJavaStaticMethod("java.nio.file.Files", "readAllBytes(java.nio.file.Path)", b);
-
-
-
-
-c=callJavaMethod(b, "java.util.Base64$Encoder", "encodeToString(byte[])", file);
-
-
-c=callJavaStaticMethod("java.util.Base64", "getEncoder()")
 </script>
   </action>
   <action type="script">
@@ -12434,6 +12360,18 @@ for (i in [0 to length(shop_list)-1])
     <showOnTop>true</showOnTop>
     <noPositionRestriction>false</noPositionRestriction>
     <useAccessibilityService>false</useAccessibilityService>
+  </action>
+  <action type="execute_root_command">
+    <useDefaultName>false</useDefaultName>
+    <name>SIZE</name>
+    <command>ls -l /storage/emulated/0/Android/application/RESOURCE/temp_flowbackup.xml</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
   </action>
   <action type="sleep">
     <useDefaultName>false</useDefaultName>
@@ -17525,40 +17463,35 @@ method: cp_send$spfdb</notecontainer>
     <group>          ♻️  LOCAL-SYNC</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <actioncontainer id="t1" x="910.0" y="-577.5">Download URL: https://raw.githubusercontent.com/TakahiroEX666/DatabaseAPI/main/tes3 to /storage/emulated/0//bao</actioncontainer>
-    <notecontainer id="t2" x="-910.0" y="-367.5" w="140.0" h="105.0">ถ้าจะทับต้องมี sha</notecontainer>
-    <actioncontainer id="t3" x="-1015.0" y="-262.50003">Execute Root Command: base64 -d /storage/emulated/0/base.sqlite in </actioncontainer>
-    <actioncontainer id="t4" x="-1190.0" y="-262.5">Script: //decode base64 //decode=callJavaConstructor("java.lang.String", "String(byte[])", callJavaStaticMethod("android.util.Base64", "decode(java.lang.String, int)", string, getJavaStaticField("android.util.Base64", "DEFAULT"))); //encode to base64 encode=callJavaStaticMethod("android.util.Base64", "encodeToString(byte[], int)", callJavaMethod(string, "java.lang.String", "getBytes()"), getJavaStaticField("android.util.Base64", "DEFAULT"))</actioncontainer>
-    <actioncontainer id="t5" x="-1190.0" y="-262.5"></actioncontainer>
-    <actioncontainer id="t6" x="-1155.0" y="-192.5">Script: //path=callJavaConstructor("java.net.URL", "URL(java.lang.String)", "/storage/emulated/0/test.png") xzx=callJavaConstructor("java.io.File", "File(java.lang.String)", "/storage/emulated/0/test.png"); path=callJavaStaticMethod("android.net.Uri", "fromFile(java.io.File)", xzx); b=callJavaStaticMethod("java.nio.file.Paths", "get(java.net.URI)", path); file=callJavaStaticMethod("java.nio.file.Files", "readAllBytes(java.nio.file.Path)", b); c=callJavaMethod(b, "java.util.Base64$Encoder", "encodeToString(byte[])", file); c=callJavaStaticMethod("java.util.Base64", "getEncoder()")</actioncontainer>
-    <actioncontainer id="t7" x="-69.99999" y="-717.5">BASE64
+    <conditioncontainer id="t1" x="-69.99998" y="-332.5">SHA?</conditioncontainer>
+    <actioncontainer id="t2" x="245.00009" y="-612.5">SHA IMPORT</actioncontainer>
+    <actioncontainer id="t3" x="244.99994" y="-507.5">GITJ SHA</actioncontainer>
+    <actioncontainer id="t4" x="-70.00001" y="-52.500015">WRITE SHA</actioncontainer>
+    <actioncontainer id="t5" x="-70.00001" y="-157.50003">SHA?</actioncontainer>
+    <actioncontainer id="t6" x="-69.99999" y="-612.5">GITJ</actioncontainer>
+    <actioncontainer id="t7" x="-70.0" y="-507.50006">GIT UPLOAD</actioncontainer>
+    <actioncontainer id="t8" x="-70.000015" y="-1417.5">FLOWLIST</actioncontainer>
+    <actioncontainer id="t9" x="-69.99999" y="-717.5">BASE64
 ENCRYPT</actioncontainer>
-    <actioncontainer id="t8" x="-69.999985" y="-822.5">EXPORT</actioncontainer>
-    <actioncontainer id="t9" x="-69.99999" y="-927.5">FLOWLIST</actioncontainer>
-    <conditioncontainer id="t10" x="-69.99998" y="-332.5">SHA?</conditioncontainer>
-    <actioncontainer id="t11" x="245.00009" y="-612.5">SHA IMPORT</actioncontainer>
-    <actioncontainer id="t12" x="244.99994" y="-507.5">GITJ SHA</actioncontainer>
-    <actioncontainer id="t13" x="-70.00001" y="-52.500015">WRITE SHA</actioncontainer>
-    <notecontainer id="t14" x="-1015.0" y="-402.5" w="140.0" h="105.0">รับ sha</notecontainer>
-    <actioncontainer id="t15" x="-1015.0" y="-367.5">HTTP Request: GET https://api.github.com/repos/TakahiroEX666/AutomagicDB/contents/tes3   store in response</actioncontainer>
-    <actioncontainer id="t16" x="-70.00001" y="-157.50003">SHA?</actioncontainer>
-    <conditioncontainer id="t17" x="-350.0" y="-332.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t18" x="-69.99999" y="-612.5">GITJ</actioncontainer>
-    <actioncontainer id="t19" x="-70.0" y="-507.50006">GIT UPLOAD</actioncontainer>
-    <triggercontainer id="t20" x="-69.999985" y="-1102.5">
+    <conditioncontainer id="t10" x="-69.99999" y="-892.5">DIFF SIZE</conditioncontainer>
+    <actioncontainer id="t11" x="-69.99997" y="-1102.5002">SIZE</actioncontainer>
+    <triggercontainer id="t12" x="-69.99998" y="-1627.5">
       <trigger>Periohhdic Timer: every 1m</trigger>
     </triggercontainer>
-    <connection from="t7" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t16" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t11" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t11" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t19" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t16" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t18" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t19" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t20" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t13" x="-69.99998" y="-1312.5">EXPORT</actioncontainer>
+    <connection from="t1" to="t5" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t2" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t7" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t5" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Encrypt / Decrypt text</name>
