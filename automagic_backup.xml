@@ -17174,28 +17174,24 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <triggercontainer id="t1" x="-910.0" y="-8032.5">
-      <trigger>MULTI</trigger>
-      <trigger>SINGLE</trigger>
-    </triggercontainer>
-    <actioncontainer id="t2" x="-1470.0" y="-3307.5">TEMPLATE 
+    <actioncontainer id="t1" x="-1470.0" y="-3307.5">TEMPLATE 
 HTTP</actioncontainer>
-    <actioncontainer id="t3" x="-1470.0" y="-3202.5">TEMPLATE 
+    <actioncontainer id="t2" x="-1470.0" y="-3202.5">TEMPLATE 
 HTTP / POST</actioncontainer>
-    <conditioncontainer id="t4" x="-1330.0" y="-3062.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t5" x="-1330.0" y="-3482.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
-    <actioncontainer id="t6" x="-1715.0" y="-3132.5">TEMPLATทE 
+    <conditioncontainer id="t3" x="-1330.0" y="-3062.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t4" x="-1330.0" y="-3482.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
+    <actioncontainer id="t5" x="-1715.0" y="-3132.5">TEMPLATทE 
 HTTP</actioncontainer>
-    <actioncontainer id="t7" x="-1610.0" y="-2957.5">TEMPLATE 
+    <actioncontainer id="t6" x="-1610.0" y="-2957.5">TEMPLATE 
 HTTP</actioncontainer>
-    <actioncontainer id="t8" x="-1820.0" y="-2887.5">CONFIG</actioncontainer>
-    <actioncontainer id="t9" x="-1540.0" y="-2852.5">TEMPLATE 
+    <actioncontainer id="t7" x="-1820.0" y="-2887.5">CONFIG</actioncontainer>
+    <actioncontainer id="t8" x="-1540.0" y="-2852.5">TEMPLATE 
 HTTP / POST</actioncontainer>
-    <actioncontainer id="t10" x="-1400.0" y="-2712.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
-    <conditioncontainer id="t11" x="-1470.0" y="-2537.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t12" x="-1400.0" y="-3412.5">TEST
+    <actioncontainer id="t9" x="-1400.0" y="-2712.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
+    <conditioncontainer id="t10" x="-1470.0" y="-2537.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t11" x="-1400.0" y="-3412.5">TEST
 KILLAPPS</actioncontainer>
-    <notecontainer id="t13" x="1627.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK START:
+    <notecontainer id="t12" x="1627.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK START:
 -type: command
 -method: mock_start
 -content: 13.000,100.000
@@ -17203,14 +17199,14 @@ KILLAPPS</actioncontainer>
 |
 |
 |=&gt; *ok</notecontainer>
-    <notecontainer id="t14" x="1942.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK STOP:
+    <notecontainer id="t13" x="1942.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK STOP:
 -type: command
 -method: mock_stop
 -response: true
 |
 |
 |=&gt; *ok</notecontainer>
-    <notecontainer id="t15" x="2257.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK GET:
+    <notecontainer id="t14" x="2257.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK GET:
 -type: command
 -method: mock_get
 -response: true
@@ -17219,14 +17215,14 @@ KILLAPPS</actioncontainer>
 |=&gt; activate
  =&gt; lat, lon
 </notecontainer>
-    <notecontainer id="t16" x="1627.5" y="-7175.0" w="315.0" h="210.0">PUT-BLUETOOTH
+    <notecontainer id="t15" x="1627.5" y="-7175.0" w="315.0" h="210.0">PUT-BLUETOOTH
 -type: command
 -method: put_bluetooth
 -response: true
 |
 |
 |=&gt; *ok</notecontainer>
-    <notecontainer id="t17" x="1627.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SQLITE
+    <notecontainer id="t16" x="1627.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SQLITE
 -type: command
 -method: al_put$sqlite
 -response: true
@@ -17234,65 +17230,69 @@ KILLAPPS</actioncontainer>
 |
 |=&gt; upload sqlite~link 
  =&gt; send link</notecontainer>
-    <notecontainer id="t18" x="1942.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SPFDB
+    <notecontainer id="t17" x="1942.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SPFDB
 -type: command
 -method: al_put$spfdb
 -response: true
 |
 |
 |=&gt; send spfdb</notecontainer>
-    <notecontainer id="t19" x="1942.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-DB
+    <notecontainer id="t18" x="1942.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-DB
 
 type: command
 method: cp_send$spfdb</notecontainer>
-    <notecontainer id="t20" x="1627.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-SQLITE
+    <notecontainer id="t19" x="1627.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-SQLITE
 
 type: job_command
 method: cp_send$spfdb</notecontainer>
-    <notecontainer id="t21" x="1627.5" y="-7595.0" w="315.0" h="210.0">(AL) KILLALL:
+    <notecontainer id="t20" x="1627.5" y="-7595.0" w="315.0" h="210.0">(AL) KILLALL:
 -type: command
 -method: killall
 -response: true
 |
 |
 |=&gt; *ok</notecontainer>
-    <actioncontainer id="t22" x="700.0" y="-6597.5">CP</actioncontainer>
-    <conditioncontainer id="t23" x="700.0" y="-6737.5">NOT ACCESS </conditioncontainer>
-    <conditioncontainer id="t24" x="700.0" y="-6422.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t25" x="-910.0" y="-7122.5">RE?</conditioncontainer>
-    <actioncontainer id="t26" x="-910.0" y="-6982.5">RESPONSE</actioncontainer>
-    <actioncontainer id="t27" x="-700.0" y="-7262.5">TOAST</actioncontainer>
-    <conditioncontainer id="t28" x="665.0" y="-6982.5">INDEX</conditioncontainer>
-    <conditioncontainer id="t29" x="665.0" y="-7052.5">INDEX</conditioncontainer>
-    <actioncontainer id="t30" x="665.0" y="-6877.5">QUERY</actioncontainer>
-    <conditioncontainer id="t31" x="700.0" y="-6772.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t32" x="-910.0" y="-7857.5">IP?</conditioncontainer>
-    <actioncontainer id="t33" x="-700.0" y="-7857.5">00: SERVICES</actioncontainer>
-    <actioncontainer id="t34" x="-910.0" y="-7612.5">CONFIG4</actioncontainer>
-    <actioncontainer id="t35" x="-910.0" y="-7262.5">HTTP SEND</actioncontainer>
-    <actioncontainer id="t36" x="-490.0" y="-7087.5"> WAIT-SEND</actioncontainer>
-    <actioncontainer id="t37" x="-490.0" y="-6982.5">NTFY.ATTACH</actioncontainer>
-    <actioncontainer id="t38" x="-490.0" y="-7262.5">HTTP FILESEND</actioncontainer>
-    <conditioncontainer id="t39" x="-910.0" y="-7437.5">CMD / FILE</conditioncontainer>
-    <connection from="t1" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t26" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t29" to="t30" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t29" to="t31" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t30" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t32" to="t34" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t32" to="t33" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t33" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t35" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t35" to="t27" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t36" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t37" to="t27" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t38" to="t27" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t38" to="t36" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t39" to="t35" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t39" to="t38" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <actioncontainer id="t21" x="700.0" y="-6597.5">CP</actioncontainer>
+    <conditioncontainer id="t22" x="700.0" y="-6737.5">NOT ACCESS </conditioncontainer>
+    <conditioncontainer id="t23" x="700.0" y="-6422.5">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t24" x="-910.0" y="-7122.5">RE?</conditioncontainer>
+    <actioncontainer id="t25" x="-910.0" y="-6982.5">RESPONSE</actioncontainer>
+    <actioncontainer id="t26" x="-700.0" y="-7262.5">TOAST</actioncontainer>
+    <conditioncontainer id="t27" x="665.0" y="-6982.5">INDEX</conditioncontainer>
+    <conditioncontainer id="t28" x="665.0" y="-7052.5">INDEX</conditioncontainer>
+    <actioncontainer id="t29" x="665.0" y="-6877.5">QUERY</actioncontainer>
+    <conditioncontainer id="t30" x="700.0" y="-6772.5">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t31" x="-910.0" y="-7857.5">IP?</conditioncontainer>
+    <actioncontainer id="t32" x="-700.0" y="-7857.5">00: SERVICES</actioncontainer>
+    <actioncontainer id="t33" x="-910.0" y="-7612.5">CONFIG4</actioncontainer>
+    <actioncontainer id="t34" x="-910.0" y="-7262.5">HTTP SEND</actioncontainer>
+    <actioncontainer id="t35" x="-490.0" y="-7087.5"> WAIT-SEND</actioncontainer>
+    <actioncontainer id="t36" x="-490.0" y="-6982.5">NTFY.ATTACH</actioncontainer>
+    <actioncontainer id="t37" x="-490.0" y="-7262.5">HTTP FILESEND</actioncontainer>
+    <conditioncontainer id="t38" x="-910.0" y="-7437.5">CMD / FILE</conditioncontainer>
+    <triggercontainer id="t39" x="-910.0" y="-8382.5">
+      <trigger>MULTI</trigger>
+      <trigger>SINGLE</trigger>
+    </triggercontainer>
+    <connection from="t21" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t21" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t25" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t28" to="t29" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t28" to="t30" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t30" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t31" to="t33" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t31" to="t32" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t32" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t33" to="t38" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t34" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t34" to="t26" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t35" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t36" to="t26" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t37" to="t26" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t37" to="t35" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t38" to="t34" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t38" to="t37" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t39" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>13: RECEIVED</name>
