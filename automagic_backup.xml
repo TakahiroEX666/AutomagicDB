@@ -95,6 +95,28 @@ NOW
   </trigger>
   <trigger type="periodic_timer">
     <useDefaultName>false</useDefaultName>
+    <name>1h</name>
+    <enabled>true</enabled>
+    <frequency>3600000</frequency>
+    <wakeDevice>true</wakeDevice>
+    <fixedTimes>true</fixedTimes>
+    <limitTimeRange>false</limitTimeRange>
+    <weekday>Mon</weekday>
+    <weekday>Tue</weekday>
+    <weekday>Wed</weekday>
+    <weekday>Thu</weekday>
+    <weekday>Fri</weekday>
+    <weekday>Sat</weekday>
+    <weekday>Sun</weekday>
+    <hourFrom>8</hourFrom>
+    <minuteFrom>0</minuteFrom>
+    <hourTo>17</hourTo>
+    <minuteTo>0</minuteTo>
+    <allowInDeviceIdle>true</allowInDeviceIdle>
+    <likeAlarmClock>false</likeAlarmClock>
+  </trigger>
+  <trigger type="periodic_timer">
+    <useDefaultName>false</useDefaultName>
     <name>1m</name>
     <enabled>true</enabled>
     <frequency>70000</frequency>
@@ -432,28 +454,6 @@ attachment_name=getString("attachment_name");</extras>
     <frequency>60000</frequency>
     <wakeDevice>true</wakeDevice>
     <fixedTimes>false</fixedTimes>
-    <limitTimeRange>false</limitTimeRange>
-    <weekday>Mon</weekday>
-    <weekday>Tue</weekday>
-    <weekday>Wed</weekday>
-    <weekday>Thu</weekday>
-    <weekday>Fri</weekday>
-    <weekday>Sat</weekday>
-    <weekday>Sun</weekday>
-    <hourFrom>8</hourFrom>
-    <minuteFrom>0</minuteFrom>
-    <hourTo>17</hourTo>
-    <minuteTo>0</minuteTo>
-    <allowInDeviceIdle>true</allowInDeviceIdle>
-    <likeAlarmClock>false</likeAlarmClock>
-  </trigger>
-  <trigger type="periodic_timer">
-    <useDefaultName>false</useDefaultName>
-    <name>Periohhdic Timer: every 1m</name>
-    <enabled>true</enabled>
-    <frequency>600000</frequency>
-    <wakeDevice>true</wakeDevice>
-    <fixedTimes>true</fixedTimes>
     <limitTimeRange>false</limitTimeRange>
     <weekday>Mon</weekday>
     <weekday>Tue</weekday>
@@ -15370,6 +15370,13 @@ y=callJavaMethod(x, "java.io.StringWriter", "toString()");
 
 </script>
   </action>
+  <action type="zip_files">
+    <useDefaultName>true</useDefaultName>
+    <name>Zip Files: /storage/emulated/0/folder to /storage/emulated/0/archive.zip</name>
+    <sourcePathList>/storage/emulated/0/folder</sourcePathList>
+    <targetPath>/storage/emulated/0/archive.zip</targetPath>
+    <showProgress>true</showProgress>
+  </action>
   <action type="input_dialog">
     <useDefaultName>false</useDefaultName>
     <name>ZONEMEN</name>
@@ -16166,7 +16173,7 @@ OPTIMIZATION</notecontainer>
     <connection from="t30" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t31" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t32" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t38" to="t30" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t38" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#39: MANUAL</name>
@@ -17637,9 +17644,9 @@ method: cp_send$spfdb</notecontainer>
       <trigger>CAST</trigger>
     </triggercontainer>
     <actioncontainer id="t2" x="70.0" y="157.5">CAST ENABLE</actioncontainer>
-    <actioncontainer id="t3" x="70.000015" y="332.5">ANYDESK_STATUSBAR</actioncontainer>
+    <actioncontainer id="t3" x="70.0" y="332.5">ANYDESK_STATUSBAR</actioncontainer>
     <actioncontainer id="t4" x="70.0" y="752.5">H-A</actioncontainer>
-    <actioncontainer id="t5" x="69.999985" y="437.49997">MP</actioncontainer>
+    <actioncontainer id="t5" x="70.0" y="437.5">MP</actioncontainer>
     <conditioncontainer id="t6" x="70.0" y="612.5">DISCONNECT </conditioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -17655,7 +17662,7 @@ method: cp_send$spfdb</notecontainer>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="-70.0" y="-1627.5">
-      <trigger>Periohhdic Timer: every 1m</trigger>
+      <trigger>1h</trigger>
     </triggercontainer>
     <conditioncontainer id="t2" x="-70.0" y="-332.5">SHA?</conditioncontainer>
     <actioncontainer id="t3" x="245.0" y="-612.5">SHA IMPORT</actioncontainer>
@@ -17710,7 +17717,7 @@ ENCRYPT</actioncontainer>
   </flow>
   <flow type="flow">
     <name>Flow1</name>
-    <group>          ♻️  LOCAL-SYNC</group>
+    <group>        📍  NAVIGATION</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="-210.0" y="-332.5">
@@ -17724,10 +17731,10 @@ ENCRYPT</actioncontainer>
     <actioncontainer id="t5" x="-140.0" y="17.5">Execute Root Command: dumpsys media_projection
  in </actioncontainer>
     <conditioncontainer id="t6" x="-280.0" y="227.5">Expression: contains(stdout,"null")</conditioncontainer>
-    <actioncontainer id="t7" x="-280.00006" y="-52.500122">Execute Root Command: screencap -p /storage/emulated/0/Android/application/SPFDB/SCREENSHOT/{time}.png in </actioncontainer>
-    <actioncontainer id="t8" x="-280.00003" y="-157.50012">Script: time="{getDate(),dateformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</actioncontainer>
-    <actioncontainer id="t9" x="-455.00006" y="17.499878">Execute Root Command: screencap -p /storage/emulated/0/Android/application/SPFDB/SCREENSHOT/{time}.png in </actioncontainer>
-    <actioncontainer id="t10" x="-455.0" y="-87.50012">Script: time="{getDate(),datedformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</actioncontainer>
+    <actioncontainer id="t7" x="-280.0" y="-52.5">Execute Root Command: screencap -p /storage/emulated/0/Android/application/SPFDB/SCREENSHOT/{time}.png in </actioncontainer>
+    <actioncontainer id="t8" x="-280.0" y="-157.5">Script: time="{getDate(),dateformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</actioncontainer>
+    <actioncontainer id="t9" x="-455.0" y="17.5">Execute Root Command: screencap -p /storage/emulated/0/Android/application/SPFDB/SCREENSHOT/{time}.png in </actioncontainer>
+    <actioncontainer id="t10" x="-455.0" y="-87.5">Script: time="{getDate(),datedformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</actioncontainer>
     <connection from="t1" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -17886,6 +17893,15 @@ MENU
     <triggercontainer id="t1" x="70.0" y="52.5" />
     <actioncontainer id="t2" x="-35.0" y="297.5">Plugin: AFWall+ Taskeeddr plugin Disable AFWall+</actioncontainer>
     <actioncontainer id="t3" x="140.0" y="297.5">Plugin: AFWall+ Taskeeddr plugin Drrrisable AFWall+</actioncontainer>
+    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>Flow4</name>
+    <group>          ♻️  LOCAL-SYNC</group>
+    <enabled>false</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <triggercontainer id="t1" x="70.0" y="52.5" />
+    <actioncontainer id="t2" x="-35.0" y="367.5">Zip Files: /storage/emulated/0/folder to /storage/emulated/0/archive.zip</actioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
