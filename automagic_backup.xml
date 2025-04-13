@@ -172,7 +172,7 @@ NOW
   </trigger>
   <trigger type="power_connected">
     <useDefaultName>false</useDefaultName>
-    <name>C-CON</name>
+    <name>C-C</name>
     <enabled>true</enabled>
     <powerConnected>true</powerConnected>
     <chargingACAdapter>true</chargingACAdapter>
@@ -181,7 +181,7 @@ NOW
   </trigger>
   <trigger type="power_connected">
     <useDefaultName>false</useDefaultName>
-    <name>C-DIS</name>
+    <name>C-D</name>
     <enabled>true</enabled>
     <powerConnected>false</powerConnected>
     <chargingACAdapter>true</chargingACAdapter>
@@ -1522,7 +1522,7 @@ contains(exception_message,"sqrt")
   </condition>
   <condition type="battery_level">
     <useDefaultName>false</useDefaultName>
-    <name>BATTVAR</name>
+    <name>BATTERY</name>
     <levelPercentage>50</levelPercentage>
     <batteryLevelCondition>FULL</batteryLevelCondition>
   </condition>
@@ -1693,10 +1693,10 @@ return true</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
-    <name>CON </name>
+    <name>CONNECT</name>
     <expression>calc=newList();
 
-trigger=="C-CON" or trigger=="Manual"</expression>
+trigger=="C-C" or trigger=="Manual"</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -2313,6 +2313,11 @@ take==true</expression>
     <useDefaultName>false</useDefaultName>
     <name>LA  </name>
     <expression>global_mockservice["gm_select"][0]=="LALAMOVE"</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>LEVEL</name>
+    <expression>battery_level&gt;=temp_level</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -4283,42 +4288,6 @@ ENCRYPT</name>
     <variableStderr>stderr</variableStderr>
     <variableExitCode>exit_code</variableExitCode>
   </action>
-  <action type="notification_status_bar">
-    <useDefaultName>false</useDefaultName>
-    <name>BATT:</name>
-    <notificationIconType>BUILTIN</notificationIconType>
-    <notificationIcon>BATTERY</notificationIcon>
-    <customNotificationIcon></customNotificationIcon>
-    <title>{mAh} mA  /  {watt} W</title>
-    <message>อุณหภูมิ: {temp}  /  เฉลี่ย: {average} mA</message>
-    <channel>BATTERY</channel>
-    <sound>false</sound>
-    <vibrate>false</vibrate>
-    <flashLED>false</flashLED>
-    <flashLEDColor>#ff00ff00</flashLEDColor>
-    <flashLEDOn>500</flashLEDOn>
-    <flashLEDOff>500</flashLEDOff>
-    <flagLocalOnly>true</flagLocalOnly>
-    <accentColorEnabled>false</accentColorEnabled>
-    <accentColor>#ffff0000</accentColor>
-    <flagOngoing>false</flagOngoing>
-    <flagNoClear>false</flagNoClear>
-    <notificationIDEnabled>true</notificationIDEnabled>
-    <notificationID>15</notificationID>
-    <category>DEFAULT</category>
-    <priority>MIN</priority>
-    <visibility>SECRET</visibility>
-    <messageBigEnabled>false</messageBigEnabled>
-    <messageBig></messageBig>
-    <showProgressbar>true</showProgressbar>
-    <progressbarIndeterminate>false</progressbarIndeterminate>
-    <progressbarValue>{mAh}</progressbarValue>
-    <progressbarMaximum>{average}</progressbarMaximum>
-    <largeIconEnabled>false</largeIconEnabled>
-    <largeIcon></largeIcon>
-    <group>XXX</group>
-    <isGroupSummary>true</isGroupSummary>
-  </action>
   <action type="control_user_interface">
     <useDefaultName>false</useDefaultName>
     <name>BTN-ACCEPT</name>
@@ -4329,6 +4298,26 @@ while(getBounds("ยอมรับ(*")!=null) {
 
    sleep(1000);
 }</script>
+  </action>
+  <action type="script">
+    <useDefaultName>false</useDefaultName>
+    <name>Bvar</name>
+    <script>mAh=(battery_current_now/1000)-(battery_current_now/1000*2);
+temp=battery_temperature/10;
+watt=round((-battery_current_now*battery_voltage/1000000)*10)/10000;
+watt="{watt,numberformat,0.0}";
+
+
+if(temp_level==null) {temp_level=battery_level}
+
+addElement(calc, mAh);
+sum=0;
+
+
+for (i in calc){sum=sum+i;}
+
+yyyy=callJavaMethod(calc, "java.util.List", "size()");
+average=sum/yyyy</script>
   </action>
   <action type="call_number">
     <useDefaultName>true</useDefaultName>
@@ -12650,6 +12639,19 @@ for (i in [0 to length(shop_list)-1])
     <requestAudioFocus>false</requestAudioFocus>
     <audioFocusType>TRANSIENT</audioFocusType>
   </action>
+  <action type="sound">
+    <useDefaultName>true</useDefaultName>
+    <name>Sound: https://proxy.notificationsounds.com/notification-sounds/ringtone-you-would-be-glad-to-know/download/file-sounds-1350-you-would-be-glad.mp3 as Notification</name>
+    <soundSourceType>FILE</soundSourceType>
+    <alarmName>Silent</alarmName>
+    <path>https://proxy.notificationsounds.com/notification-sounds/ringtone-you-would-be-glad-to-know/download/file-sounds-1350-you-would-be-glad.mp3</path>
+    <audioStreamType>NOTIFICATION</audioStreamType>
+    <startPosition></startPosition>
+    <showStopSoundNotification>false</showStopSoundNotification>
+    <waitForSoundToFinish>false</waitForSoundToFinish>
+    <requestAudioFocus>false</requestAudioFocus>
+    <audioFocusType>TRANSIENT</audioFocusType>
+  </action>
   <action type="script">
     <useDefaultName>false</useDefaultName>
     <name>SP</name>
@@ -13494,6 +13496,42 @@ putString("android.intent.extra.STREAM","content://media/external/images/media/1
 state="timeout";
 sqrt();</script>
   </action>
+  <action type="notification_status_bar">
+    <useDefaultName>false</useDefaultName>
+    <name>STATUS-BATT</name>
+    <notificationIconType>BUILTIN</notificationIconType>
+    <notificationIcon>BATTERY</notificationIcon>
+    <customNotificationIcon></customNotificationIcon>
+    <title>{mAh} mA  /  {watt} W</title>
+    <message>อุณหภูมิ: {temp}  /  เฉลี่ย: {average} mA</message>
+    <channel>BATTERY</channel>
+    <sound>false</sound>
+    <vibrate>false</vibrate>
+    <flashLED>false</flashLED>
+    <flashLEDColor>#ff00ff00</flashLEDColor>
+    <flashLEDOn>500</flashLEDOn>
+    <flashLEDOff>500</flashLEDOff>
+    <flagLocalOnly>true</flagLocalOnly>
+    <accentColorEnabled>false</accentColorEnabled>
+    <accentColor>#ffff0000</accentColor>
+    <flagOngoing>false</flagOngoing>
+    <flagNoClear>false</flagNoClear>
+    <notificationIDEnabled>true</notificationIDEnabled>
+    <notificationID>15</notificationID>
+    <category>DEFAULT</category>
+    <priority>MIN</priority>
+    <visibility>SECRET</visibility>
+    <messageBigEnabled>false</messageBigEnabled>
+    <messageBig></messageBig>
+    <showProgressbar>true</showProgressbar>
+    <progressbarIndeterminate>false</progressbarIndeterminate>
+    <progressbarValue>{mAh}</progressbarValue>
+    <progressbarMaximum>{average}</progressbarMaximum>
+    <largeIconEnabled>false</largeIconEnabled>
+    <largeIcon></largeIcon>
+    <group>XXX</group>
+    <isGroupSummary>true</isGroupSummary>
+  </action>
   <action type="stop_flows">
     <useDefaultName>false</useDefaultName>
     <name>STOP</name>
@@ -13526,8 +13564,8 @@ sqrt();</script>
   </action>
   <action type="stop_flows">
     <useDefaultName>false</useDefaultName>
-    <name>STOP: BATT</name>
-    <includeFlowNamePatternList>00: BATTERY</includeFlowNamePatternList>
+    <name>STOP-SELF</name>
+    <includeFlowNamePatternList>00: BATTERY STATUS</includeFlowNamePatternList>
     <excludeFlowNamePatternList></excludeFlowNamePatternList>
   </action>
   <action type="notification_screen">
@@ -15359,26 +15397,6 @@ while(true) {
     <text>{W}</text>
     <append>false</append>
   </action>
-  <action type="script">
-    <useDefaultName>false</useDefaultName>
-    <name>X</name>
-    <script>mAh=(battery_current_now/1000)-(battery_current_now/1000*2);
-temp=battery_temperature/10;
-watt=round((-battery_current_now*battery_voltage/1000000)*10)/10000;
-watt="{watt,numberformat,0.0}";
-
-addElement(calc, mAh);
-sum=0;
-
-
-for (i in calc){
-
-   sum=sum+i;
-}
-
-yyyy=callJavaMethod(calc, "java.util.List", "size()");
-average=sum/yyyy</script>
-  </action>
   <action type="start_activity">
     <useDefaultName>false</useDefaultName>
     <name>XML</name>
@@ -15467,13 +15485,6 @@ callJavaMethod(transformer, "javax.xml.transform.Transformer", "transform(javax.
 y=callJavaMethod(x, "java.io.StringWriter", "toString()");
 
 </script>
-  </action>
-  <action type="zip_files">
-    <useDefaultName>true</useDefaultName>
-    <name>Zip Files: /storage/emulated/0/folder to /storage/emulated/0/archive.zip</name>
-    <sourcePathList>/storage/emulated/0/folder</sourcePathList>
-    <targetPath>/storage/emulated/0/archive.zip</targetPath>
-    <showProgress>true</showProgress>
   </action>
   <action type="input_dialog">
     <useDefaultName>false</useDefaultName>
@@ -16204,40 +16215,40 @@ AUTOFILL</actioncontainer>
     <group>         🧬  MAP SERVICES</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <conditioncontainer id="t1" x="-945.0" y="-927.5">   OK   </conditioncontainer>
-    <actioncontainer id="t2" x="-945.0" y="-227.5">RUN SH</actioncontainer>
-    <actioncontainer id="t3" x="-945.0" y="-752.5">ORS-DIREX</actioncontainer>
-    <actioncontainer id="t4" x="-945.0" y="-507.5">ENCODE</actioncontainer>
-    <actioncontainer id="t5" x="-945.0" y="-402.5">SH COMMAND</actioncontainer>
-    <actioncontainer id="t6" x="-945.0" y="227.5">KML PATH</actioncontainer>
-    <actioncontainer id="t7" x="-945.0" y="332.5">RM PATHTEMP</actioncontainer>
-    <actioncontainer id="t8" x="-945.0" y="17.5">DECODE TXT</actioncontainer>
-    <actioncontainer id="t9" x="-945.0" y="122.5">KML CMD</actioncontainer>
-    <actioncontainer id="t10" x="-945.0" y="-1067.5">LATLON MAP</actioncontainer>
-    <actioncontainer id="t11" x="-1330.0" y="-962.5">PATH PROCESS</actioncontainer>
-    <conditioncontainer id="t12" x="-1330.0" y="-752.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t13" x="-1330.0" y="-1067.5">PAST-TIME</actioncontainer>
-    <notecontainer id="t14" x="-1330.0" y="-1172.5" w="140.0" h="35.0">PATH MOCK</notecontainer>
-    <notecontainer id="t15" x="-945.0" y="-1172.5" w="140.0" h="35.0">PATH EXPORT</notecontainer>
-    <actioncontainer id="t16" x="-945.0" y="-612.5">BASE</actioncontainer>
-    <actioncontainer id="t17" x="1715.0" y="-297.5">Script: response=fromJSON(response); start=response["routes"][0]["steps"][0]["location"]; start="{start[1]},{start[0]}"; end=response["routes"][0]["steps"][ljjength(response["routes"][0]["steps"])-1]["location"]; enfrd="{end[1]},{end[0]}"; waypoint=""; for (i in [0 to length(response["routes"][0]["steps"])-1]) { if(resbbbbponse["routes"][0]["steps"][i]["type"]=="job") { point=response["routes"][0]["steps"][i]["location"]; waypoint=waypoint+"{point[1]},{point[0]}|" } } waypoint=substring(waypoint, 0, length(waypoint)-1); uri = "https://www.google.com/maps/dir/?api=1" + "&amp;origin={start}" + "&amp;destination={end}" + "&amp;waypoints={waypoint}";</actioncontainer>
-    <actioncontainer id="t18" x="1715.0" y="-402.5">HTTP Request: POST https://api.openrouteservice.org/optimization application/json {route} store in response</actioncontainer>
-    <actioncontainer id="t19" x="1715.0" y="-507.5">Script: route=newMapFromValues("jobs", newList(),"vehicles",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST")) { addElement(route["jobs"], newMapFromValues( "id", i+1, "service",300, "delivery",newList(2), "location",newList( toNumber(file_text[i][3]), toNumber(file_text[i][2]) ) //"skills",newList(1) )); } } addElement(route["vehicles"],newMapFromValues( "id",1, "profile","driving-car", "start",newList(100.350930,13.745119), "end",newList(100.350930,13.745119), "capacity",newList(1000) )); route=toJSON(route)</actioncontainer>
-    <actioncontainer id="t20" x="1260.0" y="-402.5">HTTP Request: POST https://api.longdo.com/route-tsp-v2 application/x-www-form-urlencoded {encodeurl} store in response</actioncontainer>
-    <notecontainer id="t21" x="490.0" y="-507.5" w="140.0" h="105.0">HERE 
+    <triggercontainer id="t1" x="139.99998" y="-1557.5" />
+    <conditioncontainer id="t2" x="-945.0" y="-927.5">   OK   </conditioncontainer>
+    <actioncontainer id="t3" x="-945.0" y="-227.5">RUN SH</actioncontainer>
+    <actioncontainer id="t4" x="-945.0" y="-752.5">ORS-DIREX</actioncontainer>
+    <actioncontainer id="t5" x="-945.0" y="-507.5">ENCODE</actioncontainer>
+    <actioncontainer id="t6" x="-945.0" y="-402.5">SH COMMAND</actioncontainer>
+    <actioncontainer id="t7" x="-945.0" y="227.5">KML PATH</actioncontainer>
+    <actioncontainer id="t8" x="-945.0" y="332.5">RM PATHTEMP</actioncontainer>
+    <actioncontainer id="t9" x="-945.0" y="17.5">DECODE TXT</actioncontainer>
+    <actioncontainer id="t10" x="-945.0" y="122.5">KML CMD</actioncontainer>
+    <actioncontainer id="t11" x="-945.0" y="-1067.5">LATLON MAP</actioncontainer>
+    <actioncontainer id="t12" x="-1330.0" y="-962.5">PATH PROCESS</actioncontainer>
+    <conditioncontainer id="t13" x="-1330.0" y="-752.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t14" x="-1330.0" y="-1067.5">PAST-TIME</actioncontainer>
+    <notecontainer id="t15" x="-1330.0" y="-1172.5" w="140.0" h="35.0">PATH MOCK</notecontainer>
+    <notecontainer id="t16" x="-945.0" y="-1172.5" w="140.0" h="35.0">PATH EXPORT</notecontainer>
+    <actioncontainer id="t17" x="-945.0" y="-612.5">BASE</actioncontainer>
+    <actioncontainer id="t18" x="1715.0" y="-297.5">Script: response=fromJSON(response); start=response["routes"][0]["steps"][0]["location"]; start="{start[1]},{start[0]}"; end=response["routes"][0]["steps"][ljjength(response["routes"][0]["steps"])-1]["location"]; enfrd="{end[1]},{end[0]}"; waypoint=""; for (i in [0 to length(response["routes"][0]["steps"])-1]) { if(resbbbbponse["routes"][0]["steps"][i]["type"]=="job") { point=response["routes"][0]["steps"][i]["location"]; waypoint=waypoint+"{point[1]},{point[0]}|" } } waypoint=substring(waypoint, 0, length(waypoint)-1); uri = "https://www.google.com/maps/dir/?api=1" + "&amp;origin={start}" + "&amp;destination={end}" + "&amp;waypoints={waypoint}";</actioncontainer>
+    <actioncontainer id="t19" x="1715.0" y="-402.5">HTTP Request: POST https://api.openrouteservice.org/optimization application/json {route} store in response</actioncontainer>
+    <actioncontainer id="t20" x="1715.0" y="-507.5">Script: route=newMapFromValues("jobs", newList(),"vehicles",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST")) { addElement(route["jobs"], newMapFromValues( "id", i+1, "service",300, "delivery",newList(2), "location",newList( toNumber(file_text[i][3]), toNumber(file_text[i][2]) ) //"skills",newList(1) )); } } addElement(route["vehicles"],newMapFromValues( "id",1, "profile","driving-car", "start",newList(100.350930,13.745119), "end",newList(100.350930,13.745119), "capacity",newList(1000) )); route=toJSON(route)</actioncontainer>
+    <actioncontainer id="t21" x="1260.0" y="-402.5">HTTP Request: POST https://api.longdo.com/route-tsp-v2 application/x-www-form-urlencoded {encodeurl} store in response</actioncontainer>
+    <notecontainer id="t22" x="490.0" y="-507.5" w="140.0" h="105.0">HERE 
 FINDSEQUENCE2</notecontainer>
-    <notecontainer id="t22" x="910.0" y="-507.5" w="140.0" h="105.0">GEOAPIFY ROUTEPLANNER</notecontainer>
-    <notecontainer id="t23" x="1400.0" y="-507.5" w="140.0" h="105.0">LONGDO
+    <notecontainer id="t23" x="910.0" y="-507.5" w="140.0" h="105.0">GEOAPIFY ROUTEPLANNER</notecontainer>
+    <notecontainer id="t24" x="1400.0" y="-507.5" w="140.0" h="105.0">LONGDO
 TSP</notecontainer>
-    <notecontainer id="t24" x="1855.0" y="-507.5" w="140.0" h="105.0">ORS
+    <notecontainer id="t25" x="1855.0" y="-507.5" w="140.0" h="105.0">ORS
 OPTIMIZATION</notecontainer>
-    <actioncontainer id="t25" x="1260.0" y="17.5">LONGDO API</actioncontainer>
-    <actioncontainer id="t26" x="350.0" y="52.5">Start Activity: android.intent.action.VIEW {uri} </actioncontainer>
-    <triggercontainer id="t27" x="139.99998" y="-1557.5" />
+    <actioncontainer id="t26" x="1260.0" y="17.5">LONGDO API</actioncontainer>
+    <actioncontainer id="t27" x="350.0" y="52.5">Start Activity: android.intent.action.VIEW {uri} </actioncontainer>
     <actioncontainer id="t28" x="140.0" y="-1417.5">CURRENT-LOC</actioncontainer>
     <actioncontainer id="t29" x="140.0" y="-1312.5">IMPORT CSV</actioncontainer>
     <actioncontainer id="t30" x="350.0" y="-297.5">Scripbbjt: nnj</actioncontainer>
-    <conditioncontainer id="t31" x="805.00006" y="-997.49994">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t31" x="805.00006" y="-997.5">     DEBUG    </conditioncontainer>
     <actioncontainer id="t32" x="770.0" y="-1242.5">SPLITS V3n</actioncontainer>
     <actioncontainer id="t33" x="805.0" y="-1277.4999">SPLITS V2</actioncontainer>
     <actioncontainer id="t34" x="350.0" y="-402.5">HERE OPT-API</actioncontainer>
@@ -16249,34 +16260,34 @@ OPTIMIZATION</notecontainer>
     <actioncontainer id="t40" x="770.0" y="-297.5">Scripbbjt: </actioncontainer>
     <actioncontainer id="t41" x="770.0" y="-507.5">Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST") and not contains(file_text[i][0],"FIX")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",120) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</actioncontainer>
     <actioncontainer id="t42" x="1260.0" y="-297.5">Scripjjjt: response=fromJSON(response);</actioncontainer>
-    <connection from="t1" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t16" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t18" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t28" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t14" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t17" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t19" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t20" to="t42" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t27" to="t28" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t20" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t21" to="t42" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t28" to="t29" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t29" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t30" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t30" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t32" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t34" to="t30" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t35" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t36" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t36" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t37" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t39" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t40" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t40" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t41" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t42" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t42" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#39: MANUAL</name>
@@ -17365,40 +17376,38 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <connection from="t9" to="t10" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
-    <name>00: BATTERY</name>
-    <description> </description>
-    <group>          ♻️  LOCAL-SYNC</group>
+    <name>00: BATTERY STATUS</name>
+    <description>***add sound alert</description>
+    <group>          ♻️  DEVICE-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <actioncontainer id="t1" x="-35.0" y="577.5">5s  </actioncontainer>
-    <actioncontainer id="t2" x="140.0" y="577.5">BATT:</actioncontainer>
-    <conditioncontainer id="t3" x="-35.0" y="52.5">CON </conditioncontainer>
-    <actioncontainer id="t4" x="350.0" y="297.5">STOP: BATT</actioncontainer>
-    <actioncontainer id="t5" x="350.0" y="192.5">RM15</actioncontainer>
-    <actioncontainer id="t6" x="-35.0" y="402.5">X</actioncontainer>
-    <conditioncontainer id="t7" x="-35.0" y="262.5">BATTVAR</conditioncontainer>
-    <triggercontainer id="t8" x="-140.0" y="-262.5">
-      <trigger>C-DIS</trigger>
-      <trigger>C-CON</trigger>
+    <actioncontainer id="t1" x="-35.000004" y="682.5">5s  </actioncontainer>
+    <conditioncontainer id="t2" x="-35.0" y="122.5">BATTERY</conditioncontainer>
+    <actioncontainer id="t3" x="-35.0" y="297.5">Bvar</actioncontainer>
+    <actioncontainer id="t4" x="105.00002" y="682.5">STATUS-BATT</actioncontainer>
+    <conditioncontainer id="t5" x="-34.999992" y="472.50003">LEVEL</conditioncontainer>
+    <actioncontainer id="t6" x="560.0" y="227.49997">STOP-SELF</actioncontainer>
+    <actioncontainer id="t7" x="560.0" y="122.5">RM15</actioncontainer>
+    <conditioncontainer id="t8" x="-35.0" y="-87.5">CONNECT</conditioncontainer>
+    <triggercontainer id="t9" x="-35.0" y="-297.49997">
+      <trigger>C-C</trigger>
+      <trigger>C-D</trigger>
     </triggercontainer>
-    <conditioncontainer id="t9" x="-315.0" y="262.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t10" x="-245.0" y="-17.5">BATTVAR</conditioncontainer>
-    <connection from="t1" to="t7" type="NORMAL" sourcePosition="WEST" targetPosition="WEST" />
-    <connection from="t3" to="t5" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t3" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t6" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t9" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t2" type="NORMAL" sourcePosition="WEST" targetPosition="WEST" />
+    <connection from="t2" to="t3" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t1" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t7" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t8" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>00: BOOT</name>
     <description> </description>
-    <group>          ♻️  LOCAL-SYNC</group>
+    <group>          ♻️  DEVICE-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="70.0" y="52.5">
@@ -17419,7 +17428,7 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
   <flow type="flow">
     <name>11: IPCONFIG</name>
     <description>1.1 bulid 28</description>
-    <group>          ♻️  LOCAL-SYNC</group>
+    <group>          ♻️  DEVICE-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="70.0" y="-52.5">
@@ -17453,28 +17462,32 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
   <flow type="flow">
     <name>12: SENDER</name>
     <description> </description>
-    <group>          ♻️  LOCAL-SYNC</group>
+    <group>          ♻️  DEVICE-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <actioncontainer id="t1" x="-1470.0" y="-3307.5">TEMPLATE 
+    <triggercontainer id="t1" x="-910.0" y="-8382.5">
+      <trigger>MULTI</trigger>
+      <trigger>SINGLE</trigger>
+    </triggercontainer>
+    <actioncontainer id="t2" x="-1470.0" y="-3307.5">TEMPLATE 
 HTTP</actioncontainer>
-    <actioncontainer id="t2" x="-1470.0" y="-3202.5">TEMPLATE 
+    <actioncontainer id="t3" x="-1470.0" y="-3202.5">TEMPLATE 
 HTTP / POST</actioncontainer>
-    <conditioncontainer id="t3" x="-1330.0" y="-3062.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t4" x="-1330.0" y="-3482.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
-    <actioncontainer id="t5" x="-1715.0" y="-3132.5">TEMPLATทE 
+    <conditioncontainer id="t4" x="-1330.0" y="-3062.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t5" x="-1330.0" y="-3482.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
+    <actioncontainer id="t6" x="-1715.0" y="-3132.5">TEMPLATทE 
 HTTP</actioncontainer>
-    <actioncontainer id="t6" x="-1610.0" y="-2957.5">TEMPLATE 
+    <actioncontainer id="t7" x="-1610.0" y="-2957.5">TEMPLATE 
 HTTP</actioncontainer>
-    <actioncontainer id="t7" x="-1820.0" y="-2887.5">CONFIG</actioncontainer>
-    <actioncontainer id="t8" x="-1540.0" y="-2852.5">TEMPLATE 
+    <actioncontainer id="t8" x="-1820.0" y="-2887.5">CONFIG</actioncontainer>
+    <actioncontainer id="t9" x="-1540.0" y="-2852.5">TEMPLATE 
 HTTP / POST</actioncontainer>
-    <actioncontainer id="t9" x="-1400.0" y="-2712.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
-    <conditioncontainer id="t10" x="-1470.0" y="-2537.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t11" x="-1400.0" y="-3412.5">TEST
+    <actioncontainer id="t10" x="-1400.0" y="-2712.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
+    <conditioncontainer id="t11" x="-1470.0" y="-2537.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t12" x="-1400.0" y="-3412.5">TEST
 KILLAPPS</actioncontainer>
-    <notecontainer id="t12" x="1627.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK START:
+    <notecontainer id="t13" x="1627.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK START:
 -type: command
 -method: mock_start
 -content: 13.000,100.000
@@ -17482,14 +17495,14 @@ KILLAPPS</actioncontainer>
 |
 |
 |=&gt; *ok</notecontainer>
-    <notecontainer id="t13" x="1942.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK STOP:
+    <notecontainer id="t14" x="1942.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK STOP:
 -type: command
 -method: mock_stop
 -response: true
 |
 |
 |=&gt; *ok</notecontainer>
-    <notecontainer id="t14" x="2257.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK GET:
+    <notecontainer id="t15" x="2257.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK GET:
 -type: command
 -method: mock_get
 -response: true
@@ -17498,14 +17511,14 @@ KILLAPPS</actioncontainer>
 |=&gt; activate
  =&gt; lat, lon
 </notecontainer>
-    <notecontainer id="t15" x="1627.5" y="-7175.0" w="315.0" h="210.0">PUT-BLUETOOTH
+    <notecontainer id="t16" x="1627.5" y="-7175.0" w="315.0" h="210.0">PUT-BLUETOOTH
 -type: command
 -method: put_bluetooth
 -response: true
 |
 |
 |=&gt; *ok</notecontainer>
-    <notecontainer id="t16" x="1627.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SQLITE
+    <notecontainer id="t17" x="1627.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SQLITE
 -type: command
 -method: al_put$sqlite
 -response: true
@@ -17513,78 +17526,74 @@ KILLAPPS</actioncontainer>
 |
 |=&gt; upload sqlite~link 
  =&gt; send link</notecontainer>
-    <notecontainer id="t17" x="1942.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SPFDB
+    <notecontainer id="t18" x="1942.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SPFDB
 -type: command
 -method: al_put$spfdb
 -response: true
 |
 |
 |=&gt; send spfdb</notecontainer>
-    <notecontainer id="t18" x="1942.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-DB
+    <notecontainer id="t19" x="1942.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-DB
 
 type: command
 method: cp_send$spfdb</notecontainer>
-    <notecontainer id="t19" x="1627.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-SQLITE
+    <notecontainer id="t20" x="1627.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-SQLITE
 
 type: job_command
 method: cp_send$spfdb</notecontainer>
-    <notecontainer id="t20" x="1627.5" y="-7595.0" w="315.0" h="210.0">(AL) KILLALL:
+    <notecontainer id="t21" x="1627.5" y="-7595.0" w="315.0" h="210.0">(AL) KILLALL:
 -type: command
 -method: killall
 -response: true
 |
 |
 |=&gt; *ok</notecontainer>
-    <actioncontainer id="t21" x="700.0" y="-6597.5">CP</actioncontainer>
-    <conditioncontainer id="t22" x="700.0" y="-6737.5">NOT ACCESS </conditioncontainer>
-    <conditioncontainer id="t23" x="700.0" y="-6422.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t24" x="-910.0" y="-7122.5">RE?</conditioncontainer>
-    <actioncontainer id="t25" x="-910.0" y="-6982.5">RESPONSE</actioncontainer>
-    <actioncontainer id="t26" x="-700.0" y="-7262.5">TOAST</actioncontainer>
-    <conditioncontainer id="t27" x="665.0" y="-6982.5">INDEX</conditioncontainer>
-    <conditioncontainer id="t28" x="665.0" y="-7052.5">INDEX</conditioncontainer>
-    <actioncontainer id="t29" x="665.0" y="-6877.5">QUERY</actioncontainer>
-    <conditioncontainer id="t30" x="700.0" y="-6772.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t31" x="-910.0" y="-7262.5">HTTP SEND</actioncontainer>
-    <actioncontainer id="t32" x="-490.0" y="-7087.5"> WAIT-SEND</actioncontainer>
-    <actioncontainer id="t33" x="-490.0" y="-6982.5">NTFY.ATTACH</actioncontainer>
-    <actioncontainer id="t34" x="-490.0" y="-7262.5">HTTP FILESEND</actioncontainer>
-    <conditioncontainer id="t35" x="-910.0" y="-7437.5">CMD / FILE</conditioncontainer>
-    <actioncontainer id="t36" x="-1190.0" y="-8277.5">Script: public String getRealPathFromURI(Context context, Uri contentUri) { String[] proj = { MediaStore.Images.Media.DATA }; Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null); if (cursor != null) { int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA); cursor.moveToFirst(); String path = cursor.getString(column_index); cursor.close(); return path; } return null; }</actioncontainer>
-    <conditioncontainer id="t37" x="-1084.9999" y="-8032.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t38" x="-700.0" y="-7857.5">00: SERVICES</actioncontainer>
-    <conditioncontainer id="t39" x="-910.0" y="-7857.5">IP?</conditioncontainer>
-    <actioncontainer id="t40" x="-910.0" y="-7612.5">CONFIG4</actioncontainer>
-    <actioncontainer id="t41" x="-980.0" y="-8172.5">Query Content Provider: SELECT _data FROM content://media/external/images/media/1000020620</actioncontainer>
-    <triggercontainer id="t42" x="-910.0" y="-8382.5">
-      <trigger>MULTI</trigger>
-      <trigger>SINGLE</trigger>
-    </triggercontainer>
-    <connection from="t21" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t21" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t24" to="t25" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t28" to="t29" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t28" to="t30" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t29" to="t30" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t31" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t31" to="t26" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t32" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t33" to="t26" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t34" to="t26" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t34" to="t32" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t35" to="t31" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t35" to="t34" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t38" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t39" to="t40" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t39" to="t38" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t40" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t41" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t42" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t22" x="700.0" y="-6597.5">CP</actioncontainer>
+    <conditioncontainer id="t23" x="700.0" y="-6737.5">NOT ACCESS </conditioncontainer>
+    <conditioncontainer id="t24" x="700.0" y="-6422.5">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t25" x="-910.0" y="-7122.5">RE?</conditioncontainer>
+    <actioncontainer id="t26" x="-910.0" y="-6982.5">RESPONSE</actioncontainer>
+    <actioncontainer id="t27" x="-700.0" y="-7262.5">TOAST</actioncontainer>
+    <conditioncontainer id="t28" x="665.0" y="-6982.5">INDEX</conditioncontainer>
+    <conditioncontainer id="t29" x="665.0" y="-7052.5">INDEX</conditioncontainer>
+    <actioncontainer id="t30" x="665.0" y="-6877.5">QUERY</actioncontainer>
+    <conditioncontainer id="t31" x="700.0" y="-6772.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t32" x="-910.0" y="-7262.5">HTTP SEND</actioncontainer>
+    <actioncontainer id="t33" x="-490.0" y="-7087.5"> WAIT-SEND</actioncontainer>
+    <actioncontainer id="t34" x="-490.0" y="-6982.5">NTFY.ATTACH</actioncontainer>
+    <actioncontainer id="t35" x="-490.0" y="-7262.5">HTTP FILESEND</actioncontainer>
+    <conditioncontainer id="t36" x="-910.0" y="-7437.5">CMD / FILE</conditioncontainer>
+    <actioncontainer id="t37" x="-1190.0" y="-8277.5">Script: public String getRealPathFromURI(Context context, Uri contentUri) { String[] proj = { MediaStore.Images.Media.DATA }; Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null); if (cursor != null) { int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA); cursor.moveToFirst(); String path = cursor.getString(column_index); cursor.close(); return path; } return null; }</actioncontainer>
+    <conditioncontainer id="t38" x="-1084.9999" y="-8032.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t39" x="-700.0" y="-7857.5">00: SERVICES</actioncontainer>
+    <conditioncontainer id="t40" x="-910.0" y="-7857.5">IP?</conditioncontainer>
+    <actioncontainer id="t41" x="-910.0" y="-7612.5">CONFIG4</actioncontainer>
+    <actioncontainer id="t42" x="-980.0" y="-8172.5">Query Content Provider: SELECT _data FROM content://media/external/images/media/1000020620</actioncontainer>
+    <connection from="t1" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t23" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t26" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t30" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t31" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t30" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t32" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t32" to="t27" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t33" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t34" to="t27" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t35" to="t27" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t35" to="t33" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t36" to="t32" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t36" to="t35" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t39" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t40" to="t41" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t40" to="t39" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t41" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t42" to="t38" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>13: RECEIVED</name>
     <description> </description>
-    <group>          ♻️  LOCAL-SYNC</group>
+    <group>          ♻️  DEVICE-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -17678,7 +17687,7 @@ method: cp_send$spfdb</notecontainer>
   <flow type="flow">
     <name>14: RESPONSE</name>
     <description> </description>
-    <group>          ♻️  LOCAL-SYNC</group>
+    <group>          ♻️  DEVICE-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="70.0" y="52.5" />
@@ -17747,7 +17756,7 @@ method: cp_send$spfdb</notecontainer>
   <flow type="flow">
     <name>@ ANYDESK SUPPORT</name>
     <description> </description>
-    <group>          ♻️  LOCAL-SYNC</group>
+    <group>          ♻️  DEVICE-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -17769,7 +17778,7 @@ method: cp_send$spfdb</notecontainer>
   <flow type="flow">
     <name>@ GITHUB UPLOAD</name>
     <description> </description>
-    <group>          ♻️  LOCAL-SYNC</group>
+    <group>          ♻️  DEVICE-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="-70.0" y="-1627.5">
@@ -18008,12 +18017,10 @@ MENU
   </flow>
   <flow type="flow">
     <name>Flow4</name>
-    <group>          ♻️  LOCAL-SYNC</group>
+    <group>          ♻️  DEVICE-SYSTEM</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="70.0" y="52.5" />
-    <actioncontainer id="t2" x="-35.0" y="367.5">Zip Files: /storage/emulated/0/folder to /storage/emulated/0/archive.zip</actioncontainer>
-    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow5</name>
@@ -18072,6 +18079,15 @@ icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=positi
     <connection from="t2" to="t4" type="NORMAL" sourcePosition="EAST" targetPosition="EAST" />
     <connection from="t2" to="t3" type="EXCEPTION" sourcePosition="WEST" targetPosition="WEST" />
     <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>Flow8</name>
+    <group>          ♻️  DEVICE-SYSTEM</group>
+    <enabled>false</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <triggercontainer id="t1" x="70.0" y="52.5" />
+    <actioncontainer id="t2" x="-140.0" y="332.5">Sound: https://proxy.notificationsounds.com/notification-sounds/ringtone-you-would-be-glad-to-know/download/file-sounds-1350-you-would-be-glad.mp3 as Notification</actioncontainer>
+    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow9</name>
