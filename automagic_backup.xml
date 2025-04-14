@@ -1798,6 +1798,22 @@ dy=screen_y-c_y;
     <expression>contains(exception_message,"Unterminated")</expression>
   </condition>
   <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>Expression: Execute 300 times</name>
+    <expression>if (step == null) step = 0;
+
+if (step &lt; 300)
+{
+  step = step + 1;
+  return true;
+}
+else
+{ 
+  step = null;
+  return false;
+}</expression>
+  </condition>
+  <condition type="expression">
     <useDefaultName>true</useDefaultName>
     <name>Expression: gesture=="CLICK"</name>
     <expression>gesture=="CLICK"</expression>
@@ -2106,12 +2122,7 @@ existsFile(sFileDb)</expression>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
     <name>FOOD? </name>
-    <expression>if(state=="foody") {
-
-   setWidgetElementProperty("SPF_INCOMING_DENY", "T1", "text", "ปฏิเสธ");
-   return true
-}
-return false</expression>
+    <expression>state=="food"</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -3390,6 +3401,26 @@ global_spxdb["order"]["incoming"]=newMap();</script>
     <skipDisabledFlowsWithoutError>true</skipDisabledFlowsWithoutError>
     <waitForFlowsToFinish>true</waitForFlowsToFinish>
     <returnLocalVariablesToCallingFlow>false</returnLocalVariablesToCallingFlow>
+  </action>
+  <action type="script">
+    <useDefaultName>false</useDefaultName>
+    <name>1-URI</name>
+    <script>response=fromJSON(response);
+waypoint2="";
+
+
+for (i in [0 to length(response["routes"][0]["steps"])-1]) {
+
+   if(response["routes"][0]["steps"][i]["type"]=="job") {
+
+      point=response["routes"][0]["steps"][i]["location"];
+      waypoint2=waypoint2+"point={point[1]},{point[0]}&amp;";
+   }
+}
+
+
+uri="https://graphhopper.com/maps/?"+"point={lat_start},{lon_start}&amp;"+waypoint2
++"point={lat_end},{lon_end}&amp;"+"profile=scooter&amp;layer=Mapilion"</script>
   </action>
   <action type="set_flow_state">
     <useDefaultName>false</useDefaultName>
@@ -4735,6 +4766,13 @@ if(findAll(job,"a|b|c|7 111")!="[]"){
   </action>
   <action type="control_user_interface">
     <useDefaultName>true</useDefaultName>
+    <name>Control UI: sleep(1000); click("Pixel 5a ของ T A K A");</name>
+    <script>sleep(1000);
+
+click("Pixel 5a ของ T A K A");</script>
+  </action>
+  <action type="control_user_interface">
+    <useDefaultName>true</useDefaultName>
     <name>Control UI: sleep(3000); x=getContentDescriptionInActiveWindow(); y=getTextInActiveWindow();</name>
     <script>sleep(3000);
 x=getContentDescriptionInActiveWindow();
@@ -5020,6 +5058,14 @@ icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=positi
     <url>https://maps.geoapify.com/v1/staticmap?style=osm-bright-grey&amp;width=600&amp;height=400&amp;center=lonlat:100.348945,13.74682&amp;zoom=13.2&amp;marker=lonlat:100.350029,13.74682;color:%23ff0000;size:medium;text:1|lonlat:100.369626,13.751338;color:%23ff0000;size:medium;text:2&amp;apiKey=a9ebe60151e245fba58b5cb5b5ae09d7</url>
     <directory>/storage/emulated/0/Download</directory>
     <filename>youx</filename>
+    <showProgress>true</showProgress>
+  </action>
+  <action type="download_url">
+    <useDefaultName>true</useDefaultName>
+    <name>Download URL: https://mmmap15.longdo.com/mmmap/snippet/?map=epsg3857&amp;locale=th&amp;height=500&amp;width=500&amp;mode=gray&amp;marker=position:13.73547,100.40086|13.75092,100.40846;icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=position:13.74271,100.41419|13.69538,100.41809|13.63882,100.51444|13.60902,100.53530|13.57859,100.50367;offsetX:center;offsetY:bottom&amp;refresh=1 to /storage/emulated/0/Download/xxx</name>
+    <url>https://mmmap15.longdo.com/mmmap/snippet/?map=epsg3857&amp;locale=th&amp;height=500&amp;width=500&amp;mode=gray&amp;marker=position:13.73547,100.40086|13.75092,100.40846;icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=position:13.74271,100.41419|13.69538,100.41809|13.63882,100.51444|13.60902,100.53530|13.57859,100.50367;offsetX:center;offsetY:bottom&amp;refresh=1</url>
+    <directory>/storage/emulated/0/Download</directory>
+    <filename>xxx</filename>
     <showProgress>true</showProgress>
   </action>
   <action type="download_url">
@@ -8149,6 +8195,22 @@ while(true) {
   </action>
   <action type="notification_screen">
     <useDefaultName>true</useDefaultName>
+    <name>Notification on Screen: Loop ended</name>
+    <showText>true</showText>
+    <text>Loop ended</text>
+    <widgetName></widgetName>
+    <width></width>
+    <height></height>
+    <stretchToFillArea>false</stretchToFillArea>
+    <opacity>1</opacity>
+    <durationLong>false</durationLong>
+    <customPosition>false</customPosition>
+    <gravityType>TOP_LEFT</gravityType>
+    <xOffset>0</xOffset>
+    <yOffset>0</yOffset>
+  </action>
+  <action type="notification_screen">
+    <useDefaultName>true</useDefaultName>
     <name>Notification on Screen: กำลังปักหมุด...BOLT</name>
     <showText>true</showText>
     <text>กำลังปักหมุด...BOLT</text>
@@ -8362,48 +8424,32 @@ while(true) {
   </action>
   <action type="script">
     <useDefaultName>false</useDefaultName>
-    <name>ORS
-PARAMETER</name>
+    <name>ORS / PAR</name>
     <script>route=newMapFromValues("jobs", newList(),"vehicles",newList(),"options", newMapFromValues("g",true));
 
-for (i in [0 to length(file_text)-1]) {
 
+for (i in [0 to length(file_text)-1]) {
+   
    if(contains(file_text[i][0],"CUST") and not contains(file_text[i][0],"FIX")) {
 
-   addElement(route["jobs"], newMapFromValues(
-"id", i+1,
-"service",0,
-"delivery",newList(2),
-"location",newList(
-toNumber(file_text[i][3]),
-toNumber(file_text[i][2])
-
-)
-//"service",300
-));
+      addElement(route["jobs"],newMapFromValues(
+      "id", i+1,
+      "service",0,
+      "delivery",newList(2),
+      "location",newList(
+      toNumber(file_text[i][3]),
+      toNumber(file_text[i][2]))));
    }
 }
+
+
 
 addElement(route["vehicles"],newMapFromValues(
 "id",1,
 "profile","driving-car",
 "start",newList(lon_start,lat_start),
 "end",newList(lon_end,lat_end),
-"capacity",newList(1000),
-"options", newMapFromValues("avoid_features",newList("tollways"),
-
-"avoid_polygons",newMapFromValues(
-"type","",
-"coordinates",
-newList(newList(
-newList(100.5367974131,13.6313841646),
-newList(100.541834298,13.6335447092),
-newList(100.5407574467,13.6352326209),
-newList(100.5357900361,13.6330383333)
-)))
-
-)
-));
+"capacity",newList(1000)));
 
 route=toJSON(route)</script>
   </action>
@@ -9587,6 +9633,38 @@ polyline=polyline+
 "      &lt;/Placemark&gt;\n";
 id_polyline=id_polyline+1;</script>
   </action>
+  <action type="control_user_interface">
+    <useDefaultName>false</useDefaultName>
+    <name>POP-WN</name>
+    <script>for (i in [1 to 300]) {
+
+   wn=getTextInActiveWindow();
+   if(contains(wn,"คำสั่งซื้อใหม่ถูกรับอัตโนมัติ")) {
+
+      state="autoaccept";
+      sqrt();}
+
+   else if(contains(wn,"เตรียมอาหาร")) {
+
+      state="food";
+      setWidgetElementProperty("SPF_INCOMING_DENY", "T1", "text", "ปฏิเสธ");
+      sqrt()}
+
+   else if(contains(wn,"ถูกยกเลิก")) {
+
+      state="cancel";
+      sqrt()}
+
+   else if(contains(wn,"ยอมรับ") and not contains(wn,"เตรียมอาหาร")) {
+
+      return
+   }
+   sleep(10);
+}
+
+state="timeout";
+sqrt();</script>
+  </action>
   <action type="http_request">
     <useDefaultName>false</useDefaultName>
     <name>POST-POI</name>
@@ -10239,42 +10317,6 @@ end="{end[1]},{end[0]}";
 
 uri="https://graphhopper.com/maps/?"+"point={lat_start},{lon_start}&amp;"+waypoint2
 +"point=13.717727,100.344338&amp;"+"profile=scooter&amp;layer=Mapilion"</script>
-  </action>
-  <action type="script">
-    <useDefaultName>false</useDefaultName>
-    <name>Scripjjt: response=fromJSON(response);</name>
-    <script>response=fromJSON(response);
-
-
-waypoint="";
-waypoint2="";
-
-
-
-for (i in [0 to length(response["routes"][0]["steps"])-1]) {
-
-   if(response["routes"][0]["steps"][i]["type"]=="job") {
-
-      point=response["routes"][0]["steps"][i]["location"];
-      //waypoint=waypoint+"{point[1]},{point[0]}&amp;"+"{point[1]},{point[0]}&amp;";
-      //waypoint2=waypoint2+"{},{point[0]}&amp;";
-      waypoint2=waypoint2+"point={point[1]},{point[0]}&amp;";
-   }
-}
-
-
-/*
-lat=waypoint[0]["lat"];
-lng=waypoint[0]["lng"];
-start="{lat},{lng}";
-
-*/
-
-
-
-
-uri="https://graphhopper.com/maps/?"+"point={lat_start},{lon_start}&amp;"+waypoint2
-+"point={lat_end},{lon_end}&amp;"+"profile=scooter&amp;layer=Mapilion"</script>
   </action>
   <action type="script">
     <useDefaultName>false</useDefaultName>
@@ -11308,6 +11350,11 @@ points=toJSON(points)</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
+    <name>Script: refreshWidget("Widget10", true)</name>
+    <script>refreshWidget("Widget10", true)</script>
+  </action>
+  <action type="script">
+    <useDefaultName>true</useDefaultName>
     <name>Script: removeElement(global_navigation, 0);</name>
     <script>removeElement(global_navigation, 0);</script>
   </action>
@@ -11487,7 +11534,7 @@ route=toJSON(route)</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
-    <name>Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST") and not contains(file_text[i][0],"FIX")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",120) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</name>
+    <name>Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST") and not contains(file_text[i][0],"FIX")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",0) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</name>
     <script>
 
 
@@ -11517,7 +11564,7 @@ for (i in [0 to length(file_text)-1]) {
       addElement(route["jobs"],newMapFromValues(
 
 "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])),
-"duration",120)
+"duration",0)
 );
 
 }
@@ -11550,6 +11597,13 @@ addElement(route["agents"],newMapFromValues(
 ));*/
 
 route=toJSON(route)</script>
+  </action>
+  <action type="script">
+    <useDefaultName>true</useDefaultName>
+    <name>Script: setWidgetElementProperty("Widget10", "Image_1", "path", "https://mmmap15.longdo.com/mmmap/snippet/?map=epsg3857&amp;locale=th&amp;height=500&amp;width=500&amp;mode=gray&amp;marker=position:13.73547,100.40086|13.75092,100.40846;icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=position:13.74271,100.41419|13.69538,100.41809|13.63882,100.51444|13.60902,100.53530|13.57859,100.50367;offsetX:center;offsetY:bottom&amp;refresh=1");</name>
+    <script>setWidgetElementProperty("Widget10", "Image_1", "path", "https://mmmap15.longdo.com/mmmap/snippet/?map=epsg3857&amp;locale=th&amp;height=500&amp;width=500&amp;mode=gray&amp;marker=position:13.73547,100.40086|13.75092,100.40846;icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=position:13.74271,100.41419|13.69538,100.41809|13.63882,100.51444|13.60902,100.53530|13.57859,100.50367;offsetX:center;offsetY:bottom&amp;refresh=1");
+
+</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
@@ -12640,6 +12694,24 @@ for (i in [0 to length(shop_list)-1])
   </action>
   <action type="show_custom_widget_overlay">
     <useDefaultName>true</useDefaultName>
+    <name>Show Custom Widget Overlay: Overlayll 5, Widget10  Top Left</name>
+    <overlayName>Overlayll 5</overlayName>
+    <widgetName>Widget10</widgetName>
+    <width></width>
+    <height></height>
+    <gravityType>TOP_LEFT</gravityType>
+    <xOffset>0</xOffset>
+    <yOffset>0</yOffset>
+    <draggable>false</draggable>
+    <opacity>1.00</opacity>
+    <clickable>false</clickable>
+    <stretchToFillArea>false</stretchToFillArea>
+    <showOnTop>true</showOnTop>
+    <noPositionRestriction>false</noPositionRestriction>
+    <useAccessibilityService>false</useAccessibilityService>
+  </action>
+  <action type="show_custom_widget_overlay">
+    <useDefaultName>true</useDefaultName>
     <name>Show Custom Widget Overlay: SPF_ROUTE_MINIMIZE, SPF_ROUTE_MINIMIZE  Top Left</name>
     <overlayName>SPF_ROUTE_MINIMIZE</overlayName>
     <widgetName>SPF_ROUTE_MINIMIZE</widgetName>
@@ -13572,37 +13644,6 @@ putString("android.intent.extra.STREAM","content://media/external/images/media/1
     <waitForResult>false</waitForResult>
     <accessResultExtras></accessResultExtras>
   </action>
-  <action type="control_user_interface">
-    <useDefaultName>false</useDefaultName>
-    <name>STATE</name>
-    <script>for (i in [1 to 150]) {
-
-   wn=getTextInActiveWindow();
-   if(contains(wn,"คำสั่งซื้อใหม่ถูกรับอัตโนมัติ")) {
-
-      state="autoaccept";
-      sqrt();}
-
-   else if(contains(wn,"เตรียมอาหาร")) {
-
-      state="foody";
-      sqrt()}
-
-   else if(contains(wn,"ถูกยกเลิก")) {
-
-      state="cancel";
-      sqrt()}
-
-   else if(contains(wn,"ยอมรับ")) {
-
-      return
-   }
-   sleep(20);
-}
-
-state="timeout";
-sqrt();</script>
-  </action>
   <action type="notification_status_bar">
     <useDefaultName>false</useDefaultName>
     <name>STATUS-BATT</name>
@@ -14449,7 +14490,7 @@ if(trigger=="V_D") {
   <action type="execute_flows">
     <useDefaultName>false</useDefaultName>
     <name>UPDATE DB</name>
-    <includeFlowNamePatternList>#20  SPF DATABASE</includeFlowNamePatternList>
+    <includeFlowNamePatternList>"  @  SPF DATABASE"</includeFlowNamePatternList>
     <excludeFlowNamePatternList></excludeFlowNamePatternList>
     <skipDisabledFlowsWithoutError>true</skipDisabledFlowsWithoutError>
     <waitForFlowsToFinish>true</waitForFlowsToFinish>
@@ -14459,7 +14500,7 @@ if(trigger=="V_D") {
     <useDefaultName>false</useDefaultName>
     <name>UPDATE DB
 API</name>
-    <includeFlowNamePatternList>#20  SPF DATABASE</includeFlowNamePatternList>
+    <includeFlowNamePatternList>"  @  SPF DATABASE"</includeFlowNamePatternList>
     <excludeFlowNamePatternList></excludeFlowNamePatternList>
     <skipDisabledFlowsWithoutError>true</skipDisabledFlowsWithoutError>
     <waitForFlowsToFinish>true</waitForFlowsToFinish>
@@ -16023,6 +16064,21 @@ AUTOMAGIC</actioncontainer>
     <connection from="t19" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
+    <name>  @  SPF DATABASE</name>
+    <description> </description>
+    <group>         🍑   SPF</group>
+    <enabled>true</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <triggercontainer id="t1" x="-105.0" y="297.5" />
+    <actioncontainer id="t2" x="35.0" y="472.5">LIST</actioncontainer>
+    <actioncontainer id="t3" x="35.0" y="577.5">FIL</actioncontainer>
+    <actioncontainer id="t4" x="-105.0" y="472.5">CP2</actioncontainer>
+    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t4" type="NORMAL" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t4" to="t2" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
+  </flow>
+  <flow type="flow">
     <name>  @  START-BOOT</name>
     <description> </description>
     <group>          ♻️  2DEVICE-SYSTEM</group>
@@ -16047,7 +16103,7 @@ AUTOMAGIC</actioncontainer>
     <connection from="t9" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
-    <name>#20  NOTIFY </name>
+    <name>  @ NOTIFY SUPPORT</name>
     <description> </description>
     <group>         🍑   SPF</group>
     <enabled>true</enabled>
@@ -16056,28 +16112,8 @@ AUTOMAGIC</actioncontainer>
     <triggercontainer id="t1" x="105.0" y="-717.5">
       <trigger>SPF-NOTIF</trigger>
     </triggercontainer>
-    <actioncontainer id="t2" x="315.0" y="-297.5">EXECUTE SENDER</actioncontainer>
-    <conditioncontainer id="t3" x="315.0" y="-472.5">CPI-ORD</conditioncontainer>
-    <actioncontainer id="t4" x="105.0" y="-437.5">PERFORM</actioncontainer>
-    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
-    <name>#20  SPF DATABASE</name>
-    <description>A×17
-</description>
-    <group>         🍑   SPF</group>
-    <enabled>true</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="-105.0" y="297.5" />
-    <actioncontainer id="t2" x="35.0" y="472.5">LIST</actioncontainer>
-    <actioncontainer id="t3" x="35.0" y="577.5">FIL</actioncontainer>
-    <actioncontainer id="t4" x="-105.0" y="472.5">CP2</actioncontainer>
-    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t4" type="NORMAL" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t4" to="t2" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
+    <actioncontainer id="t2" x="104.99999" y="-577.5">PERFORM</actioncontainer>
+    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#21  INCOMING</name>
@@ -16086,16 +16122,13 @@ AUTOMAGIC</actioncontainer>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <triggercontainer id="t1" x="105.0" y="-4602.5">
-      <trigger>SPF-ICM</trigger>
-    </triggercontainer>
-    <actioncontainer id="t2" x="105.0" y="1067.5">Write to File: {writer} to /storage/emulated/0/file.csv (overwrite)</actioncontainer>
-    <actioncontainer id="t3" x="105.0" y="962.5">Script: /* Folder name,Folder color,Latitude,Longitude,Title,Description,Color,Phone number,Timestamp,Pin icon code CUSTOMER,009688,13.717246094464993,100.41886858642101,Marker 1,,009688,,2025-03-05T14:04:55Z,268 CUSTOMER,009688,13.720979716439867,100.39747897535563,Marker 2,,009688,,2025-03-05T14:05:13Z,269 SHOP,f44336,13.739496469745207,100.43600622564554,Marker 1,,f44336,,2025-03-05T14:03:24Z,268 SHOP,f44336,13.725766925674511,100.43142098933458,Marker 2,, f44336,,2025-03-05T14:04:10Z,269 CUSTOMER,009688,13.773109041236552,100.43157957494259,Marker 7,, 009688,,2025-03-05T22:50:18Z,419 ==+1 CUSTOMER,009688,13.758255351056553,100.43494742363691,Marker 8,,009688,,2025-03-05T22:58:08Z,265 ==+2 23AC9A =เขียว #ED4D2D =ส้ม */ header=newList("Folder name","Folder color","Latitude","Longitude","Title","Description","Color","Phone number","Timestamp","Pin icon code"); writer="{header,listformat,comma}"+"\n"; if(global_device["device"]=="alioth") { name=newList("1_SHOP","1_CUSTOMER"); color=newList("ed4d2d","23ac9a"); } else { name=newList("2_SHOP","2_CUSTOMER"); color=newList("ffeb3b","cddc39"); } for (i in [0 to length(order["route"]["all"])-1]){ count=i+1; if(order["route"]["all"][i]["location_type"]==1) { adds=newList( name[0], color[0], order["route"]["all"][i]["details"]["address"]["latitude"], order["route"]["all"][i]["details"]["address"]["longitude"], count+" - "+(order["route"]["all"][i]["details"]["parcel"]["weight"]), order["route"]["all"][i]["details"]["address"]["address"], color[0], "+"+order["route"]["all"][i]["details"]["phone"], "", 419); } else { adds=newList( name[1], color[1], order["route"]["all"][i]["details"]["address"]["latitude"], order["route"]["all"][i]["details"]["address"]["longitude"], count+" COD : "+order["route"]["all"][i]["details"]["cod"], order["route"]["all"][i]["details"]["address"]["address"], color[1], "+"+order["route"]["all"][i]["details"]["phone"], "", 419); } writer=writer+"{adds,listformat,comma}"+"\n"; }</actioncontainer>
-    <notecontainer id="t4" x="105.0" y="752.5" w="140.0" h="35.0">MAP</notecontainer>
-    <conditioncontainer id="t5" x="105.0" y="822.5">Expression: type=="พัสดุ"</conditioncontainer>
-    <notecontainer id="t6" x="2170.0" y="-2292.5" w="140.0" h="105.0">ไม่ได้ถูกลบ</notecontainer>
-    <notecontainer id="t7" x="2170.0" y="-2187.5" w="140.0" h="105.0">ปิด Cancel แล้วขึ้นใหม่แทน ป้องกันการวนซ้ำ</notecontainer>
-    <notecontainer id="t8" x="-1400.0" y="-2117.5" w="420.0" h="455.0">text = getText("ยินดีด้วย! รายได้จากการจองรอบข*");
+    <actioncontainer id="t1" x="105.0" y="1067.5">Write to File: {writer} to /storage/emulated/0/file.csv (overwrite)</actioncontainer>
+    <actioncontainer id="t2" x="105.0" y="962.5">Script: /* Folder name,Folder color,Latitude,Longitude,Title,Description,Color,Phone number,Timestamp,Pin icon code CUSTOMER,009688,13.717246094464993,100.41886858642101,Marker 1,,009688,,2025-03-05T14:04:55Z,268 CUSTOMER,009688,13.720979716439867,100.39747897535563,Marker 2,,009688,,2025-03-05T14:05:13Z,269 SHOP,f44336,13.739496469745207,100.43600622564554,Marker 1,,f44336,,2025-03-05T14:03:24Z,268 SHOP,f44336,13.725766925674511,100.43142098933458,Marker 2,, f44336,,2025-03-05T14:04:10Z,269 CUSTOMER,009688,13.773109041236552,100.43157957494259,Marker 7,, 009688,,2025-03-05T22:50:18Z,419 ==+1 CUSTOMER,009688,13.758255351056553,100.43494742363691,Marker 8,,009688,,2025-03-05T22:58:08Z,265 ==+2 23AC9A =เขียว #ED4D2D =ส้ม */ header=newList("Folder name","Folder color","Latitude","Longitude","Title","Description","Color","Phone number","Timestamp","Pin icon code"); writer="{header,listformat,comma}"+"\n"; if(global_device["device"]=="alioth") { name=newList("1_SHOP","1_CUSTOMER"); color=newList("ed4d2d","23ac9a"); } else { name=newList("2_SHOP","2_CUSTOMER"); color=newList("ffeb3b","cddc39"); } for (i in [0 to length(order["route"]["all"])-1]){ count=i+1; if(order["route"]["all"][i]["location_type"]==1) { adds=newList( name[0], color[0], order["route"]["all"][i]["details"]["address"]["latitude"], order["route"]["all"][i]["details"]["address"]["longitude"], count+" - "+(order["route"]["all"][i]["details"]["parcel"]["weight"]), order["route"]["all"][i]["details"]["address"]["address"], color[0], "+"+order["route"]["all"][i]["details"]["phone"], "", 419); } else { adds=newList( name[1], color[1], order["route"]["all"][i]["details"]["address"]["latitude"], order["route"]["all"][i]["details"]["address"]["longitude"], count+" COD : "+order["route"]["all"][i]["details"]["cod"], order["route"]["all"][i]["details"]["address"]["address"], color[1], "+"+order["route"]["all"][i]["details"]["phone"], "", 419); } writer=writer+"{adds,listformat,comma}"+"\n"; }</actioncontainer>
+    <notecontainer id="t3" x="105.0" y="752.5" w="140.0" h="35.0">MAP</notecontainer>
+    <conditioncontainer id="t4" x="105.0" y="822.5">Expression: type=="พัสดุ"</conditioncontainer>
+    <notecontainer id="t5" x="2170.0" y="-2292.5" w="140.0" h="105.0">ไม่ได้ถูกลบ</notecontainer>
+    <notecontainer id="t6" x="2170.0" y="-2187.5" w="140.0" h="105.0">ปิด Cancel แล้วขึ้นใหม่แทน ป้องกันการวนซ้ำ</notecontainer>
+    <notecontainer id="t7" x="-1400.0" y="-2117.5" w="420.0" h="455.0">text = getText("ยินดีด้วย! รายได้จากการจองรอบข*");
 sleep(1000);
 text = getTextById("com.shopee.foody.driver.th:id/pop_up_title");
 sleep(1000);
@@ -16110,7 +16143,7 @@ sleep(1000);
 bounds = getBounds("ตกลง");
 sleep(1000);
 bounds = getBoundsById("com.shopee.foody.driver.th:id/negative");</notecontainer>
-    <notecontainer id="t9" x="-1400.0" y="-1645.0" w="420.0" h="490.0">text = getText("คำสั่งซื้อใหม่ถูกรับอัตโนมัติ");
+    <notecontainer id="t8" x="-1400.0" y="-1645.0" w="420.0" h="490.0">text = getText("คำสั่งซื้อใหม่ถูกรับอัตโนมัติ");
 sleep(1000);
 text = getTextById("com.shopee.foody.driver.th:id/auto_accept_order_title");
 sleep(1000);
@@ -16125,45 +16158,32 @@ sleep(1000);
 bounds = getBounds("ตกลง");
 sleep(1000);
 bounds = getBoundsById("com.shopee.foody.driver.th:id/btn_text");</notecontainer>
-    <actioncontainer id="t10" x="-1540.0" y="-1312.5">Script: start=getDate();</actioncontainer>
-    <actioncontainer id="t11" x="-1400.0" y="-1312.5">Script: log(getDate()-start);</actioncontainer>
-    <notecontainer id="t12" x="-1470.0" y="-2852.5" w="140.0" h="35.0">สำรอง</notecontainer>
-    <notecontainer id="t13" x="-1365.0" y="-2537.5" w="350.0" h="105.0">งานปกติ =&gt; งานปกติ
+    <actioncontainer id="t9" x="-1540.0" y="-1312.5">Script: start=getDate();</actioncontainer>
+    <actioncontainer id="t10" x="-1400.0" y="-1312.5">Script: log(getDate()-start);</actioncontainer>
+    <notecontainer id="t11" x="-1470.0" y="-2852.5" w="140.0" h="35.0">สำรอง</notecontainer>
+    <notecontainer id="t12" x="-1365.0" y="-2537.5" w="350.0" h="105.0">งานปกติ =&gt; งานปกติ
 ยกเลิก =&gt; งานยกเลิก
 งานเพิ่ม =&gt; ถาม (ราคาตามยกเลิก</notecontainer>
-    <actioncontainer id="t14" x="-1470.0" y="-2782.5">SELECT</actioncontainer>
-    <actioncontainer id="t15" x="-1470.0" y="-2677.5">FILTER-</actioncontainer>
-    <actioncontainer id="t16" x="-1155.0" y="-1627.5">***DEMO TAKE</actioncontainer>
-    <conditioncontainer id="t17" x="-1330.0" y="-1102.5">ONGOING?</conditioncontainer>
-    <actioncontainer id="t18" x="-1365.0" y="-1032.5">+</actioncontainer>
-    <actioncontainer id="t19" x="-1400.0" y="-892.5">Download URL: {staticmap} to /storage/emulated/0/Download/youx</actioncontainer>
-    <actioncontainer id="t20" x="-1505.0" y="-927.5">Script: //setWidgetElementProperty("SPF_DENY_ORDER", "Image_1", "visible", true); refreshWidget("SPF_DENY_ORDER", true);</actioncontainer>
-    <conditioncontainer id="t21" x="1470.0" y="-2537.5">FILE2?</conditioncontainer>
-    <actioncontainer id="t22" x="1470.0" y="-2362.5">SQL-CANCEL ัั</actioncontainer>
-    <actioncontainer id="t23" x="105.0" y="-4427.5">STATE</actioncontainer>
-    <conditioncontainer id="t24" x="700.0" y="-4427.5">FOOD? </conditioncontainer>
-    <actioncontainer id="t25" x="420.0" y="-3552.5">Execute Flows: #22A  DENY &lt;MAINACT&gt;</actioncontainer>
-    <conditioncontainer id="t26" x="1085.0" y="-2467.5">FILE2?</conditioncontainer>
-    <actioncontainer id="t27" x="1085.0" y="-2152.5">FILTER 5A</actioncontainer>
-    <actioncontainer id="t28" x="1085.0" y="-2257.5">SQL-ASSIGN 1</actioncontainer>
-    <notecontainer id="t29" x="1417.5" y="-3972.5" w="245.0" h="105.0">ลบงานออกจาก TAKEN</notecontainer>
-    <actioncontainer id="t30" x="105.0" y="-4322.5">UPDATE DB</actioncontainer>
-    <actioncontainer id="t31" x="-140.0" y="-3867.5">WGT-DETAIL</actioncontainer>
-    <actioncontainer id="t32" x="1050.0" y="-3867.5">15s</actioncontainer>
-    <notecontainer id="t33" x="-140.0" y="-4077.5" w="140.0" h="105.0">เพิ่มระบบแคปหน้าจอ</notecontainer>
-    <actioncontainer id="t34" x="105.0" y="-4077.5">ASSIGN-ACC</actioncontainer>
-    <actioncontainer id="t35" x="105.0" y="-3972.5">2 ROUTE
-CURRENT</actioncontainer>
-    <actioncontainer id="t36" x="105.0" y="-3867.5">PRESENT</actioncontainer>
-    <actioncontainer id="t37" x="420.0" y="-3972.5">ST-TAKE,CANCEL</actioncontainer>
-    <actioncontainer id="t38" x="245.0" y="-3552.5">Script: time="{getDate(),datedformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</actioncontainer>
-    <actioncontainer id="t39" x="245.0" y="-3447.5">Execute Root Command: screencap -p /storage/emulated/0/Android/application/SPFDB/SCREENSHOT/{time}.png in </actioncontainer>
-    <actioncontainer id="t40" x="420.0" y="-3867.5">WGT-DENY</actioncontainer>
-    <actioncontainer id="t41" x="420.0" y="-3657.5">BTN-ACCEPT</actioncontainer>
-    <conditioncontainer id="t42" x="1050.0" y="-4427.5">CANCEL?</conditioncontainer>
-    <actioncontainer id="t43" x="1050.0" y="-4217.5">UPDATE DB</actioncontainer>
-    <actioncontainer id="t44" x="1050.0" y="-4077.5">CANCEL-ACC</actioncontainer>
-    <notecontainer id="t45" x="1032.5" y="-3465.0" w="735.0" h="490.0">12.04.2025 13:08:21.008 [#21  INCOMING] Flow continues executing with the next step.
+    <actioncontainer id="t13" x="-1470.0" y="-2782.5">SELECT</actioncontainer>
+    <actioncontainer id="t14" x="-1470.0" y="-2677.5">FILTER-</actioncontainer>
+    <actioncontainer id="t15" x="-1155.0" y="-1627.5">***DEMO TAKE</actioncontainer>
+    <conditioncontainer id="t16" x="-1330.0" y="-1102.5">ONGOING?</conditioncontainer>
+    <actioncontainer id="t17" x="-1365.0" y="-1032.5">+</actioncontainer>
+    <actioncontainer id="t18" x="-1400.0" y="-892.5">Download URL: {staticmap} to /storage/emulated/0/Download/youx</actioncontainer>
+    <actioncontainer id="t19" x="-1505.0" y="-927.5">Script: //setWidgetElementProperty("SPF_DENY_ORDER", "Image_1", "visible", true); refreshWidget("SPF_DENY_ORDER", true);</actioncontainer>
+    <conditioncontainer id="t20" x="1470.0" y="-2537.5">FILE2?</conditioncontainer>
+    <actioncontainer id="t21" x="1470.0" y="-2362.5">SQL-CANCEL ัั</actioncontainer>
+    <actioncontainer id="t22" x="420.0" y="-3552.5">Execute Flows: #22A  DENY &lt;MAINACT&gt;</actioncontainer>
+    <conditioncontainer id="t23" x="1085.0" y="-2467.5">FILE2?</conditioncontainer>
+    <actioncontainer id="t24" x="1085.0" y="-2152.5">FILTER 5A</actioncontainer>
+    <actioncontainer id="t25" x="1085.0" y="-2257.5">SQL-ASSIGN 1</actioncontainer>
+    <actioncontainer id="t26" x="-140.0" y="-3867.5">WGT-DETAIL</actioncontainer>
+    <actioncontainer id="t27" x="420.0" y="-3972.5">ST-TAKE,CANCEL</actioncontainer>
+    <actioncontainer id="t28" x="245.0" y="-3552.5">Script: time="{getDate(),datedformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</actioncontainer>
+    <actioncontainer id="t29" x="245.0" y="-3447.5">Execute Root Command: screencap -p /storage/emulated/0/Android/application/SPFDB/SCREENSHOT/{time}.png in </actioncontainer>
+    <actioncontainer id="t30" x="420.0" y="-3867.5">WGT-DENY</actioncontainer>
+    <actioncontainer id="t31" x="420.0" y="-3657.5">BTN-ACCEPT</actioncontainer>
+    <notecontainer id="t32" x="1347.5" y="-3465.0" w="735.0" h="490.0">12.04.2025 13:08:21.008 [#21  INCOMING] Flow continues executing with the next step.
 12.04.2025 13:08:21.008 [#21  INCOMING] Start executing condition 'FOOD? '
 12.04.2025 13:08:21.010 [#21  INCOMING] End executing condition 'FOOD? ' with return value true
 12.04.2025 13:08:21.010 [#21  INCOMING] Flow continues executing with the next step.
@@ -16180,36 +16200,56 @@ CURRENT</actioncontainer>
 12.04.2025 13:08:21.397 [#21  INCOMING] End executing action 'BTN-ACCEPT' and exception sleep(3000) interrupted (Expression: sleep(3000)[line 1])
 12.04.2025 13:08:21.398 [#21  INCOMING] Stop requested, stopping flow execution
 </notecontainer>
-    <actioncontainer id="t46" x="1050.0" y="-3972.5">SQL-CANCEL </actioncontainer>
-    <notecontainer id="t47" x="1330.0" y="-4112.5" w="140.0" h="105.0">คนละเหตุผลทำให้ db เพี้ยน</notecontainer>
-    <connection from="t1" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t14" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t17" to="t18" type="TRUE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t21" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t30" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t24" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t24" to="t42" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t24" to="t37" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t26" to="t28" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t27" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t28" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t30" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t35" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t35" to="t37" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t36" to="t31" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t37" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t38" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <triggercontainer id="t33" x="104.99996" y="-5967.5">
+      <trigger>SPF-ICM</trigger>
+    </triggercontainer>
+    <conditioncontainer id="t34" x="1750.0" y="-5687.5">CANCEL?</conditioncontainer>
+    <actioncontainer id="t35" x="105.00003" y="-5477.5">UPDATE DB</actioncontainer>
+    <actioncontainer id="t36" x="105.000015" y="-5687.5">POP-WN</actioncontainer>
+    <conditioncontainer id="t37" x="735.0" y="-5687.5">FOOD? </conditioncontainer>
+    <conditioncontainer id="t38" x="420.0" y="-5477.5">CPI-ORD</conditioncontainer>
+    <actioncontainer id="t39" x="420.0" y="-5302.4995">EXECUTE SENDER</actioncontainer>
+    <actioncontainer id="t40" x="1610.0001" y="-4427.5">UPDATE DB</actioncontainer>
+    <actioncontainer id="t41" x="1645.0" y="-4147.4995">CANCEL-ACC</actioncontainer>
+    <actioncontainer id="t42" x="1645.0" y="-3972.5">SQL-CANCEL </actioncontainer>
+    <actioncontainer id="t43" x="1680.0" y="-3867.5">15s</actioncontainer>
+    <notecontainer id="t44" x="1750.0" y="-4147.5" w="140.0" h="105.0">คนละเหตุผลทำให้ db เพี้ยน</notecontainer>
+    <notecontainer id="t45" x="1732.5" y="-3937.5" w="245.0" h="105.0">ลบงานออกจาก TAKEN</notecontainer>
+    <actioncontainer id="t46" x="105.0" y="-4077.5">ASSIGN-ACC</actioncontainer>
+    <actioncontainer id="t47" x="105.0" y="-3972.5">2 ROUTE
+CURRENT</actioncontainer>
+    <actioncontainer id="t48" x="105.0" y="-3867.5">PRESENT</actioncontainer>
+    <connection from="t2" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t17" type="TRUE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t20" to="t21" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t23" to="t25" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t27" to="t30" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t28" to="t29" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t30" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t30" to="t28" type="NORMAL" sourcePosition="WEST" targetPosition="NORTH" />
+    <connection from="t31" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t33" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t34" to="t40" type="TRUE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t35" to="t46" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t36" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t36" to="t37" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t36" to="t38" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t37" to="t34" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t37" to="t27" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t37" to="t38" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t38" to="t39" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t40" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t40" to="t38" type="NORMAL" sourcePosition="WEST" targetPosition="NORTH" />
-    <connection from="t41" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t42" to="t43" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t43" to="t44" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t44" to="t46" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t46" to="t29" type="NOTE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t46" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t41" to="t42" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t42" to="t45" type="NOTE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t42" to="t43" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t46" to="t47" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t47" to="t48" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t47" to="t27" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t48" to="t26" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
   </flow>
   <flow type="flow">
     <name>#22A  DENY &lt;MAINACT&gt;</name>
@@ -16497,19 +16537,15 @@ AUTOFILL</actioncontainer>
     <actioncontainer id="t3" x="-210.0" y="-1522.5">IMPORT CSV</actioncontainer>
     <actioncontainer id="t4" x="245.0" y="-87.5">Start Activity: android.intent.action.VIEW {uri} </actioncontainer>
     <actioncontainer id="t5" x="1120.0" y="577.5">LONGDO API</actioncontainer>
-    <actioncontainer id="t6" x="70.0" y="-1137.5">Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST") and not contains(file_text[i][0],"FIX")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",120) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</actioncontainer>
-    <actioncontainer id="t7" x="70.0" y="-1032.5">GEOAPIFY
+    <actioncontainer id="t6" x="700.0" y="-1137.5">DATA-HERzE</actioncontainer>
+    <actioncontainer id="t7" x="700.0" y="-1032.5">LONGDO
 (TSP)</actioncontainer>
-    <actioncontainer id="t8" x="70.0" y="-822.5">Scripbbjt: </actioncontainer>
-    <actioncontainer id="t9" x="700.0" y="-1137.5">DATA-HERzE</actioncontainer>
-    <actioncontainer id="t10" x="700.0" y="-1032.5">LONGDO
+    <actioncontainer id="t8" x="700.0" y="-822.5">Scripjjjt: response=fromJSON(response);</actioncontainer>
+    <actioncontainer id="t9" x="385.0" y="-822.5">Scripbbjt: nnj</actioncontainer>
+    <actioncontainer id="t10" x="385.0" y="-1032.5">HERE API 
 (TSP)</actioncontainer>
-    <actioncontainer id="t11" x="700.0" y="-822.5">Scripjjjt: response=fromJSON(response);</actioncontainer>
-    <actioncontainer id="t12" x="385.0" y="-822.5">Scripbbjt: nnj</actioncontainer>
-    <actioncontainer id="t13" x="385.0" y="-1032.5">HERE API 
-(TSP)</actioncontainer>
-    <actioncontainer id="t14" x="385.0" y="-1137.5">HERE PARAMETER</actioncontainer>
-    <notecontainer id="t15" x="-1277.5" y="-1085.0" w="385.0" h="210.0">results[0]
+    <actioncontainer id="t11" x="385.0" y="-1137.5">HERE PARAMETER</actioncontainer>
+    <notecontainer id="t12" x="-1277.5" y="-1085.0" w="385.0" h="210.0">results[0]
 
 distance/1000
 time/60
@@ -16517,30 +16553,31 @@ int totalSeconds = 6676;
 int minutes = totalSeconds / 60;
 int seconds = totalSeconds % 60;
 System.out.println(minutes + " นาที " + seconds + " วินาที");</notecontainer>
-    <actioncontainer id="t16" x="-1155.0" y="-1277.5"> SELECT </actioncontainer>
-    <actioncontainer id="t17" x="-210.0" y="-1417.5">SPLITS V3s</actioncontainer>
-    <actioncontainer id="t18" x="-210.0" y="-1032.5">ORS
+    <actioncontainer id="t13" x="-1155.0" y="-1277.5"> SELECT </actioncontainer>
+    <actioncontainer id="t14" x="-210.0" y="-1417.5">SPLITS V3s</actioncontainer>
+    <actioncontainer id="t15" x="-210.0" y="-1032.5">ORS
 (VRP)</actioncontainer>
-    <conditioncontainer id="t19" x="-315.0" y="-472.49997">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t20" x="-210.0" y="-822.5">Scripjjt: response=fromJSON(response);</actioncontainer>
-    <actioncontainer id="t21" x="-210.0" y="-1137.5">ORS
-PARAMETER</actioncontainer>
+    <actioncontainer id="t16" x="-210.0" y="-927.5">1-URI</actioncontainer>
+    <actioncontainer id="t17" x="70.0" y="-822.5">Scripbbjt: </actioncontainer>
+    <actioncontainer id="t18" x="70.0" y="-1032.5">GEOAPIFY
+(TSP)</actioncontainer>
+    <actioncontainer id="t19" x="70.0" y="-1137.5">Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST") and not contains(file_text[i][0],"FIX")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",0) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</actioncontainer>
+    <actioncontainer id="t20" x="-99.75844" y="-1115.0011">ORS / PAR</actioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t6" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t8" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t14" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t17" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t18" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t20" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t21" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t14" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t17" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t18" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t19" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t20" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#39: MANUAL</name>
@@ -17631,13 +17668,15 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
   <flow type="flow">
     <name>***NEARBY SHARE</name>
     <description> </description>
-    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <group>        📍  NAVIGATION</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5" />
-    <actioncontainer id="t2" x="-140.0" y="332.5">Execute Root Command: cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121 in </actioncontainer>
-    <actioncontainer id="t3" x="140.0" y="367.5">Start Activity: android.intent.action.SEND image/png com.google.android.gms/com.google.android.gms.nearby.sharing.send.SendActivity </actioncontainer>
-    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t1" x="-140.0" y="332.5">Execute Root Command: cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121 in </actioncontainer>
+    <triggercontainer id="t2" x="70.0" y="52.5" />
+    <actioncontainer id="t3" x="70.0" y="612.5">Control UI: sleep(1000); click("Pixel 5a ของ T A K A");</actioncontainer>
+    <actioncontainer id="t4" x="140.0" y="367.5">Start Activity: android.intent.action.SEND image/png com.google.android.gms/com.google.android.gms.nearby.sharing.send.SendActivity </actioncontainer>
+    <connection from="t2" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>11: IPCONFIG</name>
@@ -17680,7 +17719,7 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <triggercontainer id="t1" x="-909.99963" y="-8137.498">
+    <triggercontainer id="t1" x="-910.0" y="-8137.5">
       <trigger>MULTI</trigger>
       <trigger>SINGLE</trigger>
     </triggercontainer>
@@ -17781,8 +17820,8 @@ method: cp_send$spfdb</notecontainer>
     <actioncontainer id="t38" x="-910.0" y="-7612.5">CONFIG4</actioncontainer>
     <conditioncontainer id="t39" x="-910.0" y="-7857.5">IP?</conditioncontainer>
     <conditioncontainer id="t40" x="-1645.0" y="-9397.5">FOR MULTI</conditioncontainer>
-    <actioncontainer id="t41" x="-1925.0004" y="-9292.5">  CP  </actioncontainer>
-    <actioncontainer id="t42" x="-1924.9996" y="-9187.5">TEST  </actioncontainer>
+    <actioncontainer id="t41" x="-1925.0" y="-9292.5">  CP  </actioncontainer>
+    <actioncontainer id="t42" x="-1925.0" y="-9187.5">TEST  </actioncontainer>
     <actioncontainer id="t43" x="-1925.0" y="-9397.5"> QUERY </actioncontainer>
     <notecontainer id="t44" x="-1662.5" y="-9905.0" w="455.0" h="70.0">MULTI / IMAGE</notecontainer>
     <actioncontainer id="t45" x="-1645.0" y="-9572.5">C-FOL</actioncontainer>
@@ -18004,6 +18043,38 @@ method: cp_send$spfdb</notecontainer>
     <connection from="t8" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t9" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t10" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>Flow1</name>
+    <group>         🍑   SPF</group>
+    <enabled>false</enabled>
+    <executionPolicy>SKIP</executionPolicy>
+    <emergencyStopCount>999999</emergencyStopCount>
+    <actioncontainer id="t1" x="-34.999992" y="262.5">Script: setWidgetElementProperty("Widget10", "Image_1", "path", "https://mmmap15.longdo.com/mmmap/snippet/?map=epsg3857&amp;locale=th&amp;height=500&amp;width=500&amp;mode=gray&amp;marker=position:13.73547,100.40086|13.75092,100.40846;icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=position:13.74271,100.41419|13.69538,100.41809|13.63882,100.51444|13.60902,100.53530|13.57859,100.50367;offsetX:center;offsetY:bottom&amp;refresh=1");</actioncontainer>
+    <actioncontainer id="t2" x="-209.99998" y="262.49997">Show Custom Widget Overlay: Overlayll 5, Widget10  Top Left</actioncontainer>
+    <conditioncontainer id="t3" x="560.0" y="192.50003">Expression: Execute 300 times</conditioncontainer>
+    <actioncontainer id="t4" x="559.99994" y="437.5">Notification on Screen: Loop ended</actioncontainer>
+    <triggercontainer id="t5" x="70.0" y="52.5" />
+    <actioncontainer id="t6" x="385.00003" y="437.5">Script: refreshWidget("Widget10", true)</actioncontainer>
+    <actioncontainer id="t7" x="175.00003" y="472.50006">Script: refreshWidget("Widget10", true)</actioncontainer>
+    <actioncontainer id="t8" x="175.00006" y="367.5">Script: refreshWidget("Widget10", true)</actioncontainer>
+    <actioncontainer id="t9" x="175.00006" y="577.5">Script: refreshWidget("Widget10", true)</actioncontainer>
+    <actioncontainer id="t10" x="175.00006" y="682.49994">Script: refreshWidget("Widget10", true)</actioncontainer>
+    <actioncontainer id="t11" x="175.0" y="787.50006">Script: refreshWidget("Widget10", true)</actioncontainer>
+    <actioncontainer id="t12" x="175.00005" y="892.5">Script: refreshWidget("Widget10", true)</actioncontainer>
+    <actioncontainer id="t13" x="174.99998" y="262.50003">Download URL: https://mmmap15.longdo.com/mmmap/snippet/?map=epsg3857&amp;locale=th&amp;height=500&amp;width=500&amp;mode=gray&amp;marker=position:13.73547,100.40086|13.75092,100.40846;icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=position:13.74271,100.41419|13.69538,100.41809|13.63882,100.51444|13.60902,100.53530|13.57859,100.50367;offsetX:center;offsetY:bottom&amp;refresh=1 to /storage/emulated/0/Download/xxx</actioncontainer>
+    <connection from="t3" to="t4" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t6" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow10</name>
