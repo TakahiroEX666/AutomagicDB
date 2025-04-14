@@ -6076,6 +6076,17 @@ github=toJSON(newMapFromValues("message",message,
 
 namefile="automagic_backup.xml";</script>
   </action>
+  <action type="script">
+    <useDefaultName>false</useDefaultName>
+    <name>GITJ SHA2</name>
+    <script>github=toJSON(newMapFromValues("message",message,
+"content",stdout,
+"branch","main",
+"sha",fromJSON(response)["sha"]
+));
+
+namefile="automagic_backup.xml";</script>
+  </action>
   <action type="start_activity">
     <useDefaultName>false</useDefaultName>
     <name>GMAP</name>
@@ -6354,7 +6365,7 @@ cookie: shopee_token=EDZgG8Wn73Ks2NNYykVsWydXSF4zSB5+TTECHKR8OGZ52rH8Jr76RWPznl9
   </action>
   <action type="http_request">
     <useDefaultName>true</useDefaultName>
-    <name>HTTP Request: GET https://api.github.com/repos/TakahiroEX666/AutomagicDB/contents/{namefile}   store in /storage/emulated/0/Download/file.bin</name>
+    <name>HTTP Request: GET https://api.github.com/repos/TakahiroEX666/AutomagicDB/contents/{namefile}   store in response</name>
     <url>https://api.github.com/repos/TakahiroEX666/AutomagicDB/contents/{namefile}</url>
     <verifyCertificates>true</verifyCertificates>
     <basicAuthentication>false</basicAuthentication>
@@ -6374,7 +6385,7 @@ cookie: shopee_token=EDZgG8Wn73Ks2NNYykVsWydXSF4zSB5+TTECHKR8OGZ52rH8Jr76RWPznl9
     <timeout>60000</timeout>
     <setCustomHTTPHeaders>false</setCustomHTTPHeaders>
     <customHTTPHeaders></customHTTPHeaders>
-    <storeInVariable>false</storeInVariable>
+    <storeInVariable>true</storeInVariable>
     <variable>response</variable>
     <encoding></encoding>
     <path>/storage/emulated/0/Download/file.bin</path>
@@ -11180,6 +11191,11 @@ points=toJSON(points)</script>
     <useDefaultName>true</useDefaultName>
     <name>Script: removeElement(global_navigation, 0);</name>
     <script>removeElement(global_navigation, 0);</script>
+  </action>
+  <action type="script">
+    <useDefaultName>false</useDefaultName>
+    <name>Script: respobbnse=fromJSON(response);</name>
+    <script>response=fromJSON(response)["sha"];</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
@@ -16049,40 +16065,46 @@ ENCRYPT</actioncontainer>
     <actioncontainer id="t9" x="-385.0" y="-612.5">GIT
 CONTENT!</actioncontainer>
     <actioncontainer id="t10" x="-70.0" y="-52.5">WRITE SHA</actioncontainer>
-    <conditioncontainer id="t11" x="-315.0" y="-227.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t12" x="210.0" y="-717.5">SHA IMPORT</actioncontainer>
-    <actioncontainer id="t13" x="-70.0" y="-157.5">SHA?</actioncontainer>
-    <triggercontainer id="t14" x="-69.99999" y="-1697.5">
+    <actioncontainer id="t11" x="-70.0" y="-157.5">SHA?</actioncontainer>
+    <notecontainer id="t12" x="-367.5" y="-87.5" w="175.0" h="35.0">does not match</notecontainer>
+    <actioncontainer id="t13" x="-70.00001" y="-507.49997">GIT UPLOAD</actioncontainer>
+    <conditioncontainer id="t14" x="-244.99998" y="297.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t15" x="-70.0" y="-612.5">GIT
+AUTOMAGIC</actioncontainer>
+    <actioncontainer id="t16" x="-595.0" y="-192.5">GIT
+AUTOMAGIC</actioncontainer>
+    <actioncontainer id="t17" x="770.0" y="-612.5">GITJ SHA</actioncontainer>
+    <actioncontainer id="t18" x="770.0" y="-717.5">SHA IMPORT</actioncontainer>
+    <conditioncontainer id="t19" x="-70.0" y="-332.5">SHA?</conditioncontainer>
+    <actioncontainer id="t20" x="-490.0" y="262.5">Script: respobbnse=fromJSON(response);</actioncontainer>
+    <actioncontainer id="t21" x="349.99988" y="-682.5">HTTP Request: GET https://api.github.com/repos/TakahiroEX666/AutomagicDB/contents/{namefile}   store in response</actioncontainer>
+    <actioncontainer id="t22" x="350.00003" y="-577.5">GITJ SHA2</actioncontainer>
+    <triggercontainer id="t23" x="-70.0" y="-1697.5">
       <trigger>1h</trigger>
     </triggercontainer>
-    <conditioncontainer id="t15" x="104.99997" y="-1032.5001">DIFF SIZE</conditioncontainer>
-    <actioncontainer id="t16" x="-69.99998" y="-1207.5001">SIZE</actioncontainer>
-    <actioncontainer id="t17" x="210.00003" y="-612.5">GITJ SHA</actioncontainer>
-    <actioncontainer id="t18" x="-385.00006" y="17.499996">HTTP Request: GET https://api.github.com/repos/TakahiroEX666/AutomagicDB/contents/{namefile}   store in /storage/emulated/0/Download/file.bin</actioncontainer>
-    <notecontainer id="t19" x="-367.5" y="-87.5" w="175.0" h="35.0">does not match</notecontainer>
-    <actioncontainer id="t20" x="-70.0" y="-612.5">GIT
-AUTOMAGIC</actioncontainer>
-    <actioncontainer id="t21" x="-70.00001" y="-507.49997">GIT UPLOAD</actioncontainer>
-    <conditioncontainer id="t22" x="-70.0" y="-332.5">SHA?</conditioncontainer>
+    <actioncontainer id="t24" x="-69.99998" y="-1207.5001">SIZE</actioncontainer>
+    <conditioncontainer id="t25" x="-70.00003" y="-997.5003">DIFF SIZE</conditioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t7" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t7" to="t6" type="NOTE" sourcePosition="NORTH" targetPosition="SOUTH" />
     <connection from="t8" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
-    <connection from="t12" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t14" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t15" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t16" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t17" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t20" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
+    <connection from="t11" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t18" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t19" to="t11" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t19" to="t21" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t20" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t21" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t12" type="TRUE" sourcePosition="EAST" targetPosition="EAST" />
-    <connection from="t22" to="t13" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t23" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>  @  START-BOOT</name>
