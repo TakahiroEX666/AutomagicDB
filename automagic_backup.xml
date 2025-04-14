@@ -4310,6 +4310,18 @@ ENCRYPT</name>
     <variableStderr>stderr</variableStderr>
     <variableExitCode>exit_code</variableExitCode>
   </action>
+  <action type="execute_root_command">
+    <useDefaultName>false</useDefaultName>
+    <name>BASE64-2</name>
+    <command>base64 {docid}</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
+  </action>
   <action type="control_user_interface">
     <useDefaultName>false</useDefaultName>
     <name>BTN-ACCEPT</name>
@@ -5208,6 +5220,28 @@ log(subdistrict[i]);
   </action>
   <action type="script">
     <useDefaultName>false</useDefaultName>
+    <name>EXTERNAL-CV</name>
+    <script>uri=callJavaStaticMethod("android.net.Uri", "parse(java.lang.String)", 
+
+data_string);
+
+
+
+
+docid=callJavaStaticMethod("android.provider.DocumentsContract", "getDocumentId(android.net.Uri)", uri);
+
+
+
+
+docid=replaceAll(docid, "primary:", getExternalStorageDir()+"/");
+
+
+filename=split(docid,"/");
+
+namefile=filename[length(filename)-1];</script>
+  </action>
+  <action type="script">
+    <useDefaultName>false</useDefaultName>
     <name>FIL</name>
     <script>stdout=split(stdout,"\n");
 
@@ -5953,6 +5987,55 @@ flowlist="{flowlist,listformat,comma}";</script>
     <timeoutEnabled>false</timeoutEnabled>
     <timeout>60000</timeout>
   </action>
+  <action type="start_activity">
+    <useDefaultName>false</useDefaultName>
+    <name>GET_CONTENT</name>
+    <intentAction>android.intent.action.GET_CONTENT</intentAction>
+    <categoryListEnabled>true</categoryListEnabled>
+    <categoryList>android.intent.category.OPENABLE</categoryList>
+    <dataEnabled>false</dataEnabled>
+    <data></data>
+    <dataTypeEnabled>true</dataTypeEnabled>
+    <dataType>*/*</dataType>
+    <explicitComponent>false</explicitComponent>
+    <packageName></packageName>
+    <className></className>
+    <flagList></flagList>
+    <launchBoundsEnabled>false</launchBoundsEnabled>
+    <x></x>
+    <y></y>
+    <width></width>
+    <height></height>
+    <extras></extras>
+    <waitForResult>true</waitForResult>
+    <accessResultExtras></accessResultExtras>
+  </action>
+  <action type="script">
+    <useDefaultName>false</useDefaultName>
+    <name>GIT
+AUTOMAGIC</name>
+    <script>message="{getDate(),dateformat,dd.MM.yyyy}"+" | {getDate(),dateformat,HH:mm}";
+namefile="automagic_backup.xml";
+
+
+
+github=toJSON(newMapFromValues("message", message,
+"content",stdout,
+"branch","main"
+));</script>
+  </action>
+  <action type="script">
+    <useDefaultName>false</useDefaultName>
+    <name>GIT
+CONTENT!</name>
+    <script>message="test upload via content";
+
+
+github=toJSON(newMapFromValues("message",message,
+"content",stdout,
+"branch","main"
+));</script>
+  </action>
   <action type="http_request">
     <useDefaultName>false</useDefaultName>
     <name>GIT UPLOAD</name>
@@ -5984,22 +6067,14 @@ flowlist="{flowlist,listformat,comma}";</script>
   </action>
   <action type="script">
     <useDefaultName>false</useDefaultName>
-    <name>GITJ</name>
-    <script>github=toJSON(newMapFromValues("message", "{getDate(),dateformat,dd.MM.yyyy}"+" | {getDate(),dateformat,HH:mm}",
-"content",stdout,
-"branch","main"
-));
-namefile="automagic_backup.xml"</script>
-  </action>
-  <action type="script">
-    <useDefaultName>false</useDefaultName>
     <name>GITJ SHA</name>
-    <script>github=toJSON(newMapFromValues("message", "{getDate(),dateformat,dd.MM.yyyy}"+" | {getDate(),dateformat,HH:mm}",
+    <script>github=toJSON(newMapFromValues("message",message,
 "content",stdout,
 "branch","main",
 "sha",file_text
 ));
-namefile="automagic_backup.xml"</script>
+
+namefile="automagic_backup.xml";</script>
   </action>
   <action type="start_activity">
     <useDefaultName>false</useDefaultName>
@@ -6273,6 +6348,35 @@ cookie: shopee_token=EDZgG8Wn73Ks2NNYykVsWydXSF4zSB5+TTECHKR8OGZ52rH8Jr76RWPznl9
     <storeInVariable>true</storeInVariable>
     <variable>response</variable>
     <encoding>UTF-8</encoding>
+    <path>/storage/emulated/0/Download/file.bin</path>
+    <followRedirects>true</followRedirects>
+    <skipConnectivityCheck>false</skipConnectivityCheck>
+  </action>
+  <action type="http_request">
+    <useDefaultName>true</useDefaultName>
+    <name>HTTP Request: GET https://api.github.com/repos/TakahiroEX666/AutomagicDB/contents/{namefile}   store in /storage/emulated/0/Download/file.bin</name>
+    <url>https://api.github.com/repos/TakahiroEX666/AutomagicDB/contents/{namefile}</url>
+    <verifyCertificates>true</verifyCertificates>
+    <basicAuthentication>false</basicAuthentication>
+    <username></username>
+    <clientCert>false</clientCert>
+    <clientCertPath></clientCertPath>
+    <httpMethod>GET</httpMethod>
+    <networkType>DEFAULT</networkType>
+    <httpContentType>X_WWW_FORM_URLENCODED</httpContentType>
+    <contentType>text/plain</contentType>
+    <generalTextData></generalTextData>
+    <formFieldList>Lastname=XYZ,Firstname=ABC</formFieldList>
+    <uploadFieldName>upload_field</uploadFieldName>
+    <uploadFilePath></uploadFilePath>
+    <binaryContentType>application/octet-stream</binaryContentType>
+    <binaryFilePath></binaryFilePath>
+    <timeout>60000</timeout>
+    <setCustomHTTPHeaders>false</setCustomHTTPHeaders>
+    <customHTTPHeaders></customHTTPHeaders>
+    <storeInVariable>false</storeInVariable>
+    <variable>response</variable>
+    <encoding></encoding>
     <path>/storage/emulated/0/Download/file.bin</path>
     <followRedirects>true</followRedirects>
     <skipConnectivityCheck>false</skipConnectivityCheck>
@@ -15927,6 +16031,60 @@ TAKE, DENY</name>
     <connection from="t10" to="t11" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
+    <name>  @  GITHUB API</name>
+    <description>     0.1 bulid 23
+</description>
+    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <enabled>true</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <actioncontainer id="t1" x="-70.0" y="-1417.5">FLOWLIST</actioncontainer>
+    <actioncontainer id="t2" x="-70.0" y="-1312.5">EXPORT</actioncontainer>
+    <actioncontainer id="t3" x="-69.99999" y="-822.5">REPLACEKEY</actioncontainer>
+    <actioncontainer id="t4" x="-70.0" y="-717.5">BASE64
+ENCRYPT</actioncontainer>
+    <actioncontainer id="t5" x="-385.00006" y="-1312.5">EXTERNAL-CV</actioncontainer>
+    <notecontainer id="t6" x="-385.0" y="-1732.5" w="140.0" h="35.0">FROM SOURCE</notecontainer>
+    <actioncontainer id="t7" x="-385.00012" y="-1417.4999">GET_CONTENT</actioncontainer>
+    <actioncontainer id="t8" x="-385.00006" y="-717.5">BASE64-2</actioncontainer>
+    <actioncontainer id="t9" x="-385.0" y="-612.5">GIT
+CONTENT!</actioncontainer>
+    <actioncontainer id="t10" x="-70.0" y="-52.5">WRITE SHA</actioncontainer>
+    <conditioncontainer id="t11" x="-315.0" y="-227.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t12" x="210.0" y="-717.5">SHA IMPORT</actioncontainer>
+    <actioncontainer id="t13" x="-70.0" y="-157.5">SHA?</actioncontainer>
+    <triggercontainer id="t14" x="-69.99999" y="-1697.5">
+      <trigger>1h</trigger>
+    </triggercontainer>
+    <conditioncontainer id="t15" x="104.99997" y="-1032.5001">DIFF SIZE</conditioncontainer>
+    <actioncontainer id="t16" x="-69.99998" y="-1207.5001">SIZE</actioncontainer>
+    <actioncontainer id="t17" x="210.00003" y="-612.5">GITJ SHA</actioncontainer>
+    <actioncontainer id="t18" x="-385.00006" y="17.499996">HTTP Request: GET https://api.github.com/repos/TakahiroEX666/AutomagicDB/contents/{namefile}   store in /storage/emulated/0/Download/file.bin</actioncontainer>
+    <notecontainer id="t19" x="-367.5" y="-87.5" w="175.0" h="35.0">does not match</notecontainer>
+    <actioncontainer id="t20" x="-70.0" y="-612.5">GIT
+AUTOMAGIC</actioncontainer>
+    <actioncontainer id="t21" x="-70.00001" y="-507.49997">GIT UPLOAD</actioncontainer>
+    <conditioncontainer id="t22" x="-70.0" y="-332.5">SHA?</conditioncontainer>
+    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t6" type="NOTE" sourcePosition="NORTH" targetPosition="SOUTH" />
+    <connection from="t8" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
+    <connection from="t12" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t14" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t17" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t20" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t21" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t12" type="TRUE" sourcePosition="EAST" targetPosition="EAST" />
+    <connection from="t22" to="t13" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
     <name>  @  START-BOOT</name>
     <description> </description>
     <group>          ♻️  2DEVICE-SYSTEM</group>
@@ -17854,48 +18012,6 @@ method: cp_send$spfdb</notecontainer>
     <connection from="t7" to="t4" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t7" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t10" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
-    <name>@ GITHUB UPLOAD</name>
-    <description> </description>
-    <group>          ♻️  2DEVICE-SYSTEM</group>
-    <enabled>true</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <actioncontainer id="t1" x="245.0" y="-612.5">SHA IMPORT</actioncontainer>
-    <actioncontainer id="t2" x="245.0" y="-507.5">GITJ SHA</actioncontainer>
-    <actioncontainer id="t3" x="-70.0" y="-52.5">WRITE SHA</actioncontainer>
-    <actioncontainer id="t4" x="-70.0" y="-1417.5">FLOWLIST</actioncontainer>
-    <actioncontainer id="t5" x="-70.0" y="-612.5">GITJ</actioncontainer>
-    <notecontainer id="t6" x="-280.0" y="-612.5" w="140.0" h="105.0">Authorization: Bearer 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</notecontainer>
-    <actioncontainer id="t7" x="-70.0" y="-157.5">SHA?</actioncontainer>
-    <notecontainer id="t8" x="-595.0" y="-1732.5" w="140.0" h="105.0">adb shell sed -i 's/ข้อความเดิม/ข้อความใหม่/g' /sdcard/ชื่อไฟล์.txt
-</notecontainer>
-    <actioncontainer id="t9" x="-70.0" y="-507.5">GIT UPLOAD</actioncontainer>
-    <triggercontainer id="t10" x="-70.0" y="-1627.5">
-      <trigger>1h</trigger>
-    </triggercontainer>
-    <actioncontainer id="t11" x="-70.0" y="-717.5">BASE64
-ENCRYPT</actioncontainer>
-    <actioncontainer id="t12" x="-70.0" y="-1312.5">EXPORT</actioncontainer>
-    <actioncontainer id="t13" x="-69.99998" y="-1207.5001">SIZE</actioncontainer>
-    <conditioncontainer id="t14" x="-70.00002" y="-1067.5">DIFF SIZE</conditioncontainer>
-    <actioncontainer id="t15" x="-69.99999" y="-822.5">REPLACEKEY</actioncontainer>
-    <conditioncontainer id="t16" x="-314.99997" y="-192.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t17" x="-70.0" y="-332.5">SHA?</conditioncontainer>
-    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t9" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t4" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t14" to="t15" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t15" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t17" to="t1" type="TRUE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t17" to="t7" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Encrypt / Decrypt text</name>
