@@ -145,14 +145,6 @@ NOW
     <packageNameFilter>com.shopee.foody.driver.th</packageNameFilter>
     <classNameFilter>com.shopee.foody.driver.popmanager.activity.PopActivity</classNameFilter>
   </trigger>
-  <trigger type="activity_started">
-    <useDefaultName>true</useDefaultName>
-    <name>Activity Started: com.shopee.foody.driver.th/com.shopee.foody.driver.MainActivity</name>
-    <enabled>false</enabled>
-    <method>USAGE_STATISTICS</method>
-    <packageNameFilter>com.shopee.foody.driver.th</packageNameFilter>
-    <classNameFilter>com.shopee.foody.driver.MainActivity</classNameFilter>
-  </trigger>
   <trigger type="notification_status_bar_displayed">
     <useDefaultName>false</useDefaultName>
     <name>BOLT </name>
@@ -219,23 +211,6 @@ NOW
     <useDefaultName>false</useDefaultName>
     <name>CLIPBOARD</name>
     <enabled>true</enabled>
-  </trigger>
-  <trigger type="command_output">
-    <useDefaultName>true</useDefaultName>
-    <name>Command Output: dumpsys media_projection
- (root) contains text </name>
-    <enabled>false</enabled>
-    <command>dumpsys media_projection
-</command>
-    <root>true</root>
-    <seContext></seContext>
-    <workingDirectory></workingDirectory>
-    <textMatchType>CONTAINS_TEXT</textMatchType>
-    <containedString></containedString>
-    <skipInitialOutput>false</skipInitialOutput>
-    <skipInitialOutputMillis>5000</skipInitialOutputMillis>
-    <keepDeviceAwake>false</keepDeviceAwake>
-    <logOutput>false</logOutput>
   </trigger>
   <trigger type="activity_ended">
     <useDefaultName>false</useDefaultName>
@@ -655,6 +630,17 @@ attachment_name=getString("attachment_name");</extras>
     <timeoutEnabled>false</timeoutEnabled>
     <timeout>60000</timeout>
     <defaultValueOnTimeout>true</defaultValueOnTimeout>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>
+
+   ok    
+
+</name>
+    <expression>selection=value;
+
+operation=="ok"</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -1813,11 +1799,6 @@ dy=screen_y-c_y;
   </condition>
   <condition type="expression">
     <useDefaultName>true</useDefaultName>
-    <name>Expression: contains(stdout,"null")</name>
-    <expression>contains(stdout,"null")</expression>
-  </condition>
-  <condition type="expression">
-    <useDefaultName>true</useDefaultName>
     <name>Expression: gesture=="CLICK"</name>
     <expression>gesture=="CLICK"</expression>
   </condition>
@@ -2131,6 +2112,24 @@ existsFile(sFileDb)</expression>
    return true
 }
 return false</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>FOR MULTI</name>
+    <expression>if (index == null) {index = 0; multi=newList();}
+
+if (index &lt; length(stream_uris))
+{
+  stream_uri = stream_uris[index];
+  index = index + 1;
+  
+  return true;
+}
+else
+{
+  index = null;
+  return false;
+}</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -3108,6 +3107,18 @@ sleep(500);</script>
     <enlargeDialogWidth>false</enlargeDialogWidth>
     <keyboardCapitalizeSentences>false</keyboardCapitalizeSentences>
   </action>
+  <action type="execute_root_command">
+    <useDefaultName>false</useDefaultName>
+    <name>  CP  </name>
+    <command>cp {result[0]} /storage/emulated/0/Android/application/RESOURCE/ZIPFILE/{result[1]}</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
+  </action>
   <action type="notification_screen">
     <useDefaultName>false</useDefaultName>
     <name>  OK  </name>
@@ -3283,6 +3294,21 @@ if(length(global_navigation)&gt;0) {
 }
 addElement(menu, "");
 addElement(menu, "🗑️   ล้างทั้งหมด");</script>
+  </action>
+  <action type="query_content_provider">
+    <useDefaultName>false</useDefaultName>
+    <name> QUERY </name>
+    <uri>{stream_uri}</uri>
+    <projectionEnabled>true</projectionEnabled>
+    <projection>_data,_display_name</projection>
+    <selectionEnabled>false</selectionEnabled>
+    <selection></selection>
+    <selectionArgs></selectionArgs>
+    <sortOrderEnabled>false</sortOrderEnabled>
+    <sortOrder></sortOrder>
+    <queryContentProviderResultType>LIST</queryContentProviderResultType>
+    <includeHeaderRow>false</includeHeaderRow>
+    <variable>result</variable>
   </action>
   <action type="notification_screen">
     <useDefaultName>false</useDefaultName>
@@ -4354,6 +4380,11 @@ for (i in calc){sum=sum+i;}
 yyyy=callJavaMethod(calc, "java.util.List", "size()");
 average=sum/yyyy</script>
   </action>
+  <action type="create_directories">
+    <useDefaultName>false</useDefaultName>
+    <name>C-FOL</name>
+    <pathList>/storage/emulated/0/Android/application/RESOURCE/ZIPFILE</pathList>
+  </action>
   <action type="call_number">
     <useDefaultName>true</useDefaultName>
     <name>Call Number: {global_navigation[0][7]} (SIM 1)</name>
@@ -4893,6 +4924,12 @@ all_lat+
     <name>DEL-COOKIE</name>
     <domainList>*</domainList>
   </action>
+  <action type="delete_files">
+    <useDefaultName>false</useDefaultName>
+    <name>DEL-FOL</name>
+    <pathList>/storage/emulated/0/Android/application/RESOURCE/ZIPFILE</pathList>
+    <showProgress>false</showProgress>
+  </action>
   <action type="delete_http_request_cookies">
     <useDefaultName>true</useDefaultName>
     <name>Delete HTTP Request Cookies: Domain matches https://shopee.co.th/api/v4/geo/get_poi_by_geo</name>
@@ -5172,20 +5209,6 @@ log(subdistrict[i]);
     <useDefaultName>true</useDefaultName>
     <name>Execute Root Command: cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121 in </name>
     <command>cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121</command>
-    <user></user>
-    <seContext></seContext>
-    <workingDirectory></workingDirectory>
-    <timeout>300000</timeout>
-    <variableStdout>stdout</variableStdout>
-    <variableStderr>stderr</variableStderr>
-    <variableExitCode>exit_code</variableExitCode>
-  </action>
-  <action type="execute_root_command">
-    <useDefaultName>true</useDefaultName>
-    <name>Execute Root Command: dumpsys media_projection
- in </name>
-    <command>dumpsys media_projection
-</command>
     <user></user>
     <seContext></seContext>
     <workingDirectory></workingDirectory>
@@ -6987,11 +7010,6 @@ BASE</name>
     <timeoutEnabled>true</timeoutEnabled>
     <timeoutMillis>60000</timeoutMillis>
   </action>
-  <action type="init_variable_notifications_status_bar">
-    <useDefaultName>true</useDefaultName>
-    <name>Init Variable Notifications on Statusbar: notifications</name>
-    <variable>notifications</variable>
-  </action>
   <action type="init_variable_package_info">
     <useDefaultName>true</useDefaultName>
     <name>Init Variable Package Info: com.close.hook.ads,droom.sleepIfUCan,com.gombosdev.ampere,apitester.org,com.gmail.heagoo.apkeditor.pro,com.applisto.appcloneR,com.applisto.appcloner,com.begal.appclone,io.github.muntashirakon.AppManager,com.authy.authy,com.bbl.mobilebanking,com.commsource.beautyplus,com.brave.browser,com.openai.chatgpt,com.exlyo.mapmarkes,com.locationchanger,com.tuyware.jsongenie,com.tuyware.jsongenie.premium,com.vibo.jsontool,jp.blogspot.halnablue.csveditor,easynotes.notes.notepad.notebook.privatenotes.note,com.facebook.katana,com.simplemobiletools.gallery.pro,org.lineageos.glimpse,com.yc.gloryfit,com.google.android.googlequicksearchbox,com.android.hotwordenrollment.xgoogle,com.android.hotwordenrollment.okgoogle,com.google.ar.core,com.android.vending,com.grabtaxi.driver2,top.hookvip.pro,com.oasisfeng.island,ktbcs.netbank,com.leavjenn.longshot,com.exlyo.mapmarker,com.luckydroid.droidbase,bin.mt.plus,org.lineageos.twelve,com.muzhroom.maps,tw.nekomimi.nekogram,notion.id,com.pinterest,com.reqable.android,ru.zsbnkbtn.vrxmdizqi,com.shopee.th,rk.android.app.shortcutmaker,me.simpleHook,com.amosmobile.sqlitemasterpro2,org.swiftapps.swiftbackup,com.tinder,app.tracklia,com.workflowy.android,com.android.camera,com.google.android.apps.docs.editors.sheets,com.google.android.calculator,com.google.android.keep into package_info</name>
@@ -7610,6 +7628,18 @@ newfile=file_text+newfile</script>
     <path>/storage/emulated/0/Download/file.bin</path>
     <followRedirects>true</followRedirects>
     <skipConnectivityCheck>false</skipConnectivityCheck>
+  </action>
+  <action type="execute_root_command">
+    <useDefaultName>false</useDefaultName>
+    <name>LS</name>
+    <command>ls /storage/emulated/0/Android/application/RESOURCE/ZIPFILE/</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
   </action>
   <action type="input_dialog">
     <useDefaultName>false</useDefaultName>
@@ -8424,76 +8454,41 @@ cookie: shopee_token=EDZgG8Wn73Ks2NNYykVsWydXSF4zSB5+TTECHKR8OGZ52rH8Jr76RWPznl9
     <followRedirects>true</followRedirects>
     <skipConnectivityCheck>false</skipConnectivityCheck>
   </action>
-  <action type="input_dialog">
-    <useDefaultName>false</useDefaultName>
-    <name>PAST-TIME</name>
-    <title>⌛ USAGETIME</title>
-    <inputDialogType>TEXT</inputDialogType>
-    <prompt></prompt>
-    <inputValues></inputValues>
-    <defaultValue></defaultValue>
-    <titleFontSize>DEFAULT</titleFontSize>
-    <promptFontSize>DEFAULT</promptFontSize>
-    <fontSize>DEFAULT</fontSize>
-    <timeoutEnabled>false</timeoutEnabled>
-    <timeout>60000</timeout>
-    <defaultValueOnTimeout></defaultValueOnTimeout>
-    <showWhenLocked>false</showWhenLocked>
-    <turnScreenOn>false</turnScreenOn>
-    <keepScreenOn>false</keepScreenOn>
-    <enlargeDialogWidth>false</enlargeDialogWidth>
-    <keyboardCapitalizeSentences>false</keyboardCapitalizeSentences>
-  </action>
   <action type="script">
     <useDefaultName>false</useDefaultName>
     <name>PATH PROCESS</name>
-    <script>//PATH LIS
+    <script>if(contains(selection,"⌛")) {
 
+   triggertime2=addMinutes(getDate(), 43-value);}
+
+else {
+
+   triggertime2=addMinutes(getDate(), value);
+}
 
 path=split(decode,"\n");
-
-
-triggertime2=addMinutes(triggertime, 43-value);
-triggertime3=triggertime2-triggertime;
+triggertime3=triggertime2-getDate();
 triggertime4=triggertime3/length(path);
+rtime=(triggertime3/1000)/60;
 
 
 
 for (i in [0 to length(path)-1]){
 
    path[i]=split(path[i],",");
-
-
-
    act="mock.start";
-lat=path[i][1];
-lon=path[i][0];
+   lat=path[i][1];
+   lon=path[i][0];
 
-
-comp=callJavaConstructor("android.content.ComponentName", "ComponentName(java.lang.String, java.lang.String)", "com.android1500.gpssetter", "com.android1500.gpssetter.LocationReceiver");
-it=callJavaConstructor("android.content.Intent", "Intent()");
-callJavaMethod(it, "android.content.Intent", "setAction(java.lang.String)", act);
-callJavaMethod(it, "android.content.Intent", "setComponent(android.content.ComponentName)", comp);
-callJavaMethod(it, "android.content.Intent", "putExtra(java.lang.String, double)", "lat",lat);
-callJavaMethod(it, "android.content.Intent", "putExtra(java.lang.String, double)", "lon",lon);
-callJavaMethod(getContext(), "android.content.Context", "sendBroadcast(android.content.Intent)", it);
+   comp=callJavaConstructor("android.content.ComponentName", "ComponentName(java.lang.String, java.lang.String)", "com.android1500.gpssetter", "com.android1500.gpssetter.LocationReceiver");
+   it=callJavaConstructor("android.content.Intent", "Intent()");
+   callJavaMethod(it, "android.content.Intent", "setAction(java.lang.String)", act);
+   callJavaMethod(it, "android.content.Intent", "setComponent(android.content.ComponentName)", comp);
+   callJavaMethod(it, "android.content.Intent", "putExtra(java.lang.String, double)", "lat",lat);
+   callJavaMethod(it, "android.content.Intent", "putExtra(java.lang.String, double)", "lon",lon);
+   callJavaMethod(getContext(), "android.content.Context", "sendBroadcast(android.content.Intent)", it);
    sleep(triggertime4);
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-//</script>
+}</script>
   </action>
   <action type="perform_action_notification_status_bar">
     <useDefaultName>false</useDefaultName>
@@ -9679,21 +9674,6 @@ if(index==1) {
     <sortOrderEnabled>false</sortOrderEnabled>
     <sortOrder></sortOrder>
     <queryContentProviderResultType>LIST</queryContentProviderResultType>
-    <includeHeaderRow>false</includeHeaderRow>
-    <variable>result</variable>
-  </action>
-  <action type="query_content_provider">
-    <useDefaultName>true</useDefaultName>
-    <name>Query Content Provider: SELECT _data FROM content://media/external/images/media/1000020620</name>
-    <uri>content://media/external/images/media/1000020620</uri>
-    <projectionEnabled>true</projectionEnabled>
-    <projection>_data</projection>
-    <selectionEnabled>false</selectionEnabled>
-    <selection></selection>
-    <selectionArgs></selectionArgs>
-    <sortOrderEnabled>false</sortOrderEnabled>
-    <sortOrder></sortOrder>
-    <queryContentProviderResultType>SINGLE</queryContentProviderResultType>
     <includeHeaderRow>false</includeHeaderRow>
     <variable>result</variable>
   </action>
@@ -11182,25 +11162,6 @@ points=toJSON(points)</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
-    <name>Script: public String getRealPathFromURI(Context context, Uri contentUri) { String[] proj = { MediaStore.Images.Media.DATA }; Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null); if (cursor != null) { int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA); cursor.moveToFirst(); String path = cursor.getString(column_index); cursor.close(); return path; } return null; }</name>
-    <script>public String getRealPathFromURI(Context context, Uri contentUri) {
-    String[] proj = { MediaStore.Images.Media.DATA };
-    Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
-    if (cursor != null) {
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String path = cursor.getString(column_index);
-        cursor.close();
-        return path;
-    }
-    return null;
-}
-
-
-</script>
-  </action>
-  <action type="script">
-    <useDefaultName>true</useDefaultName>
     <name>Script: removeElement(global_navigation, 0);</name>
     <script>removeElement(global_navigation, 0);</script>
   </action>
@@ -11743,11 +11704,6 @@ removeDuplicateElements(customer_list)</script>
     <useDefaultName>false</useDefaultName>
     <name>Script: time="{getDate(),datedformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</name>
     <script>time="{getDate(),dateformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm.ss}";</script>
-  </action>
-  <action type="script">
-    <useDefaultName>true</useDefaultName>
-    <name>Script: time="{getDate(),dateformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</name>
-    <script>time="{getDate(),dateformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
@@ -12607,24 +12563,6 @@ for (i in [0 to length(shop_list)-1])
   </action>
   <action type="show_custom_widget_overlay">
     <useDefaultName>true</useDefaultName>
-    <name>Show Custom Widget Overlay: Overlay 5, ANYDESK_STATUSBAR  Top Left</name>
-    <overlayName>Overlay 5</overlayName>
-    <widgetName>ANYDESK_STATUSBAR</widgetName>
-    <width></width>
-    <height></height>
-    <gravityType>TOP_LEFT</gravityType>
-    <xOffset>0</xOffset>
-    <yOffset>0</yOffset>
-    <draggable>false</draggable>
-    <opacity>1.00</opacity>
-    <clickable>false</clickable>
-    <stretchToFillArea>false</stretchToFillArea>
-    <showOnTop>true</showOnTop>
-    <noPositionRestriction>false</noPositionRestriction>
-    <useAccessibilityService>true</useAccessibilityService>
-  </action>
-  <action type="show_custom_widget_overlay">
-    <useDefaultName>true</useDefaultName>
     <name>Show Custom Widget Overlay: Overlay 6, GM_SELECT  Top Left</name>
     <overlayName>Overlay 6</overlayName>
     <widgetName>GM_SELECT</widgetName>
@@ -12853,19 +12791,6 @@ for (i in [0 to length(shop_list)-1])
     <path></path>
     <audioStreamType>MUSIC</audioStreamType>
     <startPosition>150ms</startPosition>
-    <showStopSoundNotification>false</showStopSoundNotification>
-    <waitForSoundToFinish>false</waitForSoundToFinish>
-    <requestAudioFocus>false</requestAudioFocus>
-    <audioFocusType>TRANSIENT</audioFocusType>
-  </action>
-  <action type="sound">
-    <useDefaultName>true</useDefaultName>
-    <name>Sound: https://proxy.notificationsounds.com/notification-sounds/ringtone-you-would-be-glad-to-know/download/file-sounds-1350-you-would-be-glad.mp3 as Notification</name>
-    <soundSourceType>FILE</soundSourceType>
-    <alarmName>Silent</alarmName>
-    <path>https://proxy.notificationsounds.com/notification-sounds/ringtone-you-would-be-glad-to-know/download/file-sounds-1350-you-would-be-glad.mp3</path>
-    <audioStreamType>NOTIFICATION</audioStreamType>
-    <startPosition></startPosition>
     <showStopSoundNotification>false</showStopSoundNotification>
     <waitForSoundToFinish>false</waitForSoundToFinish>
     <requestAudioFocus>false</requestAudioFocus>
@@ -13941,6 +13866,11 @@ removeVariable("income");
 removeVariable("pickup");
 removeVariable("destination")</script>
   </action>
+  <action type="script">
+    <useDefaultName>false</useDefaultName>
+    <name>TEST  </name>
+    <script>addElement(multi,result)</script>
+  </action>
   <action type="input_dialog">
     <useDefaultName>false</useDefaultName>
     <name>TEST INPUT</name>
@@ -14425,6 +14355,26 @@ _distpick,"",
 );
 </script>
   </action>
+  <action type="input_dialog">
+    <useDefaultName>false</useDefaultName>
+    <name>TIMER</name>
+    <title>{selection}</title>
+    <inputDialogType>TEXT</inputDialogType>
+    <prompt></prompt>
+    <inputValues></inputValues>
+    <defaultValue></defaultValue>
+    <titleFontSize>DEFAULT</titleFontSize>
+    <promptFontSize>DEFAULT</promptFontSize>
+    <fontSize>DEFAULT</fontSize>
+    <timeoutEnabled>false</timeoutEnabled>
+    <timeout>60000</timeout>
+    <defaultValueOnTimeout></defaultValueOnTimeout>
+    <showWhenLocked>false</showWhenLocked>
+    <turnScreenOn>false</turnScreenOn>
+    <keepScreenOn>false</keepScreenOn>
+    <enlargeDialogWidth>false</enlargeDialogWidth>
+    <keyboardCapitalizeSentences>false</keyboardCapitalizeSentences>
+  </action>
   <action type="notification_screen">
     <useDefaultName>false</useDefaultName>
     <name>TOAST</name>
@@ -14525,6 +14475,13 @@ if(trigger=="V_D") {
 
    clip_data=getText(502, 179);
 }</script>
+  </action>
+  <action type="unzip_files">
+    <useDefaultName>false</useDefaultName>
+    <name>UNZIP</name>
+    <zipFilePath>/storage/emulated/0/archive.zip</zipFilePath>
+    <targetPath>/storage/emulated/0/target</targetPath>
+    <showProgress>true</showProgress>
   </action>
   <action type="execute_flows">
     <useDefaultName>false</useDefaultName>
@@ -15686,6 +15643,13 @@ callJavaMethod(transformer, "javax.xml.transform.Transformer", "transform(javax.
 y=callJavaMethod(x, "java.io.StringWriter", "toString()");
 
 </script>
+  </action>
+  <action type="zip_files">
+    <useDefaultName>false</useDefaultName>
+    <name>ZIP</name>
+    <sourcePathList>/storage/emulated/0/Android/application/RESOURCE/ZIPFILE</sourcePathList>
+    <targetPath>/storage/emulated/0/Android/application/RESOURCE/ZIPFILE.ZIP</targetPath>
+    <showProgress>false</showProgress>
   </action>
   <action type="input_dialog">
     <useDefaultName>false</useDefaultName>
@@ -17698,6 +17662,17 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <connection from="t9" to="t10" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
+    <name>***NEARBY SHARE</name>
+    <description> </description>
+    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <enabled>false</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <triggercontainer id="t1" x="70.0" y="52.5" />
+    <actioncontainer id="t2" x="-140.0" y="332.5">Execute Root Command: cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121 in </actioncontainer>
+    <actioncontainer id="t3" x="140.0" y="367.5">Start Activity: android.intent.action.SEND image/png com.google.android.gms/com.google.android.gms.nearby.sharing.send.SendActivity </actioncontainer>
+    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
     <name>11: IPCONFIG</name>
     <description>1.1 bulid 28</description>
     <group>          ♻️  2DEVICE-SYSTEM</group>
@@ -17738,28 +17713,24 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <triggercontainer id="t1" x="-910.0" y="-8382.5">
-      <trigger>MULTI</trigger>
-      <trigger>SINGLE</trigger>
-    </triggercontainer>
-    <actioncontainer id="t2" x="-1470.0" y="-3307.5">TEMPLATE 
+    <actioncontainer id="t1" x="-1470.0" y="-3307.5">TEMPLATE 
 HTTP</actioncontainer>
-    <actioncontainer id="t3" x="-1470.0" y="-3202.5">TEMPLATE 
+    <actioncontainer id="t2" x="-1470.0" y="-3202.5">TEMPLATE 
 HTTP / POST</actioncontainer>
-    <conditioncontainer id="t4" x="-1330.0" y="-3062.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t5" x="-1330.0" y="-3482.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
-    <actioncontainer id="t6" x="-1715.0" y="-3132.5">TEMPLATทE 
+    <conditioncontainer id="t3" x="-1330.0" y="-3062.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t4" x="-1330.0" y="-3482.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
+    <actioncontainer id="t5" x="-1715.0" y="-3132.5">TEMPLATทE 
 HTTP</actioncontainer>
-    <actioncontainer id="t7" x="-1610.0" y="-2957.5">TEMPLATE 
+    <actioncontainer id="t6" x="-1610.0" y="-2957.5">TEMPLATE 
 HTTP</actioncontainer>
-    <actioncontainer id="t8" x="-1820.0" y="-2887.5">CONFIG</actioncontainer>
-    <actioncontainer id="t9" x="-1540.0" y="-2852.5">TEMPLATE 
+    <actioncontainer id="t7" x="-1820.0" y="-2887.5">CONFIG</actioncontainer>
+    <actioncontainer id="t8" x="-1540.0" y="-2852.5">TEMPLATE 
 HTTP / POST</actioncontainer>
-    <actioncontainer id="t10" x="-1400.0" y="-2712.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
-    <conditioncontainer id="t11" x="-1470.0" y="-2537.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t12" x="-1400.0" y="-3412.5">TEST
+    <actioncontainer id="t9" x="-1400.0" y="-2712.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
+    <conditioncontainer id="t10" x="-1470.0" y="-2537.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t11" x="-1400.0" y="-3412.5">TEST
 KILLAPPS</actioncontainer>
-    <notecontainer id="t13" x="1627.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK START:
+    <notecontainer id="t12" x="1627.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK START:
 -type: command
 -method: mock_start
 -content: 13.000,100.000
@@ -17767,14 +17738,14 @@ KILLAPPS</actioncontainer>
 |
 |
 |=&gt; *ok</notecontainer>
-    <notecontainer id="t14" x="1942.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK STOP:
+    <notecontainer id="t13" x="1942.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK STOP:
 -type: command
 -method: mock_stop
 -response: true
 |
 |
 |=&gt; *ok</notecontainer>
-    <notecontainer id="t15" x="2257.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK GET:
+    <notecontainer id="t14" x="2257.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK GET:
 -type: command
 -method: mock_get
 -response: true
@@ -17783,14 +17754,14 @@ KILLAPPS</actioncontainer>
 |=&gt; activate
  =&gt; lat, lon
 </notecontainer>
-    <notecontainer id="t16" x="1627.5" y="-7175.0" w="315.0" h="210.0">PUT-BLUETOOTH
+    <notecontainer id="t15" x="1627.5" y="-7175.0" w="315.0" h="210.0">PUT-BLUETOOTH
 -type: command
 -method: put_bluetooth
 -response: true
 |
 |
 |=&gt; *ok</notecontainer>
-    <notecontainer id="t17" x="1627.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SQLITE
+    <notecontainer id="t16" x="1627.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SQLITE
 -type: command
 -method: al_put$sqlite
 -response: true
@@ -17798,69 +17769,87 @@ KILLAPPS</actioncontainer>
 |
 |=&gt; upload sqlite~link 
  =&gt; send link</notecontainer>
-    <notecontainer id="t18" x="1942.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SPFDB
+    <notecontainer id="t17" x="1942.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SPFDB
 -type: command
 -method: al_put$spfdb
 -response: true
 |
 |
 |=&gt; send spfdb</notecontainer>
-    <notecontainer id="t19" x="1942.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-DB
+    <notecontainer id="t18" x="1942.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-DB
 
 type: command
 method: cp_send$spfdb</notecontainer>
-    <notecontainer id="t20" x="1627.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-SQLITE
+    <notecontainer id="t19" x="1627.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-SQLITE
 
 type: job_command
 method: cp_send$spfdb</notecontainer>
-    <notecontainer id="t21" x="1627.5" y="-7595.0" w="315.0" h="210.0">(AL) KILLALL:
+    <notecontainer id="t20" x="1627.5" y="-7595.0" w="315.0" h="210.0">(AL) KILLALL:
 -type: command
 -method: killall
 -response: true
 |
 |
 |=&gt; *ok</notecontainer>
-    <actioncontainer id="t22" x="700.0" y="-6597.5">CP</actioncontainer>
-    <conditioncontainer id="t23" x="700.0" y="-6737.5">NOT ACCESS </conditioncontainer>
-    <conditioncontainer id="t24" x="700.0" y="-6422.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t25" x="-910.0" y="-7122.5">RE?</conditioncontainer>
-    <actioncontainer id="t26" x="-910.0" y="-6982.5">RESPONSE</actioncontainer>
-    <actioncontainer id="t27" x="-700.0" y="-7262.5">TOAST</actioncontainer>
-    <conditioncontainer id="t28" x="665.0" y="-6982.5">INDEX</conditioncontainer>
-    <conditioncontainer id="t29" x="665.0" y="-7052.5">INDEX</conditioncontainer>
-    <actioncontainer id="t30" x="665.0" y="-6877.5">QUERY</actioncontainer>
-    <conditioncontainer id="t31" x="700.0" y="-6772.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t32" x="-910.0" y="-7262.5">HTTP SEND</actioncontainer>
-    <actioncontainer id="t33" x="-490.0" y="-7087.5"> WAIT-SEND</actioncontainer>
-    <actioncontainer id="t34" x="-490.0" y="-6982.5">NTFY.ATTACH</actioncontainer>
-    <actioncontainer id="t35" x="-490.0" y="-7262.5">HTTP FILESEND</actioncontainer>
-    <conditioncontainer id="t36" x="-910.0" y="-7437.5">CMD / FILE</conditioncontainer>
-    <actioncontainer id="t37" x="-1190.0" y="-8277.5">Script: public String getRealPathFromURI(Context context, Uri contentUri) { String[] proj = { MediaStore.Images.Media.DATA }; Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null); if (cursor != null) { int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA); cursor.moveToFirst(); String path = cursor.getString(column_index); cursor.close(); return path; } return null; }</actioncontainer>
-    <conditioncontainer id="t38" x="-1084.9999" y="-8032.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t39" x="-700.0" y="-7857.5">00: SERVICES</actioncontainer>
-    <conditioncontainer id="t40" x="-910.0" y="-7857.5">IP?</conditioncontainer>
-    <actioncontainer id="t41" x="-910.0" y="-7612.5">CONFIG4</actioncontainer>
-    <actioncontainer id="t42" x="-980.0" y="-8172.5">Query Content Provider: SELECT _data FROM content://media/external/images/media/1000020620</actioncontainer>
-    <connection from="t1" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t26" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t29" to="t30" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t29" to="t31" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t30" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t32" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t32" to="t27" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t33" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t27" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t35" to="t27" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t35" to="t33" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t36" to="t32" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t36" to="t35" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t39" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t40" to="t41" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t40" to="t39" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t41" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t42" to="t38" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t21" x="700.0" y="-6597.5">CP</actioncontainer>
+    <conditioncontainer id="t22" x="700.0" y="-6737.5">NOT ACCESS </conditioncontainer>
+    <conditioncontainer id="t23" x="700.0" y="-6422.5">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t24" x="-910.0" y="-7122.5">RE?</conditioncontainer>
+    <actioncontainer id="t25" x="-910.0" y="-6982.5">RESPONSE</actioncontainer>
+    <actioncontainer id="t26" x="-700.0" y="-7262.5">TOAST</actioncontainer>
+    <conditioncontainer id="t27" x="665.0" y="-6982.5">INDEX</conditioncontainer>
+    <conditioncontainer id="t28" x="665.0" y="-7052.5">INDEX</conditioncontainer>
+    <actioncontainer id="t29" x="665.0" y="-6877.5">QUERY</actioncontainer>
+    <conditioncontainer id="t30" x="700.0" y="-6772.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t31" x="-910.0" y="-7262.5">HTTP SEND</actioncontainer>
+    <actioncontainer id="t32" x="-490.0" y="-7087.5"> WAIT-SEND</actioncontainer>
+    <actioncontainer id="t33" x="-490.0" y="-6982.5">NTFY.ATTACH</actioncontainer>
+    <actioncontainer id="t34" x="-490.0" y="-7262.5">HTTP FILESEND</actioncontainer>
+    <conditioncontainer id="t35" x="-910.0" y="-7437.5">CMD / FILE</conditioncontainer>
+    <actioncontainer id="t36" x="-700.0" y="-7857.5">00: SERVICES</actioncontainer>
+    <actioncontainer id="t37" x="-910.0" y="-7612.5">CONFIG4</actioncontainer>
+    <conditioncontainer id="t38" x="-910.0" y="-7857.5">IP?</conditioncontainer>
+    <conditioncontainer id="t39" x="-1645.0" y="-9397.5">FOR MULTI</conditioncontainer>
+    <actioncontainer id="t40" x="-1925.0004" y="-9292.5">  CP  </actioncontainer>
+    <actioncontainer id="t41" x="-1924.9996" y="-9187.5">TEST  </actioncontainer>
+    <actioncontainer id="t42" x="-1925.0" y="-9397.5"> QUERY </actioncontainer>
+    <notecontainer id="t43" x="-1662.5" y="-9905.0" w="455.0" h="70.0">MULTI / IMAGE</notecontainer>
+    <actioncontainer id="t44" x="-1645.0" y="-9572.5">C-FOL</actioncontainer>
+    <actioncontainer id="t45" x="-1645.0" y="-9187.5">ZIP</actioncontainer>
+    <actioncontainer id="t46" x="-1645.0" y="-9082.5">DEL-FOL</actioncontainer>
+    <actioncontainer id="t47" x="-1645.0" y="-8802.5">LS</actioncontainer>
+    <actioncontainer id="t48" x="-1645.0" y="-8907.5">UNZIP</actioncontainer>
+    <triggercontainer id="t49" x="-909.99963" y="-8137.498">
+      <trigger>MULTI</trigger>
+      <trigger>SINGLE</trigger>
+    </triggercontainer>
+    <connection from="t21" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t21" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t25" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t28" to="t29" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t28" to="t30" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t30" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t31" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t31" to="t26" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t32" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t33" to="t26" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t34" to="t26" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t34" to="t32" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t35" to="t31" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t35" to="t34" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t36" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t37" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t38" to="t37" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t38" to="t36" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t39" to="t42" type="TRUE" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t39" to="t45" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t40" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t41" to="t39" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t42" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t44" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t45" to="t46" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t48" to="t47" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t49" to="t38" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>13: RECEIVED</name>
@@ -18050,33 +18039,6 @@ method: cp_send$spfdb</notecontainer>
     <connection from="t10" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
-    <name>Flow1</name>
-    <group>        📍  NAVIGATION</group>
-    <enabled>false</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="-210.0" y="-332.5">
-      <trigger>Activity Started: com.shopee.foody.driver.th/com.shopee.foody.driver.MainActivity</trigger>
-      <trigger>Command Output: dumpsys media_projection
- (root) contains text </trigger>
-    </triggercontainer>
-    <actioncontainer id="t2" x="-35.0" y="297.5">Init Variable Notifications on Statusbar: notifications</actioncontainer>
-    <conditioncontainer id="t3" x="0.0" y="577.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t4" x="175.0" y="227.5">Show Custom Widget Overlay: Overlay 5, ANYDESK_STATUSBAR  Top Left</actioncontainer>
-    <actioncontainer id="t5" x="-140.0" y="17.5">Execute Root Command: dumpsys media_projection
- in </actioncontainer>
-    <conditioncontainer id="t6" x="-280.0" y="227.5">Expression: contains(stdout,"null")</conditioncontainer>
-    <actioncontainer id="t7" x="-280.0" y="-52.5">Execute Root Command: screencap -p /storage/emulated/0/Android/application/SPFDB/SCREENSHOT/{time}.png in </actioncontainer>
-    <actioncontainer id="t8" x="-280.0" y="-157.5">Script: time="{getDate(),dateformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</actioncontainer>
-    <actioncontainer id="t9" x="-455.0" y="17.5">Execute Root Command: screencap -p /storage/emulated/0/Android/application/SPFDB/SCREENSHOT/{time}.png in </actioncontainer>
-    <actioncontainer id="t10" x="-455.0" y="-87.5">Script: time="{getDate(),datedformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</actioncontainer>
-    <connection from="t1" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
     <name>Flow10</name>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
@@ -18205,52 +18167,6 @@ MENU
     <connection from="t6" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
-    <name>Flow13</name>
-    <group>        📍  NAVIGATION</group>
-    <enabled>false</enabled>
-    <executionPolicy>SKIP</executionPolicy>
-    <emergencyStopCount>999999</emergencyStopCount>
-    <actioncontainer id="t1" x="420.0" y="367.5">ROUTEP</actioncontainer>
-    <actioncontainer id="t2" x="420.0" y="262.5">MULTPOINT</actioncontainer>
-    <actioncontainer id="t3" x="420.0" y="157.5">B-STOP  </actioncontainer>
-    <notecontainer id="t4" x="-140.0" y="367.5" w="140.0" h="35.0">HERE API</notecontainer>
-    <triggercontainer id="t5" x="-875.0" y="157.50003" />
-    <notecontainer id="t6" x="-560.0" y="245.0" w="140.0" h="70.0">PATH EXPORT</notecontainer>
-    <actioncontainer id="t7" x="-560.0001" y="437.50003">DESTINATION</actioncontainer>
-    <conditioncontainer id="t8" x="-560.0" y="577.5">   OK   </conditioncontainer>
-    <actioncontainer id="t9" x="-560.0001" y="752.5">ORS</actioncontainer>
-    <actioncontainer id="t10" x="-559.99994" y="927.5">IMPORT
-BASE</actioncontainer>
-    <actioncontainer id="t11" x="-560.0" y="1032.5">ENCODE</actioncontainer>
-    <actioncontainer id="t12" x="-560.0" y="1312.5">RUN SH</actioncontainer>
-    <actioncontainer id="t13" x="-559.99994" y="1207.5">SHELL CODE</actioncontainer>
-    <actioncontainer id="t14" x="-560.00006" y="1662.5">KML CMD</actioncontainer>
-    <actioncontainer id="t15" x="-560.0001" y="1767.5">KML PATH</actioncontainer>
-    <actioncontainer id="t16" x="-560.00006" y="1872.5">RM PATHTEMP</actioncontainer>
-    <actioncontainer id="t17" x="-1540.0" y="-367.49994">MOCK POINTn</actioncontainer>
-    <actioncontainer id="t18" x="-560.0" y="1417.5">DECODE TXT</actioncontainer>
-    <conditioncontainer id="t19" x="-805.0" y="1417.5">PP</conditioncontainer>
-    <actioncontainer id="t20" x="-1084.9999" y="1242.4999">PATH PROCESS</actioncontainer>
-    <actioncontainer id="t21" x="-1014.9999" y="437.50006">DECODE TXT</actioncontainer>
-    <actioncontainer id="t22" x="-1015.0" y="647.5">CC</actioncontainer>
-    <actioncontainer id="t23" x="-1190.0" y="1102.5">PAST-TIME</actioncontainer>
-    <connection from="t5" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t14" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t15" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t18" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t18" to="t19" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t19" to="t21" type="TRUE" sourcePosition="NORTH" targetPosition="EAST" />
-    <connection from="t21" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
     <name>Flow15</name>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
@@ -18261,12 +18177,6 @@ BASE</actioncontainer>
     <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
-    <name>Flow2</name>
-    <enabled>false</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5" />
-  </flow>
-  <flow type="flow">
     <name>Flow3</name>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
@@ -18274,19 +18184,6 @@ BASE</actioncontainer>
     <actioncontainer id="t2" x="-35.0" y="297.5">Plugin: AFWall+ Taskeeddr plugin Disable AFWall+</actioncontainer>
     <actioncontainer id="t3" x="140.0" y="297.5">Plugin: AFWall+ Taskeeddr plugin Drrrisable AFWall+</actioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
-    <name>Flow4</name>
-    <group>        📍  NAVIGATION</group>
-    <enabled>false</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5" />
-  </flow>
-  <flow type="flow">
-    <name>Flow5</name>
-    <enabled>false</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5" />
   </flow>
   <flow type="flow">
     <name>Flow6</name>
@@ -18341,30 +18238,12 @@ icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=positi
     <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
-    <name>Flow8</name>
-    <group>        📍  NAVIGATION</group>
-    <enabled>false</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5" />
-    <actioncontainer id="t2" x="-140.0" y="332.5">Sound: https://proxy.notificationsounds.com/notification-sounds/ringtone-you-would-be-glad-to-know/download/file-sounds-1350-you-would-be-glad.mp3 as Notification</actioncontainer>
-    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
     <name>Flow9</name>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="70.0" y="52.5" />
     <actioncontainer id="t2" x="-70.0" y="367.5">Start Activity: android.intent.action.VIEW https://graphhopper.com/maps/?point=13.71775%2C100.344332_Current+Location&amp;point=13.745681,100.351119&amp;point=13.614215,100.38658&amp;point=13.745681,100.351119&amp;profile=car&amp;layer=Omniscale com.graphhopper.maps/com.graphhopper.maps.MainActivity </actioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
-    <name>NEARBY SHARE</name>
-    <enabled>false</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5" />
-    <actioncontainer id="t2" x="-140.0" y="332.5">Execute Root Command: cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121 in </actioncontainer>
-    <actioncontainer id="t3" x="140.0" y="367.5">Start Activity: android.intent.action.SEND image/png com.google.android.gms/com.google.android.gms.nearby.sharing.send.SendActivity </actioncontainer>
-    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>SHOPEE-RESRAURANT</name>
@@ -18492,6 +18371,60 @@ icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=positi
     <connection from="t51" to="t52" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t52" to="t53" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t53" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>XXX: PATH MOCK</name>
+    <description> </description>
+    <group>        📍  NAVIGATION</group>
+    <enabled>true</enabled>
+    <executionPolicy>SKIP</executionPolicy>
+    <emergencyStopCount>999999</emergencyStopCount>
+    <actioncontainer id="t1" x="420.0" y="367.5">ROUTEP</actioncontainer>
+    <actioncontainer id="t2" x="420.0" y="262.5">MULTPOINT</actioncontainer>
+    <actioncontainer id="t3" x="420.0" y="157.5">B-STOP  </actioncontainer>
+    <notecontainer id="t4" x="-140.0" y="367.5" w="140.0" h="35.0">HERE API</notecontainer>
+    <notecontainer id="t5" x="-560.0" y="245.0" w="140.0" h="70.0">PATH EXPORT</notecontainer>
+    <actioncontainer id="t6" x="-560.0001" y="437.50003">DESTINATION</actioncontainer>
+    <conditioncontainer id="t7" x="-560.0" y="577.5">   OK   </conditioncontainer>
+    <actioncontainer id="t8" x="-559.99994" y="927.5">IMPORT
+BASE</actioncontainer>
+    <actioncontainer id="t9" x="-560.0" y="1032.5">ENCODE</actioncontainer>
+    <actioncontainer id="t10" x="-560.0" y="1312.5">RUN SH</actioncontainer>
+    <actioncontainer id="t11" x="-559.99994" y="1207.5">SHELL CODE</actioncontainer>
+    <actioncontainer id="t12" x="-560.00006" y="1662.5">KML CMD</actioncontainer>
+    <actioncontainer id="t13" x="-560.0001" y="1767.5">KML PATH</actioncontainer>
+    <actioncontainer id="t14" x="-560.00006" y="1872.5">RM PATHTEMP</actioncontainer>
+    <actioncontainer id="t15" x="-1540.0" y="-367.49994">MOCK POINTn</actioncontainer>
+    <actioncontainer id="t16" x="-560.0" y="1417.5">DECODE TXT</actioncontainer>
+    <conditioncontainer id="t17" x="-805.0" y="1417.5">PP</conditioncontainer>
+    <actioncontainer id="t18" x="-1014.9999" y="437.50006">DECODE TXT</actioncontainer>
+    <actioncontainer id="t19" x="-1014.9999" y="577.5">CC</actioncontainer>
+    <conditioncontainer id="t20" x="-1014.99994" y="752.5">
+
+   ok    
+
+</conditioncontainer>
+    <actioncontainer id="t21" x="-1015.0" y="927.5">TIMER</actioncontainer>
+    <actioncontainer id="t22" x="-1014.9998" y="1032.4999">PATH PROCESS</actioncontainer>
+    <triggercontainer id="t23" x="-875.0" y="157.50003" />
+    <actioncontainer id="t24" x="-560.0001" y="752.5">ORS</actioncontainer>
+    <connection from="t6" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t24" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t17" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t17" to="t18" type="TRUE" sourcePosition="NORTH" targetPosition="EAST" />
+    <connection from="t18" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t19" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t20" to="t21" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t21" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t23" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>⚙️  KILLAPPS</name>
