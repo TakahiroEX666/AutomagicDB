@@ -16481,7 +16481,26 @@ AUTOFILL</actioncontainer>
     <executionPolicy>PARALLEL</executionPolicy>
     <actioncontainer id="t1" x="-210.0" y="-1627.5">CURRENT-LOC</actioncontainer>
     <actioncontainer id="t2" x="-210.0" y="-1522.5">IMPORT CSV</actioncontainer>
-    <notecontainer id="t3" x="-507.5" y="-1085.0" w="385.0" h="210.0">results[0]
+    <triggercontainer id="t3" x="-210.0" y="-2047.5" />
+    <actioncontainer id="t4" x="244.99997" y="-87.5">Start Activity: android.intent.action.VIEW {uri} </actioncontainer>
+    <actioncontainer id="t5" x="1120.0" y="577.5">LONGDO API</actioncontainer>
+    <actioncontainer id="t6" x="-210.0" y="-1417.5">SPLITS V3s</actioncontainer>
+    <actioncontainer id="t7" x="-210.00002" y="-1032.5">ORS
+(VRP)</actioncontainer>
+    <actioncontainer id="t8" x="-209.99997" y="-822.5">Scripjjt: response=fromJSON(response);</actioncontainer>
+    <actioncontainer id="t9" x="69.999985" y="-1137.5001">Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST") and not contains(file_text[i][0],"FIX")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",120) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</actioncontainer>
+    <actioncontainer id="t10" x="70.00001" y="-1032.5">GEOAPIFY
+(TSP)</actioncontainer>
+    <actioncontainer id="t11" x="69.999954" y="-822.49994">Scripbbjt: </actioncontainer>
+    <actioncontainer id="t12" x="699.9999" y="-1137.5">DATA-HERzE</actioncontainer>
+    <actioncontainer id="t13" x="699.9999" y="-1032.5">LONGDO
+(TSP)</actioncontainer>
+    <actioncontainer id="t14" x="699.9999" y="-822.5">Scripjjjt: response=fromJSON(response);</actioncontainer>
+    <actioncontainer id="t15" x="384.99997" y="-822.5">Scripbbjt: nnj</actioncontainer>
+    <actioncontainer id="t16" x="384.99997" y="-1032.4998">HERE API 
+(TSP)</actioncontainer>
+    <actioncontainer id="t17" x="384.99997" y="-1137.5">HERE PARAMETER</actioncontainer>
+    <notecontainer id="t18" x="-1277.5" y="-1085.0" w="385.0" h="210.0">results[0]
 
 distance/1000
 time/60
@@ -16489,50 +16508,24 @@ int totalSeconds = 6676;
 int minutes = totalSeconds / 60;
 int seconds = totalSeconds % 60;
 System.out.println(minutes + " นาที " + seconds + " วินาที");</notecontainer>
-    <triggercontainer id="t4" x="-210.0" y="-2047.5" />
-    <actioncontainer id="t5" x="-210.0" y="-1137.5">HERE PARAMETER</actioncontainer>
-    <actioncontainer id="t6" x="-210.0" y="-1032.5">HERE API 
-(TSP)</actioncontainer>
-    <actioncontainer id="t7" x="-210.0" y="-822.5">Scripbbjt: nnj</actioncontainer>
-    <actioncontainer id="t8" x="70.0" y="-822.5">Scripjjt: response=fromJSON(response);</actioncontainer>
-    <actioncontainer id="t9" x="69.99997" y="-1032.5001">ORS
-(VRP)</actioncontainer>
-    <actioncontainer id="t10" x="69.999985" y="-1137.5">ORS
+    <actioncontainer id="t19" x="-1155.0" y="-1277.5"> SELECT </actioncontainer>
+    <actioncontainer id="t20" x="-210.00002" y="-1137.5">ORS
 PARAMETER</actioncontainer>
-    <actioncontainer id="t11" x="349.9999" y="-822.5">Scripjjjt: response=fromJSON(response);</actioncontainer>
-    <actioncontainer id="t12" x="349.9999" y="-1137.5">DATA-HERzE</actioncontainer>
-    <actioncontainer id="t13" x="349.9999" y="-1032.5">LONGDO
-(TSP)</actioncontainer>
-    <actioncontainer id="t14" x="630.0" y="-1137.5001">Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST") and not contains(file_text[i][0],"FIX")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",120) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</actioncontainer>
-    <actioncontainer id="t15" x="630.0" y="-1032.5001">GEOAPIFY
-(TSP)</actioncontainer>
-    <actioncontainer id="t16" x="630.0" y="-822.49994">Scripbbjt: </actioncontainer>
-    <actioncontainer id="t17" x="244.99997" y="-87.5">Start Activity: android.intent.action.VIEW {uri} </actioncontainer>
-    <actioncontainer id="t18" x="1120.0" y="577.5">LONGDO API</actioncontainer>
-    <actioncontainer id="t19" x="-385.0" y="-1802.5"> SELECT </actioncontainer>
-    <notecontainer id="t20" x="280.0" y="105.0" w="490.0" h="210.0">ROUND===
-X 1 2 1
-3 1 X 1
-2 2 X 1
-3 1 X 1
-2 1 X 2</notecontainer>
-    <actioncontainer id="t21" x="-210.0" y="-1417.5">SPLITS V3s</actioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t12" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t14" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t15" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t16" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t21" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t14" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t17" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t20" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#39: MANUAL</name>
