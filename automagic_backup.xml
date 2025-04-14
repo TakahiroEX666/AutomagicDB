@@ -6465,6 +6465,35 @@ cookie: shopee_token=EDZgG8Wn73Ks2NNYykVsWydXSF4zSB5+TTECHKR8OGZ52rH8Jr76RWPznl9
   </action>
   <action type="http_request">
     <useDefaultName>true</useDefaultName>
+    <name>HTTP Request: GET https://api.mapbox.com/optimized-trips/v2   store in response</name>
+    <url>https://api.mapbox.com/optimized-trips/v2</url>
+    <verifyCertificates>true</verifyCertificates>
+    <basicAuthentication>false</basicAuthentication>
+    <username></username>
+    <clientCert>false</clientCert>
+    <clientCertPath></clientCertPath>
+    <httpMethod>GET</httpMethod>
+    <networkType>DEFAULT</networkType>
+    <httpContentType>X_WWW_FORM_URLENCODED</httpContentType>
+    <contentType>text/plain</contentType>
+    <generalTextData></generalTextData>
+    <formFieldList>Lastname=XYZ,Firstname=ABC</formFieldList>
+    <uploadFieldName>upload_field</uploadFieldName>
+    <uploadFilePath></uploadFilePath>
+    <binaryContentType>application/octet-stream</binaryContentType>
+    <binaryFilePath></binaryFilePath>
+    <timeout>60000</timeout>
+    <setCustomHTTPHeaders>false</setCustomHTTPHeaders>
+    <customHTTPHeaders></customHTTPHeaders>
+    <storeInVariable>true</storeInVariable>
+    <variable>response</variable>
+    <encoding></encoding>
+    <path>/storage/emulated/0/Download/file.bin</path>
+    <followRedirects>true</followRedirects>
+    <skipConnectivityCheck>false</skipConnectivityCheck>
+  </action>
+  <action type="http_request">
+    <useDefaultName>true</useDefaultName>
     <name>HTTP Request: GET https://foody.shopee.co.id/api/buyer/collections/118/stores?longitude=0.0&amp;latitude=0.0&amp;page_num=1&amp;page_size=20   store in response</name>
     <url>https://foody.shopee.co.id/api/buyer/collections/118/stores?longitude=0.0&amp;latitude=0.0&amp;page_num=1&amp;page_size=20</url>
     <verifyCertificates>true</verifyCertificates>
@@ -11832,6 +11861,32 @@ DEF_CLICK=5; q</script>
 );</script>
   </action>
   <action type="script">
+    <useDefaultName>true</useDefaultName>
+    <name>Script: { "vehicles": [ { "id": 1, "profile": "car", "start": [100.5018, 13.7563] } ], "services": [ { "id": 101, "location": [100.5231, 13.7367], "service": 300 }, { "id": 102, "location": [100.5291, 13.7455], "service": 300 } ] }</name>
+    <script>{
+  "vehicles": [
+    {
+      "id": 1,
+      "profile": "car",
+      "start": [100.5018, 13.7563]
+    }
+  ],
+  "services": [
+    {
+      "id": 101,
+      "location": [100.5231, 13.7367],
+      "service": 300
+    },
+    {
+      "id": 102,
+      "location": [100.5291, 13.7455],
+      "service": 300
+    }
+  ]
+}
+</script>
+  </action>
+  <action type="script">
     <useDefaultName>false</useDefaultName>
     <name>Scriptnnn : mnn</name>
     <script>addElement(global_mockservice["multi_service"], latlon);</script>
@@ -16569,10 +16624,12 @@ OPTIMIZATION</notecontainer>
     <actioncontainer id="t20" x="-209.99997" y="-1522.5">IMPORT CSV</actioncontainer>
     <actioncontainer id="t21" x="350.0" y="-612.5">DATA-HERE</actioncontainer>
     <actioncontainer id="t22" x="770.0" y="-507.5">Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST") and not contains(file_text[i][0],"FIX")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",120) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</actioncontainer>
-    <triggercontainer id="t23" x="-209.99997" y="-2047.5004" />
-    <conditioncontainer id="t24" x="-210.0" y="-1172.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t25" x="-210.00006" y="-1802.5"> SELECT </actioncontainer>
-    <actioncontainer id="t26" x="-210.00002" y="-1417.5">SPLITS V3s</actioncontainer>
+    <conditioncontainer id="t23" x="-210.0" y="-1172.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t24" x="-210.00006" y="-1802.5"> SELECT </actioncontainer>
+    <actioncontainer id="t25" x="-210.00002" y="-1417.5">SPLITS V3s</actioncontainer>
+    <triggercontainer id="t26" x="-209.99997" y="-2047.5004" />
+    <actioncontainer id="t27" x="-560.0" y="-1627.5">HTTP Request: GET https://api.mapbox.com/optimized-trips/v2   store in response</actioncontainer>
+    <actioncontainer id="t28" x="-560.0" y="-1907.5">Script: { "vehicles": [ { "id": 1, "profile": "car", "start": [100.5018, 13.7563] } ], "services": [ { "id": 101, "location": [100.5231, 13.7367], "service": 300 }, { "id": 102, "location": [100.5291, 13.7455], "service": 300 } ] }</actioncontainer>
     <connection from="t2" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -16583,12 +16640,14 @@ OPTIMIZATION</notecontainer>
     <connection from="t17" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t18" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t19" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t20" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t20" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t21" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t22" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t26" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t26" to="t28" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t26" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#39: MANUAL</name>
