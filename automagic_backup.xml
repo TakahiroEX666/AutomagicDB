@@ -503,7 +503,7 @@ attachment_name=getString("attachment_name");</extras>
   <trigger type="user_interface_event">
     <useDefaultName>false</useDefaultName>
     <name>SPF-CANCEL</name>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <accessibilityEventType>TYPE_WINDOW_STATE_CHANGED</accessibilityEventType>
     <packageNameFilter>com.shopee.foody.driver.th</packageNameFilter>
     <textMatchType>CONTAINS_TEXT</textMatchType>
@@ -513,7 +513,7 @@ attachment_name=getString("attachment_name");</extras>
   <trigger type="activity_started">
     <useDefaultName>false</useDefaultName>
     <name>SPF-HOME</name>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <method>CLASSIC</method>
     <packageNameFilter>com.shopee.foody.driver.th</packageNameFilter>
     <classNameFilter>com.shopee.foody.driver.MainActivity</classNameFilter>
@@ -541,7 +541,7 @@ attachment_name=getString("attachment_name");</extras>
   <trigger type="activity_started">
     <useDefaultName>false</useDefaultName>
     <name>SPF-TAKE</name>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <method>CLASSIC</method>
     <packageNameFilter>com.shopee.foody.driver.th</packageNameFilter>
     <classNameFilter>com.shopee.android.react.impl.activity.stubs.RNStubs4</classNameFilter>
@@ -4430,7 +4430,7 @@ ENCRYPT</name>
     <useDefaultName>false</useDefaultName>
     <name>BTN-ACCEPT</name>
     <script>
-sleep(13000);
+sleep(10000);
 
 while(getBounds("ยอมรับ(*")!=null) {
 
@@ -11806,7 +11806,8 @@ removeDuplicateElements(customer_list)</script>
   <action type="script">
     <useDefaultName>false</useDefaultName>
     <name>Script: time="{getDate(),datedformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</name>
-    <script>time="{getDate(),dateformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm.ss}";</script>
+    <script>time="{getDate(),dateformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm.ss}";
+sleep(3000);</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
@@ -16193,13 +16194,13 @@ CURRENT</actioncontainer>
     <actioncontainer id="t38" x="735.0" y="-4637.5">WGT-DENY</actioncontainer>
     <actioncontainer id="t39" x="735.0" y="-4742.5">ST-TAKE,CANCEL</actioncontainer>
     <actioncontainer id="t40" x="105.0" y="-4287.5">Execute Root Command: screencap -p /storage/emulated/0/Android/application/SPFDB/SCREENSHOT/{time}.png in </actioncontainer>
-    <actioncontainer id="t41" x="105.0" y="-4042.5">BTN-ACCEPT</actioncontainer>
-    <actioncontainer id="t42" x="105.0" y="-4392.5">Script: time="{getDate(),datedformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</actioncontainer>
-    <actioncontainer id="t43" x="-35.0" y="-4742.5">WGT-DETAIL</actioncontainer>
-    <triggercontainer id="t44" x="105.00001" y="-5897.5">
+    <actioncontainer id="t41" x="-35.0" y="-4742.5">WGT-DETAIL</actioncontainer>
+    <triggercontainer id="t42" x="105.00001" y="-5897.5">
       <trigger>SPF-ICM</trigger>
     </triggercontainer>
-    <actioncontainer id="t45" x="105.0" y="-4742.5">PRESENT</actioncontainer>
+    <actioncontainer id="t43" x="105.0" y="-4742.5">PRESENT</actioncontainer>
+    <actioncontainer id="t44" x="105.0" y="-4042.5">BTN-ACCEPT</actioncontainer>
+    <actioncontainer id="t45" x="105.0" y="-4392.5">Script: time="{getDate(),datedformat,dd.MM.yyyy}"+"_{getDate(),dateformat,HH.mm}";</actioncontainer>
     <connection from="t2" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t13" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -16207,7 +16208,7 @@ CURRENT</actioncontainer>
     <connection from="t20" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t21" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t23" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t24" to="t45" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t43" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t25" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t25" to="t26" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t25" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
@@ -16223,19 +16224,19 @@ CURRENT</actioncontainer>
     <connection from="t34" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t35" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t39" to="t38" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t40" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t41" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t42" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t44" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t45" to="t43" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t45" to="t39" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t45" to="t42" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t40" to="t44" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t42" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t43" to="t41" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t43" to="t39" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t43" to="t45" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t44" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t45" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#22A  DENY &lt;MAINACT&gt;</name>
     <description> </description>
     <group>         🍑   SPF</group>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
     <notecontainer id="t1" x="280.0" y="-122.5" w="140.0" h="105.0">OFF ACTIVITY</notecontainer>
@@ -16257,7 +16258,7 @@ TAKE, DENY</actioncontainer>
     <name>#22B  DENY &lt;DIALOG&gt;</name>
     <description> </description>
     <group>         🍑   SPF</group>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
     <triggercontainer id="t1" x="-105.0" y="17.5">
@@ -16277,7 +16278,7 @@ TAKE, DENY</actioncontainer>
     <name>#23  TAKE</name>
     <description> </description>
     <group>         🍑   SPF</group>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
     <triggercontainer id="t1" x="35.0" y="-507.5">
