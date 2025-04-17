@@ -16619,35 +16619,35 @@ System.out.println(minutes + " นาที " + seconds + " วินาที")
     <actioncontainer id="t20" x="385.0" y="-1137.5">HERE PARAMETER</actioncontainer>
     <actioncontainer id="t21" x="-525.0" y="-2222.5">4_allexport</actioncontainer>
     <conditioncontainer id="t22" x="-525.0" y="-2397.5">MAP MAKER</conditioncontainer>
-    <actioncontainer id="t23" x="-210.0" y="-1032.5">1-URI</actioncontainer>
-    <conditioncontainer id="t24" x="-70.0" y="-2012.5">  
+    <conditioncontainer id="t23" x="-70.0" y="-2012.5">  
 
 
 </conditioncontainer>
-    <conditioncontainer id="t25" x="175.0" y="-1347.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t26" x="-210.0" y="-1627.5">CURRENT-LOC</actioncontainer>
-    <actioncontainer id="t27" x="-210.0" y="-1522.5">IMPORT CSVgg</actioncontainer>
-    <actioncontainer id="t28" x="140.0" y="-1557.5">SPLITS V3s</actioncontainer>
-    <connection from="t1" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <conditioncontainer id="t24" x="175.0" y="-1347.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t25" x="-210.0" y="-1627.5">CURRENT-LOC</actioncontainer>
+    <actioncontainer id="t26" x="-210.0" y="-1522.5">IMPORT CSVgg</actioncontainer>
+    <actioncontainer id="t27" x="140.0" y="-1557.5">SPLITS V3s</actioncontainer>
+    <actioncontainer id="t28" x="-210.0" y="-1277.5">1-URI</actioncontainer>
+    <connection from="t1" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t6" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t7" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t10" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t11" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t28" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t13" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t17" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t19" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t20" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t21" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t22" to="t21" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t24" to="t22" type="FALSE" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t24" to="t26" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t23" to="t22" type="FALSE" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t23" to="t25" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t26" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t27" to="t28" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t28" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t27" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t28" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#39: MANUAL</name>
@@ -16655,86 +16655,86 @@ System.out.println(minutes + " นาที " + seconds + " วินาที")
     <group>        📍  NAVIGATION</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="-140.0" y="717.5" />
-    <actioncontainer id="t2" x="35.0" y="542.5">DB-SPFX</actioncontainer>
-    <actioncontainer id="t3" x="35.0" y="192.5">
+    <actioncontainer id="t1" x="35.0" y="542.5">DB-SPFX</actioncontainer>
+    <actioncontainer id="t2" x="35.0" y="192.5">
 
 
 
 
           </actioncontainer>
-    <notecontainer id="t4" x="35.0" y="192.5" w="350.0" h="105.0">                    ALL CUSTOMER EXPORT</notecontainer>
-    <actioncontainer id="t5" x="245.0" y="717.5">LIST</actioncontainer>
-    <actioncontainer id="t6" x="385.0" y="717.5">FIL</actioncontainer>
-    <conditioncontainer id="t7" x="35.0" y="717.5">FILE?</conditioncontainer>
-    <conditioncontainer id="t8" x="35.0" y="857.5">FILE2?</conditioncontainer>
-    <actioncontainer id="t9" x="280.0" y="1347.5">Script: shopeedb=newMap(); customer_list=newList(); for (i in [0 to length(varSelect)-1]) { db=fromJSON(varSelect[i][3]); for (i in [0 to length(db["driver_delivery_order"]["routes"])-1]) { if(db["drghyiver_delivery_order"]["routes"][i]["location_type"]==2) { addElement(customer_list, db["driver_delivery_order"]["routes"][i]) } } for (i in [0 to length(customer_list)-1]) { for (ii in [0 to length(db["deliveries"])-1]) { if(customer_list[i]["delivery_order_id"]==db["deliveries"][ii]["delivery_order"]["delivery_order_id"]) { customer_list[i]= newMapFromValues( "name",db["deliveries"][ii]["delivery_order"]["delivery_address"]["name"], "phone",db["deliveries"][ii]["delivery_order"]["delivery_address"]["phone"], "address",db["deliveries"][ii]["delivery_order"]["delivery_address"]["location"], "distance",customer_list[i]["distance"], //"cod",db["deliveries"][ii]["delivery_order"]["dropoff_cash_transaction"]["cash_amount"]/100000, "income",db["deliveries"][ii]["delivery_order"]["income"]/100000 ); //addMapEntry(customer_list[i],"xxx", db["deliveries"][ii]["delivery_order"]); //customer_list[i]["delivery_order_id"]=db["deliveries"][ii]["delivery_order"]; break } } } }</actioncontainer>
-    <actioncontainer id="t10" x="280.0" y="1452.5">FILTER-nnn</actioncontainer>
-    <actioncontainer id="t11" x="1050.0" y="752.5">DT</actioncontainer>
-    <notecontainer id="t12" x="2450.0" y="210.0" w="420.0" h="70.0">3
+    <notecontainer id="t3" x="35.0" y="192.5" w="350.0" h="105.0">                    ALL CUSTOMER EXPORT</notecontainer>
+    <actioncontainer id="t4" x="245.0" y="717.5">LIST</actioncontainer>
+    <actioncontainer id="t5" x="385.0" y="717.5">FIL</actioncontainer>
+    <conditioncontainer id="t6" x="35.0" y="717.5">FILE?</conditioncontainer>
+    <conditioncontainer id="t7" x="35.0" y="857.5">FILE2?</conditioncontainer>
+    <actioncontainer id="t8" x="280.0" y="1347.5">Script: shopeedb=newMap(); customer_list=newList(); for (i in [0 to length(varSelect)-1]) { db=fromJSON(varSelect[i][3]); for (i in [0 to length(db["driver_delivery_order"]["routes"])-1]) { if(db["drghyiver_delivery_order"]["routes"][i]["location_type"]==2) { addElement(customer_list, db["driver_delivery_order"]["routes"][i]) } } for (i in [0 to length(customer_list)-1]) { for (ii in [0 to length(db["deliveries"])-1]) { if(customer_list[i]["delivery_order_id"]==db["deliveries"][ii]["delivery_order"]["delivery_order_id"]) { customer_list[i]= newMapFromValues( "name",db["deliveries"][ii]["delivery_order"]["delivery_address"]["name"], "phone",db["deliveries"][ii]["delivery_order"]["delivery_address"]["phone"], "address",db["deliveries"][ii]["delivery_order"]["delivery_address"]["location"], "distance",customer_list[i]["distance"], //"cod",db["deliveries"][ii]["delivery_order"]["dropoff_cash_transaction"]["cash_amount"]/100000, "income",db["deliveries"][ii]["delivery_order"]["income"]/100000 ); //addMapEntry(customer_list[i],"xxx", db["deliveries"][ii]["delivery_order"]); //customer_list[i]["delivery_order_id"]=db["deliveries"][ii]["delivery_order"]; break } } } }</actioncontainer>
+    <actioncontainer id="t9" x="280.0" y="1452.5">FILTER-nnn</actioncontainer>
+    <actioncontainer id="t10" x="1050.0" y="752.5">DT</actioncontainer>
+    <notecontainer id="t11" x="2450.0" y="210.0" w="420.0" h="70.0">3
 SEARCH SUGGEST » GEOCODER </notecontainer>
-    <actioncontainer id="t13" x="2310.0" y="927.5">Script: response=fromJSON(response)["result"]["geometry"]["location"] //lnglat</actioncontainer>
-    <actioncontainer id="t14" x="2310.0" y="822.5">HTTP Request: GET https://mall.shopee.co.th/api/v4/geo/details?components=country%3ATH&amp;fields=formatted_address%2Cgeometry&amp;group=DS&amp;placeid={loc_id}&amp;sessiontoken=d1157d8d-55e9-4ed8-9697-21826590124d&amp;use_case=marketplace.checkout   store in response</actioncontainer>
-    <conditioncontainer id="t15" x="2310.0" y="1207.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t16" x="2310.0" y="507.5">HTTP Request: GET https://mall.shopee.co.th/api/v4/geo/autocomplete?city={city}&amp;components=country%3ATH&amp;district={district}&amp;input={input}&amp;sessiontoken=d1157d8d-55e9-4ed8-9697-21826590124d&amp;state={state}&amp;use_case=marketplace.checkout&amp;user_lat=13.7177965&amp;user_lng=100.3443447&amp;zipcode={zip}   store in response</actioncontainer>
-    <conditioncontainer id="t17" x="840.0" y="1067.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t18" x="2310.0" y="612.5">Script: loc_id=fromJSON(response)["predictions"][0]["id"];</actioncontainer>
-    <actioncontainer id="t19" x="805.0" y="472.5">DJ</actioncontainer>
-    <notecontainer id="t20" x="455.0" y="472.5" w="140.0" h="105.0">บริษัท นิ่มซี่เส็งขนส่ง 1988 จำกัด สาขามหาชัย, เลขที่ 1258/2, ถนน วิเชียรโชฎก, ตำบล มหาชัย, อำเภอเมืองสมุทรสาคร </notecontainer>
-    <notecontainer id="t21" x="927.5" y="175.0" w="245.0" h="70.0">1. TOP ACCURACY 
+    <actioncontainer id="t12" x="2310.0" y="927.5">Script: response=fromJSON(response)["result"]["geometry"]["location"] //lnglat</actioncontainer>
+    <actioncontainer id="t13" x="2310.0" y="822.5">HTTP Request: GET https://mall.shopee.co.th/api/v4/geo/details?components=country%3ATH&amp;fields=formatted_address%2Cgeometry&amp;group=DS&amp;placeid={loc_id}&amp;sessiontoken=d1157d8d-55e9-4ed8-9697-21826590124d&amp;use_case=marketplace.checkout   store in response</actioncontainer>
+    <conditioncontainer id="t14" x="2310.0" y="1207.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t15" x="2310.0" y="507.5">HTTP Request: GET https://mall.shopee.co.th/api/v4/geo/autocomplete?city={city}&amp;components=country%3ATH&amp;district={district}&amp;input={input}&amp;sessiontoken=d1157d8d-55e9-4ed8-9697-21826590124d&amp;state={state}&amp;use_case=marketplace.checkout&amp;user_lat=13.7177965&amp;user_lng=100.3443447&amp;zipcode={zip}   store in response</actioncontainer>
+    <conditioncontainer id="t16" x="840.0" y="1067.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t17" x="2310.0" y="612.5">Script: loc_id=fromJSON(response)["predictions"][0]["id"];</actioncontainer>
+    <actioncontainer id="t18" x="805.0" y="472.5">DJ</actioncontainer>
+    <notecontainer id="t19" x="455.0" y="472.5" w="140.0" h="105.0">บริษัท นิ่มซี่เส็งขนส่ง 1988 จำกัด สาขามหาชัย, เลขที่ 1258/2, ถนน วิเชียรโชฎก, ตำบล มหาชัย, อำเภอเมืองสมุทรสาคร </notecontainer>
+    <notecontainer id="t20" x="927.5" y="175.0" w="245.0" h="70.0">1. TOP ACCURACY 
 (EX) AUTOFILL » GEOCODER </notecontainer>
-    <actioncontainer id="t22" x="840.0" y="892.5">Copy Text to Clipboard: {latlng}</actioncontainer>
-    <actioncontainer id="t23" x="35.0" y="1627.5">Write to File: {writer} to /storage/emulated/0/file.csv (overwrite)</actioncontainer>
-    <actioncontainer id="t24" x="35.0" y="1137.5">SELECTnnn</actioncontainer>
-    <actioncontainer id="t25" x="35.0" y="1452.5">Script: header=newList("Folder name","Folder color","Latitude","Longitude","Title","Description","Color","Phone number","Timestamp","Pin icon code"); writer="{header,listformat,comma}"+"\n"; //x=newList(1,2,3,4); for (i in [0 to length(customer_list)-1]) { //log(customer_list[i]); if(contains(customer_list[i],"latitude")) { writer=writer+ "Test"+","+ "ff9800"+","+ customer_list[i]["address"]["latitude"]+","+ customer_list[i]["address"]["longitude"]+","+ replaceAll(customer_list[i]["name"],"\\.|\\,","")+","+ replaceAll(customer_list[i]["address"]["address"],"\\.|\\,","")+","+ "ff9800"+","+ ""+","+ ""+","+ 41+ "\n" } } /* writer=writer+ "📌"+","+ "ff5722"+","+ split[0]+","+ split[1]+","+ restaurants[i]["restaurant"]+","+ restaurants[i]["address"]+","+ "ff5722"+","+ ""+","+ ""+","+ 41+ */</actioncontainer>
-    <actioncontainer id="t26" x="840.0" y="647.5">P-AUTOFIL</actioncontainer>
-    <actioncontainer id="t27" x="1050.0" y="472.5">J-GEO</actioncontainer>
-    <actioncontainer id="t28" x="1050.0" y="647.5">P-GEO</actioncontainer>
-    <actioncontainer id="t29" x="805.0" y="367.5">TEST INPUT</actioncontainer>
-    <actioncontainer id="t30" x="1540.0" y="367.5">TEST INPUT</actioncontainer>
-    <actioncontainer id="t31" x="1540.0" y="472.5">DJ</actioncontainer>
-    <actioncontainer id="t32" x="1540.0" y="647.5">P-AUTOFIL</actioncontainer>
-    <actioncontainer id="t33" x="1540.0" y="787.5">HTTP Request: GET https://mall.shopee.co.th/api/v4/geo/details?components=country%3ATH&amp;fields=formatted_address%2Cgeometry&amp;group=DS&amp;placeid={loc_id}&amp;sessiontoken=d1157d8d-55e9-4ed8-9697-21826590124d&amp;use_case=marketplace.checkout   store in response</actioncontainer>
-    <actioncontainer id="t34" x="1540.0" y="892.5">Script: //response=fromJSON(response)["result"]["geometry"]["location"] //lnglat</actioncontainer>
-    <conditioncontainer id="t35" x="1750.0" y="1032.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t36" x="1750.0" y="647.5">Script: loc_id=fromJSON(response)["predictions"][0]["id"]; response=fromJSON(response)["predictions"];</actioncontainer>
-    <actioncontainer id="t37" x="1750.0" y="472.5">HTTP Request: GET https://mall.shopee.co.th/api/v4/geo/autocomplete?city={city}&amp;components=country%3ATH&amp;district={district}&amp;input={input}&amp;sessiontoken=d1157d8d-55e9-4ed8-9697-21826590124d&amp;state={state}&amp;use_case=marketplace.checkout&amp;user_lat=13.7177965&amp;user_lng=100.3443447&amp;zipcode={zip}   store in response</actioncontainer>
-    <actioncontainer id="t38" x="1750.0" y="367.5">J-GEO </actioncontainer>
-    <actioncontainer id="t39" x="2310.0" y="367.5">Script: city="เขต"+"ทวีวัฒนา"; district="แขวง"+"ศาลาธรรมสพน์"; state="จังหวัดกรุงเทพมหานคร"; //input="(ถ้าไม่รับสาย: 0636376715) เลขที่ 233/1, หมู่บ้าน ตลาดแสงสิริ (บ้านนกตรงข้าม MR.DIY), ซอย เพชรเกษม110 แขวงหนองค้างพลู เขตหนองแขม จังหวัดกรุงเทพมหานคร 10160"; input="35/1 หมู่ 14 แขวงศาลาธรรมสพน์ เขตทวีวัฒนา กทม"; //ตำบลตลาดขวัญ zip=10170;</actioncontainer>
-    <conditioncontainer id="t40" x="280.0" y="1207.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t41" x="35.0" y="1242.5">Script: shopeedb=newMap(); customer_list=newList(); for (i in [0 to length(varSelect)-1]) { db=fromJSON(varSelect[i][3]); for (i in [0 to length(db["driver_delivery_order"]["routes"])-1]) { if(db["drghyiver_delivery_order"]["routes"][i]["location_type"]==2) { addElement(customer_list, db["driver_delivery_order"]["routes"][i]) } } for (i in [0 to length(customer_list)-1]) { for (ii in [0 to length(db["deliveries"])-1]) { if(customer_list[i]["delivery_order_id"]==db["deliveries"][ii]["delivery_order"]["delivery_order_id"]) { customer_list[i]= newMapFromValues( "name",db["deliveries"][ii]["delivery_order"]["delivery_address"]["name"], "phone",db["deliveries"][ii]["delivery_order"]["delivery_address"]["phone"], "addresjjjs",db["deliveries"][ii]["delivery_order"]["delivery_address"]["location"], "distance",customer_list[i]["distance"], //"cod",db["deliveries"][ii]["delivery_order"]["dropoff_cash_transaction"]["cash_amount"]/100000, "income",db["deliveries"][ii]["delivery_order"]["income"]/100000 ); //addMapEntry(customer_list[i],"xxx", db["deliveries"][ii]["delivery_order"]); //customer_list[i]["delivery_order_id"]=db["deliveries"][ii]["delivery_order"]; break } } } }</actioncontainer>
-    <actioncontainer id="t42" x="-210.0" y="1522.5">Write to File: {address_x} to /storage/emulated/0/filxxxxxxxxe.txt (append)</actioncontainer>
-    <connection from="t1" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t6" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t6" to="t2" type="NORMAL" sourcePosition="NORTH" targetPosition="EAST" />
-    <connection from="t7" to="t5" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t7" to="t8" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t24" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t13" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t14" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t16" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t18" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t19" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t24" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t26" to="t27" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t27" to="t28" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t28" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t29" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t21" x="840.0" y="892.5">Copy Text to Clipboard: {latlng}</actioncontainer>
+    <actioncontainer id="t22" x="35.0" y="1627.5">Write to File: {writer} to /storage/emulated/0/file.csv (overwrite)</actioncontainer>
+    <actioncontainer id="t23" x="35.0" y="1137.5">SELECTnnn</actioncontainer>
+    <actioncontainer id="t24" x="35.0" y="1452.5">Script: header=newList("Folder name","Folder color","Latitude","Longitude","Title","Description","Color","Phone number","Timestamp","Pin icon code"); writer="{header,listformat,comma}"+"\n"; //x=newList(1,2,3,4); for (i in [0 to length(customer_list)-1]) { //log(customer_list[i]); if(contains(customer_list[i],"latitude")) { writer=writer+ "Test"+","+ "ff9800"+","+ customer_list[i]["address"]["latitude"]+","+ customer_list[i]["address"]["longitude"]+","+ replaceAll(customer_list[i]["name"],"\\.|\\,","")+","+ replaceAll(customer_list[i]["address"]["address"],"\\.|\\,","")+","+ "ff9800"+","+ ""+","+ ""+","+ 41+ "\n" } } /* writer=writer+ "📌"+","+ "ff5722"+","+ split[0]+","+ split[1]+","+ restaurants[i]["restaurant"]+","+ restaurants[i]["address"]+","+ "ff5722"+","+ ""+","+ ""+","+ 41+ */</actioncontainer>
+    <actioncontainer id="t25" x="840.0" y="647.5">P-AUTOFIL</actioncontainer>
+    <actioncontainer id="t26" x="1050.0" y="472.5">J-GEO</actioncontainer>
+    <actioncontainer id="t27" x="1050.0" y="647.5">P-GEO</actioncontainer>
+    <actioncontainer id="t28" x="805.0" y="367.5">TEST INPUT</actioncontainer>
+    <actioncontainer id="t29" x="1540.0" y="367.5">TEST INPUT</actioncontainer>
+    <actioncontainer id="t30" x="1540.0" y="472.5">DJ</actioncontainer>
+    <actioncontainer id="t31" x="1540.0" y="647.5">P-AUTOFIL</actioncontainer>
+    <actioncontainer id="t32" x="1540.0" y="787.5">HTTP Request: GET https://mall.shopee.co.th/api/v4/geo/details?components=country%3ATH&amp;fields=formatted_address%2Cgeometry&amp;group=DS&amp;placeid={loc_id}&amp;sessiontoken=d1157d8d-55e9-4ed8-9697-21826590124d&amp;use_case=marketplace.checkout   store in response</actioncontainer>
+    <actioncontainer id="t33" x="1540.0" y="892.5">Script: //response=fromJSON(response)["result"]["geometry"]["location"] //lnglat</actioncontainer>
+    <conditioncontainer id="t34" x="1750.0" y="1032.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t35" x="1750.0" y="647.5">Script: loc_id=fromJSON(response)["predictions"][0]["id"]; response=fromJSON(response)["predictions"];</actioncontainer>
+    <actioncontainer id="t36" x="1750.0" y="472.5">HTTP Request: GET https://mall.shopee.co.th/api/v4/geo/autocomplete?city={city}&amp;components=country%3ATH&amp;district={district}&amp;input={input}&amp;sessiontoken=d1157d8d-55e9-4ed8-9697-21826590124d&amp;state={state}&amp;use_case=marketplace.checkout&amp;user_lat=13.7177965&amp;user_lng=100.3443447&amp;zipcode={zip}   store in response</actioncontainer>
+    <actioncontainer id="t37" x="1750.0" y="367.5">J-GEO </actioncontainer>
+    <actioncontainer id="t38" x="2310.0" y="367.5">Script: city="เขต"+"ทวีวัฒนา"; district="แขวง"+"ศาลาธรรมสพน์"; state="จังหวัดกรุงเทพมหานคร"; //input="(ถ้าไม่รับสาย: 0636376715) เลขที่ 233/1, หมู่บ้าน ตลาดแสงสิริ (บ้านนกตรงข้าม MR.DIY), ซอย เพชรเกษม110 แขวงหนองค้างพลู เขตหนองแขม จังหวัดกรุงเทพมหานคร 10160"; input="35/1 หมู่ 14 แขวงศาลาธรรมสพน์ เขตทวีวัฒนา กทม"; //ตำบลตลาดขวัญ zip=10170;</actioncontainer>
+    <conditioncontainer id="t39" x="280.0" y="1207.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t40" x="35.0" y="1242.5">Script: shopeedb=newMap(); customer_list=newList(); for (i in [0 to length(varSelect)-1]) { db=fromJSON(varSelect[i][3]); for (i in [0 to length(db["driver_delivery_order"]["routes"])-1]) { if(db["drghyiver_delivery_order"]["routes"][i]["location_type"]==2) { addElement(customer_list, db["driver_delivery_order"]["routes"][i]) } } for (i in [0 to length(customer_list)-1]) { for (ii in [0 to length(db["deliveries"])-1]) { if(customer_list[i]["delivery_order_id"]==db["deliveries"][ii]["delivery_order"]["delivery_order_id"]) { customer_list[i]= newMapFromValues( "name",db["deliveries"][ii]["delivery_order"]["delivery_address"]["name"], "phone",db["deliveries"][ii]["delivery_order"]["delivery_address"]["phone"], "addresjjjs",db["deliveries"][ii]["delivery_order"]["delivery_address"]["location"], "distance",customer_list[i]["distance"], //"cod",db["deliveries"][ii]["delivery_order"]["dropoff_cash_transaction"]["cash_amount"]/100000, "income",db["deliveries"][ii]["delivery_order"]["income"]/100000 ); //addMapEntry(customer_list[i],"xxx", db["deliveries"][ii]["delivery_order"]); //customer_list[i]["delivery_order_id"]=db["deliveries"][ii]["delivery_order"]; break } } } }</actioncontainer>
+    <actioncontainer id="t41" x="-210.0" y="1522.5">Write to File: {address_x} to /storage/emulated/0/filxxxxxxxxe.txt (append)</actioncontainer>
+    <triggercontainer id="t42" x="630.0" y="-17.500036" />
+    <connection from="t1" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t5" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t5" to="t1" type="NORMAL" sourcePosition="NORTH" targetPosition="EAST" />
+    <connection from="t6" to="t4" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t6" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t23" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t12" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t17" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t18" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t21" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t23" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t26" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t26" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t27" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t28" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t30" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t30" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t31" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t32" to="t38" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t31" to="t37" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t32" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t33" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t35" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t36" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t37" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t38" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t39" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t40" to="t42" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t41" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t38" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t39" to="t41" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t40" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t42" to="t28" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#41: MAP MARKER</name>
