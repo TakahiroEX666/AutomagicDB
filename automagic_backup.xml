@@ -6846,6 +6846,35 @@ User-Agent: Android app Shopee appver=34424 app_type=1 platform=native_android o
     <skipConnectivityCheck>false</skipConnectivityCheck>
   </action>
   <action type="http_request">
+    <useDefaultName>true</useDefaultName>
+    <name>HTTP Request: POST https://b2-webdav.onrender.com/ multipart/form-data BACKUP2403-02:51.xml store in response</name>
+    <url>https://b2-webdav.onrender.com/</url>
+    <verifyCertificates>true</verifyCertificates>
+    <basicAuthentication>true</basicAuthentication>
+    <username>youruser</username>
+    <clientCert>false</clientCert>
+    <clientCertPath></clientCertPath>
+    <httpMethod>POST</httpMethod>
+    <networkType>DEFAULT</networkType>
+    <httpContentType>FORM_DATA_FILE_UPLOAD</httpContentType>
+    <contentType>text/plain</contentType>
+    <generalTextData></generalTextData>
+    <formFieldList>Lastname=XYZ,Firstname=ABC</formFieldList>
+    <uploadFieldName>upload_field</uploadFieldName>
+    <uploadFilePath>/storage/emulated/0/BACKUP2403-02:51.xml</uploadFilePath>
+    <binaryContentType>application/octet-stream</binaryContentType>
+    <binaryFilePath></binaryFilePath>
+    <timeout>60000</timeout>
+    <setCustomHTTPHeaders>false</setCustomHTTPHeaders>
+    <customHTTPHeaders></customHTTPHeaders>
+    <storeInVariable>true</storeInVariable>
+    <variable>response</variable>
+    <encoding></encoding>
+    <path>/storage/emulated/0/Download/file.bin</path>
+    <followRedirects>true</followRedirects>
+    <skipConnectivityCheck>false</skipConnectivityCheck>
+  </action>
+  <action type="http_request">
     <useDefaultName>false</useDefaultName>
     <name>HTTP Request: POST https://fnnboody.shopee.co.th/api/buyer/stores/-/action/search application/json {map} store in response</name>
     <url>https://foody.shopee.co.th/api/buyer/stores/-/action/search</url>
@@ -18258,6 +18287,17 @@ MENU
     <actioncontainer id="t3" x="0.0" y="612.5">Show Custom Widget Overlay: Overlay 4, Widget9  Top Left</actioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>Flow2</name>
+    <group>         🧬  MAP SERVICES</group>
+    <enabled>false</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <conditioncontainer id="t1" x="-35.0" y="682.5">     DEBUG    </conditioncontainer>
+    <triggercontainer id="t2" x="70.0" y="52.5" />
+    <actioncontainer id="t3" x="245.0" y="297.5">HTTP Request: POST https://b2-webdav.onrender.com/ multipart/form-data BACKUP2403-02:51.xml store in response</actioncontainer>
+    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow3</name>
