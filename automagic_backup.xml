@@ -137,6 +137,14 @@ NOW
     <allowInDeviceIdle>true</allowInDeviceIdle>
     <likeAlarmClock>false</likeAlarmClock>
   </trigger>
+  <trigger type="activity_ended">
+    <useDefaultName>true</useDefaultName>
+    <name>Activity Ended: com.shopee.foody.driver.th/com.shopee.foody.driver.popmanager.activity.PopActivity</name>
+    <enabled>false</enabled>
+    <method>CLASSIC</method>
+    <packageNameFilter>com.shopee.foody.driver.th</packageNameFilter>
+    <classNameFilter>com.shopee.foody.driver.popmanager.activity.PopActivity</classNameFilter>
+  </trigger>
   <trigger type="notification_status_bar_displayed">
     <useDefaultName>false</useDefaultName>
     <name>BOLT </name>
@@ -203,6 +211,21 @@ NOW
     <useDefaultName>false</useDefaultName>
     <name>CLIPBOARD</name>
     <enabled>true</enabled>
+  </trigger>
+  <trigger type="command_output">
+    <useDefaultName>true</useDefaultName>
+    <name>Command Output: getprop | grep -iE 'gsm|ril' (root) contains text </name>
+    <enabled>false</enabled>
+    <command>getprop | grep -iE 'gsm|ril'</command>
+    <root>true</root>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <textMatchType>CONTAINS_TEXT</textMatchType>
+    <containedString></containedString>
+    <skipInitialOutput>false</skipInitialOutput>
+    <skipInitialOutputMillis>5000</skipInitialOutputMillis>
+    <keepDeviceAwake>false</keepDeviceAwake>
+    <logOutput>false</logOutput>
   </trigger>
   <trigger type="command_output">
     <useDefaultName>true</useDefaultName>
@@ -5289,6 +5312,18 @@ log(subdistrict[i]);
     <useDefaultName>true</useDefaultName>
     <name>Execute Root Command: cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121 in </name>
     <command>cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
+  </action>
+  <action type="execute_root_command">
+    <useDefaultName>true</useDefaultName>
+    <name>Execute Root Command: content query --uri content://telephony/siminfo in </name>
+    <command>content query --uri content://telephony/siminfo</command>
     <user></user>
     <seContext></seContext>
     <workingDirectory></workingDirectory>
@@ -11904,6 +11939,11 @@ removeDuplicateElements(customer_list)</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
+    <name>Script: stdout=split(stdout,",");</name>
+    <script>stdout=split(stdout,",");</script>
+  </action>
+  <action type="script">
+    <useDefaultName>true</useDefaultName>
     <name>Script: take=true</name>
     <script>take=true</script>
   </action>
@@ -16077,15 +16117,15 @@ TAKE, DENY</name>
     <actioncontainer id="t2" x="70.0" y="752.5">H-A</actioncontainer>
     <conditioncontainer id="t3" x="70.0" y="612.5">DISCONNECT </conditioncontainer>
     <actioncontainer id="t4" x="70.0" y="157.5">CAST ENABLE</actioncontainer>
-    <actioncontainer id="t5" x="70.0" y="332.5">ANYDESK_STATUSBAR</actioncontainer>
-    <actioncontainer id="t6" x="70.0" y="437.5">MP</actioncontainer>
-    <notecontainer id="t7" x="-105.0" y="157.5" w="140.0" h="105.0">HAFT</notecontainer>
+    <actioncontainer id="t5" x="70.0" y="437.5">MP</actioncontainer>
+    <notecontainer id="t6" x="-105.0" y="157.5" w="140.0" h="105.0">HAFT</notecontainer>
+    <actioncontainer id="t7" x="70.0" y="332.5">ANYDESK_STATUSBAR</actioncontainer>
     <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t6" type="FALSE" sourcePosition="WEST" targetPosition="WEST" />
+    <connection from="t3" to="t5" type="FALSE" sourcePosition="WEST" targetPosition="WEST" />
     <connection from="t3" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>  @  BATTERY STATUS</name>
@@ -16637,44 +16677,44 @@ System.out.println(minutes + " นาที " + seconds + " วินาที")
 
 
 </conditioncontainer>
-    <actioncontainer id="t13" x="-210.0" y="-1872.5">CURRENT-LOC</actioncontainer>
-    <actioncontainer id="t14" x="-210.0" y="-1767.5">IMPORT CSVgg</actioncontainer>
-    <actioncontainer id="t15" x="-210.0" y="-1662.5">SPLITS V3s</actioncontainer>
-    <actioncontainer id="t16" x="-210.0" y="-1277.5">1-URI</actioncontainer>
-    <actioncontainer id="t17" x="-210.0" y="-1172.5">ORS / PAR</actioncontainer>
-    <actioncontainer id="t18" x="-210.0" y="-1067.5">ORS
+    <actioncontainer id="t13" x="-210.0" y="-1662.5">SPLITS V3s</actioncontainer>
+    <actioncontainer id="t14" x="-210.0" y="-1277.5">1-URI</actioncontainer>
+    <actioncontainer id="t15" x="-210.0" y="-1172.5">ORS / PAR</actioncontainer>
+    <actioncontainer id="t16" x="-210.0" y="-1067.5">ORS
 (VRP)</actioncontainer>
-    <actioncontainer id="t19" x="70.0" y="-1277.5">Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST") and not contains(file_text[i][0],"FIX")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",0) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</actioncontainer>
-    <actioncontainer id="t20" x="70.0" y="-1172.5">GEOAPIFY
+    <actioncontainer id="t17" x="70.0" y="-1277.5">Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST") and not contains(file_text[i][0],"FIX")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",0) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</actioncontainer>
+    <actioncontainer id="t18" x="70.0" y="-1172.5">GEOAPIFY
 (TSP)</actioncontainer>
-    <actioncontainer id="t21" x="70.0" y="-1067.5">Scripbbjt: </actioncontainer>
-    <actioncontainer id="t22" x="350.0" y="-1277.5">HERE PARAMETER</actioncontainer>
-    <actioncontainer id="t23" x="350.0" y="-1172.5">HERE API 
+    <actioncontainer id="t19" x="70.0" y="-1067.5">Scripbbjt: </actioncontainer>
+    <actioncontainer id="t20" x="350.0" y="-1277.5">HERE PARAMETER</actioncontainer>
+    <actioncontainer id="t21" x="350.0" y="-1172.5">HERE API 
 (TSP)</actioncontainer>
-    <actioncontainer id="t24" x="350.0" y="-1067.5">Scripbbjt: nnj</actioncontainer>
-    <actioncontainer id="t25" x="630.0" y="-1277.5">DATA-HERzE</actioncontainer>
-    <actioncontainer id="t26" x="630.0" y="-1172.5">LONGDO
+    <actioncontainer id="t22" x="350.0" y="-1067.5">Scripbbjt: nnj</actioncontainer>
+    <actioncontainer id="t23" x="630.0" y="-1277.5">DATA-HERzE</actioncontainer>
+    <actioncontainer id="t24" x="630.0" y="-1172.5">LONGDO
 (TSP)</actioncontainer>
-    <actioncontainer id="t27" x="630.0" y="-1067.5">Scripjjjt: response=fromJSON(response);</actioncontainer>
+    <actioncontainer id="t25" x="630.0" y="-1067.5">Scripjjjt: response=fromJSON(response);</actioncontainer>
+    <actioncontainer id="t26" x="-210.0" y="-1872.5">CURRENT-LOC</actioncontainer>
+    <actioncontainer id="t27" x="-210.0" y="-1767.5">IMPORT CSVgg</actioncontainer>
     <connection from="t1" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t10" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t11" to="t10" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t12" to="t11" type="FALSE" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t12" to="t13" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t26" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t14" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t16" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t17" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t18" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t19" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t18" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t19" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t20" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t21" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t21" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t23" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t24" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t26" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t27" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t27" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#39: MANUAL</name>
@@ -17657,70 +17697,70 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <actioncontainer id="t31" x="-560.0" y="-10587.5">Script: a=getDate(); /*laglon=newList( "13.798951","100.551200");*/ xxx="https://router.project-osrm.org/route/v1/driving/100.5018,13.7563;{laglon[0]},{laglon[1]}?overview=false"; log(xxx);</actioncontainer>
     <actioncontainer id="t32" x="-560.0" y="-10272.5">HTTP Request: GET https://router.project-osrm.org/route/v1/driving/100.551096,13.798626;{laglon[1]},{laglon[0]}?overview=false&amp;geometries=polyline   store in response</actioncontainer>
     <actioncontainer id="t33" x="945.0" y="-9817.5">AF</actioncontainer>
-    <actioncontainer id="t34" x="1085.0" y="-10447.5">B6.0</actioncontainer>
-    <actioncontainer id="t35" x="945.0" y="-10167.5">MSG</actioncontainer>
-    <notecontainer id="t36" x="175.0" y="-10657.5" w="140.0" h="105.0">แก้ไขเดียวนี้เงินสด</notecontainer>
-    <actioncontainer id="t37" x="-140.0" y="-10377.5">Script: b=getDate()-a; //response=fromJSON(response)["routes"][0]["distance"]/1000;</actioncontainer>
-    <notecontainer id="t38" x="665.0" y="-11147.5" w="140.0" h="105.0">2,32 
+    <actioncontainer id="t34" x="945.0" y="-10167.5">MSG</actioncontainer>
+    <notecontainer id="t35" x="175.0" y="-10657.5" w="140.0" h="105.0">แก้ไขเดียวนี้เงินสด</notecontainer>
+    <actioncontainer id="t36" x="-140.0" y="-10377.5">Script: b=getDate()-a; //response=fromJSON(response)["routes"][0]["distance"]/1000;</actioncontainer>
+    <notecontainer id="t37" x="665.0" y="-11147.5" w="140.0" h="105.0">2,32 
 2==modify
 32==open</notecontainer>
-    <actioncontainer id="t39" x="175.0" y="-10832.5">Script: x=distance(newLocation(global_location[0], global_location[1]), newLocation(13.782351,100.489088))</actioncontainer>
-    <notecontainer id="t40" x="350.0" y="-11147.5" w="140.0" h="105.0">ASSIST มีบัคไม่ทำงานอะไร้ลย</notecontainer>
-    <notecontainer id="t41" x="315.0" y="-10902.5" w="140.0" h="105.0">เพิ่มปักหมุด</notecontainer>
-    <actioncontainer id="t42" x="770.0" y="-10027.5">STOP</actioncontainer>
-    <actioncontainer id="t43" x="770.0" y="-9922.5">RUN</actioncontainer>
-    <actioncontainer id="t44" x="70.0" y="-10482.5">Script: x=newList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"); for (i in [0 to length(x)-1]) { log(x[i]); if(x[i]=="f") { log("_"); break } } for (i in [i+1 to length(x)-1]) { log(x[i]); if(x[i]=="m") { log("_"); break } } for (i in [i+1 to length(x)-1]) { log(x[i]); if(x[i]=="x") { log("_"); break } }</actioncontainer>
-    <actioncontainer id="t45" x="525.0" y="-10167.5">Vibrate: Custom pattern (---)</actioncontainer>
-    <actioncontainer id="t46" x="420.0" y="-9852.5">Execute Root Command: settings put system pointer_location 0 &amp;&amp; settings put system show_touches 0 in </actioncontainer>
-    <conditioncontainer id="t47" x="1085.0" y="-10727.5">Expression: contains(exception_message,"Unterminated")</conditioncontainer>
-    <conditioncontainer id="t48" x="770.0" y="-10622.5">banned</conditioncontainer>
-    <conditioncontainer id="t49" x="945.0" y="-10272.5">WGXX</conditioncontainer>
-    <conditioncontainer id="t50" x="700.0" y="-10482.5"> Debug Dialog</conditioncontainer>
-    <actioncontainer id="t51" x="490.0" y="-10762.5">CAT</actioncontainer>
-    <actioncontainer id="t52" x="490.0" y="-10867.5">Script: xxx</actioncontainer>
-    <notecontainer id="t53" x="350.0" y="-10342.5" w="140.0" h="105.0">515</notecontainer>
-    <actioncontainer id="t54" x="805.0" y="-8207.5">Write to Log: </actioncontainer>
-    <actioncontainer id="t55" x="595.0" y="-8102.5">Show Custom Widget Overlay: LALAMOVE-GPS, WM_LA  Center Right</actioncontainer>
-    <actioncontainer id="t56" x="595.0" y="-7997.5">Sleep: 3s (keep device awake)</actioncontainer>
-    <actioncontainer id="t57" x="875.0" y="-5967.5">TESTERXX้</actioncontainer>
-    <actioncontainer id="t58" x="1085.0" y="-5862.5">Input Dialog:  Single-line text </actioncontainer>
-    <actioncontainer id="t59" x="1085.0" y="-5757.5">Script: geocooder=callJavaConstructor("android.location.Geocoder", "Geocoder(android.content.Context)", getContext()); location=value; get=callJavaMethod(geocooder, "android.location.Geocoder", "getFromLocationName(java.lang.String, int)", location, 1)[0]; get=split(get,","); for (i in [length(get)-1 to 0]) { if(contains(get[i],"latitude")) { lat=split(get[i],"=")[1]; } if(contains(get[i],"longitude")) { lon=split(get[i],"=")[1]; } } latlon=lat+","+lon;</actioncontainer>
-    <actioncontainer id="t60" x="1085.0" y="-5652.5">Copy Text to Clipboard: {latlon}</actioncontainer>
-    <actioncontainer id="t61" x="350.0" y="-10482.5">Sleep: 2s (keep device awake)</actioncontainer>
-    <actioncontainer id="t62" x="525.0" y="-10027.5">MSGX</actioncontainer>
-    <actioncontainer id="t63" x="630.0" y="-8942.5">MOCKNOW</actioncontainer>
-    <actioncontainer id="t64" x="700.0" y="-10867.5">V7</actioncontainer>
-    <actioncontainer id="t65" x="490.0" y="-10622.5">V7-219</actioncontainer>
-    <actioncontainer id="t66" x="-2065.0" y="-10867.5">V5.0</actioncontainer>
-    <connection from="t1" to="t52" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t38" x="175.0" y="-10832.5">Script: x=distance(newLocation(global_location[0], global_location[1]), newLocation(13.782351,100.489088))</actioncontainer>
+    <notecontainer id="t39" x="350.0" y="-11147.5" w="140.0" h="105.0">ASSIST มีบัคไม่ทำงานอะไร้ลย</notecontainer>
+    <notecontainer id="t40" x="315.0" y="-10902.5" w="140.0" h="105.0">เพิ่มปักหมุด</notecontainer>
+    <actioncontainer id="t41" x="770.0" y="-10027.5">STOP</actioncontainer>
+    <actioncontainer id="t42" x="770.0" y="-9922.5">RUN</actioncontainer>
+    <actioncontainer id="t43" x="70.0" y="-10482.5">Script: x=newList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"); for (i in [0 to length(x)-1]) { log(x[i]); if(x[i]=="f") { log("_"); break } } for (i in [i+1 to length(x)-1]) { log(x[i]); if(x[i]=="m") { log("_"); break } } for (i in [i+1 to length(x)-1]) { log(x[i]); if(x[i]=="x") { log("_"); break } }</actioncontainer>
+    <actioncontainer id="t44" x="525.0" y="-10167.5">Vibrate: Custom pattern (---)</actioncontainer>
+    <actioncontainer id="t45" x="420.0" y="-9852.5">Execute Root Command: settings put system pointer_location 0 &amp;&amp; settings put system show_touches 0 in </actioncontainer>
+    <conditioncontainer id="t46" x="1085.0" y="-10727.5">Expression: contains(exception_message,"Unterminated")</conditioncontainer>
+    <conditioncontainer id="t47" x="770.0" y="-10622.5">banned</conditioncontainer>
+    <conditioncontainer id="t48" x="945.0" y="-10272.5">WGXX</conditioncontainer>
+    <conditioncontainer id="t49" x="700.0" y="-10482.5"> Debug Dialog</conditioncontainer>
+    <actioncontainer id="t50" x="490.0" y="-10762.5">CAT</actioncontainer>
+    <actioncontainer id="t51" x="490.0" y="-10867.5">Script: xxx</actioncontainer>
+    <notecontainer id="t52" x="350.0" y="-10342.5" w="140.0" h="105.0">515</notecontainer>
+    <actioncontainer id="t53" x="805.0" y="-8207.5">Write to Log: </actioncontainer>
+    <actioncontainer id="t54" x="595.0" y="-8102.5">Show Custom Widget Overlay: LALAMOVE-GPS, WM_LA  Center Right</actioncontainer>
+    <actioncontainer id="t55" x="595.0" y="-7997.5">Sleep: 3s (keep device awake)</actioncontainer>
+    <actioncontainer id="t56" x="875.0" y="-5967.5">TESTERXX้</actioncontainer>
+    <actioncontainer id="t57" x="1085.0" y="-5862.5">Input Dialog:  Single-line text </actioncontainer>
+    <actioncontainer id="t58" x="1085.0" y="-5757.5">Script: geocooder=callJavaConstructor("android.location.Geocoder", "Geocoder(android.content.Context)", getContext()); location=value; get=callJavaMethod(geocooder, "android.location.Geocoder", "getFromLocationName(java.lang.String, int)", location, 1)[0]; get=split(get,","); for (i in [length(get)-1 to 0]) { if(contains(get[i],"latitude")) { lat=split(get[i],"=")[1]; } if(contains(get[i],"longitude")) { lon=split(get[i],"=")[1]; } } latlon=lat+","+lon;</actioncontainer>
+    <actioncontainer id="t59" x="1085.0" y="-5652.5">Copy Text to Clipboard: {latlon}</actioncontainer>
+    <actioncontainer id="t60" x="350.0" y="-10482.5">Sleep: 2s (keep device awake)</actioncontainer>
+    <actioncontainer id="t61" x="525.0" y="-10027.5">MSGX</actioncontainer>
+    <actioncontainer id="t62" x="630.0" y="-8942.5">MOCKNOW</actioncontainer>
+    <actioncontainer id="t63" x="700.0" y="-10867.5">V7</actioncontainer>
+    <actioncontainer id="t64" x="490.0" y="-10622.5">V7-219</actioncontainer>
+    <actioncontainer id="t65" x="-2065.0" y="-10867.5">V5.0</actioncontainer>
+    <actioncontainer id="t66" x="1085.0" y="-10447.5">B6.0</actioncontainer>
+    <connection from="t1" to="t51" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t9" to="t10" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t10" to="t11" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t11" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t48" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t35" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t42" to="t43" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t43" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t45" to="t62" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t47" to="t34" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t48" to="t49" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t48" to="t47" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t49" to="t35" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t49" to="t35" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t51" to="t65" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t52" to="t51" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t55" to="t56" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t34" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t41" to="t42" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t42" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t44" to="t61" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t46" to="t66" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t47" to="t48" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t47" to="t46" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t48" to="t34" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t48" to="t34" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t50" to="t64" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t51" to="t50" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t54" to="t55" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t57" to="t58" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t58" to="t59" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t59" to="t60" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t60" to="t44" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t61" to="t45" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t62" to="t46" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t63" to="t54" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t64" to="t48" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t65" to="t61" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t65" to="t48" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t66" to="t2" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t62" to="t53" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t63" to="t47" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t64" to="t60" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t64" to="t47" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t65" to="t2" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t66" to="t47" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
   </flow>
   <flow type="flow">
     <name>(23)  ONESHOT</name>
@@ -18327,6 +18367,21 @@ pm disable co.aospa.android.certifiedprops.overlay
     resetprop -n -p persist.sys.pixelprops.pi false</notecontainer>
   </flow>
   <flow type="flow">
+    <name>Flow5</name>
+    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <enabled>false</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <triggercontainer id="t1" x="70.0" y="52.5">
+      <trigger>Command Output: getprop | grep -iE 'gsm|ril' (root) contains text </trigger>
+    </triggercontainer>
+    <conditioncontainer id="t2" x="-105.0" y="612.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t3" x="-105.0" y="262.5">Execute Root Command: content query --uri content://telephony/siminfo in </actioncontainer>
+    <actioncontainer id="t4" x="-245.0" y="402.5">Script: stdout=split(stdout,",");</actioncontainer>
+    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
     <name>Flow6</name>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
@@ -18377,6 +18432,15 @@ icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=positi
     <connection from="t3" to="t2" type="NORMAL" sourcePosition="EAST" targetPosition="EAST" />
     <connection from="t3" to="t4" type="EXCEPTION" sourcePosition="WEST" targetPosition="WEST" />
     <connection from="t4" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>Flow8</name>
+    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <enabled>false</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <triggercontainer id="t1" x="70.0" y="52.5">
+      <trigger>Activity Ended: com.shopee.foody.driver.th/com.shopee.foody.driver.popmanager.activity.PopActivity</trigger>
+    </triggercontainer>
   </flow>
   <flow type="flow">
     <name>Flow9</name>
