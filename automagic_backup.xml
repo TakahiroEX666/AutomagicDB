@@ -1659,6 +1659,17 @@ contains(exception_message,"sqrt")
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
+    <name>CALL</name>
+    <expression>if(contains(text,"+66") or length(text)==12) {
+
+      p1="call";
+      p3=text;
+      return true
+}
+return false</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
     <name>CANCEL?</name>
     <expression>state=="cancel"</expression>
   </condition>
@@ -2346,8 +2357,10 @@ return false</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
-    <name>IP?</name>
-    <expression>global_device['ipaddress']==null</expression>
+    <name>IP!?</name>
+    <expression>
+
+global_device['ipaddress']!=null</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -2499,6 +2512,73 @@ else {
 
    sleep(1000);
 }</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>MAPS</name>
+    <expression>
+
+
+
+
+
+
+
+
+
+
+
+
+
+if(contains(text,"maps.app.goo.gl")) {
+
+   p1="gmap";
+   p2="raw";
+   p3=findAll(text,"http.*")[0];
+
+   for (i in [1 to 10]){
+   
+      connection=callJavaMethod(callJavaConstructor("java.net.URL", "URL(java.lang.String)",p3), "java.net.URL", "openConnection()");
+      callJavaMethod(connection, "java.net.HttpURLConnection", "setInstanceFollowRedirects(boolean)", false);
+      callJavaMethod(connection, "java.net.HttpURLConnection", "setRequestMethod(java.lang.String)", "GET");
+      code=callJavaMethod(connection, "java.net.HttpURLConnection", "getResponseCode()");
+   
+      if(code==302) {
+   
+         location=replaceAll(callJavaMethod(connection, "java.net.URLConnection", "getHeaderField(java.lang.String)", "location"),".*continue=","");
+         break}
+
+      if(i&gt;=10) {
+         return
+      }
+   }
+   
+   
+   if(contains(location,"place")) {p3=location;return true}
+   clip_data=split(location,"/");
+   if(matches(clip_data[6],".*13\\..*|.*100\\..*")or matches(clip_data[6],".*(%[0-9A-Fa-f]{2}).*")) {
+   
+      p2="clean";
+      p3=replaceAll(clip_data[6],"'","");}
+   
+   else {
+   
+      p3=location
+   }
+   return true
+}
+return false</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>MULTI-SEND</name>
+    <expression>if(stream_uris!=null) {
+
+   if(data_string!=null) {stream_uri=data_string;}
+   p1="sendfile";
+   return true
+}
+return false</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -2679,6 +2759,25 @@ return false</expression>
     <useDefaultName>false</useDefaultName>
     <name>SHA?</name>
     <expression>contains(response,"Invalid request")</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>SINGLE-SEND</name>
+    <expression>if(stream_uri!=null or data_string!=null) {
+
+   if(data_string!=null) {stream_uri=data_string;}
+   p1="sendfile";
+   return true
+}
+return false</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>SKIP / CONFIG</name>
+    <expression>url="http://{global_device['ipaddress']}/automagic";
+to_device=removeElementValue(newList("alioth","cupid"), global_device["device"])[0];
+
+skip==true</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -3268,7 +3367,7 @@ sleep(500);</script>
   <action type="execute_root_command">
     <useDefaultName>false</useDefaultName>
     <name>  CP  </name>
-    <command>cp {result[0]} /storage/emulated/0/Android/application/RESOURCE/ZIPFILE/{result[1]}</command>
+    <command>cp '{result[0]}' '/storage/emulated/0/Android/application/RESOURCE/ZIPFILE/{result[1]}'</command>
     <user></user>
     <seContext></seContext>
     <workingDirectory></workingDirectory>
@@ -4789,71 +4888,6 @@ data=toJSON(newMapFromValues("method",p1,"content",p2,"description",p3,"script",
 
 
 triggertime=getDate();</script>
-  </action>
-  <action type="script">
-    <useDefaultName>false</useDefaultName>
-    <name>CONFIG4</name>
-    <script>url="http://{global_device['ipaddress']}/automagic";
-to_device=removeElementValue(newList("alioth","cupid"), global_device["device"])[0];
-
-
-if(skip==true) {return}
-
-if(contains(text,"maps.app.goo.gl")) {
-
-   p1="gmap";
-   p2="raw";
-   p3=findAll(text,"http.*")[0];}
-
-if(contains(text,"+66") or length(text)==12) {
-
-      p1="call";
-      p3=text;}
-
-
-
-if(stream_uri!=null or stream_uris!=null or data_string!=null) {
-
-   if(data_string!=null) {stream_uri=data_string;}
-   p1="sendfile";
-}
-
-
-
-
-
-if(p1=="gmap") {
-
-   for (i in [1 to 10]){
-   
-      connection=callJavaMethod(callJavaConstructor("java.net.URL", "URL(java.lang.String)",p3), "java.net.URL", "openConnection()");
-      callJavaMethod(connection, "java.net.HttpURLConnection", "setInstanceFollowRedirects(boolean)", false);
-      callJavaMethod(connection, "java.net.HttpURLConnection", "setRequestMethod(java.lang.String)", "GET");
-      code=callJavaMethod(connection, "java.net.HttpURLConnection", "getResponseCode()");
-   
-      if(code==302) {
-   
-         location=replaceAll(callJavaMethod(connection, "java.net.URLConnection", "getHeaderField(java.lang.String)", "location"),".*continue=","");
-         break}
-
-      if(i&gt;=10) {
-         return
-      }
-   }
-   
-   
-   if(contains(location,"place")) {p3=location;return true}
-   clip_data=split(location,"/");
-   if(matches(clip_data[6],".*13\\..*|.*100\\..*")or matches(clip_data[6],".*(%[0-9A-Fa-f]{2}).*")) {
-   
-      p2="clean";
-      p3=replaceAll(clip_data[6],"'","");}
-   
-   else {
-   
-      p3=location
-   }
-}</script>
   </action>
   <action type="control_user_interface">
     <useDefaultName>true</useDefaultName>
@@ -18077,7 +18111,7 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
   <flow type="flow">
     <name>11: IPCONFIG</name>
     <description>2.00 alpha-version</description>
-    <group>          ♻️  TKH-SYSTEM</group>
+    <group>Old</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <notecontainer id="t1" x="-175.0" y="-157.5" w="140.0" h="105.0">TKH-ALIOTH
@@ -18119,143 +18153,94 @@ TKH-CUPID</notecontainer>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <triggercontainer id="t1" x="-910.0" y="-8137.5">
+    <actioncontainer id="t1" x="-1470.0" y="-3307.5">TEMPLATE 
+HTTP</actioncontainer>
+    <actioncontainer id="t2" x="-1470.0" y="-3202.5">TEMPLATE 
+HTTP / POST</actioncontainer>
+    <conditioncontainer id="t3" x="-1330.0" y="-3062.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t4" x="-1330.0" y="-3482.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
+    <actioncontainer id="t5" x="-1715.0" y="-3132.5">TEMPLATทE 
+HTTP</actioncontainer>
+    <actioncontainer id="t6" x="-1610.0" y="-2957.5">TEMPLATE 
+HTTP</actioncontainer>
+    <actioncontainer id="t7" x="-1820.0" y="-2887.5">CONFIG</actioncontainer>
+    <actioncontainer id="t8" x="-1540.0" y="-2852.5">TEMPLATE 
+HTTP / POST</actioncontainer>
+    <actioncontainer id="t9" x="-1400.0" y="-2712.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
+    <conditioncontainer id="t10" x="-1470.0" y="-2537.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t11" x="-1400.0" y="-3412.5">TEST
+KILLAPPS</actioncontainer>
+    <actioncontainer id="t12" x="-1645.0" y="-8802.5">LS</actioncontainer>
+    <actioncontainer id="t13" x="-1645.0" y="-8907.5">UNZIP</actioncontainer>
+    <actioncontainer id="t14" x="-700.0" y="-8732.5">00: SERVICES</actioncontainer>
+    <conditioncontainer id="t15" x="-910.0" y="-8732.5">IP!?</conditioncontainer>
+    <conditioncontainer id="t16" x="-910.0" y="-8452.5">SKIP / CONFIG</conditioncontainer>
+    <conditioncontainer id="t17" x="69.99998" y="-8452.5">CALL</conditioncontainer>
+    <conditioncontainer id="t18" x="420.0" y="-8452.5">MAPS</conditioncontainer>
+    <actioncontainer id="t19" x="-700.0" y="-6142.5">TOAST</actioncontainer>
+    <actioncontainer id="t20" x="-490.00006" y="-6142.5">HTTP FILESEND</actioncontainer>
+    <actioncontainer id="t21" x="-910.0" y="-5862.5">RESPONSE</actioncontainer>
+    <conditioncontainer id="t22" x="-910.0" y="-6002.5">RE?</conditioncontainer>
+    <actioncontainer id="t23" x="-910.0" y="-6142.5">HTTP SEND</actioncontainer>
+    <conditioncontainer id="t24" x="-665.0" y="-8452.5">SINGLE-SEND</conditioncontainer>
+    <conditioncontainer id="t25" x="-245.00003" y="-8452.5">MULTI-SEND</conditioncontainer>
+    <conditioncontainer id="t26" x="1330.0" y="-6702.5">INDEX</conditioncontainer>
+    <actioncontainer id="t27" x="1295.0" y="-6702.5">QUERY</actioncontainer>
+    <conditioncontainer id="t28" x="1295.0" y="-6597.5">NOT ACCESS </conditioncontainer>
+    <conditioncontainer id="t29" x="1295.0" y="-6597.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t30" x="1295.0" y="-6562.5">CP</actioncontainer>
+    <conditioncontainer id="t31" x="1260.0" y="-6562.5">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t32" x="1400.0" y="-6737.5">INDEX</conditioncontainer>
+    <notecontainer id="t33" x="-1662.5" y="-9905.0" w="455.0" h="70.0">MULTI / IMAGE</notecontainer>
+    <actioncontainer id="t34" x="-245.00006" y="-8207.5">C-FOL</actioncontainer>
+    <conditioncontainer id="t35" x="-245.00006" y="-8032.5005">FOR MULTI</conditioncontainer>
+    <actioncontainer id="t36" x="-524.99994" y="-8032.5005"> QUERY </actioncontainer>
+    <actioncontainer id="t37" x="-245.00006" y="-7822.5">ZIP</actioncontainer>
+    <triggercontainer id="t38" x="-910.00006" y="-8942.5">
       <trigger>MULTI</trigger>
       <trigger>SINGLE</trigger>
     </triggercontainer>
-    <actioncontainer id="t2" x="-1470.0" y="-3307.5">TEMPLATE 
-HTTP</actioncontainer>
-    <actioncontainer id="t3" x="-1470.0" y="-3202.5">TEMPLATE 
-HTTP / POST</actioncontainer>
-    <conditioncontainer id="t4" x="-1330.0" y="-3062.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t5" x="-1330.0" y="-3482.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
-    <actioncontainer id="t6" x="-1715.0" y="-3132.5">TEMPLATทE 
-HTTP</actioncontainer>
-    <actioncontainer id="t7" x="-1610.0" y="-2957.5">TEMPLATE 
-HTTP</actioncontainer>
-    <actioncontainer id="t8" x="-1820.0" y="-2887.5">CONFIG</actioncontainer>
-    <actioncontainer id="t9" x="-1540.0" y="-2852.5">TEMPLATE 
-HTTP / POST</actioncontainer>
-    <actioncontainer id="t10" x="-1400.0" y="-2712.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
-    <conditioncontainer id="t11" x="-1470.0" y="-2537.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t12" x="-1400.0" y="-3412.5">TEST
-KILLAPPS</actioncontainer>
-    <notecontainer id="t13" x="1627.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK START:
--type: command
--method: mock_start
--content: 13.000,100.000
--response: true
-|
-|
-|=&gt; *ok</notecontainer>
-    <notecontainer id="t14" x="1942.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK STOP:
--type: command
--method: mock_stop
--response: true
-|
-|
-|=&gt; *ok</notecontainer>
-    <notecontainer id="t15" x="2257.5" y="-7385.0" w="315.0" h="210.0">(AL) MOCK GET:
--type: command
--method: mock_get
--response: true
-|
-|
-|=&gt; activate
- =&gt; lat, lon
-</notecontainer>
-    <notecontainer id="t16" x="1627.5" y="-7175.0" w="315.0" h="210.0">PUT-BLUETOOTH
--type: command
--method: put_bluetooth
--response: true
-|
-|
-|=&gt; *ok</notecontainer>
-    <notecontainer id="t17" x="1627.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SQLITE
--type: command
--method: al_put$sqlite
--response: true
-|
-|
-|=&gt; upload sqlite~link 
- =&gt; send link</notecontainer>
-    <notecontainer id="t18" x="1942.5" y="-6947.5" w="315.0" h="245.0">(AL) PUT-SPFDB
--type: command
--method: al_put$spfdb
--response: true
-|
-|
-|=&gt; send spfdb</notecontainer>
-    <notecontainer id="t19" x="1942.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-DB
-
-type: command
-method: cp_send$spfdb</notecontainer>
-    <notecontainer id="t20" x="1627.5" y="-6755.0" w="315.0" h="140.0">CP# SEND-SQLITE
-
-type: job_command
-method: cp_send$spfdb</notecontainer>
-    <notecontainer id="t21" x="1627.5" y="-7595.0" w="315.0" h="210.0">(AL) KILLALL:
--type: command
--method: killall
--response: true
-|
-|
-|=&gt; *ok</notecontainer>
-    <actioncontainer id="t22" x="700.0" y="-6597.5">CP</actioncontainer>
-    <conditioncontainer id="t23" x="700.0" y="-6737.5">NOT ACCESS </conditioncontainer>
-    <conditioncontainer id="t24" x="700.0" y="-6422.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t25" x="-910.0" y="-7122.5">RE?</conditioncontainer>
-    <actioncontainer id="t26" x="-910.0" y="-6982.5">RESPONSE</actioncontainer>
-    <actioncontainer id="t27" x="-700.0" y="-7262.5">TOAST</actioncontainer>
-    <conditioncontainer id="t28" x="665.0" y="-6982.5">INDEX</conditioncontainer>
-    <conditioncontainer id="t29" x="665.0" y="-7052.5">INDEX</conditioncontainer>
-    <actioncontainer id="t30" x="665.0" y="-6877.5">QUERY</actioncontainer>
-    <conditioncontainer id="t31" x="700.0" y="-6772.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t32" x="-910.0" y="-7262.5">HTTP SEND</actioncontainer>
-    <actioncontainer id="t33" x="-490.0" y="-7087.5"> WAIT-SEND</actioncontainer>
-    <actioncontainer id="t34" x="-490.0" y="-6982.5">NTFY.ATTACH</actioncontainer>
-    <actioncontainer id="t35" x="-490.0" y="-7262.5">HTTP FILESEND</actioncontainer>
-    <conditioncontainer id="t36" x="-910.0" y="-7437.5">CMD / FILE</conditioncontainer>
-    <actioncontainer id="t37" x="-700.0" y="-7857.5">00: SERVICES</actioncontainer>
-    <actioncontainer id="t38" x="-910.0" y="-7612.5">CONFIG4</actioncontainer>
-    <conditioncontainer id="t39" x="-910.0" y="-7857.5">IP?</conditioncontainer>
-    <conditioncontainer id="t40" x="-1645.0" y="-9397.5">FOR MULTI</conditioncontainer>
-    <actioncontainer id="t41" x="-1925.0" y="-9292.5">  CP  </actioncontainer>
-    <actioncontainer id="t42" x="-1925.0" y="-9187.5">TEST  </actioncontainer>
-    <actioncontainer id="t43" x="-1925.0" y="-9397.5"> QUERY </actioncontainer>
-    <notecontainer id="t44" x="-1662.5" y="-9905.0" w="455.0" h="70.0">MULTI / IMAGE</notecontainer>
-    <actioncontainer id="t45" x="-1645.0" y="-9572.5">C-FOL</actioncontainer>
-    <actioncontainer id="t46" x="-1645.0" y="-9187.5">ZIP</actioncontainer>
-    <actioncontainer id="t47" x="-1645.0" y="-9082.5">DEL-FOL</actioncontainer>
-    <actioncontainer id="t48" x="-1645.0" y="-8802.5">LS</actioncontainer>
-    <actioncontainer id="t49" x="-1645.0" y="-8907.5">UNZIP</actioncontainer>
-    <connection from="t1" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t26" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t29" to="t30" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t29" to="t31" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t39" x="-490.00006" y="-5862.5">NTFY.ATTACH</actioncontainer>
+    <actioncontainer id="t40" x="-490.00006" y="-5967.5"> WAIT-SEND</actioncontainer>
+    <actioncontainer id="t41" x="-524.99994" y="-7927.5">  CP  </actioncontainer>
+    <actioncontainer id="t42" x="-489.99994" y="-7647.5">TEST  </actioncontainer>
+    <actioncontainer id="t43" x="-245.00006" y="-7717.5">DEL-FOL</actioncontainer>
+    <conditioncontainer id="t44" x="-910.0" y="-6527.5">CMD / FILE</conditioncontainer>
+    <connection from="t13" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t14" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t15" to="t16" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t44" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t24" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t17" to="t18" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t17" to="t44" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t18" to="t44" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t20" to="t19" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t20" to="t40" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t21" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t23" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t23" to="t19" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t24" to="t44" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t25" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t25" to="t17" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t25" to="t34" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t26" to="t27" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t26" to="t29" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t27" to="t29" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t28" to="t30" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t30" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t32" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t32" to="t27" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t33" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t27" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t35" to="t27" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t35" to="t33" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t36" to="t32" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t36" to="t35" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t37" to="t38" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t38" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t39" to="t38" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t39" to="t37" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t40" to="t43" type="TRUE" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t40" to="t46" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t34" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t35" to="t36" type="TRUE" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t35" to="t37" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t36" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t37" to="t43" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t38" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t39" to="t19" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t40" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t41" to="t42" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t42" to="t40" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t43" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t45" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t46" to="t47" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t49" to="t48" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t42" to="t35" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t43" to="t44" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t44" to="t23" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t44" to="t20" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>13: RECEIVED</name>
@@ -18362,6 +18347,19 @@ method: cp_send$spfdb</notecontainer>
     <actioncontainer id="t3" x="70.0" y="367.5">Message Dialog: Time Out!! Response </actioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>15:  CONTROL MENU</name>
+    <description>0.00 </description>
+    <group>          ♻️  TKH-SYSTEM</group>
+    <enabled>false</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <triggercontainer id="t1" x="70.0" y="52.5" />
+    <notecontainer id="t2" x="175.0" y="210.0" w="350.0" h="140.0">:  TURN-ON
+:  GET-LOCATION
+:  MOCK-LOCATION (START-STOP)
+:  RESTART
+:  KILL-SPF</notecontainer>
   </flow>
   <flow type="flow">
     <name>31-</name>
