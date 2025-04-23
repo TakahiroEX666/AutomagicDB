@@ -1748,33 +1748,6 @@ return false</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
-    <name>CMD / FILE</name>
-    <expression>
-
-
-
-
-
-
-
-
-
-
-
-data=toJSON(newMapFromValues(
-"type",p1,
-"method",p2,
-"content",p3,
-"script",p4,
-"response",p5));
-
-
-
-
-return true</expression>
-  </condition>
-  <condition type="expression">
-    <useDefaultName>false</useDefaultName>
     <name>COLUMN</name>
     <expression>if(index==null) {index=0}
 else if(index&lt;length(file_text)-1){index=index+1}
@@ -2568,8 +2541,7 @@ return false</expression>
     <name>MULTI-SEND</name>
     <expression>if(stream_uris!=null) {
 
-   if(data_string!=null) {stream_uri=data_string;}
-   p1="sendfile";
+   
    return true
 }
 return false</expression>
@@ -3389,7 +3361,13 @@ sleep(500);</script>
   <action type="script">
     <useDefaultName>false</useDefaultName>
     <name>  X. </name>
-    <script>if(stream_uris!=null) {
+    <script>p1="sendfile";
+
+
+
+
+
+if(stream_uris!=null) {
 
    method="";
    stream_uri="/storage/emulated/0/Android/application/RESOURCE/ZIPFILE.ZIP";
@@ -5412,8 +5390,8 @@ log(subdistrict[i]);
   </action>
   <action type="execute_flows">
     <useDefaultName>true</useDefaultName>
-    <name>Execute Flows: 12: SENDER</name>
-    <includeFlowNamePatternList>12: SENDER</includeFlowNamePatternList>
+    <name>Execute Flows: 12: SENDER / MENULIST</name>
+    <includeFlowNamePatternList>12: SENDER / MENULIST</includeFlowNamePatternList>
     <excludeFlowNamePatternList></excludeFlowNamePatternList>
     <skipDisabledFlowsWithoutError>false</skipDisabledFlowsWithoutError>
     <waitForFlowsToFinish>false</waitForFlowsToFinish>
@@ -5577,7 +5555,7 @@ log(subdistrict[i]);
   <action type="execute_flows">
     <useDefaultName>false</useDefaultName>
     <name>EXECUTE SENDER</name>
-    <includeFlowNamePatternList>12: SENDER</includeFlowNamePatternList>
+    <includeFlowNamePatternList>12: SENDER / MENULIST</includeFlowNamePatternList>
     <excludeFlowNamePatternList></excludeFlowNamePatternList>
     <skipDisabledFlowsWithoutError>false</skipDisabledFlowsWithoutError>
     <waitForFlowsToFinish>false</waitForFlowsToFinish>
@@ -6807,8 +6785,8 @@ cookie: shopee_token=EDZgG8Wn73Ks2NNYykVsWydXSF4zSB5+TTECHKR8OGZ52rH8Jr76RWPznl9
     <binaryContentType>application/octet-stream</binaryContentType>
     <binaryFilePath>/storage/emulated/0/chat_1412752913</binaryFilePath>
     <timeout>60000</timeout>
-    <setCustomHTTPHeaders>false</setCustomHTTPHeaders>
-    <customHTTPHeaders></customHTTPHeaders>
+    <setCustomHTTPHeaders>true</setCustomHTTPHeaders>
+    <customHTTPHeaders>test: 555</customHTTPHeaders>
     <storeInVariable>true</storeInVariable>
     <variable>response</variable>
     <encoding>UTF-8</encoding>
@@ -7317,6 +7295,35 @@ user-agent: okhttp/4.4.0</customHTTPHeaders>
   </action>
   <action type="http_request">
     <useDefaultName>true</useDefaultName>
+    <name>HTTP Request: POST https://uguu.se/upload.php multipart/form-data app-release.apk store in response</name>
+    <url>https://uguu.se/upload.php</url>
+    <verifyCertificates>true</verifyCertificates>
+    <basicAuthentication>false</basicAuthentication>
+    <username></username>
+    <clientCert>false</clientCert>
+    <clientCertPath></clientCertPath>
+    <httpMethod>POST</httpMethod>
+    <networkType>DEFAULT</networkType>
+    <httpContentType>FORM_DATA_FILE_UPLOAD</httpContentType>
+    <contentType>text/plain</contentType>
+    <generalTextData></generalTextData>
+    <formFieldList>Lastname=XYZ,Firstname=ABC</formFieldList>
+    <uploadFieldName>upload_field</uploadFieldName>
+    <uploadFilePath>/storage/emulated/0/Download/app-release.apk</uploadFilePath>
+    <binaryContentType>application/octet-stream</binaryContentType>
+    <binaryFilePath></binaryFilePath>
+    <timeout>60000</timeout>
+    <setCustomHTTPHeaders>false</setCustomHTTPHeaders>
+    <customHTTPHeaders></customHTTPHeaders>
+    <storeInVariable>true</storeInVariable>
+    <variable>response</variable>
+    <encoding></encoding>
+    <path>/storage/emulated/0/Download/file.bin</path>
+    <followRedirects>true</followRedirects>
+    <skipConnectivityCheck>false</skipConnectivityCheck>
+  </action>
+  <action type="http_request">
+    <useDefaultName>true</useDefaultName>
     <name>HTTP Request: POST https://workflowy.com/api/bullets/create/ text/plain {json} store in response</name>
     <url>https://workflowy.com/api/bullets/create/</url>
     <verifyCertificates>true</verifyCertificates>
@@ -7376,7 +7383,20 @@ user-agent: okhttp/4.4.0</customHTTPHeaders>
   <action type="script">
     <useDefaultName>false</useDefaultName>
     <name>HTTP SEND</name>
-    <script>if(global_device["ipaddress"]==null) {
+    <script>
+data=toJSON(newMapFromValues(
+"type",p1,
+"method",p2,
+"content",p3,
+"script",p4,
+"response",p5));
+
+
+
+
+
+
+if(global_device["ipaddress"]==null) {
 
    connection=callJavaMethod(callJavaConstructor("java.net.URL","URL(java.lang.String)",
    callJavaConstructor("java.net.URL", "URL(java.lang.String)","https://ntfy.sh/to{to_device}")), "java.net.URL", "openConnection()");
@@ -8768,9 +8788,10 @@ while(true) {
     <uploadFilePath>{stream_uri}</uploadFilePath>
     <binaryContentType>application/octet-stream</binaryContentType>
     <binaryFilePath>{stream_uri}</binaryFilePath>
-    <timeout>60000</timeout>
+    <timeout>20000</timeout>
     <setCustomHTTPHeaders>true</setCustomHTTPHeaders>
-    <customHTTPHeaders>Filename: {subject}</customHTTPHeaders>
+    <customHTTPHeaders>Filename: {subject}
+Message: 500</customHTTPHeaders>
     <storeInVariable>true</storeInVariable>
     <variable>response</variable>
     <encoding>UTF-8</encoding>
@@ -18162,101 +18183,108 @@ TKH-CUPID</notecontainer>
     <connection from="t12" to="t11" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
-    <name>12: SENDER</name>
-    <description> </description>
+    <name>12: SENDER / MENULIST</name>
+    <description>0.54 alpha-version</description>
     <group>          ♻️  TKH-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <triggercontainer id="t1" x="-910.0" y="-8942.5">
+    <actioncontainer id="t1" x="-1470.0" y="-3307.5">TEMPLATE 
+HTTP</actioncontainer>
+    <actioncontainer id="t2" x="-1470.0" y="-3202.5">TEMPLATE 
+HTTP / POST</actioncontainer>
+    <conditioncontainer id="t3" x="-1330.0" y="-3062.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t4" x="-1330.0" y="-3482.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
+    <actioncontainer id="t5" x="-1715.0" y="-3132.5">TEMPLATทE 
+HTTP</actioncontainer>
+    <actioncontainer id="t6" x="-1610.0" y="-2957.5">TEMPLATE 
+HTTP</actioncontainer>
+    <actioncontainer id="t7" x="-1820.0" y="-2887.5">CONFIG</actioncontainer>
+    <actioncontainer id="t8" x="-1540.0" y="-2852.5">TEMPLATE 
+HTTP / POST</actioncontainer>
+    <actioncontainer id="t9" x="-1400.0" y="-2712.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
+    <conditioncontainer id="t10" x="-1470.0" y="-2537.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t11" x="-1400.0" y="-3412.5">TEST
+KILLAPPS</actioncontainer>
+    <actioncontainer id="t12" x="-1645.0" y="-8802.5">LS</actioncontainer>
+    <actioncontainer id="t13" x="-1645.0" y="-8907.5">UNZIP</actioncontainer>
+    <actioncontainer id="t14" x="-700.0" y="-8732.5">00: SERVICES</actioncontainer>
+    <conditioncontainer id="t15" x="-910.0" y="-8732.5">IP!?</conditioncontainer>
+    <conditioncontainer id="t16" x="1330.0" y="-6702.5">INDEX</conditioncontainer>
+    <actioncontainer id="t17" x="1295.0" y="-6702.5">QUERY</actioncontainer>
+    <conditioncontainer id="t18" x="1295.0" y="-6597.5">NOT ACCESS </conditioncontainer>
+    <conditioncontainer id="t19" x="1295.0" y="-6597.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t20" x="1295.0" y="-6562.5">CP</actioncontainer>
+    <conditioncontainer id="t21" x="1260.0" y="-6562.5">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t22" x="1400.0" y="-6737.5">INDEX</conditioncontainer>
+    <notecontainer id="t23" x="-1662.5" y="-9905.0" w="455.0" h="70.0">MULTI / IMAGE</notecontainer>
+    <conditioncontainer id="t24" x="-910.0" y="-8452.5">SKIP / CONFIG</conditioncontainer>
+    <conditioncontainer id="t25" x="-700.0" y="-8452.5">CALL</conditioncontainer>
+    <conditioncontainer id="t26" x="-490.00006" y="-8452.5">MAPS</conditioncontainer>
+    <notecontainer id="t27" x="-1120.0" y="-9310.0" w="350.0" h="140.0">:  TURN-ON
+:  GET-LOCATION
+:  MOCK-LOCATION (START-STOP)
+:  RESTART
+:  KILL-SPF</notecontainer>
+    <actioncontainer id="t28" x="-910.0" y="-7087.5">HTTP SEND</actioncontainer>
+    <conditioncontainer id="t29" x="-1295.0" y="-6737.5">RE?</conditioncontainer>
+    <actioncontainer id="t30" x="-1295.0" y="-6562.5">RESPONSE</actioncontainer>
+    <actioncontainer id="t31" x="525.0001" y="-8207.502">C-FOL</actioncontainer>
+    <conditioncontainer id="t32" x="525.0" y="-8032.5">FOR MULTI</conditioncontainer>
+    <actioncontainer id="t33" x="209.99998" y="-8032.5"> QUERY </actioncontainer>
+    <actioncontainer id="t34" x="210.0" y="-7927.5">  CP  </actioncontainer>
+    <actioncontainer id="t35" x="209.99997" y="-7822.5">TEST  </actioncontainer>
+    <actioncontainer id="t36" x="525.00006" y="-7822.5">ZIP</actioncontainer>
+    <actioncontainer id="t37" x="525.0001" y="-7717.5">DEL-FOL</actioncontainer>
+    <conditioncontainer id="t38" x="6.866455E-5" y="-8452.5">SINGLE-SEND</conditioncontainer>
+    <conditioncontainer id="t39" x="525.00006" y="-8452.5">MULTI-SEND</conditioncontainer>
+    <actioncontainer id="t40" x="-420.00006" y="-6527.5">TOAST</actioncontainer>
+    <actioncontainer id="t41" x="245.00003" y="-7087.5">HTTP FILESEND</actioncontainer>
+    <actioncontainer id="t42" x="-8.392334E-5" y="-7262.5">  X. </actioncontainer>
+    <actioncontainer id="t43" x="1.1444092E-5" y="-6877.5"> WAIT-SEND</actioncontainer>
+    <actioncontainer id="t44" x="-1.1444092E-5" y="-6772.5">NTFY.ATTACH</actioncontainer>
+    <conditioncontainer id="t45" x="35.0" y="-6492.5">     DEBUG    </conditioncontainer>
+    <triggercontainer id="t46" x="-945.0" y="-9117.5">
       <trigger>MULTI</trigger>
       <trigger>SINGLE</trigger>
     </triggercontainer>
-    <actioncontainer id="t2" x="-1470.0" y="-3307.5">TEMPLATE 
-HTTP</actioncontainer>
-    <actioncontainer id="t3" x="-1470.0" y="-3202.5">TEMPLATE 
-HTTP / POST</actioncontainer>
-    <conditioncontainer id="t4" x="-1330.0" y="-3062.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t5" x="-1330.0" y="-3482.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
-    <actioncontainer id="t6" x="-1715.0" y="-3132.5">TEMPLATทE 
-HTTP</actioncontainer>
-    <actioncontainer id="t7" x="-1610.0" y="-2957.5">TEMPLATE 
-HTTP</actioncontainer>
-    <actioncontainer id="t8" x="-1820.0" y="-2887.5">CONFIG</actioncontainer>
-    <actioncontainer id="t9" x="-1540.0" y="-2852.5">TEMPLATE 
-HTTP / POST</actioncontainer>
-    <actioncontainer id="t10" x="-1400.0" y="-2712.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
-    <conditioncontainer id="t11" x="-1470.0" y="-2537.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t12" x="-1400.0" y="-3412.5">TEST
-KILLAPPS</actioncontainer>
-    <actioncontainer id="t13" x="-1645.0" y="-8802.5">LS</actioncontainer>
-    <actioncontainer id="t14" x="-1645.0" y="-8907.5">UNZIP</actioncontainer>
-    <actioncontainer id="t15" x="-700.0" y="-8732.5">00: SERVICES</actioncontainer>
-    <conditioncontainer id="t16" x="-910.0" y="-8732.5">IP!?</conditioncontainer>
-    <conditioncontainer id="t17" x="-910.0" y="-8452.5">SKIP / CONFIG</conditioncontainer>
-    <conditioncontainer id="t18" x="70.0" y="-8452.5">CALL</conditioncontainer>
-    <conditioncontainer id="t19" x="420.0" y="-8452.5">MAPS</conditioncontainer>
-    <actioncontainer id="t20" x="-700.0" y="-6142.5">TOAST</actioncontainer>
-    <actioncontainer id="t21" x="-910.0" y="-5862.5">RESPONSE</actioncontainer>
-    <conditioncontainer id="t22" x="-910.0" y="-6002.5">RE?</conditioncontainer>
-    <actioncontainer id="t23" x="-910.0" y="-6142.5">HTTP SEND</actioncontainer>
-    <conditioncontainer id="t24" x="1330.0" y="-6702.5">INDEX</conditioncontainer>
-    <actioncontainer id="t25" x="1295.0" y="-6702.5">QUERY</actioncontainer>
-    <conditioncontainer id="t26" x="1295.0" y="-6597.5">NOT ACCESS </conditioncontainer>
-    <conditioncontainer id="t27" x="1295.0" y="-6597.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t28" x="1295.0" y="-6562.5">CP</actioncontainer>
-    <conditioncontainer id="t29" x="1260.0" y="-6562.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t30" x="1400.0" y="-6737.5">INDEX</conditioncontainer>
-    <notecontainer id="t31" x="-1662.5" y="-9905.0" w="455.0" h="70.0">MULTI / IMAGE</notecontainer>
-    <actioncontainer id="t32" x="-245.0" y="-8207.5">C-FOL</actioncontainer>
-    <actioncontainer id="t33" x="-525.0" y="-8032.5"> QUERY </actioncontainer>
-    <actioncontainer id="t34" x="-525.0" y="-7927.5">  CP  </actioncontainer>
-    <actioncontainer id="t35" x="-525.0" y="-7822.5">TEST  </actioncontainer>
-    <conditioncontainer id="t36" x="-245.0" y="-8452.5">MULTI-SEND</conditioncontainer>
-    <conditioncontainer id="t37" x="-245.0" y="-8032.5">FOR MULTI</conditioncontainer>
-    <conditioncontainer id="t38" x="-665.0" y="-8452.5">SINGLE-SEND</conditioncontainer>
-    <actioncontainer id="t39" x="-245.0" y="-7717.5">DEL-FOL</actioncontainer>
-    <actioncontainer id="t40" x="-245.0" y="-7822.5">ZIP</actioncontainer>
-    <actioncontainer id="t41" x="-175.0" y="-6142.5"> WAIT-SEND</actioncontainer>
-    <actioncontainer id="t42" x="-175.00002" y="-5932.5">NTFY.ATTACH</actioncontainer>
-    <actioncontainer id="t43" x="-139.99998" y="-6387.5">HTTP FILESEND</actioncontainer>
-    <conditioncontainer id="t44" x="-910.0" y="-7192.5">CMD / FILE</conditioncontainer>
-    <actioncontainer id="t45" x="-665.0001" y="-7192.5">  X. </actioncontainer>
-    <connection from="t1" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t14" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t16" to="t15" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <conditioncontainer id="t47" x="-1190.0" y="-8627.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t48" x="-1260.0" y="-8872.5">HTTP Request: POST https://uguu.se/upload.php multipart/form-data app-release.apk store in response</actioncontainer>
+    <connection from="t13" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t14" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t15" to="t24" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t16" to="t17" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t17" to="t44" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t17" to="t38" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t18" to="t19" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t18" to="t44" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t19" to="t44" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t21" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t20" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t24" to="t25" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t24" to="t27" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t19" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t17" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t18" to="t20" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t20" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t25" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t24" to="t28" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t26" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t25" to="t28" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t26" to="t38" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t26" to="t28" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t28" to="t29" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t32" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t28" to="t29" type="NORMAL" sourcePosition="WEST" targetPosition="NORTH" />
+    <connection from="t28" to="t40" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t29" to="t30" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t31" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t32" to="t33" type="TRUE" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t32" to="t36" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t33" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t34" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t35" to="t37" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t36" to="t18" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t36" to="t32" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t37" to="t33" type="TRUE" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t37" to="t40" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t38" to="t36" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t38" to="t45" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t39" to="t45" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t40" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t41" to="t42" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t42" to="t20" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t43" to="t20" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t43" to="t41" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t44" to="t23" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t45" to="t43" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t35" to="t32" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t36" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t37" to="t42" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t38" to="t39" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t38" to="t42" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t39" to="t31" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t41" to="t43" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t42" to="t43" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t43" to="t44" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t44" to="t40" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t44" to="t45" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t46" to="t48" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t48" to="t47" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>13: RECEIVED</name>
@@ -18307,7 +18335,7 @@ KILLAPPS</actioncontainer>
     <actioncontainer id="t36" x="735.0" y="-2642.5">DOCS</actioncontainer>
     <actioncontainer id="t37" x="910.0" y="-2642.5">XML</actioncontainer>
     <conditioncontainer id="t38" x="-630.0" y="-2747.5">RESPONSE </conditioncontainer>
-    <actioncontainer id="t39" x="-630.0" y="-2572.5">Execute Flows: 12: SENDER</actioncontainer>
+    <actioncontainer id="t39" x="-630.0" y="-2572.5">Execute Flows: 12: SENDER / MENULIST</actioncontainer>
     <actioncontainer id="t40" x="-1330.0" y="-4007.5">RM-NTFY</actioncontainer>
     <conditioncontainer id="t41" x="-1120.0" y="-3132.5">INCOMING</conditioncontainer>
     <conditioncontainer id="t42" x="-1120.0" y="-3552.5">POST</conditioncontainer>
@@ -18363,19 +18391,6 @@ KILLAPPS</actioncontainer>
     <actioncontainer id="t3" x="70.0" y="367.5">Message Dialog: Time Out!! Response </actioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
-    <name>15:  CONTROL MENU</name>
-    <description>0.00 </description>
-    <group>          ♻️  TKH-SYSTEM</group>
-    <enabled>false</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5" />
-    <notecontainer id="t2" x="175.0" y="210.0" w="350.0" h="140.0">:  TURN-ON
-:  GET-LOCATION
-:  MOCK-LOCATION (START-STOP)
-:  RESTART
-:  KILL-SPF</notecontainer>
   </flow>
   <flow type="flow">
     <name>31-</name>
