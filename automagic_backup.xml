@@ -229,6 +229,21 @@ NOW
   </trigger>
   <trigger type="command_output">
     <useDefaultName>true</useDefaultName>
+    <name>Command Output: logcat | grep 'StatsLog' (root) contains text </name>
+    <enabled>false</enabled>
+    <command>logcat | grep 'StatsLog'</command>
+    <root>true</root>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <textMatchType>CONTAINS_TEXT</textMatchType>
+    <containedString></containedString>
+    <skipInitialOutput>false</skipInitialOutput>
+    <skipInitialOutputMillis>5000</skipInitialOutputMillis>
+    <keepDeviceAwake>false</keepDeviceAwake>
+    <logOutput>false</logOutput>
+  </trigger>
+  <trigger type="command_output">
+    <useDefaultName>true</useDefaultName>
     <name>Command Output: resetprop -n -p persist.sys.pixelprops.google false (root) contains text </name>
     <enabled>false</enabled>
     <command>resetprop -n -p persist.sys.pixelprops.google false</command>
@@ -369,6 +384,36 @@ NOW
     <ignoreRegular>false</ignoreRegular>
     <ignoreOngoing>false</ignoreOngoing>
     <ignoreGroupSummary>false</ignoreGroupSummary>
+  </trigger>
+  <trigger type="command_output">
+    <useDefaultName>false</useDefaultName>
+    <name>LONG_BACK</name>
+    <enabled>true</enabled>
+    <command>logcat | grep 'LAUNCHER_TASKBAR_BACK_BUTTON_LONGPRESS'</command>
+    <root>true</root>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <textMatchType>CONTAINS_TEXT</textMatchType>
+    <containedString></containedString>
+    <skipInitialOutput>false</skipInitialOutput>
+    <skipInitialOutputMillis>5000</skipInitialOutputMillis>
+    <keepDeviceAwake>false</keepDeviceAwake>
+    <logOutput>false</logOutput>
+  </trigger>
+  <trigger type="command_output">
+    <useDefaultName>false</useDefaultName>
+    <name>LONG_HOME</name>
+    <enabled>true</enabled>
+    <command>logcat | grep 'LAUNCHER_TASKBAR_HOME_BUTTON_LONGPRESS'</command>
+    <root>true</root>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <textMatchType>CONTAINS_TEXT</textMatchType>
+    <containedString></containedString>
+    <skipInitialOutput>false</skipInitialOutput>
+    <skipInitialOutputMillis>5000</skipInitialOutputMillis>
+    <keepDeviceAwake>false</keepDeviceAwake>
+    <logOutput>false</logOutput>
   </trigger>
   <trigger type="app_task_ended">
     <useDefaultName>false</useDefaultName>
@@ -1461,6 +1506,13 @@ return true</expression>
 
 return false </expression>
   </condition>
+  <condition type="app_task_running">
+    <useDefaultName>true</useDefaultName>
+    <name>App Task Running: com.anydesk.anydeskandroid,io.github.muntashirakon.AppManager,com.brave.browser,io.github.tehcneko.clipboardwhitelist,com.android.backupconfirm,com.android.cts.ctsshim,com.android.cts.priv.ctsshim,com.android.imsserviceentitlement,com.android.sdksandbox,com.android.systemui.accessibility.accessibilitymenu,com.android.wifi.dialog,com.android.companiondevicemanager,com.weberdo.apps.copy,com.google.android.apps.turbo,com.google.android.apps.work.clouddpc,co.aospa.dolby.xiaomi,io.github.nitsuya.donottryaccessibility,com.shopee.foody.driver.th,com.android.dynsystem,com.android.emergency,com.google.android.apps.emojiwallpaper,co.aospa.sense,com.kooritea.fcmfix,com.google.android.documentsui,com.franco.kernel,com.google.android.inputmethod.latin,com.google.ar.core,com.android.vending,com.android1500.gpssetter,com.android.healthconnect.controller,com.tsng.hidemyapplist,io.github.auag0.imnotadeveloper,com.android.intentresolver,com.rifsxd.ksunext,com.google.audio.hearing.visualization.accessibility.scribe,com.kasikornbank.makebykbank,com.exlyo.mapmarker,com.google.android.apps.maps,com.google.android.markup,com.google.android.apps.messaging,bin.mt.plus,com.fitc.wifihotspot,com.google.android.apps.nexuslauncher,com.android.printspooler,com.google.android.as.oss,com.android.simappdialog,com.android.stk,com.google.android.tts,org.swiftapps.swiftbackup,com.android.uwb.resources,github.tornaco.android.thanos.pro,com.android.vpndialogs,com.google.android.apps.weather,com.google.android.youtube,com.android.camera,com.android.providers.calendar,com.android.devicediagnostics,com.android.carrierdefaultapp,com.google.android.accessibility.switchaccess,com.android.captiveportallogin,com.android.cellbroadcastreceiver.module,com.android.adservices.api,com.android.settings.intelligence,com.android.providers.downloads.ui,com.android.permissioncontroller,com.google.android.apps.setupwizard.searchselector,com.android.wifi.resources,com.android.connectivity.resources,com.android.providers.contacts,com.google.android.deskclock,com.google.android.gms,com.android.bips,com.google.android.settings.intelligence,com.android.phone,com.android.keychain,com.google.android.contacts,com.google.android.apps.aiwallpapers,com.google.android.apps.wallpaper,com.android.credentialmanager,com.google.android.avatarpicker,com.android.providers.media.module,com.google.android.soundpicker,com.google.android.tag,com.android.safetycenter.resources,com.google.android.dialer,com.android.server.telecom,com.google.android.keep,com.google.android.accessibility.soundamplifier,com.android.packageinstaller,com.android.certinstaller,com.android.dreams.phototable,com.android.wallpaper.livepicker,com.android.managedprovisioning,com.google.android.flipendo,com.android.mtp,com.google.android.apps.wellbeing (most recent)</name>
+    <method>CLASSIC</method>
+    <packageNameList>com.anydesk.anydeskandroid,io.github.muntashirakon.AppManager,com.brave.browser,io.github.tehcneko.clipboardwhitelist,com.android.backupconfirm,com.android.cts.ctsshim,com.android.cts.priv.ctsshim,com.android.imsserviceentitlement,com.android.sdksandbox,com.android.systemui.accessibility.accessibilitymenu,com.android.wifi.dialog,com.android.companiondevicemanager,com.weberdo.apps.copy,com.google.android.apps.turbo,com.google.android.apps.work.clouddpc,co.aospa.dolby.xiaomi,io.github.nitsuya.donottryaccessibility,com.shopee.foody.driver.th,com.android.dynsystem,com.android.emergency,com.google.android.apps.emojiwallpaper,co.aospa.sense,com.kooritea.fcmfix,com.google.android.documentsui,com.franco.kernel,com.google.android.inputmethod.latin,com.google.ar.core,com.android.vending,com.android1500.gpssetter,com.android.healthconnect.controller,com.tsng.hidemyapplist,io.github.auag0.imnotadeveloper,com.android.intentresolver,com.rifsxd.ksunext,com.google.audio.hearing.visualization.accessibility.scribe,com.kasikornbank.makebykbank,com.exlyo.mapmarker,com.google.android.apps.maps,com.google.android.markup,com.google.android.apps.messaging,bin.mt.plus,com.fitc.wifihotspot,com.google.android.apps.nexuslauncher,com.android.printspooler,com.google.android.as.oss,com.android.simappdialog,com.android.stk,com.google.android.tts,org.swiftapps.swiftbackup,com.android.uwb.resources,github.tornaco.android.thanos.pro,com.android.vpndialogs,com.google.android.apps.weather,com.google.android.youtube,com.android.camera,com.android.providers.calendar,com.android.devicediagnostics,com.android.carrierdefaultapp,com.google.android.accessibility.switchaccess,com.android.captiveportallogin,com.android.cellbroadcastreceiver.module,com.android.adservices.api,com.android.settings.intelligence,com.android.providers.downloads.ui,com.android.permissioncontroller,com.google.android.apps.setupwizard.searchselector,com.android.wifi.resources,com.android.connectivity.resources,com.android.providers.contacts,com.google.android.deskclock,com.google.android.gms,com.android.bips,com.google.android.settings.intelligence,com.android.phone,com.android.keychain,com.google.android.contacts,com.google.android.apps.aiwallpapers,com.google.android.apps.wallpaper,com.android.credentialmanager,com.google.android.avatarpicker,com.android.providers.media.module,com.google.android.soundpicker,com.google.android.tag,com.android.safetycenter.resources,com.google.android.dialer,com.android.server.telecom,com.google.android.keep,com.google.android.accessibility.soundamplifier,com.android.packageinstaller,com.android.certinstaller,com.android.dreams.phototable,com.android.wallpaper.livepicker,com.android.managedprovisioning,com.google.android.flipendo,com.android.mtp,com.google.android.apps.wellbeing</packageNameList>
+    <checkMostRecentAppTaskOnly>true</checkMostRecentAppTaskOnly>
+  </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
     <name>AREA</name>
@@ -2392,6 +2444,16 @@ take==true</expression>
 
 
 return false</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>LONG_BACK</name>
+    <expression>trigger=="LONG_BACK"</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>LONG_HOME</name>
+    <expression>trigger=="LONG_HOME"</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -5286,6 +5348,18 @@ log(subdistrict[i]);
   </action>
   <action type="execute_root_command">
     <useDefaultName>true</useDefaultName>
+    <name>Execute Root Command: am force-stop {package_name} in </name>
+    <command>am force-stop {package_name}</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
+  </action>
+  <action type="execute_root_command">
+    <useDefaultName>true</useDefaultName>
     <name>Execute Root Command: am start --user 0 -a android.intent.action.VIEW -d content://com.android.externalstorage.documents/document/primary%3Aafile.csv -t text/csv -f 269484035 in </name>
     <command>am start --user 0 -a android.intent.action.VIEW -d content://com.android.externalstorage.documents/document/primary%3Aafile.csv -t text/csv -f 269484035</command>
     <user></user>
@@ -5324,6 +5398,18 @@ log(subdistrict[i]);
     <useDefaultName>true</useDefaultName>
     <name>Execute Root Command: content query --uri content://telephony/siminfo in </name>
     <command>content query --uri content://telephony/siminfo</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
+  </action>
+  <action type="execute_root_command">
+    <useDefaultName>true</useDefaultName>
+    <name>Execute Root Command: input keyevent ASSIST in </name>
+    <command>input keyevent ASSIST</command>
     <user></user>
     <seContext></seContext>
     <workingDirectory></workingDirectory>
@@ -8416,6 +8502,22 @@ while(true) {
     <name>Notification on Screen: เพิ่ม: {clip_data}</name>
     <showText>true</showText>
     <text>เพิ่ม: {clip_data}</text>
+    <widgetName></widgetName>
+    <width></width>
+    <height></height>
+    <stretchToFillArea>false</stretchToFillArea>
+    <opacity>1.00</opacity>
+    <durationLong>false</durationLong>
+    <customPosition>false</customPosition>
+    <gravityType>TOP_LEFT</gravityType>
+    <xOffset>0</xOffset>
+    <yOffset>0</yOffset>
+  </action>
+  <action type="notification_screen">
+    <useDefaultName>true</useDefaultName>
+    <name>Notification on Screen: แอพพลิเคชั่นถูกปิด</name>
+    <showText>true</showText>
+    <text>แอพพลิเคชั่นถูกปิด</text>
     <widgetName></widgetName>
     <width></width>
     <height></height>
@@ -16107,7 +16209,7 @@ TAKE, DENY</name>
     <name>  @  ANYDESK SUPPORT</name>
     <description>     1.0 bulid 00
 </description>
-    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <group>          ♻️  TKH-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -16131,7 +16233,7 @@ TAKE, DENY</name>
     <name>  @  BATTERY STATUS</name>
     <description>     1.1 bulid 00
 </description>
-    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <group>          ♻️  TKH-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -16165,7 +16267,7 @@ TAKE, DENY</name>
     <name>  @  GITHUB API</name>
     <description>     0.4 bulid 01
 </description>
-    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <group>          ♻️  TKH-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="-70.0" y="-1697.5">
@@ -16226,7 +16328,7 @@ AUTOMAGIC</actioncontainer>
   <flow type="flow">
     <name>  @  START-BOOT</name>
     <description> </description>
-    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <group>          ♻️  TKH-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="70.0" y="-157.5">
@@ -16492,24 +16594,24 @@ TAKE, DENY</actioncontainer>
     <actioncontainer id="t12" x="2310.0" y="-402.5">BASE-CSV</actioncontainer>
     <actioncontainer id="t13" x="2450.0" y="-402.5">BASE-XML </actioncontainer>
     <actioncontainer id="t14" x="2310.0" y="-87.5">  OK  </actioncontainer>
-    <conditioncontainer id="t15" x="2310.0" y="-1592.5">EXIST?</conditioncontainer>
-    <actioncontainer id="t16" x="2310.0" y="-1172.5">SEL
+    <actioncontainer id="t15" x="2310.0" y="-1067.5">FILTER X4+CC</actioncontainer>
+    <actioncontainer id="t16" x="2310.0" y="-192.5">WRITEFILE</actioncontainer>
+    <actioncontainer id="t17" x="2310.0" y="-1172.5">SEL
 ASSIGN/CC</actioncontainer>
-    <actioncontainer id="t17" x="2310.0" y="-1067.5">FILTER X4+CC</actioncontainer>
-    <actioncontainer id="t18" x="2310.0" y="-192.5">WRITEFILE</actioncontainer>
-    <connection from="t1" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <conditioncontainer id="t18" x="2310.0" y="-1592.5">EXIST?</conditioncontainer>
+    <connection from="t1" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t8" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t10" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t12" to="t2" type="EXCEPTION" sourcePosition="WEST" targetPosition="EAST" />
     <connection from="t14" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t15" to="t16" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t16" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t17" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t18" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t17" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t18" to="t17" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#33:  LOCATION ENGINE</name>
@@ -16653,12 +16755,9 @@ AUTOFILL</actioncontainer>
     <group>         🧬  MAP SERVICES</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="-210.0" y="-2607.5">
-      <trigger>EX-MAP MAKER</trigger>
-    </triggercontainer>
-    <actioncontainer id="t2" x="245.0" y="-87.5">Start Activity: android.intent.action.VIEW {uri} </actioncontainer>
-    <actioncontainer id="t3" x="1120.0" y="577.5">LONGDO API</actioncontainer>
-    <notecontainer id="t4" x="-1277.5" y="-1085.0" w="385.0" h="210.0">results[0]
+    <actioncontainer id="t1" x="245.0" y="-87.5">Start Activity: android.intent.action.VIEW {uri} </actioncontainer>
+    <actioncontainer id="t2" x="1120.0" y="577.5">LONGDO API</actioncontainer>
+    <notecontainer id="t3" x="-1277.5" y="-1085.0" w="385.0" h="210.0">results[0]
 
 distance/1000
 time/60
@@ -16666,55 +16765,59 @@ int totalSeconds = 6676;
 int minutes = totalSeconds / 60;
 int seconds = totalSeconds % 60;
 System.out.println(minutes + " นาที " + seconds + " วินาที");</notecontainer>
-    <actioncontainer id="t5" x="-1155.0" y="-1277.5"> SELECT </actioncontainer>
-    <notecontainer id="t6" x="-1295.0" y="-2152.5" w="140.0" h="105.0">path</notecontainer>
-    <actioncontainer id="t7" x="-1295.0" y="-1977.5">Execute Root Command: ls -ltr /storage/emulated/0/ in </actioncontainer>
-    <notecontainer id="t8" x="-1382.5" y="-1872.5" w="245.0" h="35.0">ls -ltr /storage/emulated/0/</notecontainer>
-    <actioncontainer id="t9" x="-525.0" y="-2012.5">IMPORT CSVX</actioncontainer>
-    <actioncontainer id="t10" x="-525.0" y="-2222.5">4_allexport</actioncontainer>
-    <conditioncontainer id="t11" x="-525.0" y="-2397.5">MAP MAKER</conditioncontainer>
-    <conditioncontainer id="t12" x="-210.0" y="-2397.5">  
+    <actioncontainer id="t4" x="-1155.0" y="-1277.5"> SELECT </actioncontainer>
+    <notecontainer id="t5" x="-1295.0" y="-2152.5" w="140.0" h="105.0">path</notecontainer>
+    <actioncontainer id="t6" x="-1295.0" y="-1977.5">Execute Root Command: ls -ltr /storage/emulated/0/ in </actioncontainer>
+    <notecontainer id="t7" x="-1382.5" y="-1872.5" w="245.0" h="35.0">ls -ltr /storage/emulated/0/</notecontainer>
+    <actioncontainer id="t8" x="-525.0" y="-2012.5">IMPORT CSVX</actioncontainer>
+    <actioncontainer id="t9" x="-525.0" y="-2222.5">4_allexport</actioncontainer>
+    <actioncontainer id="t10" x="-210.0" y="-1277.5">1-URI</actioncontainer>
+    <actioncontainer id="t11" x="-210.0" y="-1172.5">ORS / PAR</actioncontainer>
+    <actioncontainer id="t12" x="-210.0" y="-1067.5">ORS
+(VRP)</actioncontainer>
+    <actioncontainer id="t13" x="70.0" y="-1277.5">Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST") and not contains(file_text[i][0],"FIX")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",0) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</actioncontainer>
+    <actioncontainer id="t14" x="70.0" y="-1172.5">GEOAPIFY
+(TSP)</actioncontainer>
+    <actioncontainer id="t15" x="70.0" y="-1067.5">Scripbbjt: </actioncontainer>
+    <actioncontainer id="t16" x="350.0" y="-1277.5">HERE PARAMETER</actioncontainer>
+    <actioncontainer id="t17" x="350.0" y="-1172.5">HERE API 
+(TSP)</actioncontainer>
+    <actioncontainer id="t18" x="350.0" y="-1067.5">Scripbbjt: nnj</actioncontainer>
+    <actioncontainer id="t19" x="630.0" y="-1277.5">DATA-HERzE</actioncontainer>
+    <actioncontainer id="t20" x="630.0" y="-1172.5">LONGDO
+(TSP)</actioncontainer>
+    <actioncontainer id="t21" x="630.0" y="-1067.5">Scripjjjt: response=fromJSON(response);</actioncontainer>
+    <actioncontainer id="t22" x="-210.0" y="-1872.5">CURRENT-LOC</actioncontainer>
+    <actioncontainer id="t23" x="-210.0" y="-1767.5">IMPORT CSVgg</actioncontainer>
+    <triggercontainer id="t24" x="-210.0" y="-2607.5">
+      <trigger>EX-MAP MAKER</trigger>
+    </triggercontainer>
+    <conditioncontainer id="t25" x="-210.0" y="-2397.5">  
 
 
 </conditioncontainer>
-    <actioncontainer id="t13" x="-210.0" y="-1662.5">SPLITS V3s</actioncontainer>
-    <actioncontainer id="t14" x="-210.0" y="-1277.5">1-URI</actioncontainer>
-    <actioncontainer id="t15" x="-210.0" y="-1172.5">ORS / PAR</actioncontainer>
-    <actioncontainer id="t16" x="-210.0" y="-1067.5">ORS
-(VRP)</actioncontainer>
-    <actioncontainer id="t17" x="70.0" y="-1277.5">Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST") and not contains(file_text[i][0],"FIX")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",0) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</actioncontainer>
-    <actioncontainer id="t18" x="70.0" y="-1172.5">GEOAPIFY
-(TSP)</actioncontainer>
-    <actioncontainer id="t19" x="70.0" y="-1067.5">Scripbbjt: </actioncontainer>
-    <actioncontainer id="t20" x="350.0" y="-1277.5">HERE PARAMETER</actioncontainer>
-    <actioncontainer id="t21" x="350.0" y="-1172.5">HERE API 
-(TSP)</actioncontainer>
-    <actioncontainer id="t22" x="350.0" y="-1067.5">Scripbbjt: nnj</actioncontainer>
-    <actioncontainer id="t23" x="630.0" y="-1277.5">DATA-HERzE</actioncontainer>
-    <actioncontainer id="t24" x="630.0" y="-1172.5">LONGDO
-(TSP)</actioncontainer>
-    <actioncontainer id="t25" x="630.0" y="-1067.5">Scripjjjt: response=fromJSON(response);</actioncontainer>
-    <actioncontainer id="t26" x="-210.0" y="-1872.5">CURRENT-LOC</actioncontainer>
-    <actioncontainer id="t27" x="-210.0" y="-1767.5">IMPORT CSVgg</actioncontainer>
-    <connection from="t1" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t10" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t11" type="FALSE" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t12" to="t26" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <conditioncontainer id="t26" x="-525.0" y="-2397.5">MAP MAKER</conditioncontainer>
+    <actioncontainer id="t27" x="-210.0" y="-1662.5">SPLITS V3s</actioncontainer>
+    <connection from="t9" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t14" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t15" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t16" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t17" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t18" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t19" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t18" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t19" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t20" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t21" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t21" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t23" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t24" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t26" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t27" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t26" type="FALSE" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t25" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t26" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t27" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#39: MANUAL</name>
@@ -17818,7 +17921,7 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
   <flow type="flow">
     <name>11: IPCONFIG</name>
     <description>1.1 bulid 28</description>
-    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <group>          ♻️  TKH-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="70.0" y="-52.5">
@@ -17852,7 +17955,7 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
   <flow type="flow">
     <name>12: SENDER</name>
     <description> </description>
-    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <group>          ♻️  TKH-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -17997,7 +18100,7 @@ method: cp_send$spfdb</notecontainer>
   <flow type="flow">
     <name>13: RECEIVED</name>
     <description> </description>
-    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <group>          ♻️  TKH-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -18091,7 +18194,7 @@ method: cp_send$spfdb</notecontainer>
   <flow type="flow">
     <name>14: RESPONSE</name>
     <description> </description>
-    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <group>          ♻️  TKH-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="70.0" y="52.5" />
@@ -18319,6 +18422,28 @@ MENU
     <connection from="t6" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
+    <name>Flow13</name>
+    <group>          ♻️  TKH-SYSTEM</group>
+    <enabled>true</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <conditioncontainer id="t1" x="105.00001" y="227.49997">App Task Running: com.anydesk.anydeskandroid,io.github.muntashirakon.AppManager,com.brave.browser,io.github.tehcneko.clipboardwhitelist,com.android.backupconfirm,com.android.cts.ctsshim,com.android.cts.priv.ctsshim,com.android.imsserviceentitlement,com.android.sdksandbox,com.android.systemui.accessibility.accessibilitymenu,com.android.wifi.dialog,com.android.companiondevicemanager,com.weberdo.apps.copy,com.google.android.apps.turbo,com.google.android.apps.work.clouddpc,co.aospa.dolby.xiaomi,io.github.nitsuya.donottryaccessibility,com.shopee.foody.driver.th,com.android.dynsystem,com.android.emergency,com.google.android.apps.emojiwallpaper,co.aospa.sense,com.kooritea.fcmfix,com.google.android.documentsui,com.franco.kernel,com.google.android.inputmethod.latin,com.google.ar.core,com.android.vending,com.android1500.gpssetter,com.android.healthconnect.controller,com.tsng.hidemyapplist,io.github.auag0.imnotadeveloper,com.android.intentresolver,com.rifsxd.ksunext,com.google.audio.hearing.visualization.accessibility.scribe,com.kasikornbank.makebykbank,com.exlyo.mapmarker,com.google.android.apps.maps,com.google.android.markup,com.google.android.apps.messaging,bin.mt.plus,com.fitc.wifihotspot,com.google.android.apps.nexuslauncher,com.android.printspooler,com.google.android.as.oss,com.android.simappdialog,com.android.stk,com.google.android.tts,org.swiftapps.swiftbackup,com.android.uwb.resources,github.tornaco.android.thanos.pro,com.android.vpndialogs,com.google.android.apps.weather,com.google.android.youtube,com.android.camera,com.android.providers.calendar,com.android.devicediagnostics,com.android.carrierdefaultapp,com.google.android.accessibility.switchaccess,com.android.captiveportallogin,com.android.cellbroadcastreceiver.module,com.android.adservices.api,com.android.settings.intelligence,com.android.providers.downloads.ui,com.android.permissioncontroller,com.google.android.apps.setupwizard.searchselector,com.android.wifi.resources,com.android.connectivity.resources,com.android.providers.contacts,com.google.android.deskclock,com.google.android.gms,com.android.bips,com.google.android.settings.intelligence,com.android.phone,com.android.keychain,com.google.android.contacts,com.google.android.apps.aiwallpapers,com.google.android.apps.wallpaper,com.android.credentialmanager,com.google.android.avatarpicker,com.android.providers.media.module,com.google.android.soundpicker,com.google.android.tag,com.android.safetycenter.resources,com.google.android.dialer,com.android.server.telecom,com.google.android.keep,com.google.android.accessibility.soundamplifier,com.android.packageinstaller,com.android.certinstaller,com.android.dreams.phototable,com.android.wallpaper.livepicker,com.android.managedprovisioning,com.google.android.flipendo,com.android.mtp,com.google.android.apps.wellbeing (most recent)</conditioncontainer>
+    <actioncontainer id="t2" x="35.0" y="402.5">Execute Root Command: am force-stop {package_name} in </actioncontainer>
+    <actioncontainer id="t3" x="35.000004" y="612.49994">Notification on Screen: แอพพลิเคชั่นถูกปิด</actioncontainer>
+    <triggercontainer id="t4" x="69.99999" y="-227.5">
+      <trigger>LONG_HOME</trigger>
+      <trigger>LONG_BACK</trigger>
+    </triggercontainer>
+    <conditioncontainer id="t5" x="70.0" y="-17.5">LONG_BACK</conditioncontainer>
+    <conditioncontainer id="t6" x="315.00003" y="-17.500004">LONG_HOME</conditioncontainer>
+    <actioncontainer id="t7" x="315.0" y="192.5">Execute Root Command: input keyevent ASSIST in </actioncontainer>
+    <connection from="t1" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t1" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t6" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
     <name>Flow15</name>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
@@ -18368,7 +18493,7 @@ pm disable co.aospa.android.certifiedprops.overlay
   </flow>
   <flow type="flow">
     <name>Flow5</name>
-    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <group>          ♻️  TKH-SYSTEM</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="70.0" y="52.5">
@@ -18435,12 +18560,15 @@ icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=positi
   </flow>
   <flow type="flow">
     <name>Flow8</name>
-    <group>          ♻️  2DEVICE-SYSTEM</group>
+    <group>          ♻️  TKH-SYSTEM</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="70.0" y="52.5">
       <trigger>Activity Ended: com.shopee.foody.driver.th/com.shopee.foody.driver.popmanager.activity.PopActivity</trigger>
+      <trigger>Command Output: logcat | grep 'StatsLog' (root) contains text </trigger>
     </triggercontainer>
+    <notecontainer id="t2" x="-70.0" y="437.5" w="140.0" h="105.0">LAUNCHER_TASKBAR_BACK_BUTTON_LONGPRESS
+LAUNCHER_TASKBAR_HOME_BUTTON_LONGPRESS</notecontainer>
   </flow>
   <flow type="flow">
     <name>Flow9</name>
@@ -18612,20 +18740,20 @@ icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=positi
     <conditioncontainer id="t22" x="-805.0" y="1417.5">PP</conditioncontainer>
     <actioncontainer id="t23" x="-560.0" y="752.5">ORS</actioncontainer>
     <conditioncontainer id="t24" x="-560.0" y="402.5">   OK   </conditioncontainer>
-    <actioncontainer id="t25" x="-560.0" y="262.5">DESTINATION</actioncontainer>
-    <notecontainer id="t26" x="-560.0" y="-227.5" w="140.0" h="35.0">47</notecontainer>
-    <conditioncontainer id="t27" x="-315.0" y="1487.5"> Debug Dialog</conditioncontainer>
-    <actioncontainer id="t28" x="-560.0" y="1137.5">SHELL CODE</actioncontainer>
-    <notecontainer id="t29" x="35.0" y="17.5" w="140.0" h="105.0">90</notecontainer>
-    <actioncontainer id="t30" x="35.0" y="157.5">HTTP Request: GET http://router.project-osrm.org/route/v1/driving/100.349335,13.706248;100.346376,13.719743?geometries=polyline&amp;overview=full   store in response</actioncontainer>
-    <notecontainer id="t31" x="105.0" y="402.5" w="280.0" h="105.0">Geoapify NON ENCODED
+    <notecontainer id="t25" x="-560.0" y="-227.5" w="140.0" h="35.0">47</notecontainer>
+    <conditioncontainer id="t26" x="-315.0" y="1487.5"> Debug Dialog</conditioncontainer>
+    <actioncontainer id="t27" x="-560.0" y="1137.5">SHELL CODE</actioncontainer>
+    <notecontainer id="t28" x="35.0" y="17.5" w="140.0" h="105.0">90</notecontainer>
+    <actioncontainer id="t29" x="35.0" y="157.5">HTTP Request: GET http://router.project-osrm.org/route/v1/driving/100.349335,13.706248;100.346376,13.719743?geometries=polyline&amp;overview=full   store in response</actioncontainer>
+    <notecontainer id="t30" x="105.0" y="402.5" w="280.0" h="105.0">Geoapify NON ENCODED
 ORS ✓
 OSRM ✓</notecontainer>
-    <actioncontainer id="t32" x="-560.0" y="1242.5">RUN SH</actioncontainer>
-    <actioncontainer id="t33" x="-560.0" y="647.5">Execute Root Command: rm /storage/emulated/0/Android/application/SPFDB/path_polyline.kml &amp;&amp; rm /storage/emulated/0/Android/application/SPFDB/decode.txt in </actioncontainer>
-    <actioncontainer id="t34" x="-560.0" y="927.5">IMPORT
+    <actioncontainer id="t31" x="-560.0" y="1242.5">RUN SH</actioncontainer>
+    <actioncontainer id="t32" x="-560.0" y="647.5">Execute Root Command: rm /storage/emulated/0/Android/application/SPFDB/path_polyline.kml &amp;&amp; rm /storage/emulated/0/Android/application/SPFDB/decode.txt in </actioncontainer>
+    <actioncontainer id="t33" x="-560.0" y="927.5">IMPORT
 BASE</actioncontainer>
-    <connection from="t1" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t34" x="-560.0" y="262.5">DESTINATION</actioncontainer>
+    <connection from="t1" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t6" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t7" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t8" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -18633,17 +18761,17 @@ BASE</actioncontainer>
     <connection from="t13" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t17" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t17" to="t22" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t18" to="t28" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t18" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t20" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t21" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t22" to="t6" type="TRUE" sourcePosition="NORTH" targetPosition="EAST" />
-    <connection from="t23" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t24" to="t33" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t28" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t32" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t33" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t23" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t32" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t27" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t31" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t32" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t33" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t34" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>⚙️  KILLAPPS</name>
