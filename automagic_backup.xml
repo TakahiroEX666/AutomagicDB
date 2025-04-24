@@ -319,7 +319,7 @@ NOW
   <trigger type="http_request">
     <useDefaultName>false</useDefaultName>
     <name>GET</name>
-    <enabled>true</enabled>
+    <enabled>false</enabled>
     <path>/get</path>
     <port>5555</port>
     <bindToWifiOnly>false</bindToWifiOnly>
@@ -348,7 +348,7 @@ NOW
   <trigger type="http_request">
     <useDefaultName>false</useDefaultName>
     <name>HTTP</name>
-    <enabled>true</enabled>
+    <enabled>false</enabled>
     <path>/automagic</path>
     <port>5555</port>
     <bindToWifiOnly>false</bindToWifiOnly>
@@ -471,7 +471,7 @@ NOW
   <trigger type="general_broadcast">
     <useDefaultName>false</useDefaultName>
     <name>NTFY</name>
-    <enabled>true</enabled>
+    <enabled>false</enabled>
     <action>io.heckel.ntfy.MESSAGE_RECEIVED</action>
     <categoryList></categoryList>
     <dataSchemeList></dataSchemeList>
@@ -900,69 +900,40 @@ return false</expression>
     <name>      OK      </name>
     <expression>if(operation=="ok") {
 
-   if(index==0) {
-
-      p1=
-      p2=
-      p3=
-      p4=
-      p5=}
+   p1="command";
+   p2="shell";
 
    if(index==0) {
 
-      p1=
-      p2=
-      p3=
-      p4=
-      p5=}
+      p3="";} else
 
-   if(index==0) {
+   if(index==1) {
 
-      p1=
-      p2=
-      p3=
-      p4=
-      p5=}
+      p3="";} else
 
-   if(index==0) {
+   if(index==2) {
 
-      p1=
-      p2=
-      p3=
-      p4=
-      p5=}
+      p3="";} else
 
-   if(index==0) {
+   if(index==3) {
 
-      p1=
-      p2=
-      p3=
-      p4=
-      p5=}
+      p3="";} else
 
-   if(index==0) {
+   if(index==4) {
 
-      p1=
-      p2=
-      p3=
-      p4=
-      p5=}
+      p3="";} else
 
-   if(index==0) {
+   if(index==5) {
 
-      p1=
-      p2=
-      p3=
-      p4=
-      p5=}
+      p3="";} else
 
-   if(index==0) {
+   if(index==6) {
 
-      p1=
-      p2=
-      p3=
-      p4=
-      p5=
+      p3="";} else
+
+   if(index==7) {
+
+     p3="";
    }
    return true
 }
@@ -1727,11 +1698,6 @@ contains(exception_message,"sqrt")
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
-    <name>C</name>
-    <expression>response["type"]=="command" </expression>
-  </condition>
-  <condition type="expression">
-    <useDefaultName>false</useDefaultName>
     <name>CALL</name>
     <expression>if(contains(text,"+66") or length(text)==12) {
 
@@ -1852,6 +1818,11 @@ while(true) {
 }
    
 return true</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>COMM</name>
+    <expression>response["type"]=="command" </expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -2366,8 +2337,8 @@ return false</expression>
     <name>INCOMING</name>
     <expression>if(response["type"]=="job"){
 
-   if(response["method"]=="spf") {sqrt()}
-   return true
+   if(response["method"]=="spf") {return true}
+   return false
 }
 return false</expression>
   </condition>
@@ -2392,19 +2363,13 @@ global_device['ipaddress']!=null</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
-    <name>JOB-C</name>
-    <expression>response["type"]=="job_command" 
-//and global_device["device"]=="alioth"</expression>
-  </condition>
-  <condition type="expression">
-    <useDefaultName>false</useDefaultName>
     <name>KILL</name>
     <expression>trigger=="STC";</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
     <name>KILLALL</name>
-    <expression>response["method"]=="killall"</expression>
+    <expression>response["method"]=="shell"</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -2593,6 +2558,8 @@ return false</expression>
 "📴   KILL-SPF",
 "🫐   OPEN BLUETOOTH",
 "",
+"🩸  RESET-ANYDESK",
+"",
 "🗺️   GET-LOCATION",
 "🚩   START-MOCK",
 "🚩   STOP-MOCK"
@@ -2701,19 +2668,6 @@ if(poi_district!=dt) {
 checkloop=null;
 
 return true</expression>
-  </condition>
-  <condition type="expression">
-    <useDefaultName>false</useDefaultName>
-    <name>POST</name>
-    <expression>if(trigger=="HTTP") {
-
-   if(file_upload_field!=null) {
-
-      sqrt();
-   }
-   response=fromJSON(http_params["NanoHttpd.QUERY_STRING"]);}
-
-contains(trigger,"HTTP") or contains(trigger,"NTFY")</expression>
   </condition>
   <condition type="confirmation_dialog">
     <useDefaultName>false</useDefaultName>
@@ -2863,6 +2817,19 @@ contains(exception_message,"sqrt")</expression>
 } else
 
 return false</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>UP-FILE?</name>
+    <expression>if(trigger=="HTTP") {
+
+   if(file_upload_field!=null) {
+
+      sqrt();
+   }
+   response=fromJSON(http_params["NanoHttpd.QUERY_STRING"]);}
+
+contains(trigger,"HTTP") or contains(trigger,"NTFY")</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -5296,7 +5263,7 @@ all_lat+
     <useDefaultName>false</useDefaultName>
     <name>DOWNLOAD</name>
     <url>{attachment}</url>
-    <directory>/storage/emulated/0/Documents</directory>
+    <directory>/storage/emulated/0/Android/application/SHAREFILE</directory>
     <filename>{attachment_name}</filename>
     <showProgress>true</showProgress>
   </action>
@@ -8878,7 +8845,7 @@ while(true) {
   <action type="execute_root_command">
     <useDefaultName>false</useDefaultName>
     <name>MV</name>
-    <command>mv {file_upload_field} /storage/emulated/0/{http_params["upload_field"]}</command>
+    <command>mv {file_upload_field} {target}{http_params["upload_field"]}</command>
     <user></user>
     <seContext></seContext>
     <workingDirectory></workingDirectory>
@@ -12526,8 +12493,10 @@ removeDuplicateElements(customer_list)</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
-    <name>Script: stream_uri="/storage/emulated/0/Android/application/RESOURCE/{type}_{triggertime}.zip";</name>
-    <script>stream_uri="/storage/emulated/0/Android/application/RESOURCE/{type}_{triggertime}.zip";</script>
+    <name>Script: stream_uri="/storage/emulated/0/Android/application/RESOURCE/{type}_{triggertime}.zip"; filename="{type}_{triggertime}.zip";</name>
+    <script>stream_uri="/storage/emulated/0/Android/application/RESOURCE/{type}_{triggertime}.zip";
+
+filename="{type}_{triggertime}.zip";</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
@@ -13215,6 +13184,18 @@ Only available if you select &lt;b&gt;Continue Task After Error&lt;/b&gt; and th
 
 {file_text}</text>
     <append>false</append>
+  </action>
+  <action type="execute_root_command">
+    <useDefaultName>false</useDefaultName>
+    <name>SHELL RE!</name>
+    <command>{response["content"]}</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
   </action>
   <action type="script">
     <useDefaultName>false</useDefaultName>
@@ -15246,6 +15227,18 @@ addElement(type_list,"***บ้าน");
 
 
 addElement(type_list,"ไม่พบ : "+address_raw);</script>
+  </action>
+  <action type="script">
+    <useDefaultName>false</useDefaultName>
+    <name>TYPE-FOLDER</name>
+    <script>if(http_headers["type"]=="photo") {
+
+   target="/storage/emulated/0/DCIM/Camera/";}
+
+else {
+
+   targer="/storage/emulated/0/Android/application/SHAREFILE/";
+}</script>
   </action>
   <action type="control_user_interface">
     <useDefaultName>false</useDefaultName>
@@ -18485,7 +18478,7 @@ TKH-CUPID</notecontainer>
   </flow>
   <flow type="flow">
     <name>12: SENDER / MENULIST</name>
-    <description>0.54 alpha-version</description>
+    <description>0.61  alpha-version</description>
     <group>          ♻️  TKH-SYSTEM</group>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
@@ -18511,105 +18504,105 @@ KILLAPPS</actioncontainer>
     <actioncontainer id="t10" x="-1645.0" y="-3237.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
     <conditioncontainer id="t11" x="-1295.0" y="-10132.5">IP!?</conditioncontainer>
     <actioncontainer id="t12" x="-1085.0" y="-10132.5">00: SERVICES</actioncontainer>
-    <actioncontainer id="t13" x="-980.0" y="-9572.5">     MENU     </actioncontainer>
-    <conditioncontainer id="t14" x="-980.0" y="-9397.5">      OK      </conditioncontainer>
-    <conditioncontainer id="t15" x="350.0" y="-9747.5">MULTI-SEND</conditioncontainer>
-    <actioncontainer id="t16" x="-420.0" y="-6492.5">Execute Root Command: curl -F "files[]=@{xxx}" https://uguu.se/upload.php
+    <conditioncontainer id="t13" x="350.0" y="-9747.5">MULTI-SEND</conditioncontainer>
+    <actioncontainer id="t14" x="-420.0" y="-6492.5">Execute Root Command: curl -F "files[]=@{xxx}" https://uguu.se/upload.php
  in </actioncontainer>
-    <conditioncontainer id="t17" x="-385.0" y="-6072.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t18" x="-1295.0" y="-9747.5">SKIP / CONFIG</conditioncontainer>
-    <conditioncontainer id="t19" x="-700.0" y="-9747.5">CALL</conditioncontainer>
-    <conditioncontainer id="t20" x="-980.0" y="-9747.5">MENULIST</conditioncontainer>
-    <conditioncontainer id="t21" x="-455.0" y="-9747.5">MAPS</conditioncontainer>
-    <actioncontainer id="t22" x="-1295.0" y="-9187.5">HTTP SEND</actioncontainer>
-    <conditioncontainer id="t23" x="35.0" y="-9747.5">SINGLE-SEND</conditioncontainer>
-    <actioncontainer id="t24" x="-280.0" y="-6702.5">Script: xxx="/storage/emulated/0/Android/raw";</actioncontainer>
-    <actioncontainer id="t25" x="-280.0" y="-6492.5">Execute Root Command: curl -F "reqtype=fileupload" -F "fileToUpload=@{xxx}" https://catbox.moe/user/api.php
+    <conditioncontainer id="t15" x="-385.0" y="-6072.5">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t16" x="-700.0" y="-9747.5">CALL</conditioncontainer>
+    <conditioncontainer id="t17" x="-455.0" y="-9747.5">MAPS</conditioncontainer>
+    <conditioncontainer id="t18" x="35.0" y="-9747.5">SINGLE-SEND</conditioncontainer>
+    <actioncontainer id="t19" x="-280.0" y="-6702.5">Script: xxx="/storage/emulated/0/Android/raw";</actioncontainer>
+    <actioncontainer id="t20" x="-280.0" y="-6492.5">Execute Root Command: curl -F "reqtype=fileupload" -F "fileToUpload=@{xxx}" https://catbox.moe/user/api.php
  in </actioncontainer>
-    <actioncontainer id="t26" x="-420.0" y="-6352.5">Script: xxx=getDate()-triggertime</actioncontainer>
-    <actioncontainer id="t27" x="-1330.0" y="-6597.5">RESPONSE</actioncontainer>
-    <actioncontainer id="t28" x="-1190.0" y="-6597.5">GIT UPLOADdfd</actioncontainer>
-    <actioncontainer id="t29" x="-1190.0" y="-6702.5">GITJ SHA2d</actioncontainer>
-    <actioncontainer id="t30" x="-1050.0" y="-6702.5">TOAST</actioncontainer>
-    <actioncontainer id="t31" x="-1050.0" y="-6597.5">GIT UPLOADd</actioncontainer>
-    <actioncontainer id="t32" x="-840.0" y="-6702.5">UNZIP</actioncontainer>
-    <actioncontainer id="t33" x="-840.0" y="-6597.5">LS</actioncontainer>
-    <actioncontainer id="t34" x="-1050.0" y="-6492.5">GET-jSHAs</actioncontainer>
-    <conditioncontainer id="t35" x="-1365.0" y="-6702.5">RE?</conditioncontainer>
-    <actioncontainer id="t36" x="350.0" y="-9537.5">C-FOL</actioncontainer>
-    <actioncontainer id="t37" x="630.0" y="-9222.5">TEST  </actioncontainer>
-    <actioncontainer id="t38" x="35.0" y="-9537.5"> QUERY </actioncontainer>
-    <actioncontainer id="t39" x="35.0" y="-9327.5">  X. </actioncontainer>
-    <actioncontainer id="t40" x="630.0" y="-9537.5"> QUERY </actioncontainer>
-    <actioncontainer id="t41" x="630.0" y="-9327.5">  CP  </actioncontainer>
-    <actioncontainer id="t42" x="805.0" y="-9537.5">  X. c</actioncontainer>
-    <conditioncontainer id="t43" x="350.0" y="-9327.5">FOR MULTI</conditioncontainer>
-    <actioncontainer id="t44" x="350.0" y="-9152.5">  X.x</actioncontainer>
-    <actioncontainer id="t45" x="34.999992" y="-8172.501">NTFY.ATTACH</actioncontainer>
-    <actioncontainer id="t46" x="34.999992" y="-8277.5">NTFY.ATTmACH</actioncontainer>
-    <actioncontainer id="t47" x="34.999992" y="-8382.5">Script:mm response=fromJSON(response);</actioncontainer>
-    <actioncontainer id="t48" x="34.999992" y="-8487.5">GIT UPLOADdm</actioncontainer>
-    <actioncontainer id="t49" x="34.999992" y="-8592.5">GITs
+    <actioncontainer id="t21" x="-420.0" y="-6352.5">Script: xxx=getDate()-triggertime</actioncontainer>
+    <actioncontainer id="t22" x="-1330.0" y="-6597.5">RESPONSE</actioncontainer>
+    <actioncontainer id="t23" x="-1190.0" y="-6597.5">GIT UPLOADdfd</actioncontainer>
+    <actioncontainer id="t24" x="-1190.0" y="-6702.5">GITJ SHA2d</actioncontainer>
+    <actioncontainer id="t25" x="-1050.0" y="-6702.5">TOAST</actioncontainer>
+    <actioncontainer id="t26" x="-1050.0" y="-6597.5">GIT UPLOADd</actioncontainer>
+    <actioncontainer id="t27" x="-840.0" y="-6702.5">UNZIP</actioncontainer>
+    <actioncontainer id="t28" x="-840.0" y="-6597.5">LS</actioncontainer>
+    <actioncontainer id="t29" x="-1050.0" y="-6492.5">GET-jSHAs</actioncontainer>
+    <conditioncontainer id="t30" x="-1365.0" y="-6702.5">RE?</conditioncontainer>
+    <actioncontainer id="t31" x="350.0" y="-9537.5">C-FOL</actioncontainer>
+    <actioncontainer id="t32" x="630.0" y="-9222.5">TEST  </actioncontainer>
+    <actioncontainer id="t33" x="35.0" y="-9537.5"> QUERY </actioncontainer>
+    <actioncontainer id="t34" x="630.0" y="-9327.5">  CP  </actioncontainer>
+    <actioncontainer id="t35" x="805.0" y="-9537.5">  X. c</actioncontainer>
+    <conditioncontainer id="t36" x="350.0" y="-9327.5">FOR MULTI</conditioncontainer>
+    <actioncontainer id="t37" x="350.0" y="-9152.5">  X.x</actioncontainer>
+    <actioncontainer id="t38" x="35.0" y="-8172.5">NTFY.ATTACH</actioncontainer>
+    <actioncontainer id="t39" x="350.0" y="-9047.5">ZIP</actioncontainer>
+    <actioncontainer id="t40" x="350.0" y="-8942.5">DEL-FOL</actioncontainer>
+    <actioncontainer id="t41" x="-280.0" y="-8592.5"> WAIT-SEND</actioncontainer>
+    <actioncontainer id="t42" x="35.0" y="-8382.5">Script:mm response=fromJSON(response);</actioncontainer>
+    <actioncontainer id="t43" x="35.0" y="-8277.5">NTFY.ATTmACH</actioncontainer>
+    <actioncontainer id="t44" x="35.0" y="-8592.5">GITs
 AUTOMAGIC</actioncontainer>
-    <actioncontainer id="t50" x="350.0" y="-9047.5">ZIP</actioncontainer>
-    <actioncontainer id="t51" x="350.0" y="-8942.5">DEL-FOL</actioncontainer>
-    <actioncontainer id="t52" x="350.0" y="-8697.5">Script: stream_uri="/storage/emulated/0/Android/application/RESOURCE/{type}_{triggertime}.zip";</actioncontainer>
-    <actioncontainer id="t53" x="34.999992" y="-8697.5">BASE64x
+    <actioncontainer id="t45" x="35.0" y="-8487.5">GIT UPLOADdm</actioncontainer>
+    <actioncontainer id="t46" x="350.0" y="-8697.5">Script: stream_uri="/storage/emulated/0/Android/application/RESOURCE/{type}_{triggertime}.zip"; filename="{type}_{triggertime}.zip";</actioncontainer>
+    <conditioncontainer id="t47" x="-1295.0" y="-9747.5">SKIP / CONFIG</conditioncontainer>
+    <actioncontainer id="t48" x="-1295.0" y="-9187.5">HTTP SEND</actioncontainer>
+    <conditioncontainer id="t49" x="-980.0" y="-9747.5">MENULIST</conditioncontainer>
+    <actioncontainer id="t50" x="-980.0" y="-9572.5">     MENU     </actioncontainer>
+    <conditioncontainer id="t51" x="-980.0" y="-9397.5">      OK      </conditioncontainer>
+    <actioncontainer id="t52" x="35.0" y="-8697.5">BASE64x
 ENCRYPT</actioncontainer>
-    <actioncontainer id="t54" x="-280.00003" y="-8592.5"> WAIT-SEND</actioncontainer>
-    <actioncontainer id="t55" x="-280.00003" y="-8697.5">HTTP FILESEND</actioncontainer>
+    <actioncontainer id="t53" x="-280.0" y="-8697.5">HTTP FILESEND</actioncontainer>
+    <actioncontainer id="t54" x="35.0" y="-9327.5">  X. </actioncontainer>
+    <actioncontainer id="t55" x="630.0" y="-9537.5"> QUERY </actioncontainer>
     <connection from="t1" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t11" to="t12" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t11" to="t18" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t14" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t15" to="t36" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t16" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t18" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t18" to="t20" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t19" to="t21" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t19" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t20" to="t13" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t20" to="t19" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t21" to="t23" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t21" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t23" to="t38" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t15" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t24" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t26" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t29" to="t28" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t32" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t35" to="t27" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t36" to="t43" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t37" to="t43" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t38" to="t39" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t38" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t39" to="t53" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t40" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t40" to="t42" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t41" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t42" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t43" to="t40" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t43" to="t44" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t44" to="t50" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t47" to="t46" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t48" to="t47" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t49" to="t48" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t47" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t47" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t31" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t14" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t17" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t16" to="t48" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t17" to="t18" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t17" to="t48" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t18" to="t33" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t18" to="t13" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t19" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t20" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t21" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t27" to="t28" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t30" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t31" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t32" to="t36" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t33" to="t54" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t33" to="t54" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t34" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t35" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t36" to="t55" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t36" to="t37" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t37" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t39" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t40" to="t46" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t42" to="t43" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t44" to="t45" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t45" to="t42" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t46" to="t52" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t47" to="t48" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t47" to="t49" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t49" to="t50" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t49" to="t16" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t50" to="t51" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t51" to="t52" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t52" to="t53" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t53" to="t49" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t51" to="t48" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t52" to="t44" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t54" to="t53" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t55" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t55" to="t35" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
   </flow>
   <flow type="flow">
     <name>13: RECEIVED</name>
-    <description> </description>
-    <group>Old</group>
-    <enabled>true</enabled>
+    <description>0.61  alpha-version</description>
+    <group>          ♻️  TKH-SYSTEM</group>
+    <enabled>false</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <triggercontainer id="t1" x="-1120.0" y="-4007.5">
+    <triggercontainer id="t1" x="-1540.0" y="-4287.5">
       <trigger>GET</trigger>
       <trigger>HTTP</trigger>
       <trigger>NTFY</trigger>
@@ -18631,35 +18624,36 @@ ENCRYPT</actioncontainer>
     <actioncontainer id="t16" x="-210.0" y="-17.5">Script: response2=fromJSON(response2); clip_data=response2["unshortened_url"]; clip_data=split(clip_data,"/"); if(matches(clip_data[6],".*13\\..*|.*100\\..*")) { link=clip_data[6] }</actioncontainer>
     <actioncontainer id="t17" x="-210.0" y="52.5">HTTP Request: GET https://unshorten.me/api/v2/unshorten?url={response["content"]}   store in response2</actioncontainer>
     <conditioncontainer id="t18" x="-140.0" y="87.5">UPDATE</conditioncontainer>
-    <conditioncontainer id="t19" x="-385.0" y="-3132.5">RESPONSE</conditioncontainer>
-    <actioncontainer id="t20" x="245.0" y="-2922.5">KILLG</actioncontainer>
-    <actioncontainer id="t21" x="245.0" y="-2782.5">Sleep: 100ms (keep device awake)</actioncontainer>
-    <conditioncontainer id="t22" x="105.0" y="-3132.5">🗺️</conditioncontainer>
-    <actioncontainer id="t23" x="245.0" y="-2642.5">MAP-RAW</actioncontainer>
-    <conditioncontainer id="t24" x="-140.0" y="-3132.5">📞</conditioncontainer>
-    <conditioncontainer id="t25" x="-875.0" y="-3132.5">JOB-C</conditioncontainer>
-    <actioncontainer id="t26" x="105.0" y="-2782.5">Sleep: 100ms (keep device awake)</actioncontainer>
-    <actioncontainer id="t27" x="105.0" y="-2642.5">MAP-CLEAN</actioncontainer>
-    <actioncontainer id="t28" x="525.0" y="-3132.5">DOWNLOAD</actioncontainer>
-    <actioncontainer id="t29" x="735.0" y="-2642.5">DOCS</actioncontainer>
-    <actioncontainer id="t30" x="910.0" y="-2642.5">XML</actioncontainer>
-    <actioncontainer id="t31" x="-1330.0" y="-4007.5">RM-NTFY</actioncontainer>
-    <conditioncontainer id="t32" x="-1120.0" y="-3132.5">INCOMING</conditioncontainer>
-    <conditioncontainer id="t33" x="-1120.0" y="-3552.5">POST</conditioncontainer>
-    <conditioncontainer id="t34" x="-1120.0" y="-3342.5">ATTACH</conditioncontainer>
-    <actioncontainer id="t35" x="-1330.0" y="-2852.5">SPF</actioncontainer>
-    <actioncontainer id="t36" x="-1330.0" y="-2957.5">SPF</actioncontainer>
-    <actioncontainer id="t37" x="105.0" y="-2922.5">KILLG</actioncontainer>
-    <actioncontainer id="t38" x="525.0" y="-3342.5">W/ DOWN</actioncontainer>
-    <conditioncontainer id="t39" x="735.0" y="-2922.5">ACCESSFILE</conditioncontainer>
-    <actioncontainer id="t40" x="735.0" y="-3132.5">MV</actioncontainer>
-    <actioncontainer id="t41" x="-385.0" y="-2887.5">STOP-RES</actioncontainer>
-    <conditioncontainer id="t42" x="-630.0" y="-3132.5">C</conditioncontainer>
-    <conditioncontainer id="t43" x="-630.0" y="-2887.5">KILLALL</conditioncontainer>
-    <conditioncontainer id="t44" x="-630.0" y="-2747.5">RESPONSE </conditioncontainer>
-    <actioncontainer id="t45" x="-630.0" y="-2572.5">Execute Flows: 12: SENDER / MENULIST</actioncontainer>
-    <connection from="t1" to="t31" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t1" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t19" x="735.0" y="-2642.5">DOCS</actioncontainer>
+    <conditioncontainer id="t20" x="-1540.0" y="-3832.5">ATTACH</conditioncontainer>
+    <actioncontainer id="t21" x="-1750.0" y="-4287.5">RM-NTFY</actioncontainer>
+    <actioncontainer id="t22" x="-1540.0" y="-3272.5">SPF</actioncontainer>
+    <actioncontainer id="t23" x="-1540.0" y="-3167.5">SPF</actioncontainer>
+    <conditioncontainer id="t24" x="-1540.0" y="-3482.5">INCOMING</conditioncontainer>
+    <conditioncontainer id="t25" x="-1330.0" y="-3482.5">RESPONSE</conditioncontainer>
+    <actioncontainer id="t26" x="-1330.0" y="-3272.5">STOP-RES</actioncontainer>
+    <conditioncontainer id="t27" x="-875.0" y="-3482.5">COMM</conditioncontainer>
+    <actioncontainer id="t28" x="-630.0" y="-3272.5">SHELL RE!</actioncontainer>
+    <conditioncontainer id="t29" x="-875.0" y="-3272.5">KILLALL</conditioncontainer>
+    <actioncontainer id="t30" x="-875.0" y="-2887.5">Execute Flows: 12: SENDER / MENULIST</actioncontainer>
+    <conditioncontainer id="t31" x="-875.0" y="-3062.5">RESPONSE </conditioncontainer>
+    <conditioncontainer id="t32" x="-280.0" y="-3482.5">📞</conditioncontainer>
+    <conditioncontainer id="t33" x="-1.5258789E-5" y="-3482.5">🗺️</conditioncontainer>
+    <actioncontainer id="t34" x="7.6293945E-6" y="-3272.5">KILLG</actioncontainer>
+    <actioncontainer id="t35" x="139.99997" y="-3272.5">KILLG</actioncontainer>
+    <actioncontainer id="t36" x="-3.8146973E-6" y="-3167.5">Sleep: 100ms (keep device awake)</actioncontainer>
+    <actioncontainer id="t37" x="139.99998" y="-3167.5">Sleep: 100ms (keep device awake)</actioncontainer>
+    <actioncontainer id="t38" x="0.0" y="-3062.5">MAP-CLEAN</actioncontainer>
+    <actioncontainer id="t39" x="140.0" y="-3062.5">MAP-RAW</actioncontainer>
+    <conditioncontainer id="t40" x="-1540.0" y="-3972.5">UP-FILE?</conditioncontainer>
+    <actioncontainer id="t41" x="910.0" y="-2642.5">XML</actioncontainer>
+    <actioncontainer id="t42" x="525.0" y="-3342.5">W/ DOWN</actioncontainer>
+    <actioncontainer id="t43" x="735.0" y="-3202.5">MV</actioncontainer>
+    <actioncontainer id="t44" x="525.0001" y="-3202.5">DOWNLOAD</actioncontainer>
+    <conditioncontainer id="t45" x="735.0" y="-2922.5">ACCESSFILE</conditioncontainer>
+    <actioncontainer id="t46" x="734.99994" y="-3342.5">TYPE-FOLDER</actioncontainer>
+    <connection from="t1" to="t21" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t1" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t6" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -18670,31 +18664,33 @@ ENCRYPT</actioncontainer>
     <connection from="t16" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t16" to="t12" type="EXCEPTION" sourcePosition="EAST" targetPosition="NORTH" />
     <connection from="t17" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t19" to="t24" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t19" to="t41" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t20" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t21" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t37" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t20" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t24" to="t22" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t25" to="t42" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t26" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t28" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
-    <connection from="t32" to="t25" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t32" to="t36" type="EXCEPTION" sourcePosition="WEST" targetPosition="NORTH" />
-    <connection from="t33" to="t40" type="EXCEPTION" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t20" to="t24" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t20" to="t42" type="TRUE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t22" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t25" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t25" to="t26" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t27" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t27" to="t29" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t27" to="t32" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t29" to="t28" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t29" to="t31" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t31" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t31" to="t30" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t32" to="t33" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t33" to="t34" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t32" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t38" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t36" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t37" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t38" to="t28" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t39" to="t29" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t40" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t42" to="t19" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t42" to="t43" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t43" to="t44" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t44" to="t45" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t33" to="t35" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t34" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t35" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t36" to="t38" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t37" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t40" to="t20" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t40" to="t46" type="EXCEPTION" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t42" to="t44" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t43" to="t45" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t44" to="t45" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
+    <connection from="t45" to="t19" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t46" to="t43" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>14: RESPONSE</name>
