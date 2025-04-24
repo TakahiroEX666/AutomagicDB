@@ -2617,12 +2617,7 @@ trigger=="Manual"</expression>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
     <name>MULTI-SEND</name>
-    <expression>if(stream_uris!=null) {
-
-   
-   return true
-}
-return false</expression>
+    <expression>contains(trigger,"MULTI")</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -2811,13 +2806,6 @@ return false</expression>
 
    if(data_string!=null) {stream_uri=data_string;}
    p1="sendfile";
-
-
-
-
-
-
-
    return true
 }
 return false</expression>
@@ -3467,27 +3455,17 @@ sleep(500);</script>
     <useDefaultName>false</useDefaultName>
     <name>  X. </name>
     <script>p1="sendfile";
+method="";
 
 
+if(result!=null) {
 
+   stream_uri=result[0]}
 
+else {
 
-if(stream_uris!=null) {
-
-   method="";
-   stream_uri="/storage/emulated/0/Android/application/RESOURCE/ZIPFILE.ZIP";
-   
-
-
-} else {
-
-
-
-   method="";
    stream_uri=replaceAll(stream_uri,"content.*fp","");
    stream_uri=replaceAll(stream_uri,"%20","_");
-
-
 }</script>
   </action>
   <action type="control_user_interface">
@@ -5366,14 +5344,6 @@ icon:http://mmmap15.longdo.com/mmmap/images/icons_big/bank.png&amp;marker=positi
   </action>
   <action type="download_url">
     <useDefaultName>true</useDefaultName>
-    <name>Download URL: https://raw.githubusercontent.com/TakahiroEX666/AutomagicDB/main/raw to /storage/emulated/0/Download/ooo</name>
-    <url>https://raw.githubusercontent.com/TakahiroEX666/AutomagicDB/main/raw</url>
-    <directory>/storage/emulated/0/Download</directory>
-    <filename>ooo</filename>
-    <showProgress>true</showProgress>
-  </action>
-  <action type="download_url">
-    <useDefaultName>true</useDefaultName>
     <name>Download URL: {staticmap} to /storage/emulated/0/Download/youx</name>
     <url>{staticmap}</url>
     <directory>/storage/emulated/0/Download</directory>
@@ -5572,18 +5542,6 @@ log(subdistrict[i]);
     <useDefaultName>true</useDefaultName>
     <name>Execute Root Command: cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121 in </name>
     <command>cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121</command>
-    <user></user>
-    <seContext></seContext>
-    <workingDirectory></workingDirectory>
-    <timeout>300000</timeout>
-    <variableStdout>stdout</variableStdout>
-    <variableStderr>stderr</variableStderr>
-    <variableExitCode>exit_code</variableExitCode>
-  </action>
-  <action type="execute_root_command">
-    <useDefaultName>true</useDefaultName>
-    <name>Execute Root Command: content query --uri content://media/external/images/media/1000012755 in </name>
-    <command>content query --uri content://media/external/images/media/1000012755</command>
     <user></user>
     <seContext></seContext>
     <workingDirectory></workingDirectory>
@@ -6575,65 +6533,6 @@ flowlist="{flowlist,listformat,comma}";</script>
   </action>
   <action type="http_request">
     <useDefaultName>false</useDefaultName>
-    <name>GET-SHAjs</name>
-    <url>https://api.github.com/repos/TakahiroEX666/AutomagicDB/contents/raw</url>
-    <verifyCertificates>true</verifyCertificates>
-    <basicAuthentication>false</basicAuthentication>
-    <username></username>
-    <clientCert>false</clientCert>
-    <clientCertPath></clientCertPath>
-    <httpMethod>GET</httpMethod>
-    <networkType>DEFAULT</networkType>
-    <httpContentType>X_WWW_FORM_URLENCODED</httpContentType>
-    <contentType>text/plain</contentType>
-    <generalTextData></generalTextData>
-    <formFieldList>Lastname=XYZ,Firstname=ABC</formFieldList>
-    <uploadFieldName>upload_field</uploadFieldName>
-    <uploadFilePath></uploadFilePath>
-    <binaryContentType>application/octet-stream</binaryContentType>
-    <binaryFilePath></binaryFilePath>
-    <timeout>60000</timeout>
-    <setCustomHTTPHeaders>false</setCustomHTTPHeaders>
-    <customHTTPHeaders></customHTTPHeaders>
-    <storeInVariable>true</storeInVariable>
-    <variable>response</variable>
-    <encoding></encoding>
-    <path>/storage/emulated/0/Download/file.bin</path>
-    <followRedirects>true</followRedirects>
-    <skipConnectivityCheck>false</skipConnectivityCheck>
-  </action>
-  <action type="http_request">
-    <useDefaultName>false</useDefaultName>
-    <name>GET-SHAjsg</name>
-    <url>https://raw.githubusercontent.com/TakahiroEX666/AutomagicDB/main/raw?t=1713960000
-</url>
-    <verifyCertificates>true</verifyCertificates>
-    <basicAuthentication>false</basicAuthentication>
-    <username></username>
-    <clientCert>false</clientCert>
-    <clientCertPath></clientCertPath>
-    <httpMethod>GET</httpMethod>
-    <networkType>DEFAULT</networkType>
-    <httpContentType>X_WWW_FORM_URLENCODED</httpContentType>
-    <contentType>text/plain</contentType>
-    <generalTextData></generalTextData>
-    <formFieldList>Lastname=XYZ,Firstname=ABC</formFieldList>
-    <uploadFieldName>upload_field</uploadFieldName>
-    <uploadFilePath></uploadFilePath>
-    <binaryContentType>application/octet-stream</binaryContentType>
-    <binaryFilePath></binaryFilePath>
-    <timeout>60000</timeout>
-    <setCustomHTTPHeaders>false</setCustomHTTPHeaders>
-    <customHTTPHeaders></customHTTPHeaders>
-    <storeInVariable>true</storeInVariable>
-    <variable>response</variable>
-    <encoding></encoding>
-    <path>/storage/emulated/0/Download/file.bin</path>
-    <followRedirects>true</followRedirects>
-    <skipConnectivityCheck>false</skipConnectivityCheck>
-  </action>
-  <action type="http_request">
-    <useDefaultName>false</useDefaultName>
     <name>GET-SHAs</name>
     <url>https://api.github.com/repos/TakahiroEX666/AutomagicDB/contents/raw</url>
     <verifyCertificates>true</verifyCertificates>
@@ -7586,35 +7485,6 @@ user-agent: okhttp/4.4.0</customHTTPHeaders>
     <storeInVariable>true</storeInVariable>
     <variable>response</variable>
     <encoding>UTF-8</encoding>
-    <path>/storage/emulated/0/Download/file.bin</path>
-    <followRedirects>true</followRedirects>
-    <skipConnectivityCheck>false</skipConnectivityCheck>
-  </action>
-  <action type="http_request">
-    <useDefaultName>true</useDefaultName>
-    <name>HTTP Request: POST https://uguu.se/upload.php multipart/form-data {xxx} store in response</name>
-    <url>https://uguu.se/upload.php</url>
-    <verifyCertificates>false</verifyCertificates>
-    <basicAuthentication>false</basicAuthentication>
-    <username></username>
-    <clientCert>false</clientCert>
-    <clientCertPath></clientCertPath>
-    <httpMethod>POST</httpMethod>
-    <networkType>DEFAULT</networkType>
-    <httpContentType>FORM_DATA_FILE_UPLOAD</httpContentType>
-    <contentType>text/plain</contentType>
-    <generalTextData></generalTextData>
-    <formFieldList>Lastname=XYZ,Firstname=ABC</formFieldList>
-    <uploadFieldName>files[]</uploadFieldName>
-    <uploadFilePath>{xxx}</uploadFilePath>
-    <binaryContentType>application/octet-stream</binaryContentType>
-    <binaryFilePath>/storage/emulated/0/Android/BackupDB/APK/ADBKeyboard.apk</binaryFilePath>
-    <timeout>60000</timeout>
-    <setCustomHTTPHeaders>false</setCustomHTTPHeaders>
-    <customHTTPHeaders>file: @xxx.apk</customHTTPHeaders>
-    <storeInVariable>true</storeInVariable>
-    <variable>response</variable>
-    <encoding></encoding>
     <path>/storage/emulated/0/Download/file.bin</path>
     <followRedirects>true</followRedirects>
     <skipConnectivityCheck>false</skipConnectivityCheck>
@@ -10602,21 +10472,6 @@ if(index==1) {
     <includeHeaderRow>false</includeHeaderRow>
     <variable>result</variable>
   </action>
-  <action type="query_content_provider">
-    <useDefaultName>true</useDefaultName>
-    <name>Query Content Provider: SELECT  FROM content://bin.mt.plus.fp/storage/emulated/0/Download/app-release.apk</name>
-    <uri>content://bin.mt.plus.fp/storage/emulated/0/Download/app-release.apk</uri>
-    <projectionEnabled>true</projectionEnabled>
-    <projection></projection>
-    <selectionEnabled>false</selectionEnabled>
-    <selection></selection>
-    <selectionArgs></selectionArgs>
-    <sortOrderEnabled>false</sortOrderEnabled>
-    <sortOrder></sortOrder>
-    <queryContentProviderResultType>LIST</queryContentProviderResultType>
-    <includeHeaderRow>false</includeHeaderRow>
-    <variable>result</variable>
-  </action>
   <action type="init_variable_text_file">
     <useDefaultName>false</useDefaultName>
     <name>RAW CSV</name>
@@ -12276,11 +12131,6 @@ uri = "https://www.google.com/maps/dir/?api=1" +
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
-    <name>Script: response=fromJSON(response)["content"];</name>
-    <script>response=fromJSON(response)["content"];</script>
-  </action>
-  <action type="script">
-    <useDefaultName>true</useDefaultName>
     <name>Script: response=fromJSON(response)["result"]["geometry"]["location"] //lnglat</name>
     <script>response=fromJSON(response)["result"]["geometry"]["location"]
 
@@ -12580,11 +12430,6 @@ sleep(3000);</script>
     <useDefaultName>true</useDefaultName>
     <name>Script: trigger="FL_SHP_BALL";</name>
     <script>trigger="FL_SHP_BALL";</script>
-  </action>
-  <action type="script">
-    <useDefaultName>true</useDefaultName>
-    <name>Script: triggertime=getDate();</name>
-    <script>triggertime=getDate();</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
@@ -16807,7 +16652,7 @@ TAKE, DENY</name>
     <actioncontainer id="t8" x="-280.0" y="122.5">เหมียว เหมียว</actioncontainer>
     <conditioncontainer id="t9" x="-35.0" y="-87.5">CONNECT</conditioncontainer>
     <conditioncontainer id="t10" x="-35.0" y="472.5">LEVEL</conditioncontainer>
-    <actioncontainer id="t11" x="245.0" y="437.49994">ALERT-S</actioncontainer>
+    <actioncontainer id="t11" x="245.0" y="437.5">ALERT-S</actioncontainer>
     <connection from="t1" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="NORMAL" sourcePosition="WEST" targetPosition="WEST" />
     <connection from="t3" to="t4" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -18526,154 +18371,119 @@ TKH-CUPID</notecontainer>
     <actioncontainer id="t3" x="1295.0" y="-6562.5">CP</actioncontainer>
     <conditioncontainer id="t4" x="1260.0" y="-6562.5">     DEBUG    </conditioncontainer>
     <conditioncontainer id="t5" x="1400.0" y="-6737.5">INDEX</conditioncontainer>
-    <conditioncontainer id="t6" x="525.0" y="-8032.5">FOR MULTI</conditioncontainer>
-    <actioncontainer id="t7" x="210.0" y="-7822.5">TEST  </actioncontainer>
-    <actioncontainer id="t8" x="525.0" y="-7822.5">ZIP</actioncontainer>
-    <actioncontainer id="t9" x="525.0" y="-7717.5">DEL-FOL</actioncontainer>
-    <conditioncontainer id="t10" x="525.0" y="-8452.5">MULTI-SEND</conditioncontainer>
-    <actioncontainer id="t11" x="245.0" y="-7087.5">HTTP FILESEND</actioncontainer>
-    <actioncontainer id="t12" x="0.0" y="-6877.5"> WAIT-SEND</actioncontainer>
-    <actioncontainer id="t13" x="0.0" y="-6772.5">NTFY.ATTACH</actioncontainer>
-    <conditioncontainer id="t14" x="35.0" y="-6492.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t15" x="-2100.0" y="-8277.5">GITJ SHA2</actioncontainer>
-    <actioncontainer id="t16" x="-2100.0" y="-8417.5">GET-SHAs</actioncontainer>
-    <actioncontainer id="t17" x="-2450.0" y="-7157.5">Download URL: https://raw.githubusercontent.com/TakahiroEX666/AutomagicDB/main/raw to /storage/emulated/0/Download/ooo</actioncontainer>
-    <conditioncontainer id="t18" x="-2765.0" y="-7752.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t19" x="-2660.0" y="-7927.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t20" x="-2660.0" y="-8312.5">GET-SHAjs</actioncontainer>
-    <notecontainer id="t21" x="-2800.0" y="-8592.5" w="140.0" h="105.0">YmFsZWVyYW9kb2Rva3Nza2tka2QKYmFsZWVyYW9kb2Rva3Nza2tka2QKYmFsZWVyYW9kb2Rva3Nz
-a2tka2Q=
-</notecontainer>
-    <actioncontainer id="t22" x="-2695.0" y="-8067.5">Script: response=fromJSON(response)["content"];</actioncontainer>
-    <actioncontainer id="t23" x="-2415.0" y="-8487.5">REPLACEKEY</actioncontainer>
-    <actioncontainer id="t24" x="-2555.0" y="-8137.5">Script: triggertime=getDate();</actioncontainer>
-    <actioncontainer id="t25" x="-2415.0" y="-8277.5">GITs
-AUTOMAGIC</actioncontainer>
-    <conditioncontainer id="t26" x="-2380.0" y="-7437.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t27" x="-2345.0" y="-7682.5">SHA?</conditioncontainer>
-    <actioncontainer id="t28" x="-2520.0" y="-7822.5">Script: xxx=getDate()-triggertime</actioncontainer>
-    <actioncontainer id="t29" x="-2380.0" y="-7997.5">GIT UPLOADd</actioncontainer>
-    <notecontainer id="t30" x="-2310.0" y="-7787.5" w="140.0" h="105.0">10662</notecontainer>
-    <actioncontainer id="t31" x="-2415.0" y="-8382.5">BASE64x
-ENCRYPT</actioncontainer>
-    <actioncontainer id="t32" x="-2870.0" y="-9257.5">LS</actioncontainer>
-    <notecontainer id="t33" x="-2887.5" y="-10360.0" w="455.0" h="70.0">MULTI / IMAGE</notecontainer>
-    <actioncontainer id="t34" x="-2870.0" y="-9362.5">UNZIP</actioncontainer>
-    <actioncontainer id="t35" x="-770.0" y="-7087.5">TOAST</actioncontainer>
-    <actioncontainer id="t36" x="-910.0" y="-6597.5">RESPONSE</actioncontainer>
-    <actioncontainer id="t37" x="-1785.0" y="-2817.5">CONFIG</actioncontainer>
-    <actioncontainer id="t38" x="-1645.0" y="-2817.5">TEMPLATE 
+    <actioncontainer id="t6" x="-1785.0" y="-2817.5">CONFIG</actioncontainer>
+    <actioncontainer id="t7" x="-1645.0" y="-2817.5">TEMPLATE 
 HTTP</actioncontainer>
-    <actioncontainer id="t39" x="-1785.0" y="-2922.5">TEMPLATทE 
+    <actioncontainer id="t8" x="-1785.0" y="-2922.5">TEMPLATทE 
 HTTP</actioncontainer>
-    <actioncontainer id="t40" x="-1645.0" y="-2922.5">TEMPLATE 
+    <actioncontainer id="t9" x="-1645.0" y="-2922.5">TEMPLATE 
 HTTP / POST</actioncontainer>
-    <actioncontainer id="t41" x="-1785.0" y="-3027.5">TEMPLATE 
+    <actioncontainer id="t10" x="-1785.0" y="-3027.5">TEMPLATE 
 HTTP / POST</actioncontainer>
-    <actioncontainer id="t42" x="-1645.0" y="-3027.5">TEMPLATE 
+    <actioncontainer id="t11" x="-1645.0" y="-3027.5">TEMPLATE 
 HTTP</actioncontainer>
-    <actioncontainer id="t43" x="-1785.0" y="-3132.5">TEST
+    <actioncontainer id="t12" x="-1785.0" y="-3132.5">TEST
 KILLAPPS</actioncontainer>
-    <actioncontainer id="t44" x="-1645.0" y="-3132.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
-    <actioncontainer id="t45" x="-1645.0" y="-3237.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
-    <actioncontainer id="t46" x="-2275.0" y="-10132.5">Script: xxx="/storage/emulated/0/Android/raw";</actioncontainer>
-    <actioncontainer id="t47" x="-2275.0" y="-9957.5">Execute Root Command: curl -F "reqtype=fileupload" -F "fileToUpload=@{xxx}" https://catbox.moe/user/api.php
- in </actioncontainer>
-    <actioncontainer id="t48" x="-2415.0" y="-9957.5">Execute Root Command: curl -F "files[]=@{xxx}" https://uguu.se/upload.php
- in </actioncontainer>
-    <actioncontainer id="t49" x="-2555.0" y="-9957.5">HTTP Request: POST https://uguu.se/upload.php multipart/form-data {xxx} store in response</actioncontainer>
-    <actioncontainer id="t50" x="-2415.0" y="-9712.5">Script: xxx=getDate()-triggertime</actioncontainer>
-    <conditioncontainer id="t51" x="-2415.0" y="-9537.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t52" x="-2905.0" y="-8382.5">GET-SHAjsg</actioncontainer>
-    <conditioncontainer id="t53" x="-1295.0" y="-9747.5">SKIP / CONFIG</conditioncontainer>
-    <notecontainer id="t54" x="-2485.0" y="-10395.0" w="350.0" h="140.0">:  TURN-ON
-:  GET-LOCATION
-:  MOCK-LOCATION (START-STOP)
-:  RESTART
-:  KILL-SPF
-:  OPEN BLUETOOTH</notecontainer>
-    <conditioncontainer id="t55" x="-1295.0" y="-10132.5">IP!?</conditioncontainer>
-    <actioncontainer id="t56" x="-1085.0" y="-10132.5">00: SERVICES</actioncontainer>
-    <conditioncontainer id="t57" x="-700.0" y="-9747.5">CALL</conditioncontainer>
-    <conditioncontainer id="t58" x="-455.0" y="-9747.5">MAPS</conditioncontainer>
-    <conditioncontainer id="t59" x="-910.0" y="-6772.5">RE?</conditioncontainer>
-    <actioncontainer id="t60" x="-1295.0" y="-9187.5">HTTP SEND</actioncontainer>
-    <actioncontainer id="t61" x="-980.0" y="-9572.5">     MENU     </actioncontainer>
-    <conditioncontainer id="t62" x="-980.0" y="-9747.5">MENULIST</conditioncontainer>
-    <conditioncontainer id="t63" x="-980.0" y="-9397.5">      OK      </conditioncontainer>
-    <conditioncontainer id="t64" x="35.0" y="-9152.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t65" x="-1610.0" y="-10062.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t66" x="525.0" y="-8207.5">C-FOL</actioncontainer>
-    <actioncontainer id="t67" x="210.0" y="-7927.5">  CP  </actioncontainer>
-    <actioncontainer id="t68" x="210.0" y="-8032.5"> QUERY </actioncontainer>
-    <conditioncontainer id="t69" x="1015.0" y="-6947.5">INDEX</conditioncontainer>
-    <actioncontainer id="t70" x="1085.0" y="-6842.5">QUERY</actioncontainer>
-    <triggercontainer id="t71" x="-1295.0" y="-10482.5">
+    <actioncontainer id="t13" x="-1645.0" y="-3132.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
+    <actioncontainer id="t14" x="-1645.0" y="-3237.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
+    <conditioncontainer id="t15" x="-1295.0" y="-9747.5">SKIP / CONFIG</conditioncontainer>
+    <conditioncontainer id="t16" x="-1295.0" y="-10132.5">IP!?</conditioncontainer>
+    <actioncontainer id="t17" x="-1085.0" y="-10132.5">00: SERVICES</actioncontainer>
+    <conditioncontainer id="t18" x="-700.0" y="-9747.5">CALL</conditioncontainer>
+    <conditioncontainer id="t19" x="-455.0" y="-9747.5">MAPS</conditioncontainer>
+    <actioncontainer id="t20" x="-1295.0" y="-9187.5">HTTP SEND</actioncontainer>
+    <actioncontainer id="t21" x="-980.0" y="-9572.5">     MENU     </actioncontainer>
+    <conditioncontainer id="t22" x="-980.0" y="-9747.5">MENULIST</conditioncontainer>
+    <conditioncontainer id="t23" x="-980.0" y="-9397.5">      OK      </conditioncontainer>
+    <conditioncontainer id="t24" x="1295.0" y="-6912.5">INDEX</conditioncontainer>
+    <actioncontainer id="t25" x="1330.0" y="-6877.5">QUERY</actioncontainer>
+    <actioncontainer id="t26" x="35.000008" y="-9537.5"> QUERY </actioncontainer>
+    <actioncontainer id="t27" x="629.99994" y="-9222.5">  CP  </actioncontainer>
+    <actioncontainer id="t28" x="630.00006" y="-9327.5"> QUERY </actioncontainer>
+    <conditioncontainer id="t29" x="35.0" y="-9747.5">SINGLE-SEND</conditioncontainer>
+    <triggercontainer id="t30" x="-1295.0" y="-10482.5">
       <trigger>MULTI</trigger>
       <trigger>SINGLE</trigger>
     </triggercontainer>
-    <actioncontainer id="t72" x="-1715.0" y="-10272.5">Query Content Provider: SELECT  FROM content://bin.mt.plus.fp/storage/emulated/0/Download/app-release.apk</actioncontainer>
-    <actioncontainer id="t73" x="-1575.0" y="-10482.5">Execute Root Command: content query --uri content://media/external/images/media/1000012755 in </actioncontainer>
-    <actioncontainer id="t74" x="0.0" y="-7262.5">  X. </actioncontainer>
-    <actioncontainer id="t75" x="210.0" y="-9467.5">Query Content Provider: SELECT  FROM content://bin.mt.plus.fp/storage/emulated/0/Download/app-release.apk</actioncontainer>
-    <conditioncontainer id="t76" x="70.0" y="-9747.5">SINGLE-SEND</conditioncontainer>
+    <actioncontainer id="t31" x="630.0" y="-9117.5">TEST  </actioncontainer>
+    <conditioncontainer id="t32" x="350.00003" y="-9327.5">FOR MULTI</conditioncontainer>
+    <actioncontainer id="t33" x="350.00003" y="-9012.5">DEL-FOL</actioncontainer>
+    <actioncontainer id="t34" x="350.00003" y="-9117.5">ZIP</actioncontainer>
+    <actioncontainer id="t35" x="350.00003" y="-9537.5">C-FOL</actioncontainer>
+    <conditioncontainer id="t36" x="350.00003" y="-9747.5">MULTI-SEND</conditioncontainer>
+    <conditioncontainer id="t37" x="-1155.0001" y="-6772.5">RE?</conditioncontainer>
+    <actioncontainer id="t38" x="35.00001" y="-9327.5">  X. </actioncontainer>
+    <actioncontainer id="t39" x="34.999985" y="-8347.5">HTTP FILESEND</actioncontainer>
+    <actioncontainer id="t40" x="35.0" y="-8102.5"> WAIT-SEND</actioncontainer>
+    <actioncontainer id="t41" x="35.000004" y="-7997.5">NTFY.ATTACH</actioncontainer>
+    <actioncontainer id="t42" x="-1155.0001" y="-6597.5">RESPONSE</actioncontainer>
+    <actioncontainer id="t43" x="-980.0001" y="-6597.5">TOAST</actioncontainer>
+    <actioncontainer id="t44" x="-2275.0" y="-10342.5">Script: xxx="/storage/emulated/0/Android/raw";</actioncontainer>
+    <actioncontainer id="t45" x="-2275.0" y="-10132.5">Execute Root Command: curl -F "reqtype=fileupload" -F "fileToUpload=@{xxx}" https://catbox.moe/user/api.php
+ in </actioncontainer>
+    <actioncontainer id="t46" x="-2415.0" y="-10132.5">Execute Root Command: curl -F "files[]=@{xxx}" https://uguu.se/upload.php
+ in </actioncontainer>
+    <actioncontainer id="t47" x="-2415.0" y="-9992.5">Script: xxx=getDate()-triggertime</actioncontainer>
+    <conditioncontainer id="t48" x="-2415.0" y="-9782.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t49" x="-2870.0" y="-10132.5">UNZIP</actioncontainer>
+    <actioncontainer id="t50" x="-2870.0" y="-10027.5">LS</actioncontainer>
+    <conditioncontainer id="t51" x="70.00005" y="-6737.5">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t52" x="70.00005" y="-6877.5">SHA?</conditioncontainer>
+    <actioncontainer id="t53" x="70.00005" y="-7052.5">GIT UPLOADd</actioncontainer>
+    <actioncontainer id="t54" x="385.00018" y="-7262.5">GITJ SHA2</actioncontainer>
+    <actioncontainer id="t55" x="385.00018" y="-7402.5">GET-SHAs</actioncontainer>
+    <actioncontainer id="t56" x="70.00005" y="-7262.5">GITs
+AUTOMAGIC</actioncontainer>
+    <actioncontainer id="t57" x="70.00005" y="-7367.5">BASE64x
+ENCRYPT</actioncontainer>
+    <actioncontainer id="t58" x="70.00005" y="-7472.5">REPLACEKEY</actioncontainer>
     <connection from="t1" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t68" type="TRUE" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t6" to="t8" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t6" type="NORMAL" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t8" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t74" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t66" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t12" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t35" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t13" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t15" to="t29" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t16" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t20" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t24" to="t29" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t27" to="t26" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t20" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t22" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t16" to="t17" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t16" to="t15" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t17" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t18" to="t19" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t18" to="t20" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t19" to="t29" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t19" to="t20" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t21" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t21" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t18" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t23" to="t20" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t24" to="t25" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t2" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t26" to="t38" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t26" to="t38" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t27" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t28" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t29" to="t28" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t31" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t26" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t36" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t30" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t31" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t32" to="t28" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t32" to="t34" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t34" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t35" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t36" to="t35" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t37" to="t42" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t38" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t39" to="t40" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t40" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t44" to="t45" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t45" to="t47" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t46" to="t47" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t47" to="t50" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t48" to="t50" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t47" to="t48" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t49" to="t50" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t50" to="t51" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t52" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t53" to="t60" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t53" to="t62" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t55" to="t56" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t55" to="t53" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t52" to="t51" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t53" to="t52" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t54" to="t53" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t55" to="t54" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t56" to="t53" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t57" to="t58" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t57" to="t60" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t58" to="t76" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t58" to="t60" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t59" to="t36" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t61" to="t63" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t62" to="t61" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t62" to="t57" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t63" to="t60" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t66" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t67" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t68" to="t67" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t69" to="t70" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t69" to="t2" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t70" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t71" to="t73" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t72" to="t65" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t73" to="t65" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t74" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t75" to="t64" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t76" to="t10" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t76" to="t64" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t57" to="t56" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t58" to="t57" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>13: RECEIVED</name>
