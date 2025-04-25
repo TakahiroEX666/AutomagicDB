@@ -376,7 +376,7 @@ NOW
   <trigger type="command_output">
     <useDefaultName>false</useDefaultName>
     <name>LAKILL</name>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <command>logcat -c; logcat -v threadtime *:D</command>
     <root>true</root>
     <seContext></seContext>
@@ -3695,7 +3695,7 @@ global_spxdb["order"]["incoming"]=newMap();</script>
   <action type="execute_flows">
     <useDefaultName>false</useDefaultName>
     <name>00: SERVICES</name>
-    <includeFlowNamePatternList>11: IPCONFIG</includeFlowNamePatternList>
+    <includeFlowNamePatternList>CR11: IPCONFIG</includeFlowNamePatternList>
     <excludeFlowNamePatternList></excludeFlowNamePatternList>
     <skipDisabledFlowsWithoutError>true</skipDisabledFlowsWithoutError>
     <waitForFlowsToFinish>true</waitForFlowsToFinish>
@@ -5451,8 +5451,8 @@ log(subdistrict[i]);
   </action>
   <action type="execute_flows">
     <useDefaultName>true</useDefaultName>
-    <name>Execute Flows: 12: SENDER</name>
-    <includeFlowNamePatternList>12: SENDER</includeFlowNamePatternList>
+    <name>Execute Flows: CR12: SENDER</name>
+    <includeFlowNamePatternList>CR12: SENDER</includeFlowNamePatternList>
     <excludeFlowNamePatternList></excludeFlowNamePatternList>
     <skipDisabledFlowsWithoutError>false</skipDisabledFlowsWithoutError>
     <waitForFlowsToFinish>false</waitForFlowsToFinish>
@@ -5658,7 +5658,7 @@ log(subdistrict[i]);
   <action type="execute_flows">
     <useDefaultName>false</useDefaultName>
     <name>EXECUTE SENDER</name>
-    <includeFlowNamePatternList>12: SENDER</includeFlowNamePatternList>
+    <includeFlowNamePatternList>CR12: SENDER</includeFlowNamePatternList>
     <excludeFlowNamePatternList></excludeFlowNamePatternList>
     <skipDisabledFlowsWithoutError>false</skipDisabledFlowsWithoutError>
     <waitForFlowsToFinish>false</waitForFlowsToFinish>
@@ -8010,7 +8010,7 @@ BASE</name>
   <action type="execute_flows">
     <useDefaultName>false</useDefaultName>
     <name>IPCONFIG</name>
-    <includeFlowNamePatternList>11: IPCONFIG</includeFlowNamePatternList>
+    <includeFlowNamePatternList>CR11: IPCONFIG</includeFlowNamePatternList>
     <excludeFlowNamePatternList></excludeFlowNamePatternList>
     <skipDisabledFlowsWithoutError>false</skipDisabledFlowsWithoutError>
     <waitForFlowsToFinish>false</waitForFlowsToFinish>
@@ -10732,7 +10732,7 @@ str2: sitting</customHTTPHeaders>
   <action type="execute_flows">
     <useDefaultName>false</useDefaultName>
     <name>RESPONSE</name>
-    <includeFlowNamePatternList>14: RESPONSE</includeFlowNamePatternList>
+    <includeFlowNamePatternList>CR14: RESPONSE</includeFlowNamePatternList>
     <excludeFlowNamePatternList></excludeFlowNamePatternList>
     <skipDisabledFlowsWithoutError>false</skipDisabledFlowsWithoutError>
     <waitForFlowsToFinish>false</waitForFlowsToFinish>
@@ -14536,7 +14536,7 @@ putString("android.intent.extra.STREAM","content://media/external/images/media/1
   <action type="stop_flows">
     <useDefaultName>false</useDefaultName>
     <name>STOP-RES</name>
-    <includeFlowNamePatternList>14: RESPONSE</includeFlowNamePatternList>
+    <includeFlowNamePatternList>CR14: RESPONSE</includeFlowNamePatternList>
     <excludeFlowNamePatternList></excludeFlowNamePatternList>
   </action>
   <action type="stop_flows">
@@ -17929,7 +17929,7 @@ EXTEND</actioncontainer>
     <name>(15)  NOKILL</name>
     <description> </description>
     <group>Old</group>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
     <triggercontainer id="t1" x="35.0" y="-577.5">
@@ -18512,9 +18512,74 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <connection from="t4" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
-    <name>11: IPCONFIG</name>
-    <description>2.00 alpha-version</description>
+    <name>18: FOLDER SYNC ❌</name>
+    <description>✖️</description>
     <group>Old</group>
+    <enabled>false</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <triggercontainer id="t1" x="70.0" y="52.5" />
+  </flow>
+  <flow type="flow">
+    <name>31-</name>
+    <description> </description>
+    <enabled>true</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <triggercontainer id="t1" x="70.0" y="-52.5" />
+    <actioncontainer id="t2" x="70.0" y="297.5">ZONEMEN</actioncontainer>
+    <actioncontainer id="t3" x="70.0" y="822.5">Show Custom Widget Overlay: LISTDISTRICT, LISTDISTRICT  Top Right</actioncontainer>
+    <actioncontainer id="t4" x="70.0" y="87.5">Script: G=global_lalamove_v6;</actioncontainer>
+    <conditioncontainer id="t5" x="70.0" y="437.5"> 1 </conditioncontainer>
+    <conditioncontainer id="t6" x="490.0" y="437.5">  5  </conditioncontainer>
+    <actioncontainer id="t7" x="70.0" y="612.5">Script: global_temp_district=newList();</actioncontainer>
+    <conditioncontainer id="t8" x="315.0" y="437.5">  4  </conditioncontainer>
+    <actioncontainer id="t9" x="70.0" y="192.5">Script: zonemenu=newList( "🗺️ โหมด : {G['ZONE']['mode'][0]}", "📝 เพิ่มรายการ", "", "", "🔐 รายชื่อล็อค:\n {G['ZONE']['restrict']}", "🚫 รายชื่อบล็อค:\n {G['ZONE']['block']}", "" );</actioncontainer>
+    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t8" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t7" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t6" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t9" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>32-</name>
+    <description> </description>
+    <enabled>true</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <triggercontainer id="t1" x="-35.0" y="-752.5">
+      <trigger>CLIPBOARD</trigger>
+    </triggercontainer>
+    <actioncontainer id="t2" x="-245.0" y="-122.5">
+
+
+
+
+   </actioncontainer>
+    <actioncontainer id="t3" x="385.0" y="-122.5">Show Custom Widget Overlay: LISTDISTRICT, LISTDISTRICT  Top Right</actioncontainer>
+    <conditioncontainer id="t4" x="175.0" y="-122.5">CLICK</conditioncontainer>
+    <actioncontainer id="t5" x="175.0" y="17.5">Hide Custom Widget Overlay: LISTDISTRICT</actioncontainer>
+    <conditioncontainer id="t6" x="175.0" y="297.5">Exprkkession: index==3</conditioncontainer>
+    <conditioncontainer id="t7" x="-35.0" y="-122.5">CLIPBOARD</conditioncontainer>
+    <actioncontainer id="t8" x="175.0" y="472.5">Script: if(index==1) { global_lalamove_v6["ZONE"]["restrict"]=global_temp_district; } if(index==2) { global_lalamove_v6["ZONE"]["block"]=global_temp_district; } removeVariable("global_temp_district"); setWidgetElementProperty("LISTDISTRICT", "Text_1", "text", "");</actioncontainer>
+    <actioncontainer id="t9" x="-35.0" y="17.5">Notification on Screen: เพิ่ม: {clip_data}</actioncontainer>
+    <actioncontainer id="t10" x="175.0" y="157.5">Input Dialog:  Single Choice Menu "{global_temp_district}",🔐 =&gt; เพิ่มในล็อค,🚫  =&gt; เพิ่มในบล็อค,📝  เพิ่มใหม่,❌  ยกเลิกการเพิ่ม</actioncontainer>
+    <notecontainer id="t11" x="245.0" y="-297.5" w="140.0" h="105.0">เปิดทำงานเมื่อทำงาน  ฝlalamove</notecontainer>
+    <connection from="t1" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t3" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t4" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t3" type="TRUE" sourcePosition="EAST" targetPosition="SOUTH" />
+    <connection from="t6" to="t8" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t2" type="EXCEPTION" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t7" to="t4" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t7" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>CR11: IPCONFIG</name>
+    <description>2.00 alpha-version</description>
+    <group>          ♻️  TKH-CONNECT</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="70.0" y="-52.5">
@@ -18550,7 +18615,7 @@ TKH-CUPID</notecontainer>
     <connection from="t12" to="t11" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
-    <name>12: SENDER</name>
+    <name>CR12: SENDER</name>
     <description>0.67</description>
     <group>          ♻️  TKH-CONNECT</group>
     <enabled>true</enabled>
@@ -18680,7 +18745,7 @@ ENCRYPT</actioncontainer>
     <connection from="t57" to="t14" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
   </flow>
   <flow type="flow">
-    <name>13: RECEIVED</name>
+    <name>CR13: RECEIVED</name>
     <description>0.67</description>
     <group>          ♻️  TKH-CONNECT</group>
     <enabled>true</enabled>
@@ -18718,7 +18783,7 @@ ENCRYPT</actioncontainer>
     <conditioncontainer id="t26" x="-875.0" y="-3482.5">COMM</conditioncontainer>
     <actioncontainer id="t27" x="-630.0" y="-3272.5">SHELL RE!</actioncontainer>
     <conditioncontainer id="t28" x="-875.0" y="-3272.5">KILLALL</conditioncontainer>
-    <actioncontainer id="t29" x="-875.0" y="-2887.5">Execute Flows: 12: SENDER</actioncontainer>
+    <actioncontainer id="t29" x="-875.0" y="-2887.5">Execute Flows: CR12: SENDER</actioncontainer>
     <conditioncontainer id="t30" x="-875.0" y="-3062.5">RESPONSE </conditioncontainer>
     <conditioncontainer id="t31" x="-1540.0" y="-3972.5">UP-FILE?</conditioncontainer>
     <actioncontainer id="t32" x="910.0" y="-2642.5">XML</actioncontainer>
@@ -18798,7 +18863,7 @@ ENCRYPT</actioncontainer>
     <connection from="t59" to="t53" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
-    <name>14: RESPONSE</name>
+    <name>CR14: RESPONSE</name>
     <description> </description>
     <group>          ♻️  TKH-CONNECT</group>
     <enabled>true</enabled>
@@ -18808,71 +18873,6 @@ ENCRYPT</actioncontainer>
     <actioncontainer id="t3" x="70.0" y="262.5">Sleep: 10s (keep degcvice awake)</actioncontainer>
     <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
-    <name>18: FOLDER SYNC ❌</name>
-    <description>✖️</description>
-    <group>          ♻️  TKH-CONNECT</group>
-    <enabled>false</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5" />
-  </flow>
-  <flow type="flow">
-    <name>31-</name>
-    <description> </description>
-    <enabled>true</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="-52.5" />
-    <actioncontainer id="t2" x="70.0" y="297.5">ZONEMEN</actioncontainer>
-    <actioncontainer id="t3" x="70.0" y="822.5">Show Custom Widget Overlay: LISTDISTRICT, LISTDISTRICT  Top Right</actioncontainer>
-    <actioncontainer id="t4" x="70.0" y="87.5">Script: G=global_lalamove_v6;</actioncontainer>
-    <conditioncontainer id="t5" x="70.0" y="437.5"> 1 </conditioncontainer>
-    <conditioncontainer id="t6" x="490.0" y="437.5">  5  </conditioncontainer>
-    <actioncontainer id="t7" x="70.0" y="612.5">Script: global_temp_district=newList();</actioncontainer>
-    <conditioncontainer id="t8" x="315.0" y="437.5">  4  </conditioncontainer>
-    <actioncontainer id="t9" x="70.0" y="192.5">Script: zonemenu=newList( "🗺️ โหมด : {G['ZONE']['mode'][0]}", "📝 เพิ่มรายการ", "", "", "🔐 รายชื่อล็อค:\n {G['ZONE']['restrict']}", "🚫 รายชื่อบล็อค:\n {G['ZONE']['block']}", "" );</actioncontainer>
-    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t8" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t7" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t6" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t9" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
-    <name>32-</name>
-    <description> </description>
-    <enabled>true</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="-35.0" y="-752.5">
-      <trigger>CLIPBOARD</trigger>
-    </triggercontainer>
-    <actioncontainer id="t2" x="-245.0" y="-122.5">
-
-
-
-
-   </actioncontainer>
-    <actioncontainer id="t3" x="385.0" y="-122.5">Show Custom Widget Overlay: LISTDISTRICT, LISTDISTRICT  Top Right</actioncontainer>
-    <conditioncontainer id="t4" x="175.0" y="-122.5">CLICK</conditioncontainer>
-    <actioncontainer id="t5" x="175.0" y="17.5">Hide Custom Widget Overlay: LISTDISTRICT</actioncontainer>
-    <conditioncontainer id="t6" x="175.0" y="297.5">Exprkkession: index==3</conditioncontainer>
-    <conditioncontainer id="t7" x="-35.0" y="-122.5">CLIPBOARD</conditioncontainer>
-    <actioncontainer id="t8" x="175.0" y="472.5">Script: if(index==1) { global_lalamove_v6["ZONE"]["restrict"]=global_temp_district; } if(index==2) { global_lalamove_v6["ZONE"]["block"]=global_temp_district; } removeVariable("global_temp_district"); setWidgetElementProperty("LISTDISTRICT", "Text_1", "text", "");</actioncontainer>
-    <actioncontainer id="t9" x="-35.0" y="17.5">Notification on Screen: เพิ่ม: {clip_data}</actioncontainer>
-    <actioncontainer id="t10" x="175.0" y="157.5">Input Dialog:  Single Choice Menu "{global_temp_district}",🔐 =&gt; เพิ่มในล็อค,🚫  =&gt; เพิ่มในบล็อค,📝  เพิ่มใหม่,❌  ยกเลิกการเพิ่ม</actioncontainer>
-    <notecontainer id="t11" x="245.0" y="-297.5" w="140.0" h="105.0">เปิดทำงานเมื่อทำงาน  ฝlalamove</notecontainer>
-    <connection from="t1" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t3" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t4" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t3" type="TRUE" sourcePosition="EAST" targetPosition="SOUTH" />
-    <connection from="t6" to="t8" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t2" type="EXCEPTION" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t7" to="t4" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t7" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Encrypt / Decrypt text</name>
@@ -19107,7 +19107,7 @@ MENU
   </flow>
   <flow type="flow">
     <name>Flow17</name>
-    <group>          ♻️  TKH-CONNECT</group>
+    <group>Old</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <conditioncontainer id="t1" x="0.0" y="437.5">     DEBUG    </conditioncontainer>
