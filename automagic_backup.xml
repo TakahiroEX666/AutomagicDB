@@ -593,6 +593,21 @@ attachment_name=getString("attachment_name");</extras>
     <packageNameFilter>com.shopee.foody.driver.th</packageNameFilter>
     <classNameFilter>com.shopee.android.react.impl.activity.stubs.RNStubs4</classNameFilter>
   </trigger>
+  <trigger type="general_broadcast">
+    <useDefaultName>false</useDefaultName>
+    <name>SIM_CHANGE</name>
+    <enabled>true</enabled>
+    <action>android.intent.action.SIM_STATE_CHANGED</action>
+    <categoryList></categoryList>
+    <dataSchemeList></dataSchemeList>
+    <dataAuthorityList></dataAuthorityList>
+    <dataPathLiteralList></dataPathLiteralList>
+    <dataPathPrefixList></dataPathPrefixList>
+    <dataPathGlobList></dataPathGlobList>
+    <dataTypeList></dataTypeList>
+    <extras>state=getString("ss");</extras>
+    <receiveInitialStickyBroadcast>false</receiveInitialStickyBroadcast>
+  </trigger>
   <trigger type="send_intent_received">
     <useDefaultName>false</useDefaultName>
     <name>SINGLE</name>
@@ -1545,6 +1560,11 @@ return true</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
+    <name>ADDSIM</name>
+    <expression>state=="LOADED"</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
     <name>ALIOTH</name>
     <expression>contains(trigger,"BOOT") and global_device["device"]=="alioth"</expression>
   </condition>
@@ -1869,6 +1889,11 @@ if(current_size!=global_device["size_flow"]) {
    return true
 }
 return false</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>DISCARD</name>
+    <expression>state=="ABSENT"</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -3695,7 +3720,7 @@ global_spxdb["order"]["incoming"]=newMap();</script>
   <action type="execute_flows">
     <useDefaultName>false</useDefaultName>
     <name>00: SERVICES</name>
-    <includeFlowNamePatternList>CR11: IPCONFIG</includeFlowNamePatternList>
+    <includeFlowNamePatternList>CR02:  ▶️ IP CONFIG</includeFlowNamePatternList>
     <excludeFlowNamePatternList></excludeFlowNamePatternList>
     <skipDisabledFlowsWithoutError>true</skipDisabledFlowsWithoutError>
     <waitForFlowsToFinish>true</waitForFlowsToFinish>
@@ -8010,7 +8035,7 @@ BASE</name>
   <action type="execute_flows">
     <useDefaultName>false</useDefaultName>
     <name>IPCONFIG</name>
-    <includeFlowNamePatternList>CR11: IPCONFIG</includeFlowNamePatternList>
+    <includeFlowNamePatternList>CR02:  ▶️ IP CONFIG</includeFlowNamePatternList>
     <excludeFlowNamePatternList></excludeFlowNamePatternList>
     <skipDisabledFlowsWithoutError>false</skipDisabledFlowsWithoutError>
     <waitForFlowsToFinish>false</waitForFlowsToFinish>
@@ -18577,42 +18602,63 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <connection from="t10" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
-    <name>CR11: IPCONFIG</name>
+    <name>CR00:  ▶️ BOOT</name>
+    <description> </description>
+    <group>          ♻️  TKH-CONNECT</group>
+    <enabled>true</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <actioncontainer id="t1" x="69.99999" y="472.49994">RENDER SERVER</actioncontainer>
+    <conditioncontainer id="t2" x="69.99999" y="297.5">10m </conditioncontainer>
+    <triggercontainer id="t3" x="70.0" y="52.5">
+      <trigger>10m </trigger>
+    </triggercontainer>
+    <connection from="t2" to="t1" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>CR01:  ▶️ SIM SELECT</name>
+    <description> </description>
+    <group>          ♻️  TKH-CONNECT</group>
+    <enabled>true</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <triggercontainer id="t1" x="70.0" y="52.5">
+      <trigger>SIM_CHANGE</trigger>
+    </triggercontainer>
+    <conditioncontainer id="t2" x="70.0" y="262.5">DISCARD</conditioncontainer>
+    <conditioncontainer id="t3" x="315.0" y="262.5">ADDSIM</conditioncontainer>
+    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+  </flow>
+  <flow type="flow">
+    <name>CR02:  ▶️ IP CONFIG</name>
     <description>2.00 alpha-version</description>
     <group>          ♻️  TKH-CONNECT</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="-52.5">
-      <trigger>10m </trigger>
-      <trigger>1m</trigger>
+    <actioncontainer id="t1" x="70.0" y="1137.5">REQ-SER</actioncontainer>
+    <actioncontainer id="t2" x="595.0" y="787.5">RM / IP</actioncontainer>
+    <conditioncontainer id="t3" x="70.0" y="612.5">WIFI-CONN</conditioncontainer>
+    <conditioncontainer id="t4" x="70.0" y="962.5">IP FIND</conditioncontainer>
+    <actioncontainer id="t5" x="350.0" y="612.5"> WLAN1</actioncontainer>
+    <conditioncontainer id="t6" x="350.0" y="367.5">WIFI-SYSTEM</conditioncontainer>
+    <triggercontainer id="t7" x="70.0" y="-52.5">
       <trigger>WIFI-CON</trigger>
+      <trigger>1m</trigger>
     </triggercontainer>
-    <notecontainer id="t2" x="-175.0" y="-157.5" w="140.0" h="105.0">TKH-ALIOTH
-TKH-CUPID</notecontainer>
-    <conditioncontainer id="t3" x="-315.0" y="192.5">10m </conditioncontainer>
-    <conditioncontainer id="t4" x="70.0" y="367.5">MAIN-NET</conditioncontainer>
-    <actioncontainer id="t5" x="-315.0" y="367.5">RENDER SERVER</actioncontainer>
-    <actioncontainer id="t6" x="70.0" y="1137.5">REQ-SER</actioncontainer>
-    <actioncontainer id="t7" x="595.0" y="787.5">RM / IP</actioncontainer>
-    <conditioncontainer id="t8" x="70.0" y="612.5">WIFI-CONN</conditioncontainer>
-    <conditioncontainer id="t9" x="70.0" y="962.5">IP FIND</conditioncontainer>
-    <actioncontainer id="t10" x="70.0" y="192.5">SIMINFO</actioncontainer>
-    <actioncontainer id="t11" x="350.0" y="612.5"> WLAN1</actioncontainer>
-    <conditioncontainer id="t12" x="350.0" y="367.5">WIFI-SYSTEM</conditioncontainer>
-    <connection from="t1" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t8" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t12" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t6" to="t7" type="EXCEPTION" sourcePosition="EAST" targetPosition="SOUTH" />
-    <connection from="t8" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="WEST" />
-    <connection from="t8" to="t11" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t9" to="t6" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t7" type="FALSE" sourcePosition="EAST" targetPosition="SOUTH" />
-    <connection from="t10" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t7" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t12" to="t11" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t8" x="70.0" y="192.5">SIMINFO</actioncontainer>
+    <conditioncontainer id="t9" x="70.0" y="367.5">MAIN-NET</conditioncontainer>
+    <connection from="t1" to="t2" type="EXCEPTION" sourcePosition="EAST" targetPosition="SOUTH" />
+    <connection from="t3" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="WEST" />
+    <connection from="t3" to="t5" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t4" to="t1" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="SOUTH" />
+    <connection from="t5" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t6" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t6" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
   </flow>
   <flow type="flow">
     <name>CR12: SENDER</name>
@@ -18780,44 +18826,44 @@ ENCRYPT</actioncontainer>
     <actioncontainer id="t23" x="-1540.0" y="-3167.5">SPF</actioncontainer>
     <conditioncontainer id="t24" x="-1540.0" y="-3482.5">INCOMING</conditioncontainer>
     <conditioncontainer id="t25" x="-1330.0" y="-3482.5">RESPONSE</conditioncontainer>
-    <conditioncontainer id="t26" x="-875.0" y="-3482.5">COMM</conditioncontainer>
-    <actioncontainer id="t27" x="-630.0" y="-3272.5">SHELL RE!</actioncontainer>
-    <conditioncontainer id="t28" x="-875.0" y="-3272.5">KILLALL</conditioncontainer>
-    <actioncontainer id="t29" x="-875.0" y="-2887.5">Execute Flows: CR12: SENDER</actioncontainer>
-    <conditioncontainer id="t30" x="-875.0" y="-3062.5">RESPONSE </conditioncontainer>
-    <conditioncontainer id="t31" x="-1540.0" y="-3972.5">UP-FILE?</conditioncontainer>
-    <actioncontainer id="t32" x="910.0" y="-2642.5">XML</actioncontainer>
-    <actioncontainer id="t33" x="525.0" y="-3342.5">W/ DOWN</actioncontainer>
-    <conditioncontainer id="t34" x="735.0" y="-2922.5">ACCESSFILE</conditioncontainer>
-    <conditioncontainer id="t35" x="-280.0" y="-3482.5">📞</conditioncontainer>
-    <actioncontainer id="t36" x="0.0" y="-2782.5">MAP-CLEAN</actioncontainer>
-    <actioncontainer id="t37" x="140.0" y="-2782.5">MAP-RAW</actioncontainer>
-    <actioncontainer id="t38" x="0.0" y="-2887.5">Sleep: 100ms (keep device awake)</actioncontainer>
-    <actioncontainer id="t39" x="140.0" y="-2887.5">Sleep: 100ms (keep device awake)</actioncontainer>
-    <actioncontainer id="t40" x="0.0" y="-2992.5">KILLG</actioncontainer>
-    <actioncontainer id="t41" x="140.0" y="-2992.5">KILLG</actioncontainer>
-    <actioncontainer id="t42" x="0.0" y="-3097.5">Execute Root Command: input keyevent KEYCODE_WAKEUP
+    <actioncontainer id="t26" x="-630.0" y="-3272.5">SHELL RE!</actioncontainer>
+    <conditioncontainer id="t27" x="-875.0" y="-3272.5">KILLALL</conditioncontainer>
+    <actioncontainer id="t28" x="-875.0" y="-2887.5">Execute Flows: CR12: SENDER</actioncontainer>
+    <conditioncontainer id="t29" x="-875.0" y="-3062.5">RESPONSE </conditioncontainer>
+    <conditioncontainer id="t30" x="-1540.0" y="-3972.5">UP-FILE?</conditioncontainer>
+    <actioncontainer id="t31" x="910.0" y="-2642.5">XML</actioncontainer>
+    <actioncontainer id="t32" x="525.0" y="-3342.5">W/ DOWN</actioncontainer>
+    <conditioncontainer id="t33" x="735.0" y="-2922.5">ACCESSFILE</conditioncontainer>
+    <conditioncontainer id="t34" x="-280.0" y="-3482.5">📞</conditioncontainer>
+    <actioncontainer id="t35" x="0.0" y="-2782.5">MAP-CLEAN</actioncontainer>
+    <actioncontainer id="t36" x="140.0" y="-2782.5">MAP-RAW</actioncontainer>
+    <actioncontainer id="t37" x="0.0" y="-2887.5">Sleep: 100ms (keep device awake)</actioncontainer>
+    <actioncontainer id="t38" x="140.0" y="-2887.5">Sleep: 100ms (keep device awake)</actioncontainer>
+    <actioncontainer id="t39" x="0.0" y="-2992.5">KILLG</actioncontainer>
+    <actioncontainer id="t40" x="140.0" y="-2992.5">KILLG</actioncontainer>
+    <actioncontainer id="t41" x="0.0" y="-3097.5">Execute Root Command: input keyevent KEYCODE_WAKEUP
  in </actioncontainer>
-    <conditioncontainer id="t43" x="0.0" y="-3482.5">🗺️</conditioncontainer>
-    <actioncontainer id="t44" x="140.0" y="-3097.5">Execute Root Command: input keyevent KEYCODE_WAKEUP
+    <conditioncontainer id="t42" x="0.0" y="-3482.5">🗺️</conditioncontainer>
+    <actioncontainer id="t43" x="140.0" y="-3097.5">Execute Root Command: input keyevent KEYCODE_WAKEUP
  in </actioncontainer>
-    <actioncontainer id="t45" x="-1330.0" y="-3272.5">STOP-RES</actioncontainer>
-    <actioncontainer id="t46" x="-1330.0" y="-3167.5">Messagbhe Dialog: ✓ คำสั่งสำเร็จ ✓ </actioncontainer>
-    <actioncontainer id="t47" x="735.0" y="-3202.5">MV</actioncontainer>
-    <actioncontainer id="t48" x="735.0" y="-3342.5">TYPE-FOLDER</actioncontainer>
-    <actioncontainer id="t49" x="1015.0" y="-3097.5">LS</actioncontainer>
-    <actioncontainer id="t50" x="1015.0" y="-3202.5">UNZIP</actioncontainer>
-    <notecontainer id="t51" x="525.0" y="-2782.5" w="140.0" h="105.0">response["type"]</notecontainer>
-    <actioncontainer id="t52" x="525.0" y="-3202.5">DOWNLOAD</actioncontainer>
-    <actioncontainer id="t53" x="35.0" y="-2397.5">GIT UPLOADdfd</actioncontainer>
-    <actioncontainer id="t54" x="385.0" y="-2397.5">LS</actioncontainer>
-    <actioncontainer id="t55" x="175.0" y="-2502.5">TOAST</actioncontainer>
-    <actioncontainer id="t56" x="385.0" y="-2502.5">UNZIP</actioncontainer>
-    <actioncontainer id="t57" x="175.0" y="-2292.5">GET-jSHAs</actioncontainer>
-    <actioncontainer id="t58" x="175.0" y="-2397.5">GIT UPLOADd</actioncontainer>
-    <actioncontainer id="t59" x="35.0" y="-2502.5">GITJ SHA2d</actioncontainer>
+    <actioncontainer id="t44" x="-1330.0" y="-3272.5">STOP-RES</actioncontainer>
+    <actioncontainer id="t45" x="-1330.0" y="-3167.5">Messagbhe Dialog: ✓ คำสั่งสำเร็จ ✓ </actioncontainer>
+    <actioncontainer id="t46" x="735.0" y="-3202.5">MV</actioncontainer>
+    <actioncontainer id="t47" x="735.0" y="-3342.5">TYPE-FOLDER</actioncontainer>
+    <actioncontainer id="t48" x="1015.0" y="-3097.5">LS</actioncontainer>
+    <actioncontainer id="t49" x="1015.0" y="-3202.5">UNZIP</actioncontainer>
+    <notecontainer id="t50" x="525.0" y="-2782.5" w="140.0" h="105.0">response["type"]</notecontainer>
+    <actioncontainer id="t51" x="525.0" y="-3202.5">DOWNLOAD</actioncontainer>
+    <actioncontainer id="t52" x="35.0" y="-2397.5">GIT UPLOADdfd</actioncontainer>
+    <actioncontainer id="t53" x="385.0" y="-2397.5">LS</actioncontainer>
+    <actioncontainer id="t54" x="175.0" y="-2502.5">TOAST</actioncontainer>
+    <actioncontainer id="t55" x="385.0" y="-2502.5">UNZIP</actioncontainer>
+    <actioncontainer id="t56" x="175.0" y="-2292.5">GET-jSHAs</actioncontainer>
+    <actioncontainer id="t57" x="175.0" y="-2397.5">GIT UPLOADd</actioncontainer>
+    <actioncontainer id="t58" x="35.0" y="-2502.5">GITJ SHA2d</actioncontainer>
+    <conditioncontainer id="t59" x="-875.0" y="-3482.5">COMM</conditioncontainer>
     <connection from="t1" to="t21" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t1" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t30" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t6" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -18829,38 +18875,38 @@ ENCRYPT</actioncontainer>
     <connection from="t16" to="t12" type="EXCEPTION" sourcePosition="EAST" targetPosition="NORTH" />
     <connection from="t17" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t20" to="t24" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t20" to="t33" type="TRUE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t20" to="t32" type="TRUE" sourcePosition="EAST" targetPosition="NORTH" />
     <connection from="t22" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t24" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t24" to="t25" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t25" to="t45" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t26" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t26" to="t28" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t26" to="t35" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t28" to="t27" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t28" to="t30" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t28" to="t30" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t30" to="t29" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t31" to="t20" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t31" to="t48" type="EXCEPTION" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t33" to="t52" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t19" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t35" to="t43" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t25" to="t44" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t59" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t27" to="t26" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t27" to="t29" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t27" to="t29" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t28" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t30" to="t20" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t30" to="t47" type="EXCEPTION" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t32" to="t51" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t33" to="t19" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t34" to="t42" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t37" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t38" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t39" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t40" to="t38" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t41" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t42" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t43" to="t42" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t43" to="t44" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t44" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t45" to="t46" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t47" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t48" to="t47" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t50" to="t49" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t52" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
-    <connection from="t56" to="t54" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t59" to="t53" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t42" to="t41" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t42" to="t43" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t43" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t44" to="t45" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t46" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t47" to="t46" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t49" to="t48" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t51" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
+    <connection from="t55" to="t53" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t58" to="t52" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t59" to="t27" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t59" to="t34" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
   </flow>
   <flow type="flow">
     <name>CR14: RESPONSE</name>
@@ -19110,13 +19156,13 @@ MENU
     <group>Old</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <conditioncontainer id="t1" x="0.0" y="437.5">     DEBUG    </conditioncontainer>
-    <triggercontainer id="t2" x="0.0" y="-227.50003" />
+    <triggercontainer id="t1" x="0.0" y="-227.50003" />
+    <conditioncontainer id="t2" x="0.0" y="437.5">     DEBUG    </conditioncontainer>
     <actioncontainer id="t3" x="-3.0517578E-5" y="-52.5">Script: j</actioncontainer>
     <actioncontainer id="t4" x="0.0" y="122.499985">HTTP Request: POST https://dm.terabox.com/api/create?a=commit&amp;devuid=005C7D3FE2C2CDE6FEF0916606699687%7CVHISOWSG7&amp;clienttype=1&amp;channel=android_15_M2012K11AG_bd-dubox_1024074a&amp;version=3.61.5&amp;logid=MTc0NTU0NzUyMjkxNCxmZTgwOjpiYWU4Ojk4MTI6OTAxZDozMmI2JXJtbmV0X2RhdGEwLDQyOTc1NA&amp;lang=th_TH&amp;versioncode=484&amp;ZID=&amp;isVip=1&amp;bgstatus=0&amp;carrier_country=th&amp;device_country=th&amp;phone_brand=POCO&amp;activestatus=0&amp;startDevTime=1745547522914&amp;firstlaunchtime=1745546955&amp;time=1745547522658&amp;cuid=005C7D3FE2C2CDE6FEF0916606699687%7CVHISOWSG7&amp;network_type=wifi&amp;apn_id=1_-1&amp;carrier=52003th_52003th&amp;app_id=250528&amp;app_name=&amp;af_media_source=Undefined&amp;ab_variant_a=&amp;ab_variant_b=&amp;ab_variant_c=&amp;ab_variant_d=&amp;ab_variant_e=&amp;rand=f35a64041760339beaff8ce4d25d237d60557731 application/x-www-form-urlencoded path=/tester2,isdir=1,block_list=[] store in response</actioncontainer>
-    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow2</name>
