@@ -1561,7 +1561,7 @@ return true</expression>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
     <name>ADDSIM</name>
-    <expression>state=="LOADED"</expression>
+    <expression>state=="LOADED" or state==null</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -2513,8 +2513,8 @@ return false</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
-    <name>MAIN-NET</name>
-    <expression>if(contains(siminfo,"8966032310271314477")) {
+    <name>MAIN</name>
+    <expression>if(global_device["main"]=true) {
 
    wlan_cmd="ip -4 neigh show | grep -E 'REACHABLE|STALE|DELAY' | tr -s ' ' | cut -d ' ' -f1 ";
    return true}
@@ -8031,6 +8031,15 @@ BASE</name>
     <keepScreenOn>false</keepScreenOn>
     <enlargeDialogWidth>false</enlargeDialogWidth>
     <keyboardCapitalizeSentences>false</keyboardCapitalizeSentences>
+  </action>
+  <action type="execute_flows">
+    <useDefaultName>false</useDefaultName>
+    <name>IP-F</name>
+    <includeFlowNamePatternList>CR02:  ▶️ IP CONFIG</includeFlowNamePatternList>
+    <excludeFlowNamePatternList></excludeFlowNamePatternList>
+    <skipDisabledFlowsWithoutError>true</skipDisabledFlowsWithoutError>
+    <waitForFlowsToFinish>true</waitForFlowsToFinish>
+    <returnLocalVariablesToCallingFlow>false</returnLocalVariablesToCallingFlow>
   </action>
   <action type="execute_flows">
     <useDefaultName>false</useDefaultName>
@@ -13623,7 +13632,7 @@ for (i in [0 to length(shop_list)-1])
   </action>
   <action type="execute_root_command">
     <useDefaultName>false</useDefaultName>
-    <name>SIMINFO</name>
+    <name>SIM_INFO</name>
     <command>content query --uri content://telephony/siminfo</command>
     <user></user>
     <seContext></seContext>
@@ -13632,6 +13641,27 @@ for (i in [0 to length(shop_list)-1])
     <variableStdout>siminfo</variableStdout>
     <variableStderr>stderr</variableStderr>
     <variableExitCode>exit_code</variableExitCode>
+  </action>
+  <action type="script">
+    <useDefaultName>false</useDefaultName>
+    <name>SIM_MAIN</name>
+    <script>if(contains(siminfo,"8966032310271314477")) {
+
+   global_device["main"]=true}
+
+else {
+
+   global_device["main"]=false
+}</script>
+  </action>
+  <action type="execute_flows">
+    <useDefaultName>false</useDefaultName>
+    <name>SIM_SELECT-F</name>
+    <includeFlowNamePatternList>CR01:  ▶️ SIM SELECT</includeFlowNamePatternList>
+    <excludeFlowNamePatternList></excludeFlowNamePatternList>
+    <skipDisabledFlowsWithoutError>true</skipDisabledFlowsWithoutError>
+    <waitForFlowsToFinish>true</waitForFlowsToFinish>
+    <returnLocalVariablesToCallingFlow>false</returnLocalVariablesToCallingFlow>
   </action>
   <action type="execute_root_command">
     <useDefaultName>false</useDefaultName>
@@ -16898,33 +16928,33 @@ CONTENT!</actioncontainer>
     <actioncontainer id="t7" x="-70.0" y="-1417.5">FLOWLIST</actioncontainer>
     <actioncontainer id="t8" x="-70.0" y="-1312.5">EXPORT</actioncontainer>
     <actioncontainer id="t9" x="-70.0" y="-1207.5">SIZE</actioncontainer>
-    <conditioncontainer id="t10" x="-70.0" y="-997.5">DIFF SIZE</conditioncontainer>
-    <actioncontainer id="t11" x="-70.0" y="-822.5">REPLACEKEY</actioncontainer>
-    <actioncontainer id="t12" x="-70.0" y="-717.5">BASE64
+    <actioncontainer id="t10" x="-70.0" y="-822.5">REPLACEKEY</actioncontainer>
+    <actioncontainer id="t11" x="-70.0" y="-717.5">BASE64
 ENCRYPT</actioncontainer>
-    <actioncontainer id="t13" x="-70.0" y="-612.5">GIT
+    <actioncontainer id="t12" x="-70.0" y="-612.5">GIT
 AUTOMAGIC</actioncontainer>
-    <actioncontainer id="t14" x="-70.0" y="-507.5">GIT UPLOAD</actioncontainer>
-    <actioncontainer id="t15" x="245.0" y="-717.5">GET-SHA</actioncontainer>
-    <actioncontainer id="t16" x="245.0" y="-612.5">GITJ SHA2</actioncontainer>
-    <conditioncontainer id="t17" x="-70.0" y="-332.5">SHA?</conditioncontainer>
+    <actioncontainer id="t13" x="-70.0" y="-507.5">GIT UPLOAD</actioncontainer>
+    <actioncontainer id="t14" x="245.0" y="-717.5">GET-SHA</actioncontainer>
+    <actioncontainer id="t15" x="245.0" y="-612.5">GITJ SHA2</actioncontainer>
+    <conditioncontainer id="t16" x="-70.0" y="-332.5">SHA?</conditioncontainer>
+    <conditioncontainer id="t17" x="-70.0" y="-997.5">DIFF SIZE</conditioncontainer>
     <connection from="t1" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
+    <connection from="t4" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
     <connection from="t5" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t6" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t6" to="t2" type="NOTE" sourcePosition="NORTH" targetPosition="SOUTH" />
     <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t8" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t11" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t11" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t12" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t14" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t15" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t16" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t17" to="t15" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t13" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t14" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t16" to="t14" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t17" to="t10" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>  @  SPF DATABASE</name>
@@ -17962,7 +17992,6 @@ EXTEND</actioncontainer>
     </triggercontainer>
     <actioncontainer id="t2" x="-280.0" y="-192.5">DAPP</actioncontainer>
     <actioncontainer id="t3" x="-210.0" y="-367.5">S</actioncontainer>
-    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
@@ -18607,13 +18636,18 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <group>          ♻️  TKH-CONNECT</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <actioncontainer id="t1" x="69.99999" y="472.49994">RENDER SERVER</actioncontainer>
-    <conditioncontainer id="t2" x="69.99999" y="297.5">10m </conditioncontainer>
-    <triggercontainer id="t3" x="70.0" y="52.5">
+    <triggercontainer id="t1" x="70.0" y="52.5">
       <trigger>10m </trigger>
+      <trigger>BOOT</trigger>
     </triggercontainer>
-    <connection from="t2" to="t1" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t2" x="70.0" y="402.5">RENDER SERVER</actioncontainer>
+    <conditioncontainer id="t3" x="70.00001" y="227.5">10m </conditioncontainer>
+    <actioncontainer id="t4" x="350.0" y="402.5">SIM_SELECT-F</actioncontainer>
+    <actioncontainer id="t5" x="350.0" y="507.49997">IP-F</actioncontainer>
+    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t4" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>CR01:  ▶️ SIM SELECT</name>
@@ -18624,10 +18658,15 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <triggercontainer id="t1" x="70.0" y="52.5">
       <trigger>SIM_CHANGE</trigger>
     </triggercontainer>
-    <conditioncontainer id="t2" x="70.0" y="262.5">DISCARD</conditioncontainer>
-    <conditioncontainer id="t3" x="315.0" y="262.5">ADDSIM</conditioncontainer>
-    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t3" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <conditioncontainer id="t2" x="315.0" y="262.5">ADDSIM</conditioncontainer>
+    <actioncontainer id="t3" x="315.0" y="577.5">SIM_MAIN</actioncontainer>
+    <actioncontainer id="t4" x="315.00003" y="472.49994">SIM_INFO</actioncontainer>
+    <conditioncontainer id="t5" x="70.0" y="262.5">DISCARD</conditioncontainer>
+    <connection from="t1" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t5" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="WEST" />
   </flow>
   <flow type="flow">
     <name>CR02:  ▶️ IP CONFIG</name>
@@ -18636,29 +18675,27 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <actioncontainer id="t1" x="70.0" y="1137.5">REQ-SER</actioncontainer>
-    <actioncontainer id="t2" x="595.0" y="787.5">RM / IP</actioncontainer>
-    <conditioncontainer id="t3" x="70.0" y="612.5">WIFI-CONN</conditioncontainer>
-    <conditioncontainer id="t4" x="70.0" y="962.5">IP FIND</conditioncontainer>
-    <actioncontainer id="t5" x="350.0" y="612.5"> WLAN1</actioncontainer>
-    <conditioncontainer id="t6" x="350.0" y="367.5">WIFI-SYSTEM</conditioncontainer>
-    <triggercontainer id="t7" x="70.0" y="-52.5">
+    <actioncontainer id="t2" x="700.0" y="787.5">RM / IP</actioncontainer>
+    <triggercontainer id="t3" x="70.0" y="-52.5">
       <trigger>WIFI-CON</trigger>
       <trigger>1m</trigger>
     </triggercontainer>
-    <actioncontainer id="t8" x="70.0" y="192.5">SIMINFO</actioncontainer>
-    <conditioncontainer id="t9" x="70.0" y="367.5">MAIN-NET</conditioncontainer>
+    <conditioncontainer id="t4" x="70.000015" y="157.5">MAIN</conditioncontainer>
+    <conditioncontainer id="t5" x="454.99994" y="157.50002">WIFI-SYSTEM</conditioncontainer>
+    <conditioncontainer id="t6" x="70.0" y="612.5">WIFI-CONN</conditioncontainer>
+    <actioncontainer id="t7" x="455.00003" y="612.5"> WLAN1</actioncontainer>
+    <conditioncontainer id="t8" x="70.0" y="962.5">IP FIND</conditioncontainer>
     <connection from="t1" to="t2" type="EXCEPTION" sourcePosition="EAST" targetPosition="SOUTH" />
-    <connection from="t3" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="WEST" />
-    <connection from="t3" to="t5" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t4" to="t1" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="SOUTH" />
-    <connection from="t5" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t6" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t6" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t5" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t5" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t5" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="WEST" />
+    <connection from="t6" to="t7" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t6" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t8" to="t1" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="SOUTH" />
   </flow>
   <flow type="flow">
     <name>CR12: SENDER</name>
