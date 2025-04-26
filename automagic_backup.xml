@@ -7648,6 +7648,35 @@ user-agent: okhttp/4.4.0</customHTTPHeaders>
     <followRedirects>true</followRedirects>
     <skipConnectivityCheck>false</skipConnectivityCheck>
   </action>
+  <action type="http_request">
+    <useDefaultName>true</useDefaultName>
+    <name>HTTP Request: PUT https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/foldersync/xxx.sh application/octet-stream xxx.sh store in response</name>
+    <url>https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/foldersync/xxx.sh</url>
+    <verifyCertificates>true</verifyCertificates>
+    <basicAuthentication>false</basicAuthentication>
+    <username></username>
+    <clientCert>false</clientCert>
+    <clientCertPath></clientCertPath>
+    <httpMethod>PUT</httpMethod>
+    <networkType>DEFAULT</networkType>
+    <httpContentType>BINARY_UNENCODED</httpContentType>
+    <contentType>text/plain</contentType>
+    <generalTextData></generalTextData>
+    <formFieldList>Lastname=XYZ,Firstname=ABC</formFieldList>
+    <uploadFieldName>upload_field</uploadFieldName>
+    <uploadFilePath></uploadFilePath>
+    <binaryContentType>application/octet-stream</binaryContentType>
+    <binaryFilePath>/storage/emulated/0/xxx.sh</binaryFilePath>
+    <timeout>60000</timeout>
+    <setCustomHTTPHeaders>true</setCustomHTTPHeaders>
+    <customHTTPHeaders>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4bWh2c3l6bWV2emxvYWpta2tmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2NTM1MDIsImV4cCI6MjA2MTIyOTUwMn0.zbtfHyA-qdWo3NdZfI3OfU4KKtJy77iwOMlqCn_L2Eo</customHTTPHeaders>
+    <storeInVariable>true</storeInVariable>
+    <variable>response</variable>
+    <encoding></encoding>
+    <path>/storage/emulated/0/Download/file.bin</path>
+    <followRedirects>true</followRedirects>
+    <skipConnectivityCheck>false</skipConnectivityCheck>
+  </action>
   <action type="script">
     <useDefaultName>false</useDefaultName>
     <name>HTTP SEND</name>
@@ -19200,6 +19229,21 @@ MENU
     <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>Flow18</name>
+    <group>          ♻️  TKH-CONNECT</group>
+    <enabled>false</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <triggercontainer id="t1" x="70.0" y="52.5" />
+    <notecontainer id="t2" x="175.0" y="682.5" w="350.0" h="245.0">https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/foldersync
+
+https://cxmhvsyzmevzloajmkkf.supabase.co</notecontainer>
+    <notecontainer id="t3" x="-175.0" y="717.5" w="140.0" h="105.0">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4bWh2c3l6bWV2emxvYWpta2tmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2NTM1MDIsImV4cCI6MjA2MTIyOTUwMn0.zbtfHyA-qdWo3NdZfI3OfU4KKtJy77iwOMlqCn_L2Eo</notecontainer>
+    <actioncontainer id="t4" x="-35.0" y="332.5">HTTP Request: PUT https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/foldersync/xxx.sh application/octet-stream xxx.sh store in response</actioncontainer>
+    <conditioncontainer id="t5" x="-245.0" y="542.5"></conditioncontainer>
+    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow2</name>
