@@ -1883,9 +1883,9 @@ return true</expression>
     <name>DIFF SIZE</name>
     <expression>current_size=split(stdout," ")[4];
 
-if(current_size!=global_device["size_flow"]) {
+if(current_size!=global_device["sync_service"]["alioth_automagic_github"]) {
 
-   global_device["size_flow"]=current_size;
+   global_device["sync_service"]["alioth_automagic_github"]=current_size;
    return true
 }
 return false</expression>
@@ -5587,6 +5587,20 @@ log(subdistrict[i]);
   </action>
   <action type="execute_root_command">
     <useDefaultName>true</useDefaultName>
+    <name>Execute Root Command: find /storage/emulated/0/Android/application/SYNCFOLDER/ -type d
+ in </name>
+    <command>find /storage/emulated/0/Android/application/SYNCFOLDER/ -type d
+</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
+  </action>
+  <action type="execute_root_command">
+    <useDefaultName>true</useDefaultName>
     <name>Execute Root Command: input keyevent ASSIST in </name>
     <command>input keyevent ASSIST</command>
     <user></user>
@@ -7372,6 +7386,36 @@ User-Agent: Android app Shopee appver=34424 app_type=1 platform=native_android o
     <timeout>60000</timeout>
     <setCustomHTTPHeaders>false</setCustomHTTPHeaders>
     <customHTTPHeaders></customHTTPHeaders>
+    <storeInVariable>true</storeInVariable>
+    <variable>response</variable>
+    <encoding></encoding>
+    <path>/storage/emulated/0/Download/file.bin</path>
+    <followRedirects>true</followRedirects>
+    <skipConnectivityCheck>false</skipConnectivityCheck>
+  </action>
+  <action type="http_request">
+    <useDefaultName>true</useDefaultName>
+    <name>HTTP Request: POST https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/list/foldersync application/json {toJSON(newMapFromValues("prefix",""))} store in response</name>
+    <url>https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/list/foldersync</url>
+    <verifyCertificates>true</verifyCertificates>
+    <basicAuthentication>false</basicAuthentication>
+    <username></username>
+    <clientCert>false</clientCert>
+    <clientCertPath></clientCertPath>
+    <httpMethod>POST</httpMethod>
+    <networkType>DEFAULT</networkType>
+    <httpContentType>GENERAL_TEXT</httpContentType>
+    <contentType>application/json</contentType>
+    <generalTextData>{toJSON(newMapFromValues("prefix",""))}</generalTextData>
+    <formFieldList>Lastname=XYZ,Firstname=ABC</formFieldList>
+    <uploadFieldName>upload_field</uploadFieldName>
+    <uploadFilePath></uploadFilePath>
+    <binaryContentType>application/octet-stream</binaryContentType>
+    <binaryFilePath>/storage/emulated/0/Android/application/SYNCFOLDER/{file}</binaryFilePath>
+    <timeout>60000</timeout>
+    <setCustomHTTPHeaders>true</setCustomHTTPHeaders>
+    <customHTTPHeaders>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4bWh2c3l6bWV2emxvYWpta2tmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NTY1MzUwMiwiZXhwIjoyMDYxMjI5NTAyfQ.AitaZs2Wi6SOUrGtNyCOTFY5HHRzWe9ATwBcr5BB9zU
+apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4bWh2c3l6bWV2emxvYWpta2tmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NTY1MzUwMiwiZXhwIjoyMDYxMjI5NTAyfQ.AitaZs2Wi6SOUrGtNyCOTFY5HHRzWe9ATwBcr5BB9zU</customHTTPHeaders>
     <storeInVariable>true</storeInVariable>
     <variable>response</variable>
     <encoding></encoding>
@@ -19276,26 +19320,33 @@ MENU
 
 https://cxmhvsyzmevzloajmkkf.supabase.co</notecontainer>
     <conditioncontainer id="t2" x="-420.0" y="-192.5">Expression: index &lt; length(files);</conditioncontainer>
-    <actioncontainer id="t3" x="-210.00003" y="-192.5">Notification on Screen: Loop ended</actioncontainer>
+    <actioncontainer id="t3" x="-210.0" y="-192.5">Notification on Screen: Loop ended</actioncontainer>
     <actioncontainer id="t4" x="-420.0" y="-367.5">Script: index = 0;</actioncontainer>
-    <actioncontainer id="t5" x="-420.0" y="-17.499992">Script: file = files[index];</actioncontainer>
-    <actioncontainer id="t6" x="-420.0" y="262.50003">Script: index = index + 1;</actioncontainer>
+    <actioncontainer id="t5" x="-420.0" y="-17.5">Script: file = files[index];</actioncontainer>
+    <actioncontainer id="t6" x="-420.0" y="262.5">Script: index = index + 1;</actioncontainer>
     <actioncontainer id="t7" x="-420.0" y="-472.5">Script: files=split(stdout,"\n");</actioncontainer>
-    <triggercontainer id="t8" x="-420.0" y="-892.5" />
-    <notecontainer id="t9" x="-70.0" y="752.5" w="140.0" h="105.0">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4bWh2c3l6bWV2emxvYWpta2tmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2NTM1MDIsImV4cCI6MjA2MTIyOTUwMn0.zbtfHyA-qdWo3NdZfI3OfU4KKtJy77iwOMlqCn_L2Eo</notecontainer>
-    <conditioncontainer id="t10" x="-70.000015" y="647.49994">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t11" x="-70.00009" y="542.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t12" x="-420.00006" y="-577.5">Execute Root Command: ls '/storage/emulated/0/Android/application/SYNCFOLDER/' in </actioncontainer>
-    <actioncontainer id="t13" x="-420.0" y="122.5">HTTP Request: PUT https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/foldersync/{file} application/octet-stream {file} store in response</actioncontainer>
+    <notecontainer id="t8" x="-70.0" y="752.5" w="140.0" h="105.0">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4bWh2c3l6bWV2emxvYWpta2tmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2NTM1MDIsImV4cCI6MjA2MTIyOTUwMn0.zbtfHyA-qdWo3NdZfI3OfU4KKtJy77iwOMlqCn_L2Eo</notecontainer>
+    <conditioncontainer id="t9" x="-70.0" y="647.5">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t10" x="-70.0" y="542.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t11" x="-420.0" y="-577.5">Execute Root Command: ls '/storage/emulated/0/Android/application/SYNCFOLDER/' in </actioncontainer>
+    <actioncontainer id="t12" x="-420.0" y="122.5">HTTP Request: PUT https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/foldersync/{file} application/octet-stream {file} store in response</actioncontainer>
+    <triggercontainer id="t13" x="-420.0" y="-892.5" />
+    <conditioncontainer id="t14" x="-665.0" y="-192.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t15" x="-595.0" y="-367.49994">Execute Root Command: find /storage/emulated/0/Android/application/SYNCFOLDER/ -type d
+ in </actioncontainer>
+    <actioncontainer id="t16" x="-735.0" y="-367.50006">HTTP Request: POST https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/list/foldersync application/json {toJSON(newMapFromValues("prefix",""))} store in response</actioncontainer>
     <connection from="t2" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t4" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t6" to="t2" type="NORMAL" sourcePosition="WEST" targetPosition="WEST" />
     <connection from="t7" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t16" type="NORMAL" sourcePosition="WEST" targetPosition="NORTH" />
+    <connection from="t15" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t14" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow2</name>
