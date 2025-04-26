@@ -2070,6 +2070,11 @@ return false</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>true</useDefaultName>
+    <name>Expression: index &lt; length(files);</name>
+    <expression>index &lt; length(files);</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>true</useDefaultName>
     <name>Expression: index==0</name>
     <expression>index==0</expression>
   </condition>
@@ -5620,6 +5625,18 @@ log(subdistrict[i]);
   </action>
   <action type="execute_root_command">
     <useDefaultName>true</useDefaultName>
+    <name>Execute Root Command: ls '/storage/emulated/0/Android/application/SYNCFOLDER/' in </name>
+    <command>ls '/storage/emulated/0/Android/application/SYNCFOLDER/'</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
+  </action>
+  <action type="execute_root_command">
+    <useDefaultName>true</useDefaultName>
     <name>Execute Root Command: ls -ltr /storage/emulated/0/ in </name>
     <command>ls -ltr /storage/emulated/0/</command>
     <user></user>
@@ -7650,8 +7667,8 @@ user-agent: okhttp/4.4.0</customHTTPHeaders>
   </action>
   <action type="http_request">
     <useDefaultName>true</useDefaultName>
-    <name>HTTP Request: PUT https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/foldersync/xxx.sh application/octet-stream xxx.sh store in response</name>
-    <url>https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/foldersync/xxx.sh</url>
+    <name>HTTP Request: PUT https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/foldersync/{file} application/octet-stream {file} store in response</name>
+    <url>https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/foldersync/{file}</url>
     <verifyCertificates>true</verifyCertificates>
     <basicAuthentication>false</basicAuthentication>
     <username></username>
@@ -7666,10 +7683,10 @@ user-agent: okhttp/4.4.0</customHTTPHeaders>
     <uploadFieldName>upload_field</uploadFieldName>
     <uploadFilePath></uploadFilePath>
     <binaryContentType>application/octet-stream</binaryContentType>
-    <binaryFilePath>/storage/emulated/0/xxx.sh</binaryFilePath>
+    <binaryFilePath>/storage/emulated/0/Android/application/SYNCFOLDER/{file}</binaryFilePath>
     <timeout>60000</timeout>
     <setCustomHTTPHeaders>true</setCustomHTTPHeaders>
-    <customHTTPHeaders>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4bWh2c3l6bWV2emxvYWpta2tmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2NTM1MDIsImV4cCI6MjA2MTIyOTUwMn0.zbtfHyA-qdWo3NdZfI3OfU4KKtJy77iwOMlqCn_L2Eo</customHTTPHeaders>
+    <customHTTPHeaders>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4bWh2c3l6bWV2emxvYWpta2tmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NTY1MzUwMiwiZXhwIjoyMDYxMjI5NTAyfQ.AitaZs2Wi6SOUrGtNyCOTFY5HHRzWe9ATwBcr5BB9zU</customHTTPHeaders>
     <storeInVariable>true</storeInVariable>
     <variable>response</variable>
     <encoding></encoding>
@@ -11544,6 +11561,11 @@ bbb="{bb,listformat,comma}";</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
+    <name>Script: file = files[index];</name>
+    <script>file = files[index];</script>
+  </action>
+  <action type="script">
+    <useDefaultName>true</useDefaultName>
     <name>Script: file_text=replaceAll(file_text, "\n"," "); line_color="fff39621"; line=" {file_text}"; write= "&lt;?xml version='1.0' encoding='UTF-8' ?&gt;"+"\n"+ '&lt;kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2"&gt;'+"\n"+ " &lt;Document&gt;"+"\n"+ " &lt;name&gt;yyy&lt;/name&gt;"+"\n"+ ' &lt;Style id="mm_folder_color_1"&gt;'+"\n"+ " &lt;IconStyle&gt;"+"\n"+ " &lt;color&gt;{line_color}&lt;/color&gt;"+"\n"+ " &lt;colorMode&gt;normal&lt;/colorMode&gt;"+"\n"+ " &lt;scale&gt;1&lt;/scale&gt;"+"\n"+ " &lt;/IconStyle&gt;"+"\n"+ " &lt;LineStyle&gt;"+"\n"+ " &lt;color&gt;{line_color}&lt;/color&gt;"+"\n"+ " &lt;width&gt;1&lt;/width&gt;"+"\n"+ " &lt;/LineStyle&gt;"+"\n"+ " &lt;PolyStyle&gt;"+"\n"+ " &lt;color&gt;{line_color}&lt;/color&gt;"+"\n"+ " &lt;/PolyStyle&gt;"+"\n"+ " &lt;/Style&gt;"+"\n"+ ' &lt;Folder id="1"&gt;'+"\n"+ " &lt;styleUrl&gt;#mm_folder_color_1&lt;/styleUrl&gt;"+"\n"+ " &lt;name&gt;POLYLINE&lt;/name&gt;"+"\n"+ ' &lt;Style id="mm_marker_color_7"&gt;'+"\n"+ " &lt;IconStyle&gt;"+"\n"+ " &lt;color&gt;{line_color}&lt;/color&gt;"+"\n"+ " &lt;colorMode&gt;normal&lt;/colorMode&gt;"+"\n"+ " &lt;scale&gt;1&lt;/scale&gt;"+"\n"+ " &lt;/IconStyle&gt;"+"\n"+ " &lt;LineStyle&gt;"+"\n"+ " &lt;color&gt;{line_color}&lt;/color&gt;"+"\n"+ " &lt;width&gt;1&lt;/width&gt;"+"\n"+ " &lt;/LineStyle&gt;"+"\n"+ " &lt;PolyStyle&gt;"+"\n"+ " &lt;color&gt;{line_color}&lt;/color&gt;"+"\n"+ " &lt;/PolyStyle&gt;"+"\n"+ " &lt;/Style&gt;"+"\n"+ ' &lt;Placemark id="7"&gt;'+"\n"+ " &lt;name&gt;Marker 1&lt;/name&gt;"+"\n"+ " &lt;LineString&gt;"+"\n"+ " &lt;coordinates&gt;{line}&lt;/coordinates&gt;"+"\n"+ " &lt;/LineString&gt;"+"\n"+ " &lt;styleUrl&gt;#mm_marker_color_7&lt;/styleUrl&gt;"+"\n"+ " &lt;/Placemark&gt;"+"\n"+ ' &lt;Placemark id="8"&gt;'+"\n"+ " &lt;name&gt;Marker 2&lt;/name&gt;"+"\n"+ " &lt;LineString&gt;"+"\n"+ " &lt;coordinates&gt;{line}&lt;/coordinates&gt;"+"\n"+ " &lt;/LineString&gt;"+"\n"+ " &lt;styleUrl&gt;#mm_marker_color_7&lt;/styleUrl&gt;"+"\n"+ " &lt;/Placemark&gt;"+"\n"+ " &lt;/Folder&gt;"+"\n"+ " &lt;/Document&gt;"+"\n"+ "&lt;/kml&gt;"+"\n";</name>
     <script>
 file_text=replaceAll(file_text, "\n"," ");
@@ -11612,6 +11634,11 @@ write=
 "    &lt;/Folder&gt;"+"\n"+
 "  &lt;/Document&gt;"+"\n"+
 "&lt;/kml&gt;"+"\n";</script>
+  </action>
+  <action type="script">
+    <useDefaultName>true</useDefaultName>
+    <name>Script: files=split(stdout,"\n");</name>
+    <script>files=split(stdout,"\n");</script>
   </action>
   <action type="script">
     <useDefaultName>false</useDefaultName>
@@ -11913,6 +11940,16 @@ global_lalamove_v6["ZONE"]["block"]=global_temp_district;
 removeVariable("global_temp_district");
 
 setWidgetElementProperty("LISTDISTRICT", "Text_1", "text", "");</script>
+  </action>
+  <action type="script">
+    <useDefaultName>true</useDefaultName>
+    <name>Script: index = 0;</name>
+    <script>index = 0;</script>
+  </action>
+  <action type="script">
+    <useDefaultName>true</useDefaultName>
+    <name>Script: index = index + 1;</name>
+    <script>index = index + 1;</script>
   </action>
   <action type="script">
     <useDefaultName>false</useDefaultName>
@@ -18670,9 +18707,9 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
       <trigger>BOOT</trigger>
     </triggercontainer>
     <actioncontainer id="t2" x="70.0" y="402.5">RENDER SERVER</actioncontainer>
-    <conditioncontainer id="t3" x="70.00001" y="227.5">10m </conditioncontainer>
+    <conditioncontainer id="t3" x="70.0" y="227.5">10m </conditioncontainer>
     <actioncontainer id="t4" x="350.0" y="402.5">SIM_SELECT-F</actioncontainer>
-    <actioncontainer id="t5" x="350.0" y="507.49997">IP-F</actioncontainer>
+    <actioncontainer id="t5" x="350.0" y="507.5">IP-F</actioncontainer>
     <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t4" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
@@ -18703,28 +18740,28 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <group>          ♻️  TKH-CONNECT</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <actioncontainer id="t1" x="70.0" y="1137.5">REQ-SER</actioncontainer>
-    <actioncontainer id="t2" x="700.0" y="787.5">RM / IP</actioncontainer>
-    <triggercontainer id="t3" x="70.0" y="-52.5">
+    <triggercontainer id="t1" x="70.0" y="-52.5">
       <trigger>WIFI-CON</trigger>
       <trigger>1m</trigger>
     </triggercontainer>
+    <actioncontainer id="t2" x="70.0" y="1137.5">REQ-SER</actioncontainer>
+    <actioncontainer id="t3" x="700.0" y="787.5">RM / IP</actioncontainer>
     <conditioncontainer id="t4" x="70.000015" y="157.5">MAIN</conditioncontainer>
     <conditioncontainer id="t5" x="454.99994" y="157.50002">WIFI-SYSTEM</conditioncontainer>
     <conditioncontainer id="t6" x="70.0" y="612.5">WIFI-CONN</conditioncontainer>
-    <actioncontainer id="t7" x="455.00003" y="612.5"> WLAN1</actioncontainer>
+    <actioncontainer id="t7" x="455.0" y="612.5"> WLAN1</actioncontainer>
     <conditioncontainer id="t8" x="70.0" y="962.5">IP FIND</conditioncontainer>
-    <connection from="t1" to="t2" type="EXCEPTION" sourcePosition="EAST" targetPosition="SOUTH" />
-    <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="EXCEPTION" sourcePosition="EAST" targetPosition="SOUTH" />
     <connection from="t4" to="t6" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t5" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t5" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t5" to="t3" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
     <connection from="t5" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="WEST" />
+    <connection from="t6" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="WEST" />
     <connection from="t6" to="t7" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t1" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="SOUTH" />
+    <connection from="t8" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t3" type="FALSE" sourcePosition="EAST" targetPosition="SOUTH" />
   </flow>
   <flow type="flow">
     <name>CR12: SENDER</name>
@@ -19235,15 +19272,30 @@ MENU
     <group>          ♻️  TKH-CONNECT</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5" />
-    <notecontainer id="t2" x="175.0" y="682.5" w="350.0" h="245.0">https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/foldersync
+    <notecontainer id="t1" x="175.0" y="682.5" w="350.0" h="245.0">https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/foldersync
 
 https://cxmhvsyzmevzloajmkkf.supabase.co</notecontainer>
-    <notecontainer id="t3" x="-175.0" y="717.5" w="140.0" h="105.0">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4bWh2c3l6bWV2emxvYWpta2tmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2NTM1MDIsImV4cCI6MjA2MTIyOTUwMn0.zbtfHyA-qdWo3NdZfI3OfU4KKtJy77iwOMlqCn_L2Eo</notecontainer>
-    <actioncontainer id="t4" x="-35.0" y="332.5">HTTP Request: PUT https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/foldersync/xxx.sh application/octet-stream xxx.sh store in response</actioncontainer>
-    <conditioncontainer id="t5" x="-245.0" y="542.5"></conditioncontainer>
-    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <conditioncontainer id="t2" x="-420.0" y="-192.5">Expression: index &lt; length(files);</conditioncontainer>
+    <actioncontainer id="t3" x="-210.00003" y="-192.5">Notification on Screen: Loop ended</actioncontainer>
+    <actioncontainer id="t4" x="-420.0" y="-367.5">Script: index = 0;</actioncontainer>
+    <actioncontainer id="t5" x="-420.0" y="-17.499992">Script: file = files[index];</actioncontainer>
+    <actioncontainer id="t6" x="-420.0" y="262.50003">Script: index = index + 1;</actioncontainer>
+    <actioncontainer id="t7" x="-420.0" y="-472.5">Script: files=split(stdout,"\n");</actioncontainer>
+    <triggercontainer id="t8" x="-420.0" y="-892.5" />
+    <notecontainer id="t9" x="-70.0" y="752.5" w="140.0" h="105.0">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4bWh2c3l6bWV2emxvYWpta2tmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2NTM1MDIsImV4cCI6MjA2MTIyOTUwMn0.zbtfHyA-qdWo3NdZfI3OfU4KKtJy77iwOMlqCn_L2Eo</notecontainer>
+    <conditioncontainer id="t10" x="-70.000015" y="647.49994">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t11" x="-70.00009" y="542.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t12" x="-420.00006" y="-577.5">Execute Root Command: ls '/storage/emulated/0/Android/application/SYNCFOLDER/' in </actioncontainer>
+    <actioncontainer id="t13" x="-420.0" y="122.5">HTTP Request: PUT https://cxmhvsyzmevzloajmkkf.supabase.co/storage/v1/object/foldersync/{file} application/octet-stream {file} store in response</actioncontainer>
+    <connection from="t2" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t4" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t2" type="NORMAL" sourcePosition="WEST" targetPosition="WEST" />
+    <connection from="t7" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow2</name>
