@@ -118,7 +118,7 @@ NOW
   <trigger type="periodic_timer">
     <useDefaultName>false</useDefaultName>
     <name>1m</name>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <frequency>70000</frequency>
     <wakeDevice>true</wakeDevice>
     <fixedTimes>true</fixedTimes>
@@ -456,6 +456,14 @@ NOW
     <name>MULTI</name>
     <enabled>true</enabled>
   </trigger>
+  <trigger type="notification_screen_displayed">
+    <useDefaultName>true</useDefaultName>
+    <name>Notification on Screen Displayed: com.fitc.wifihotspot</name>
+    <enabled>true</enabled>
+    <packageNameFilter>com.fitc.wifihotspot</packageNameFilter>
+    <textMatchType>CONTAINS_TEXT</textMatchType>
+    <textFilter></textFilter>
+  </trigger>
   <trigger type="notification_status_bar_displayed">
     <useDefaultName>false</useDefaultName>
     <name>NOW</name>
@@ -596,7 +604,7 @@ attachment_name=getString("attachment_name");</extras>
   <trigger type="general_broadcast">
     <useDefaultName>false</useDefaultName>
     <name>SIM_CHANGE</name>
-    <enabled>true</enabled>
+    <enabled>false</enabled>
     <action>android.intent.action.SIM_STATE_CHANGED</action>
     <categoryList></categoryList>
     <dataSchemeList></dataSchemeList>
@@ -725,7 +733,7 @@ attachment_name=getString("attachment_name");</extras>
   <trigger type="wifi_connected">
     <useDefaultName>false</useDefaultName>
     <name>WIFI-CON</name>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <all>false</all>
     <ssidList>TKH-ALIOTH,TKH-CUPID</ssidList>
     <triggerOnBSSIDChanges>false</triggerOnBSSIDChanges>
@@ -5504,6 +5512,20 @@ log(subdistrict[i]);
   </action>
   <action type="execute_root_command">
     <useDefaultName>true</useDefaultName>
+    <name>Execute Root Command: am force-stop com.fitc.wifihotspot &amp;&amp; sleep 0.01 &amp;&amp; am start -a android.intent.action.VIEW -d "wifihotspot://turnoff"
+ in </name>
+    <command>am force-stop com.fitc.wifihotspot &amp;&amp; sleep 0.01 &amp;&amp; am start -a android.intent.action.VIEW -d "wifihotspot://turnoff"
+</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
+  </action>
+  <action type="execute_root_command">
+    <useDefaultName>true</useDefaultName>
     <name>Execute Root Command: am force-stop {package_name} in </name>
     <command>am force-stop {package_name}</command>
     <user></user>
@@ -6945,6 +6967,15 @@ route=route+"apiKey=nt9ob12ZKWo0hPk18-wL3_KmUtCTtuQT0KwRCUvBIR0";</script>
     <useDefaultName>false</useDefaultName>
     <name>HOTSPOT://ON</name>
     <url>wifihotspot://turnon</url>
+    <explicitComponent>false</explicitComponent>
+    <packageName></packageName>
+    <className></className>
+    <appName></appName>
+  </action>
+  <action type="open_browser_url">
+    <useDefaultName>false</useDefaultName>
+    <name>HOTSPOT://ONX</name>
+    <url>wifihotspot://turnoff</url>
     <explicitComponent>false</explicitComponent>
     <packageName></packageName>
     <className></className>
@@ -11460,26 +11491,6 @@ callJavaMethod(xmlSerializer, "org.xmlpull.v1.XmlSerializer", "endDocument()")</
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
-    <name>Script: /*WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE); WifiInfo wifiInfo = wifiManager.getConnectionInfo(); String ssid = wifiInfo.getSSID(); */ gss=callJavaMethod(getContext(), "android.content.Context", "getSystemService(java.lang.String)",getJavaStaticField("android.content.Context", "WIFI_SERVICE")); aaa=callJavaMethod(gss, "android.net.wifi.WifiManager", "getConnectionInfo()"); wifi_=callJavaMethod(aaa, "android.net.wifi.WifiInfo", "getWifiSsid()");</name>
-    <script>/*WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-String ssid = wifiInfo.getSSID();
-*/
-
-
-
-gss=callJavaMethod(getContext(), "android.content.Context", "getSystemService(java.lang.String)",getJavaStaticField("android.content.Context", "WIFI_SERVICE"));
-
-aaa=callJavaMethod(gss, "android.net.wifi.WifiManager", "getConnectionInfo()");
-wifi_=callJavaMethod(aaa, "android.net.wifi.WifiInfo", "getWifiSsid()");
-
-
-
-
-</script>
-  </action>
-  <action type="script">
-    <useDefaultName>true</useDefaultName>
     <name>Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</name>
     <script>//if(global_device["device"]=="alioth") {sqrt();}
 
@@ -11850,6 +11861,57 @@ global_widget["SPF_ROUTE_MINIMIZE"]["y"]=widget_y_offset;</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
+    <name>Script: gss=callJavaMethod(getContext(), "android.content.Context", "getSystemService(java.lang.String)",getJavaStaticField("android.content.Context", "WIFI_SERVICE")); aaa=callJavaMethod(gss, "android.net.wifi.WifiManager", "getConnectionInfo()"); wifi_=callJavaMethod(aaa, "android.net.wifi.WifiInfo", "getWifiSsid()"); if(wifi_!=null and not contains(wifi_,"TKH")) { state="none"; } else if(contains(wifi_,"TKH")) { cmd="ip -4 neigh show | cut -d ' ' -f1 "; state="subdevice";} else if(global_device["position"]=="main") { cmd="ip -4 neigh show | grep -E 'REACHABLE|STALE|DELAY' | tr -s ' ' | cut -d ' ' -f1 "; state="main"; } if(cmd!=null) { exec=callJavaMethod(callJavaStaticMethod("java.lang.Runtime", "getRuntime()"), "java.lang.Runtime", "exec(java.lang.String)", "su"); out=callJavaMethod(exec, "java.lang.Process", "getOutputStream()"); os=callJavaConstructor("java.io.DataOutputStream","DataOutputStream(java.io.OutputStream)",out); callJavaMethod(os, "java.io.DataOutputStream","writeBytes(java.lang.String)",cmd); callJavaMethod(os, "java.io.DataOutputStream", "flush()"); callJavaMethod(os, "java.io.DataOutputStream", "writeBytes(java.lang.String)", "\nexit\n"); callJavaMethod(os, "java.io.DataOutputStream", "flush()"); stdout=callJavaMethod(callJavaConstructor("java.io.BufferedReader","BufferedReader(java.io.Reader)",callJavaConstructor("java.io.InputStreamReader","InputStreamReader(java.io.InputStream)",callJavaMethod(exec, "java.lang.Process", "getInputStream()"))), "java.io.BufferedReader", "readLine()"); if(contains(stdout,"192")) { stdout=trim(stdout)+":5555"; global_device["ipaddress"]=stdout; cp_state=false; return } } global_device["ipaddress"]=null;</name>
+    <script>gss=callJavaMethod(getContext(), "android.content.Context", "getSystemService(java.lang.String)",getJavaStaticField("android.content.Context", "WIFI_SERVICE"));
+aaa=callJavaMethod(gss, "android.net.wifi.WifiManager", "getConnectionInfo()");
+wifi_=callJavaMethod(aaa, "android.net.wifi.WifiInfo", "getWifiSsid()");
+
+
+if(wifi_!=null and not contains(wifi_,"TKH")) {
+
+   state="none";
+}
+
+else if(contains(wifi_,"TKH")) {
+
+   cmd="ip -4 neigh show | cut -d ' ' -f1 ";
+   state="subdevice";}
+
+else if(global_device["position"]=="main") {
+
+   cmd="ip -4 neigh show | grep -E 'REACHABLE|STALE|DELAY' | tr -s ' ' | cut -d ' ' -f1 ";
+   state="main";
+}
+
+
+
+if(cmd!=null) {
+
+   exec=callJavaMethod(callJavaStaticMethod("java.lang.Runtime", "getRuntime()"), "java.lang.Runtime", "exec(java.lang.String)", "su");
+   out=callJavaMethod(exec, "java.lang.Process", "getOutputStream()");
+   os=callJavaConstructor("java.io.DataOutputStream","DataOutputStream(java.io.OutputStream)",out);
+
+   callJavaMethod(os, "java.io.DataOutputStream","writeBytes(java.lang.String)",cmd);
+   callJavaMethod(os, "java.io.DataOutputStream", "flush()");
+   callJavaMethod(os, "java.io.DataOutputStream", "writeBytes(java.lang.String)", "\nexit\n");
+   callJavaMethod(os, "java.io.DataOutputStream", "flush()");
+
+   stdout=callJavaMethod(callJavaConstructor("java.io.BufferedReader","BufferedReader(java.io.Reader)",callJavaConstructor("java.io.InputStreamReader","InputStreamReader(java.io.InputStream)",callJavaMethod(exec, "java.lang.Process", "getInputStream()"))), "java.io.BufferedReader", "readLine()");
+
+
+   if(contains(stdout,"192")) {
+
+      stdout=trim(stdout)+":5555";
+      global_device["ipaddress"]=stdout;
+      cp_state=false;
+      return
+   }
+}
+
+global_device["ipaddress"]=null;</script>
+  </action>
+  <action type="script">
+    <useDefaultName>true</useDefaultName>
     <name>Script: header=newList("Folder name","Folder color","Latitude","Longitude","Title","Description","Color","Phone number","Timestamp","Pin icon code"); writer="{header,listformat,comma}"+"\n"; //x=newList(1,2,3,4); for (i in [0 to length(customer_list)-1]) { //log(customer_list[i]); if(contains(customer_list[i],"latitude")) { writer=writer+ "Test"+","+ "ff9800"+","+ customer_list[i]["address"]["latitude"]+","+ customer_list[i]["address"]["longitude"]+","+ replaceAll(customer_list[i]["name"],"\\.|\\,","")+","+ replaceAll(customer_list[i]["address"]["address"],"\\.|\\,","")+","+ "ff9800"+","+ ""+","+ ""+","+ 41+ "\n" } } /* writer=writer+ "📌"+","+ "ff5722"+","+ split[0]+","+ split[1]+","+ restaurants[i]["restaurant"]+","+ restaurants[i]["address"]+","+ "ff5722"+","+ ""+","+ ""+","+ 41+ */</name>
     <script>header=newList("Folder name","Folder color","Latitude","Longitude","Title","Description","Color","Phone number","Timestamp","Pin icon code");
 
@@ -12100,6 +12162,65 @@ newLon=lon+toDegrees(deltaLon);
     <name>Script: lat=toNumber(split(value,",")[0]); lon=toNumber(split(value,",")[1]);</name>
     <script>lat=toNumber(split(value,",")[0]);
 lon=toNumber(split(value,",")[1]);</script>
+  </action>
+  <action type="script">
+    <useDefaultName>true</useDefaultName>
+    <name>Script: list=newList(); siminfo=split(siminfo,"\n"); for (ii in [0 to length(siminfo)-1]) { map=newMap(); spliter=split(siminfo[ii],", "); for (i in [0 to length(spliter)-1]){ splitx=split(spliter[i],"="); log(splitx); if(length(splitx)&gt;1){ addMapEntry(map, splitx[0], splitx[1]); } else { addMapEntry(map, splitx[0], ""); } } addElement(list,map); } for (i in [0 to length(list)-1]){ if(contains(list[i],"8966032310271314477")) { if(list[i]["sim_id"]!=-1) { state="main"; } } }</name>
+    <script>
+
+list=newList();
+
+
+
+
+
+siminfo=split(siminfo,"\n");
+
+
+
+for (ii in [0 to length(siminfo)-1])
+{
+
+map=newMap();
+
+
+spliter=split(siminfo[ii],", ");
+
+
+for (i in [0 to length(spliter)-1]){
+
+   splitx=split(spliter[i],"=");
+   log(splitx);
+
+   if(length(splitx)&gt;1){
+
+      addMapEntry(map, splitx[0], splitx[1]);
+   } else {
+      addMapEntry(map, splitx[0], "");
+   }
+}
+
+addElement(list,map);
+}
+
+
+
+
+
+
+
+
+for (i in [0 to length(list)-1]){
+
+   if(contains(list[i],"8966032310271314477")) {
+
+      if(list[i]["sim_id"]!=-1) {
+
+         state="main";
+      }
+   }
+}
+</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
@@ -13826,11 +13947,11 @@ for (i in [0 to length(shop_list)-1])
     <name>SIM_MAIN</name>
     <script>if(contains(siminfo,"8966032310271314477")) {
 
-   global_device["main"]=true}
+   global_device["position"]="main"}
 
 else {
 
-   global_device["main"]=false
+   global_device["position"]="sub"
 }</script>
   </action>
   <action type="execute_flows">
@@ -16508,6 +16629,18 @@ callJavaMethod(os, "java.io.DataOutputStream", "flush()");
     <noPositionRestriction>false</noPositionRestriction>
     <useAccessibilityService>false</useAccessibilityService>
   </action>
+  <action type="execute_root_command">
+    <useDefaultName>false</useDefaultName>
+    <name>WIFIKILLER</name>
+    <command>am force-stop com.fitc.wifihotspot</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
+  </action>
   <action type="control_user_interface">
     <useDefaultName>false</useDefaultName>
     <name>WN-CLEAR</name>
@@ -17177,16 +17310,16 @@ AUTOMAGIC</actioncontainer>
     <actioncontainer id="t3" x="-455.0" y="227.5">V_ACCESS</actioncontainer>
     <actioncontainer id="t4" x="-455.0" y="332.5">ACCESSIBILITYS</actioncontainer>
     <conditioncontainer id="t5" x="385.0" y="227.5">ALIOTH</conditioncontainer>
-    <actioncontainer id="t6" x="385.0" y="402.5">HOTSPOT://ON</actioncontainer>
-    <actioncontainer id="t7" x="70.0" y="17.5">IPCONFIG</actioncontainer>
-    <actioncontainer id="t8" x="70.0" y="402.5">HS</actioncontainer>
-    <actioncontainer id="t9" x="70.0" y="227.5">ANYDESK</actioncontainer>
-    <connection from="t1" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t6" x="70.0" y="17.5">IPCONFIG</actioncontainer>
+    <actioncontainer id="t7" x="70.0" y="402.5">HS</actioncontainer>
+    <actioncontainer id="t8" x="70.0" y="227.5">ANYDESK</actioncontainer>
+    <actioncontainer id="t9" x="385.0" y="402.5">HOTSPOT://ON</actioncontainer>
+    <connection from="t1" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t6" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>  @ NOTIFY SUPPORT</name>
@@ -18829,71 +18962,82 @@ ch.gridvision.ppam.androidautomagic.simplelang.a.d</notecontainer>
     <group>          ♻️  TKH-CONNECT</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5">
+    <conditioncontainer id="t1" x="70.0" y="227.5">10m </conditioncontainer>
+    <actioncontainer id="t2" x="70.0" y="402.5">RENDER SERVER</actioncontainer>
+    <actioncontainer id="t3" x="350.0" y="402.5">SIM_SELECT-F</actioncontainer>
+    <actioncontainer id="t4" x="350.0" y="507.5">IP-F</actioncontainer>
+    <triggercontainer id="t5" x="70.0" y="52.5">
       <trigger>10m </trigger>
       <trigger>BOOT</trigger>
     </triggercontainer>
-    <conditioncontainer id="t2" x="70.0" y="227.5">10m </conditioncontainer>
-    <actioncontainer id="t3" x="350.0" y="402.5">SIM_SELECT-F</actioncontainer>
-    <actioncontainer id="t4" x="350.0" y="507.5">IP-F</actioncontainer>
-    <actioncontainer id="t5" x="70.0" y="402.5">RENDER SERVER</actioncontainer>
-    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t3" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t1" to="t3" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
     <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>CR01:  ▶️ SIM SELECT</name>
     <description> </description>
     <group>          ♻️  TKH-CONNECT</group>
-    <enabled>true</enabled>
+    <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5">
+    <conditioncontainer id="t1" x="315.0" y="262.5">ADDSIM</conditioncontainer>
+    <conditioncontainer id="t2" x="70.0" y="262.5">DISCARD</conditioncontainer>
+    <notecontainer id="t3" x="-70.0" y="402.5" w="140.0" h="105.0">ปิดhilotspot</notecontainer>
+    <notecontainer id="t4" x="35.0" y="787.5" w="140.0" h="105.0">ล้าง ip</notecontainer>
+    <notecontainer id="t5" x="280.0" y="822.5" w="140.0" h="105.0">sim_id</notecontainer>
+    <conditioncontainer id="t6" x="70.000015" y="17.499985">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t7" x="525.0" y="192.5">SIM_INFO</actioncontainer>
+    <actioncontainer id="t8" x="315.0" y="682.5">SIM_MAIN</actioncontainer>
+    <actioncontainer id="t9" x="70.0" y="-367.5">SIM_INFO</actioncontainer>
+    <actioncontainer id="t10" x="70.0" y="-122.499985">Script: list=newList(); siminfo=split(siminfo,"\n"); for (ii in [0 to length(siminfo)-1]) { map=newMap(); spliter=split(siminfo[ii],", "); for (i in [0 to length(spliter)-1]){ splitx=split(spliter[i],"="); log(splitx); if(length(splitx)&gt;1){ addMapEntry(map, splitx[0], splitx[1]); } else { addMapEntry(map, splitx[0], ""); } } addElement(list,map); } for (i in [0 to length(list)-1]){ if(contains(list[i],"8966032310271314477")) { if(list[i]["sim_id"]!=-1) { state="main"; } } }</actioncontainer>
+    <actioncontainer id="t11" x="-420.0" y="-472.50003">HOTSPOT://ONX</actioncontainer>
+    <conditioncontainer id="t12" x="-175.0" y="-682.5">     DEBUG    </conditioncontainer>
+    <triggercontainer id="t13" x="-35.000015" y="-1277.5">
       <trigger>SIM_CHANGE</trigger>
     </triggercontainer>
-    <conditioncontainer id="t2" x="315.0" y="262.5">ADDSIM</conditioncontainer>
-    <actioncontainer id="t3" x="315.0" y="577.5">SIM_MAIN</actioncontainer>
-    <actioncontainer id="t4" x="315.0" y="472.5">SIM_INFO</actioncontainer>
-    <conditioncontainer id="t5" x="70.0" y="262.5">DISCARD</conditioncontainer>
-    <connection from="t1" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t5" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="WEST" />
+    <actioncontainer id="t14" x="-420.00003" y="-612.5">WIFIKILLER</actioncontainer>
+    <actioncontainer id="t15" x="-105.0" y="-892.5">Execute Root Command: am force-stop com.fitc.wifihotspot &amp;&amp; sleep 0.01 &amp;&amp; am start -a android.intent.action.VIEW -d "wifihotspot://turnoff"
+ in </actioncontainer>
+    <connection from="t1" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t1" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t2" to="t8" type="TRUE" sourcePosition="SOUTH" targetPosition="WEST" />
+    <connection from="t9" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>CR02:  ▶️ IP CONFIG</name>
-    <description>2.00 alpha-version</description>
+    <description>2.01</description>
     <group>          ♻️  TKH-CONNECT</group>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="-840.0" y="-822.5">
       <trigger>WIFI-CON</trigger>
       <trigger>1m</trigger>
     </triggercontainer>
-    <actioncontainer id="t2" x="70.0" y="1137.5">REQ-SER</actioncontainer>
-    <actioncontainer id="t3" x="700.0" y="787.5">RM / IP</actioncontainer>
-    <conditioncontainer id="t4" x="70.0" y="962.5">IP FIND</conditioncontainer>
-    <conditioncontainer id="t5" x="455.0" y="157.5">WIFI-SYSTEM</conditioncontainer>
-    <conditioncontainer id="t6" x="70.0" y="157.5">MAIN</conditioncontainer>
+    <conditioncontainer id="t2" x="70.0" y="647.5">WIFI-CONN</conditioncontainer>
+    <conditioncontainer id="t3" x="-560.0" y="-577.5">WIFI-CONN</conditioncontainer>
+    <conditioncontainer id="t4" x="-665.0" y="-822.4999">WIFI-CONN</conditioncontainer>
+    <conditioncontainer id="t5" x="70.0" y="157.5">MAIN</conditioncontainer>
+    <conditioncontainer id="t6" x="455.0" y="157.5">WIFI-SYSTEM</conditioncontainer>
     <actioncontainer id="t7" x="455.0" y="612.5"> WLAN1</actioncontainer>
-    <conditioncontainer id="t8" x="70.0" y="647.5">WIFI-CONN</conditioncontainer>
-    <conditioncontainer id="t9" x="-594.99994" y="-612.5">WIFI-CONN</conditioncontainer>
-    <conditioncontainer id="t10" x="-805.0" y="-367.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t11" x="-560.0" y="-577.5001">WIFI-CONN</conditioncontainer>
-    <actioncontainer id="t12" x="-945.0" y="-612.5">Script: /*WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE); WifiInfo wifiInfo = wifiManager.getConnectionInfo(); String ssid = wifiInfo.getSSID(); */ gss=callJavaMethod(getContext(), "android.content.Context", "getSystemService(java.lang.String)",getJavaStaticField("android.content.Context", "WIFI_SERVICE")); aaa=callJavaMethod(gss, "android.net.wifi.WifiManager", "getConnectionInfo()"); wifi_=callJavaMethod(aaa, "android.net.wifi.WifiInfo", "getWifiSsid()");</actioncontainer>
-    <connection from="t1" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t3" type="EXCEPTION" sourcePosition="EAST" targetPosition="SOUTH" />
-    <connection from="t4" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t3" type="FALSE" sourcePosition="EAST" targetPosition="SOUTH" />
-    <connection from="t5" to="t3" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t5" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t8" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t5" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t7" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="WEST" />
-    <connection from="t8" to="t7" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t12" to="t10" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <conditioncontainer id="t8" x="70.0" y="962.5">IP FIND</conditioncontainer>
+    <actioncontainer id="t9" x="70.0" y="1137.5">REQ-SER</actioncontainer>
+    <actioncontainer id="t10" x="700.0" y="787.5">RM / IP</actioncontainer>
+    <actioncontainer id="t11" x="-840.0" y="-647.5">Script: gss=callJavaMethod(getContext(), "android.content.Context", "getSystemService(java.lang.String)",getJavaStaticField("android.content.Context", "WIFI_SERVICE")); aaa=callJavaMethod(gss, "android.net.wifi.WifiManager", "getConnectionInfo()"); wifi_=callJavaMethod(aaa, "android.net.wifi.WifiInfo", "getWifiSsid()"); if(wifi_!=null and not contains(wifi_,"TKH")) { state="none"; } else if(contains(wifi_,"TKH")) { cmd="ip -4 neigh show | cut -d ' ' -f1 "; state="subdevice";} else if(global_device["position"]=="main") { cmd="ip -4 neigh show | grep -E 'REACHABLE|STALE|DELAY' | tr -s ' ' | cut -d ' ' -f1 "; state="main"; } if(cmd!=null) { exec=callJavaMethod(callJavaStaticMethod("java.lang.Runtime", "getRuntime()"), "java.lang.Runtime", "exec(java.lang.String)", "su"); out=callJavaMethod(exec, "java.lang.Process", "getOutputStream()"); os=callJavaConstructor("java.io.DataOutputStream","DataOutputStream(java.io.OutputStream)",out); callJavaMethod(os, "java.io.DataOutputStream","writeBytes(java.lang.String)",cmd); callJavaMethod(os, "java.io.DataOutputStream", "flush()"); callJavaMethod(os, "java.io.DataOutputStream", "writeBytes(java.lang.String)", "\nexit\n"); callJavaMethod(os, "java.io.DataOutputStream", "flush()"); stdout=callJavaMethod(callJavaConstructor("java.io.BufferedReader","BufferedReader(java.io.Reader)",callJavaConstructor("java.io.InputStreamReader","InputStreamReader(java.io.InputStream)",callJavaMethod(exec, "java.lang.Process", "getInputStream()"))), "java.io.BufferedReader", "readLine()"); if(contains(stdout,"192")) { stdout=trim(stdout)+":5555"; global_device["ipaddress"]=stdout; cp_state=false; return } } global_device["ipaddress"]=null;</actioncontainer>
+    <conditioncontainer id="t12" x="-805.0" y="-367.5">     DEBUG    </conditioncontainer>
+    <connection from="t1" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t10" type="TRUE" sourcePosition="SOUTH" targetPosition="WEST" />
+    <connection from="t2" to="t7" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t5" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t6" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t6" to="t10" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t6" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t10" type="FALSE" sourcePosition="EAST" targetPosition="SOUTH" />
+    <connection from="t9" to="t10" type="EXCEPTION" sourcePosition="EAST" targetPosition="SOUTH" />
+    <connection from="t11" to="t12" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>CR12: SENDER</name>
@@ -18965,30 +19109,30 @@ ENCRYPT</actioncontainer>
     <actioncontainer id="t40" x="35.0" y="-8172.5">NTFY.ATTACH</actioncontainer>
     <conditioncontainer id="t41" x="-1295.0" y="-8417.5">RE?</conditioncontainer>
     <actioncontainer id="t42" x="-1295.0" y="-8277.5">RESPONSE</actioncontainer>
-    <actioncontainer id="t43" x="-1295.0" y="-9187.5">HTTP SEND</actioncontainer>
-    <actioncontainer id="t44" x="35.0" y="-8277.5">NTFY.ATTmACH</actioncontainer>
-    <conditioncontainer id="t45" x="-70.0" y="-9082.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t46" x="35.0" y="-9537.5"> QUERY </actioncontainer>
-    <actioncontainer id="t47" x="35.0" y="-9327.5">  X. </actioncontainer>
-    <actioncontainer id="t48" x="-840.0" y="-6702.5">UNZIP</actioncontainer>
-    <actioncontainer id="t49" x="-840.0" y="-6597.5">LS</actioncontainer>
-    <actioncontainer id="t50" x="-1190.0" y="-6702.5">GITJ SHA2d</actioncontainer>
-    <actioncontainer id="t51" x="-1190.0" y="-6597.5">GIT UPLOADdfd</actioncontainer>
-    <actioncontainer id="t52" x="-1050.0" y="-6492.5">GET-jSHAs</actioncontainer>
-    <actioncontainer id="t53" x="-1050.0" y="-6597.5">GIT UPLOADd</actioncontainer>
-    <actioncontainer id="t54" x="-1050.0" y="-6702.5">TOAST</actioncontainer>
-    <conditioncontainer id="t55" x="-1295.0" y="-9747.5">SKIP / CONFIG</conditioncontainer>
-    <actioncontainer id="t56" x="-980.0" y="-9572.5">     MENU     </actioncontainer>
-    <conditioncontainer id="t57" x="-980.0" y="-9747.5">MENULIST</conditioncontainer>
+    <actioncontainer id="t43" x="35.0" y="-8277.5">NTFY.ATTmACH</actioncontainer>
+    <conditioncontainer id="t44" x="-70.0" y="-9082.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t45" x="35.0" y="-9537.5"> QUERY </actioncontainer>
+    <actioncontainer id="t46" x="-840.0" y="-6702.5">UNZIP</actioncontainer>
+    <actioncontainer id="t47" x="-840.0" y="-6597.5">LS</actioncontainer>
+    <actioncontainer id="t48" x="-1190.0" y="-6702.5">GITJ SHA2d</actioncontainer>
+    <actioncontainer id="t49" x="-1190.0" y="-6597.5">GIT UPLOADdfd</actioncontainer>
+    <actioncontainer id="t50" x="-1050.0" y="-6492.5">GET-jSHAs</actioncontainer>
+    <actioncontainer id="t51" x="-1050.0" y="-6597.5">GIT UPLOADd</actioncontainer>
+    <actioncontainer id="t52" x="-1050.0" y="-6702.5">TOAST</actioncontainer>
+    <conditioncontainer id="t53" x="-1295.0" y="-9747.5">SKIP / CONFIG</conditioncontainer>
+    <actioncontainer id="t54" x="-980.0" y="-9572.5">     MENU     </actioncontainer>
+    <conditioncontainer id="t55" x="-980.0" y="-9747.5">MENULIST</conditioncontainer>
+    <actioncontainer id="t56" x="-1295.0" y="-9187.5">HTTP SEND</actioncontainer>
+    <actioncontainer id="t57" x="35.0" y="-9327.5">  X. </actioncontainer>
     <connection from="t1" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t11" to="t30" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t11" to="t55" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t53" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t12" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t14" to="t15" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t14" to="t43" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t14" to="t56" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
     <connection from="t15" to="t16" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t15" to="t43" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t16" to="t46" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t56" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t16" to="t45" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t16" to="t33" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t17" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t18" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -18999,13 +19143,13 @@ ENCRYPT</actioncontainer>
     <connection from="t23" to="t28" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t23" to="t35" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t24" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t44" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t43" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t26" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t27" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t28" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t28" to="t22" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t29" to="t43" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t30" to="t55" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t56" type="TRUE" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t30" to="t53" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t31" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t32" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t33" to="t34" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -19013,17 +19157,17 @@ ENCRYPT</actioncontainer>
     <connection from="t35" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t39" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t41" to="t42" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t43" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t46" to="t47" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t45" to="t57" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t45" to="t57" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t46" to="t47" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t47" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t48" to="t49" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t50" to="t51" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t55" to="t43" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t55" to="t57" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t56" to="t29" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t57" to="t56" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t57" to="t14" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t53" to="t56" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t53" to="t55" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t54" to="t29" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t55" to="t54" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t55" to="t14" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t56" to="t41" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t57" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>CR13: RECEIVED</name>
@@ -19067,36 +19211,36 @@ ENCRYPT</actioncontainer>
     <conditioncontainer id="t29" x="-875.0" y="-3062.5">RESPONSE </conditioncontainer>
     <conditioncontainer id="t30" x="-1540.0" y="-3972.5">UP-FILE?</conditioncontainer>
     <actioncontainer id="t31" x="910.0" y="-2642.5">XML</actioncontainer>
-    <actioncontainer id="t32" x="525.0" y="-3342.5">W/ DOWN</actioncontainer>
-    <conditioncontainer id="t33" x="735.0" y="-2922.5">ACCESSFILE</conditioncontainer>
-    <conditioncontainer id="t34" x="-280.0" y="-3482.5">📞</conditioncontainer>
-    <actioncontainer id="t35" x="0.0" y="-2782.5">MAP-CLEAN</actioncontainer>
-    <actioncontainer id="t36" x="140.0" y="-2782.5">MAP-RAW</actioncontainer>
-    <actioncontainer id="t37" x="0.0" y="-2887.5">Sleep: 100ms (keep device awake)</actioncontainer>
-    <actioncontainer id="t38" x="140.0" y="-2887.5">Sleep: 100ms (keep device awake)</actioncontainer>
-    <actioncontainer id="t39" x="0.0" y="-2992.5">KILLG</actioncontainer>
-    <actioncontainer id="t40" x="140.0" y="-2992.5">KILLG</actioncontainer>
-    <actioncontainer id="t41" x="0.0" y="-3097.5">Execute Root Command: input keyevent KEYCODE_WAKEUP
+    <conditioncontainer id="t32" x="735.0" y="-2922.5">ACCESSFILE</conditioncontainer>
+    <actioncontainer id="t33" x="0.0" y="-2782.5">MAP-CLEAN</actioncontainer>
+    <actioncontainer id="t34" x="140.0" y="-2782.5">MAP-RAW</actioncontainer>
+    <actioncontainer id="t35" x="0.0" y="-2887.5">Sleep: 100ms (keep device awake)</actioncontainer>
+    <actioncontainer id="t36" x="140.0" y="-2887.5">Sleep: 100ms (keep device awake)</actioncontainer>
+    <actioncontainer id="t37" x="0.0" y="-2992.5">KILLG</actioncontainer>
+    <actioncontainer id="t38" x="140.0" y="-2992.5">KILLG</actioncontainer>
+    <actioncontainer id="t39" x="0.0" y="-3097.5">Execute Root Command: input keyevent KEYCODE_WAKEUP
  in </actioncontainer>
-    <conditioncontainer id="t42" x="0.0" y="-3482.5">🗺️</conditioncontainer>
-    <actioncontainer id="t43" x="140.0" y="-3097.5">Execute Root Command: input keyevent KEYCODE_WAKEUP
+    <conditioncontainer id="t40" x="0.0" y="-3482.5">🗺️</conditioncontainer>
+    <actioncontainer id="t41" x="140.0" y="-3097.5">Execute Root Command: input keyevent KEYCODE_WAKEUP
  in </actioncontainer>
-    <actioncontainer id="t44" x="-1330.0" y="-3272.5">STOP-RES</actioncontainer>
-    <actioncontainer id="t45" x="-1330.0" y="-3167.5">Messagbhe Dialog: ✓ คำสั่งสำเร็จ ✓ </actioncontainer>
-    <actioncontainer id="t46" x="735.0" y="-3202.5">MV</actioncontainer>
-    <actioncontainer id="t47" x="735.0" y="-3342.5">TYPE-FOLDER</actioncontainer>
-    <actioncontainer id="t48" x="1015.0" y="-3097.5">LS</actioncontainer>
-    <actioncontainer id="t49" x="1015.0" y="-3202.5">UNZIP</actioncontainer>
-    <notecontainer id="t50" x="525.0" y="-2782.5" w="140.0" h="105.0">response["type"]</notecontainer>
-    <actioncontainer id="t51" x="525.0" y="-3202.5">DOWNLOAD</actioncontainer>
-    <actioncontainer id="t52" x="35.0" y="-2397.5">GIT UPLOADdfd</actioncontainer>
-    <actioncontainer id="t53" x="385.0" y="-2397.5">LS</actioncontainer>
-    <actioncontainer id="t54" x="175.0" y="-2502.5">TOAST</actioncontainer>
-    <actioncontainer id="t55" x="385.0" y="-2502.5">UNZIP</actioncontainer>
-    <actioncontainer id="t56" x="175.0" y="-2292.5">GET-jSHAs</actioncontainer>
-    <actioncontainer id="t57" x="175.0" y="-2397.5">GIT UPLOADd</actioncontainer>
-    <actioncontainer id="t58" x="35.0" y="-2502.5">GITJ SHA2d</actioncontainer>
-    <conditioncontainer id="t59" x="-875.0" y="-3482.5">COMM</conditioncontainer>
+    <actioncontainer id="t42" x="-1330.0" y="-3272.5">STOP-RES</actioncontainer>
+    <actioncontainer id="t43" x="-1330.0" y="-3167.5">Messagbhe Dialog: ✓ คำสั่งสำเร็จ ✓ </actioncontainer>
+    <actioncontainer id="t44" x="735.0" y="-3202.5">MV</actioncontainer>
+    <actioncontainer id="t45" x="735.0" y="-3342.5">TYPE-FOLDER</actioncontainer>
+    <actioncontainer id="t46" x="1015.0" y="-3097.5">LS</actioncontainer>
+    <actioncontainer id="t47" x="1015.0" y="-3202.5">UNZIP</actioncontainer>
+    <notecontainer id="t48" x="525.0" y="-2782.5" w="140.0" h="105.0">response["type"]</notecontainer>
+    <actioncontainer id="t49" x="525.0" y="-3202.5">DOWNLOAD</actioncontainer>
+    <actioncontainer id="t50" x="35.0" y="-2397.5">GIT UPLOADdfd</actioncontainer>
+    <actioncontainer id="t51" x="385.0" y="-2397.5">LS</actioncontainer>
+    <actioncontainer id="t52" x="175.0" y="-2502.5">TOAST</actioncontainer>
+    <actioncontainer id="t53" x="385.0" y="-2502.5">UNZIP</actioncontainer>
+    <actioncontainer id="t54" x="175.0" y="-2292.5">GET-jSHAs</actioncontainer>
+    <actioncontainer id="t55" x="175.0" y="-2397.5">GIT UPLOADd</actioncontainer>
+    <actioncontainer id="t56" x="35.0" y="-2502.5">GITJ SHA2d</actioncontainer>
+    <conditioncontainer id="t57" x="-875.0" y="-3482.5">COMM</conditioncontainer>
+    <conditioncontainer id="t58" x="-280.0" y="-3482.5">📞</conditioncontainer>
+    <actioncontainer id="t59" x="525.0" y="-3342.5">W/ DOWN</actioncontainer>
     <connection from="t1" to="t21" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
     <connection from="t1" to="t30" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -19110,38 +19254,38 @@ ENCRYPT</actioncontainer>
     <connection from="t16" to="t12" type="EXCEPTION" sourcePosition="EAST" targetPosition="NORTH" />
     <connection from="t17" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t20" to="t24" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t20" to="t32" type="TRUE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t20" to="t59" type="TRUE" sourcePosition="EAST" targetPosition="NORTH" />
     <connection from="t22" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t24" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t24" to="t25" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t25" to="t44" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t59" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t25" to="t42" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t57" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t27" to="t26" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t27" to="t29" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t27" to="t29" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t29" to="t28" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t30" to="t20" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t30" to="t47" type="EXCEPTION" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t32" to="t51" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t33" to="t19" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t42" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t30" to="t45" type="EXCEPTION" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t32" to="t19" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t35" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t36" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t37" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t38" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t39" to="t37" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t40" to="t38" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t41" to="t39" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t42" to="t41" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t42" to="t43" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t43" to="t40" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t44" to="t45" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t46" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t40" to="t39" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t40" to="t41" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t41" to="t38" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t42" to="t43" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t44" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t45" to="t44" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t47" to="t46" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t49" to="t48" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t51" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
-    <connection from="t55" to="t53" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t58" to="t52" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t59" to="t27" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t59" to="t34" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t49" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
+    <connection from="t53" to="t51" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t56" to="t50" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t57" to="t27" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t57" to="t58" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t58" to="t40" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t59" to="t49" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>CR14: RESPONSE</name>
@@ -19150,10 +19294,10 @@ ENCRYPT</actioncontainer>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="70.0" y="52.5" />
-    <actioncontainer id="t2" x="70.0" y="367.5">Message Dialog: Time Out!! Response </actioncontainer>
-    <actioncontainer id="t3" x="70.0" y="262.5">Sleep: 10s (keep degcvice awake)</actioncontainer>
-    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t2" x="70.0" y="262.5">Sleep: 10s (keep degcvice awake)</actioncontainer>
+    <actioncontainer id="t3" x="70.0" y="367.5">Message Dialog: Time Out!! Response </actioncontainer>
+    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Encrypt / Decrypt text</name>
@@ -19398,6 +19542,17 @@ MENU
     <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>Flow18</name>
+    <group>          ♻️  TKH-CONNECT</group>
+    <enabled>true</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <conditioncontainer id="t1" x="70.0" y="297.5">     DEBUG    </conditioncontainer>
+    <triggercontainer id="t2" x="70.0" y="52.5">
+      <trigger>Notification on Screen Displayed: com.fitc.wifihotspot</trigger>
+    </triggercontainer>
+    <connection from="t2" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow2</name>
@@ -19654,7 +19809,7 @@ LAUNCHER_TASKBAR_HOME_BUTTON_LONGPRESS</notecontainer>
   <flow type="flow">
     <name>SUPRABASE SYNC</name>
     <description> </description>
-    <group>          ♻️  TKH-CONNECT</group>
+    <group>         🍑   SPF</group>
     <enabled>false</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="-945.0002" y="-1697.5" />
