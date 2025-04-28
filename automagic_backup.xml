@@ -66,14 +66,6 @@
     <allowInDeviceIdle>true</allowInDeviceIdle>
     <likeAlarmClock>false</likeAlarmClock>
   </trigger>
-  <trigger type="activity_ended">
-    <useDefaultName>true</useDefaultName>
-    <name>Activity Ended: com.shopee.foody.driver.th/com.shopee.foody.driver.popmanager.activity.PopActivity</name>
-    <enabled>false</enabled>
-    <method>CLASSIC</method>
-    <packageNameFilter>com.shopee.foody.driver.th</packageNameFilter>
-    <classNameFilter>com.shopee.foody.driver.popmanager.activity.PopActivity</classNameFilter>
-  </trigger>
   <trigger type="automagic_startup">
     <useDefaultName>false</useDefaultName>
     <name>BOOT</name>
@@ -106,51 +98,6 @@
     <textMatchType>CONTAINS_TEXT</textMatchType>
     <textFilter>แชร์หน้าจอ</textFilter>
     <removeNonPrintableCharacters>false</removeNonPrintableCharacters>
-  </trigger>
-  <trigger type="command_output">
-    <useDefaultName>true</useDefaultName>
-    <name>Command Output: ip -4 neigh show | grep -E 'REACHABLE|STALE|DELAY' (root) contains text </name>
-    <enabled>false</enabled>
-    <command>ip -4 neigh show | grep -E 'REACHABLE|STALE|DELAY'</command>
-    <root>true</root>
-    <seContext></seContext>
-    <workingDirectory></workingDirectory>
-    <textMatchType>CONTAINS_TEXT</textMatchType>
-    <containedString></containedString>
-    <skipInitialOutput>false</skipInitialOutput>
-    <skipInitialOutputMillis>5000</skipInitialOutputMillis>
-    <keepDeviceAwake>false</keepDeviceAwake>
-    <logOutput>false</logOutput>
-  </trigger>
-  <trigger type="command_output">
-    <useDefaultName>true</useDefaultName>
-    <name>Command Output: logcat -c; logcat -v time *:I (root) contains text MediaProjectionManager</name>
-    <enabled>true</enabled>
-    <command>logcat -c; logcat -v time *:I</command>
-    <root>true</root>
-    <seContext></seContext>
-    <workingDirectory></workingDirectory>
-    <textMatchType>CONTAINS_TEXT</textMatchType>
-    <containedString>MediaProjectionManager</containedString>
-    <skipInitialOutput>false</skipInitialOutput>
-    <skipInitialOutputMillis>5000</skipInitialOutputMillis>
-    <keepDeviceAwake>false</keepDeviceAwake>
-    <logOutput>false</logOutput>
-  </trigger>
-  <trigger type="command_output">
-    <useDefaultName>true</useDefaultName>
-    <name>Command Output: logcat | grep 'StatsLog' (root) contains text </name>
-    <enabled>false</enabled>
-    <command>logcat | grep 'StatsLog'</command>
-    <root>true</root>
-    <seContext></seContext>
-    <workingDirectory></workingDirectory>
-    <textMatchType>CONTAINS_TEXT</textMatchType>
-    <containedString></containedString>
-    <skipInitialOutput>false</skipInitialOutput>
-    <skipInitialOutputMillis>5000</skipInitialOutputMillis>
-    <keepDeviceAwake>false</keepDeviceAwake>
-    <logOutput>false</logOutput>
   </trigger>
   <trigger type="file_observer">
     <useDefaultName>false</useDefaultName>
@@ -393,6 +340,37 @@ attachment_name=getString("attachment_name");</extras>
     <method>CLASSIC</method>
     <packageNameFilter>com.shopee.foody.driver.th</packageNameFilter>
     <classNameFilter>com.shopee.android.react.impl.activity.stubs.RNStubs4</classNameFilter>
+  </trigger>
+  <trigger type="command_output">
+    <useDefaultName>false</useDefaultName>
+    <name>START-MP</name>
+    <enabled>true</enabled>
+    <command>logcat | grep -i mediaprojection
+</command>
+    <root>true</root>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <textMatchType>CONTAINS_TEXT</textMatchType>
+    <containedString>Start the token instance com.android.server.media.projection.MediaProjectionManagerService</containedString>
+    <skipInitialOutput>true</skipInitialOutput>
+    <skipInitialOutputMillis>2000</skipInitialOutputMillis>
+    <keepDeviceAwake>false</keepDeviceAwake>
+    <logOutput>false</logOutput>
+  </trigger>
+  <trigger type="command_output">
+    <useDefaultName>false</useDefaultName>
+    <name>STOP-MP</name>
+    <enabled>true</enabled>
+    <command>logcat | grep -i mediaprojection</command>
+    <root>true</root>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <textMatchType>CONTAINS_TEXT</textMatchType>
+    <containedString>stopping projection</containedString>
+    <skipInitialOutput>false</skipInitialOutput>
+    <skipInitialOutputMillis>5000</skipInitialOutputMillis>
+    <keepDeviceAwake>false</keepDeviceAwake>
+    <logOutput>false</logOutput>
   </trigger>
   <trigger type="wifi_connected">
     <useDefaultName>false</useDefaultName>
@@ -826,16 +804,6 @@ return false</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
-    <name>DISCONNECT </name>
-    <expression>if(contains(stdout,"null")) {
-
-   return true
-}
-sleep(random(5000,30000));
-return false</expression>
-  </condition>
-  <condition type="expression">
-    <useDefaultName>false</useDefaultName>
     <name>EXIST?</name>
     <expression>sFileDb=getExternalStorageDir()+"/Android/application/SPFDB/{global_spxdb['files']}";
 OPEN_READONLY = getJavaStaticField("android.database.sqlite.SQLiteDatabase","OPEN_READONLY");
@@ -860,54 +828,6 @@ dy=screen_y-c_y;
 
 
 (dx*dx+dy*dy)&lt;=(radius*radius)</expression>
-  </condition>
-  <condition type="expression">
-    <useDefaultName>false</useDefaultName>
-    <name>Expression: Execute 99 times</name>
-    <expression>if (step == null) step = 43;
-
-if (step &lt; 99)
-{
-  step = step + 1;
-//step=46;
-  log("http://192.168.1.{step}:5431/automagic");
-  return true;
-}
-else
-{ 
-  step = null;
-  return false;
-}</expression>
-  </condition>
-  <condition type="expression">
-    <useDefaultName>true</useDefaultName>
-    <name>Expression: if (index != -1) { task = value; removeVariable("value"); return true } return false</name>
-    <expression>if (index != -1) {
-	task = value;
-	removeVariable("value");
-	return true
-}
-return false</expression>
-  </condition>
-  <condition type="expression">
-    <useDefaultName>true</useDefaultName>
-    <name>Expression: if (value != "") { password = value; removeVariable("value"); return true } return false</name>
-    <expression>if (value != "") {
-	password = value;
-	removeVariable("value");
-	return true
-}
-return false</expression>
-  </condition>
-  <condition type="expression">
-    <useDefaultName>true</useDefaultName>
-    <name>Expression: if (value != "") { text = value; removeVariable("value"); return true } return false</name>
-    <expression>if (value != "") {
-	text = value;
-	removeVariable("value");
-	return true
-}
-return false</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>true</useDefaultName>
@@ -1236,18 +1156,21 @@ return false</expression>
 ml=newList(
    newList("▶️   SCREEN-ON","input keyevent 224",null),
    newList("❎   SCREEN-OFF","input keyevent 223",null),
+   newList(""),
    newList("🛑   TURN OFF","reboot -p",null),
    newList("🔁   RESTART","reboot",null),
+   newList("📵   EJECT CALL","input keyevent KEYCODE_ENDCALL",null),
    newList("📴   KILL-SPF","am force-stop com.shopee.foody.driver.th",5000),
    newList("🫐   ENABLE BLUETOOTH","cmd bluetooth_manager enable",5000),
-   newList("👋🏻   DISABLE BLUETOOTH","cmd bluetooth_manager disable",500),
+   newList("👋🏻   DISABLE BLUETOOTH","cmd bluetooth_manager disable",5000),
    newList(""),
    newList("🩸   RESET-ANYDESK",null,null),
    newList(""),
-   newList("▶️   CONTROL MEDIA","input keyevent 85",null),
+   newList("▶️   PLAY/STOP MEDIA","input keyevent 85",null),
    newList(""),
    newList("🗺️   GET-LOCATION",null,null),
    newList("🚩   START-MOCK",null,null),
+   newList("📌   MOCK CURRENT",null,null),
    newList("🚩   STOP-MOCK",null,null)
 );
 
@@ -1427,6 +1350,16 @@ skip==true</expression>
    return true
 }
 return false</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>START?</name>
+    <expression>contains(trigger,"START")</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>STOP?</name>
+    <expression>contains(trigger,"STOP")</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>false</useDefaultName>
@@ -2490,6 +2423,15 @@ ENCRYPT</name>
     <variableStderr>stderr</variableStderr>
     <variableExitCode>exit_code</variableExitCode>
   </action>
+  <action type="execute_flows">
+    <useDefaultName>false</useDefaultName>
+    <name>BATT</name>
+    <includeFlowNamePatternList>♪   CHARGE-CALC</includeFlowNamePatternList>
+    <excludeFlowNamePatternList></excludeFlowNamePatternList>
+    <skipDisabledFlowsWithoutError>false</skipDisabledFlowsWithoutError>
+    <waitForFlowsToFinish>false</waitForFlowsToFinish>
+    <returnLocalVariablesToCallingFlow>false</returnLocalVariablesToCallingFlow>
+  </action>
   <action type="control_user_interface">
     <useDefaultName>false</useDefaultName>
     <name>BTN-ACCEPT</name>
@@ -2944,44 +2886,6 @@ latlng=lat+","+lng
     <name>ENCODE</name>
     <script>poly=fromJSON(response)["routes"][0]["geometry"];</script>
   </action>
-  <action type="script">
-    <useDefaultName>false</useDefaultName>
-    <name>Encrypt / Decrypt text</name>
-    <script>ITERATION_COUNT = 1000;
-KEY_LENGTH = 256; //256-bits for AES-256, 128-bits for AES-128
-PBKDF2_DERIVATION_ALGORITHM = "PBKDF2WithHmacSHA1";
-CIPHER_ALGORITHM = "AES/CBC/PKCS5Padding";
-PKCS5_SALT_LENGTH = 32;
-DELIMITER = "]";
-paramList = newList();
-random = callJavaConstructor("java.security.SecureRandom", "SecureRandom()");
-
-function='returnVar=null;\naddElement(paramList, param);\nparam=funparam[1];\neval(param[0]);\nparam=removeElement(paramList, length(paramList)-1);\nif (returnVar!=null) {\n\treturn returnVar\n}';
-
-//generateSalt()
-generateSalt = 'b = callJavaMethod(callJavaStaticMethod("java.nio.ByteBuffer", "allocate(int)", PKCS5_SALT_LENGTH), "java.nio.ByteBuffer", "array()");\ncallJavaMethod(random, "java.security.SecureRandom", "nextBytes(byte[])", b);\nreturn b';
-
-//generateIv(int length)
-generateIv = 'b = callJavaMethod(callJavaStaticMethod("java.nio.ByteBuffer", "allocate(int)", param[1]), "java.nio.ByteBuffer", "array()");\ncallJavaMethod(random, "java.security.SecureRandom", "nextBytes(byte[])", b);\nreturnVar = b';
-
-//deriveKey(String password, byte[] salt)
-deriveKey = 'keySpec = callJavaConstructor("javax.crypto.spec.PBEKeySpec", "PBEKeySpec(char[], byte[], int, int)", callJavaMethod(param[1], "java.lang.String", "toCharArray()"), param[2], ITERATION_COUNT, KEY_LENGTH);\nkeyFactory = callJavaStaticMethod("javax.crypto.SecretKeyFactory", "getInstance(java.lang.String)", PBKDF2_DERIVATION_ALGORITHM);\nkeyBytes = callJavaMethod(callJavaMethod(keyFactory, "javax.crypto.SecretKeyFactory", "generateSecret(java.security.spec.KeySpec)", keySpec), "java.security.Key", "getEncoded()");\nreturnVar = callJavaConstructor("javax.crypto.spec.SecretKeySpec", "SecretKeySpec(byte[], java.lang.String)", keyBytes, "AES")';
-
-//toBase64(byte[] bytes)
-toBase64 ='returnVar = callJavaStaticMethod("android.util.Base64", "encodeToString(byte[], int)", param[1], getJavaStaticField("android.util.Base64", "NO_WRAP"))';
-
-//fromBase64(String base64)
-fromBase64 = 'returnVar = callJavaStaticMethod("android.util.Base64", "decode(java.lang.String, int)", param[1], getJavaStaticField("android.util.Base64", "NO_WRAP"))';
-
-//encrypt(String plaintext, String password)
-//encrypted = eval((funparam=newList(function, newList(encrypt, text, password)))[0]);
-encrypt = 'salt = eval(generateSalt);\nkey = eval((funparam=newList(function, newList(deriveKey, param[2], salt)))[0]);\ncipher = callJavaStaticMethod("javax.crypto.Cipher", "getInstance(java.lang.String)", CIPHER_ALGORITHM);\niv = eval((funparam=newList(function, newList(generateIv, callJavaMethod(cipher, "javax.crypto.Cipher", "getBlockSize()"))))[0]);\nivParams = callJavaConstructor("javax.crypto.spec.IvParameterSpec", "IvParameterSpec(byte[])", iv);\ncallJavaMethod(cipher, "javax.crypto.Cipher", "init(int, java.security.Key, java.security.spec.AlgorithmParameterSpec)", getJavaStaticField("javax.crypto.Cipher", "ENCRYPT_MODE"), key, ivParams);\ncipherText = callJavaMethod(cipher, "javax.crypto.Cipher", "doFinal(byte[])", callJavaMethod(param[1], "java.lang.String", "getBytes(java.lang.String)", "UTF-8"));\nreturnVar = eval((funparam=newList(function, newList(toBase64, salt)))[0]) + DELIMITER + eval((funparam=newList(function, newList(toBase64, iv)))[0]) + DELIMITER + eval((funparam=newList(function, newList(toBase64, cipherText)))[0])';
-
-
-//decrypt(String ciphertext, String password)
-//decrypted = eval((funparam=newList(function, newList(decrypt, text, password)))[0]);
-decrypt = 'fields = split(param[1], DELIMITER);\nsalt = eval((funparam=newList(function, newList(fromBase64, fields[0])))[0]);\niv = eval((funparam=newList(function, newList(fromBase64, fields[1])))[0]);\ncipherBytes = eval((funparam=newList(function, newList(fromBase64, fields[2])))[0]);\nkey = eval((funparam=newList(function, newList(deriveKey, param[2], salt)))[0]);\ncipher = callJavaStaticMethod("javax.crypto.Cipher", "getInstance(java.lang.String)", CIPHER_ALGORITHM);\nivParams = callJavaConstructor("javax.crypto.spec.IvParameterSpec", "IvParameterSpec(byte[])", iv);\ncallJavaMethod(cipher, "javax.crypto.Cipher", "init(int, java.security.Key, java.security.spec.AlgorithmParameterSpec)", getJavaStaticField("javax.crypto.Cipher", "DECRYPT_MODE"), key, ivParams);\nplaintext = callJavaMethod(cipher, "javax.crypto.Cipher", "doFinal(byte[])", cipherBytes);\nreturnVar = callJavaConstructor("java.lang.String", "String(byte[], java.lang.String)", plaintext, "UTF-8")';</script>
-  </action>
   <action type="execute_flows">
     <useDefaultName>true</useDefaultName>
     <name>Execute Flows: #22A  DENY &lt;MAINACT&gt;</name>
@@ -3017,6 +2921,18 @@ decrypt = 'fields = split(param[1], DELIMITER);\nsalt = eval((funparam=newList(f
     <skipDisabledFlowsWithoutError>false</skipDisabledFlowsWithoutError>
     <waitForFlowsToFinish>false</waitForFlowsToFinish>
     <returnLocalVariablesToCallingFlow>false</returnLocalVariablesToCallingFlow>
+  </action>
+  <action type="execute_root_command">
+    <useDefaultName>true</useDefaultName>
+    <name>Execute Root Command: am force-stop com.anydesk.anydeskandroid &amp;&amp; sleep 0.01 &amp;&amp;  in </name>
+    <command>am force-stop com.anydesk.anydeskandroid &amp;&amp; sleep 0.01 &amp;&amp; </command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
   </action>
   <action type="execute_root_command">
     <useDefaultName>true</useDefaultName>
@@ -3074,18 +2990,6 @@ decrypt = 'fields = split(param[1], DELIMITER);\nsalt = eval((funparam=newList(f
     <useDefaultName>true</useDefaultName>
     <name>Execute Root Command: input keyevent ASSIST in </name>
     <command>input keyevent ASSIST</command>
-    <user></user>
-    <seContext></seContext>
-    <workingDirectory></workingDirectory>
-    <timeout>300000</timeout>
-    <variableStdout>stdout</variableStdout>
-    <variableStderr>stderr</variableStderr>
-    <variableExitCode>exit_code</variableExitCode>
-  </action>
-  <action type="execute_root_command">
-    <useDefaultName>true</useDefaultName>
-    <name>Execute Root Command: ip -4 neigh show | cut -d ' ' -f1  in </name>
-    <command>ip -4 neigh show | cut -d ' ' -f1 </command>
     <user></user>
     <seContext></seContext>
     <workingDirectory></workingDirectory>
@@ -4374,35 +4278,6 @@ cookie: shopee_token=EDZgG8Wn73Ks2NNYykVsWydXSF4zSB5+TTECHKR8OGZ52rH8Jr76RWPznl9
   </action>
   <action type="http_request">
     <useDefaultName>true</useDefaultName>
-    <name>HTTP Request: GET http://192.168.1.{step}:5431/automagic   store in response</name>
-    <url>http://192.168.1.{step}:5431/automagic</url>
-    <verifyCertificates>false</verifyCertificates>
-    <basicAuthentication>false</basicAuthentication>
-    <username></username>
-    <clientCert>false</clientCert>
-    <clientCertPath></clientCertPath>
-    <httpMethod>GET</httpMethod>
-    <networkType>DEFAULT</networkType>
-    <httpContentType>X_WWW_FORM_URLENCODED</httpContentType>
-    <contentType>text/plain</contentType>
-    <generalTextData></generalTextData>
-    <formFieldList>Lastname=XYZ,Firstname=ABC</formFieldList>
-    <uploadFieldName>upload_field</uploadFieldName>
-    <uploadFilePath></uploadFilePath>
-    <binaryContentType>application/octet-stream</binaryContentType>
-    <binaryFilePath></binaryFilePath>
-    <timeout>200</timeout>
-    <setCustomHTTPHeaders>false</setCustomHTTPHeaders>
-    <customHTTPHeaders></customHTTPHeaders>
-    <storeInVariable>true</storeInVariable>
-    <variable>response</variable>
-    <encoding></encoding>
-    <path>/storage/emulated/0/Download/file.bin</path>
-    <followRedirects>true</followRedirects>
-    <skipConnectivityCheck>false</skipConnectivityCheck>
-  </action>
-  <action type="http_request">
-    <useDefaultName>true</useDefaultName>
     <name>HTTP Request: GET http://router.project-osrm.org/route/v1/driving/100.349335,13.706248;100.346376,13.719743?geometries=polyline&amp;overview=full   store in response</name>
     <url>http://router.project-osrm.org/route/v1/driving/100.349335,13.706248;100.346376,13.719743?geometries=polyline&amp;overview=full</url>
     <verifyCertificates>true</verifyCertificates>
@@ -5116,66 +4991,6 @@ BASE</name>
     <enlargeDialogWidth>false</enlargeDialogWidth>
     <keyboardCapitalizeSentences>false</keyboardCapitalizeSentences>
   </action>
-  <action type="input_dialog">
-    <useDefaultName>true</useDefaultName>
-    <name>Input Dialog:  Single Choice Menu encrypt,decrypt</name>
-    <title></title>
-    <inputDialogType>SINGLE_CHOICE_MENU</inputDialogType>
-    <prompt></prompt>
-    <inputValues>encrypt,decrypt</inputValues>
-    <defaultValue></defaultValue>
-    <titleFontSize>DEFAULT</titleFontSize>
-    <promptFontSize>DEFAULT</promptFontSize>
-    <fontSize>DEFAULT</fontSize>
-    <timeoutEnabled>false</timeoutEnabled>
-    <timeout>60000</timeout>
-    <defaultValueOnTimeout></defaultValueOnTimeout>
-    <showWhenLocked>false</showWhenLocked>
-    <turnScreenOn>false</turnScreenOn>
-    <keepScreenOn>false</keepScreenOn>
-    <enlargeDialogWidth>false</enlargeDialogWidth>
-    <keyboardCapitalizeSentences>false</keyboardCapitalizeSentences>
-  </action>
-  <action type="input_dialog">
-    <useDefaultName>true</useDefaultName>
-    <name>Input Dialog: Enter password Password </name>
-    <title>Enter password</title>
-    <inputDialogType>PASSWORD</inputDialogType>
-    <prompt></prompt>
-    <inputValues></inputValues>
-    <defaultValue></defaultValue>
-    <titleFontSize>DEFAULT</titleFontSize>
-    <promptFontSize>DEFAULT</promptFontSize>
-    <fontSize>DEFAULT</fontSize>
-    <timeoutEnabled>false</timeoutEnabled>
-    <timeout>60000</timeout>
-    <defaultValueOnTimeout></defaultValueOnTimeout>
-    <showWhenLocked>false</showWhenLocked>
-    <turnScreenOn>false</turnScreenOn>
-    <keepScreenOn>false</keepScreenOn>
-    <enlargeDialogWidth>false</enlargeDialogWidth>
-    <keyboardCapitalizeSentences>false</keyboardCapitalizeSentences>
-  </action>
-  <action type="input_dialog">
-    <useDefaultName>true</useDefaultName>
-    <name>Input Dialog: Enter text to {task} Multi-line text </name>
-    <title>Enter text to {task}</title>
-    <inputDialogType>TEXT</inputDialogType>
-    <prompt></prompt>
-    <inputValues></inputValues>
-    <defaultValue></defaultValue>
-    <titleFontSize>DEFAULT</titleFontSize>
-    <promptFontSize>DEFAULT</promptFontSize>
-    <fontSize>DEFAULT</fontSize>
-    <timeoutEnabled>false</timeoutEnabled>
-    <timeout>60000</timeout>
-    <defaultValueOnTimeout></defaultValueOnTimeout>
-    <showWhenLocked>false</showWhenLocked>
-    <turnScreenOn>false</turnScreenOn>
-    <keepScreenOn>false</keepScreenOn>
-    <enlargeDialogWidth>false</enlargeDialogWidth>
-    <keyboardCapitalizeSentences>false</keyboardCapitalizeSentences>
-  </action>
   <action type="script">
     <useDefaultName>false</useDefaultName>
     <name>IP METHOD</name>
@@ -5766,19 +5581,6 @@ callJavaMethod(it, "android.content.Intent", "setComponent(android.content.Compo
 callJavaMethod(it, "android.content.Intent", "putExtra(java.lang.String, double)", "lat",lat);
 callJavaMethod(it, "android.content.Intent", "putExtra(java.lang.String, double)", "lon",lon);
 callJavaMethod(getContext(), "android.content.Context", "sendBroadcast(android.content.Intent)", it);</script>
-  </action>
-  <action type="execute_root_command">
-    <useDefaultName>false</useDefaultName>
-    <name>MP</name>
-    <command>dumpsys media_projection
-</command>
-    <user></user>
-    <seContext></seContext>
-    <workingDirectory></workingDirectory>
-    <timeout>300000</timeout>
-    <variableStdout>stdout</variableStdout>
-    <variableStderr>stderr</variableStderr>
-    <variableExitCode>exit_code</variableExitCode>
   </action>
   <action type="script">
     <useDefaultName>false</useDefaultName>
@@ -7791,22 +7593,6 @@ bbb="{bb,listformat,comma}";</script>
   </action>
   <action type="script">
     <useDefaultName>true</useDefaultName>
-    <name>Script: if (task == "encrypt") { encrypted = eval((funparam=newList(function, newList(encrypt, text, password)))[0]); } else if (task == "decrypt") { decrypted = eval((funparam=newList(function, newList(decrypt, text, password)))[0]); } for (v in getVariableNames()) {if (NOT matches(v, "global_.*|flow_name|trigger|encrypted|decrypted")) {removeVariable(v)}; }; removeVariable("v");</name>
-    <script>if (task == "encrypt") {
-	encrypted = eval((funparam=newList(function, newList(encrypt, text, password)))[0]);
-}
-else if (task == "decrypt") {
-	decrypted = eval((funparam=newList(function, newList(decrypt, text, password)))[0]);
-}
-
-for (v in getVariableNames()) 
-  {if (NOT matches(v, "global_.*|flow_name|trigger|encrypted|decrypted"))
-     {removeVariable(v)};
-  };
-removeVariable("v");</script>
-  </action>
-  <action type="script">
-    <useDefaultName>true</useDefaultName>
     <name>Script: index = 0;</name>
     <script>index = 0;</script>
   </action>
@@ -9620,8 +9406,8 @@ putString("android.intent.extra.STREAM","content://media/external/images/media/1
     <notificationIconType>BUILTIN</notificationIconType>
     <notificationIcon>BATTERY</notificationIcon>
     <customNotificationIcon></customNotificationIcon>
-    <title>{mAh} mA  /  {watt} W</title>
-    <message>อุณหภูมิ: {temp}  /  เฉลี่ย: {average} mA</message>
+    <title>{mAh} mA : {average} mA</title>
+    <message>อุณหภูมิ: {temp}</message>
     <channel>BATTERY</channel>
     <sound>false</sound>
     <vibrate>false</vibrate>
@@ -9665,7 +9451,7 @@ putString("android.intent.extra.STREAM","content://media/external/images/media/1
   <action type="stop_flows">
     <useDefaultName>false</useDefaultName>
     <name>STOP-SELF</name>
-    <includeFlowNamePatternList>"  @  BATTERY STATUS"</includeFlowNamePatternList>
+    <includeFlowNamePatternList>♪   CHARGE-CALC</includeFlowNamePatternList>
     <excludeFlowNamePatternList></excludeFlowNamePatternList>
   </action>
   <action type="script">
@@ -10212,22 +9998,6 @@ y=callJavaMethod(x, "java.io.StringWriter", "toString()");
     <targetPath>/storage/emulated/0/Android/application/SYNCFOLDER/{file}.zip</targetPath>
     <showProgress>true</showProgress>
   </action>
-  <action type="speech_output">
-    <useDefaultName>false</useDefaultName>
-    <name>เหมียว เหมียว</name>
-    <audioStreamType>MUSIC</audioStreamType>
-    <text>เหมียว เหมียว</text>
-    <locale>th_TH</locale>
-    <usePitch>true</usePitch>
-    <pitch>1.0</pitch>
-    <useSpeechRate>true</useSpeechRate>
-    <speechRate>1</speechRate>
-    <embeddedSynthesis>false</embeddedSynthesis>
-    <networkSynthesis>false</networkSynthesis>
-    <showStopSpeechNotification>false</showStopSpeechNotification>
-    <requestAudioFocus>true</requestAudioFocus>
-    <audioFocusType>TRANSIENT</audioFocusType>
-  </action>
   <action type="set_flow_state">
     <useDefaultName>false</useDefaultName>
     <name>❌
@@ -10245,111 +10015,6 @@ TAKE, DENY</name>
     <timeoutEnabled>true</timeoutEnabled>
     <timeout>5000</timeout>
   </action>
-  <flow type="flow">
-    <name>  @  ANYDESK SUPPORT</name>
-    <description>     1.0 bulid 00
-</description>
-    <group>        🫐</group>
-    <enabled>true</enabled>
-    <executionPolicy>SKIP</executionPolicy>
-    <emergencyStopCount>999999</emergencyStopCount>
-    <actioncontainer id="t1" x="70.0" y="752.5">H-A</actioncontainer>
-    <conditioncontainer id="t2" x="70.0" y="612.5">DISCONNECT </conditioncontainer>
-    <actioncontainer id="t3" x="70.0" y="437.5">MP</actioncontainer>
-    <actioncontainer id="t4" x="70.0" y="332.5">ANYDESK_STATUSBAR</actioncontainer>
-    <notecontainer id="t5" x="-105.0" y="157.5" w="140.0" h="105.0">HAFT</notecontainer>
-    <actioncontainer id="t6" x="70.0" y="157.5">CAST ENABLE</actioncontainer>
-    <conditioncontainer id="t7" x="-70.0" y="-227.5">     DEBUG    </conditioncontainer>
-    <triggercontainer id="t8" x="70.0" y="-402.5">
-      <trigger>CAST</trigger>
-      <trigger>Command Output: logcat -c; logcat -v time *:I (root) contains text MediaProjectionManager</trigger>
-    </triggercontainer>
-    <connection from="t2" to="t3" type="FALSE" sourcePosition="WEST" targetPosition="WEST" />
-    <connection from="t2" to="t1" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
-    <name>  @  BATTERY STATUS</name>
-    <description>     1.1 bulid 00
-</description>
-    <enabled>true</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <emergencyStopCount>999999</emergencyStopCount>
-    <triggercontainer id="t1" x="-35.0" y="-262.5">
-      <trigger>C-C</trigger>
-      <trigger>C-D</trigger>
-    </triggercontainer>
-    <actioncontainer id="t2" x="-35.0" y="682.5">5s  </actioncontainer>
-    <conditioncontainer id="t3" x="-35.0" y="122.5">BATTERY</conditioncontainer>
-    <actioncontainer id="t4" x="-35.0" y="297.5">Bvar</actioncontainer>
-    <actioncontainer id="t5" x="175.0" y="682.5">STATUS-BATT</actioncontainer>
-    <actioncontainer id="t6" x="420.0" y="227.5">STOP-SELF</actioncontainer>
-    <actioncontainer id="t7" x="420.0" y="122.5">RM15</actioncontainer>
-    <actioncontainer id="t8" x="-280.0" y="122.5">เหมียว เหมียว</actioncontainer>
-    <conditioncontainer id="t9" x="-35.0" y="-87.5">CONNECT</conditioncontainer>
-    <conditioncontainer id="t10" x="-35.0" y="472.5">LEVEL</conditioncontainer>
-    <actioncontainer id="t11" x="245.0" y="437.5">ALERT-S</actioncontainer>
-    <connection from="t1" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t3" type="NORMAL" sourcePosition="WEST" targetPosition="WEST" />
-    <connection from="t3" to="t4" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t7" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t9" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t3" type="FALSE" sourcePosition="EAST" targetPosition="EAST" />
-    <connection from="t11" to="t3" type="NORMAL" sourcePosition="NORTH" targetPosition="EAST" />
-  </flow>
-  <flow type="flow">
-    <name>  @  GITHUB API</name>
-    <description>     0.4 bulid 01
-</description>
-    <enabled>true</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="-70.0" y="-1697.5">
-      <trigger>1h</trigger>
-    </triggercontainer>
-    <notecontainer id="t2" x="-385.0" y="-1732.5" w="140.0" h="35.0">FROM SOURCE</notecontainer>
-    <actioncontainer id="t3" x="-385.0" y="-717.5">BASE64-2</actioncontainer>
-    <actioncontainer id="t4" x="-385.0" y="-612.5">GIT
-CONTENT!</actioncontainer>
-    <actioncontainer id="t5" x="-385.0" y="-1312.5">EXTERNAL-CV</actioncontainer>
-    <actioncontainer id="t6" x="-385.0" y="-1417.5">GET_CONTENT</actioncontainer>
-    <actioncontainer id="t7" x="-70.0" y="-1417.5">FLOWLIST</actioncontainer>
-    <actioncontainer id="t8" x="-70.0" y="-1312.5">EXPORT</actioncontainer>
-    <actioncontainer id="t9" x="-70.0" y="-1207.5">SIZE</actioncontainer>
-    <actioncontainer id="t10" x="-70.0" y="-822.5">REPLACEKEY</actioncontainer>
-    <actioncontainer id="t11" x="-70.0" y="-717.5">BASE64
-ENCRYPT</actioncontainer>
-    <actioncontainer id="t12" x="-70.0" y="-612.5">GIT
-AUTOMAGIC</actioncontainer>
-    <actioncontainer id="t13" x="-70.0" y="-507.5">GIT UPLOAD</actioncontainer>
-    <actioncontainer id="t14" x="245.0" y="-717.5">GET-SHA</actioncontainer>
-    <actioncontainer id="t15" x="245.0" y="-612.5">GITJ SHA2</actioncontainer>
-    <conditioncontainer id="t16" x="-70.0" y="-332.5">SHA?</conditioncontainer>
-    <conditioncontainer id="t17" x="-70.0" y="-997.5">DIFF SIZE</conditioncontainer>
-    <connection from="t1" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
-    <connection from="t5" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t2" type="NOTE" sourcePosition="NORTH" targetPosition="SOUTH" />
-    <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t13" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t14" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t15" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t16" to="t14" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t17" to="t10" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
   <flow type="flow">
     <name>  @  SPF DATABASE</name>
     <description> </description>
@@ -11061,29 +10726,6 @@ NEXT</conditioncontainer>
     <connection from="t3" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
-    <name>***NEARBY SHARE</name>
-    <description> </description>
-    <enabled>false</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5" />
-    <actioncontainer id="t2" x="-140.0" y="332.5">Execute Root Command: cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121 in </actioncontainer>
-    <actioncontainer id="t3" x="70.0" y="612.5">Control UI: sleep(1000); click("Pixel 5a ของ T A K A");</actioncontainer>
-    <actioncontainer id="t4" x="140.0" y="367.5">Start Activity: android.intent.action.SEND image/png com.google.android.gms/com.google.android.gms.nearby.sharing.send.SendActivity </actioncontainer>
-    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
-    <name>????? 1</name>
-    <enabled>false</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5">
-      <trigger>Activity Ended: com.shopee.foody.driver.th/com.shopee.foody.driver.popmanager.activity.PopActivity</trigger>
-      <trigger>Command Output: logcat | grep 'StatsLog' (root) contains text </trigger>
-    </triggercontainer>
-    <notecontainer id="t2" x="-70.0" y="437.5" w="140.0" h="105.0">LAUNCHER_TASKBAR_BACK_BUTTON_LONGPRESS
-LAUNCHER_TASKBAR_HOME_BUTTON_LONGPRESS</notecontainer>
-  </flow>
-  <flow type="flow">
     <name>CR00: BOOT</name>
     <description> </description>
     <group>          ♻️  TKH-CONNECT 0428</group>
@@ -11095,21 +10737,23 @@ LAUNCHER_TASKBAR_HOME_BUTTON_LONGPRESS</notecontainer>
     </triggercontainer>
     <actioncontainer id="t2" x="350.0" y="402.5">SIM_SELECT-F</actioncontainer>
     <actioncontainer id="t3" x="350.0" y="507.5">IP-F</actioncontainer>
-    <actioncontainer id="t4" x="70.0" y="402.5">RENDER SERVER</actioncontainer>
-    <conditioncontainer id="t5" x="350.0" y="682.5">SIM_MAIN</conditioncontainer>
-    <actioncontainer id="t6" x="350.0" y="1172.5">HS</actioncontainer>
-    <actioncontainer id="t7" x="350.0" y="1067.5">ANYDESK</actioncontainer>
-    <actioncontainer id="t8" x="350.0" y="857.5">HSPOT:ON</actioncontainer>
-    <actioncontainer id="t9" x="-140.0" y="402.5">APPOPS ANYDESK</actioncontainer>
-    <conditioncontainer id="t10" x="70.0" y="227.5">10m </conditioncontainer>
-    <connection from="t1" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <conditioncontainer id="t4" x="350.0" y="682.5">SIM_MAIN</conditioncontainer>
+    <actioncontainer id="t5" x="350.0" y="1172.5">HS</actioncontainer>
+    <actioncontainer id="t6" x="350.0" y="857.5">HSPOT:ON</actioncontainer>
+    <actioncontainer id="t7" x="-314.99997" y="367.49997">RENDER SERVER</actioncontainer>
+    <actioncontainer id="t8" x="-105.00001" y="402.5">BATT</actioncontainer>
+    <conditioncontainer id="t9" x="70.0" y="227.5">10m </conditioncontainer>
+    <actioncontainer id="t10" x="69.99999" y="402.5">APPOPS ANYDESK</actioncontainer>
+    <actioncontainer id="t11" x="350.0" y="1067.5">ANYDESK</actioncontainer>
+    <connection from="t1" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t8" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t10" to="t9" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t6" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t9" to="t10" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t8" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>CR01: SIM SELECT</name>
@@ -11172,140 +10816,144 @@ LAUNCHER_TASKBAR_HOME_BUTTON_LONGPRESS</notecontainer>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <triggercontainer id="t1" x="-2135.0" y="-11182.5">
-      <trigger>MULTI</trigger>
-      <trigger>SINGLE</trigger>
-    </triggercontainer>
-    <actioncontainer id="t2" x="-1785.0" y="-2817.5">CONFIG</actioncontainer>
-    <actioncontainer id="t3" x="-1645.0" y="-2817.5">TEMPLATE 
+    <actioncontainer id="t1" x="-1785.0" y="-2817.5">CONFIG</actioncontainer>
+    <actioncontainer id="t2" x="-1645.0" y="-2817.5">TEMPLATE 
 HTTP</actioncontainer>
-    <actioncontainer id="t4" x="-1785.0" y="-2922.5">TEMPLATทE 
+    <actioncontainer id="t3" x="-1785.0" y="-2922.5">TEMPLATทE 
 HTTP</actioncontainer>
-    <actioncontainer id="t5" x="-1645.0" y="-2922.5">TEMPLATE 
+    <actioncontainer id="t4" x="-1645.0" y="-2922.5">TEMPLATE 
 HTTP / POST</actioncontainer>
-    <actioncontainer id="t6" x="-1785.0" y="-3027.5">TEMPLATE 
+    <actioncontainer id="t5" x="-1785.0" y="-3027.5">TEMPLATE 
 HTTP / POST</actioncontainer>
-    <actioncontainer id="t7" x="-1645.0" y="-3027.5">TEMPLATE 
+    <actioncontainer id="t6" x="-1645.0" y="-3027.5">TEMPLATE 
 HTTP</actioncontainer>
-    <actioncontainer id="t8" x="-1785.0" y="-3132.5">TEST
+    <actioncontainer id="t7" x="-1785.0" y="-3132.5">TEST
 KILLAPPS</actioncontainer>
-    <actioncontainer id="t9" x="-1645.0" y="-3132.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
-    <actioncontainer id="t10" x="-1645.0" y="-3237.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
-    <conditioncontainer id="t11" x="-1505.0" y="-10937.5">SYNC:</conditioncontainer>
-    <conditioncontainer id="t12" x="-1295.0" y="-10587.5">      OK      </conditioncontainer>
-    <actioncontainer id="t13" x="-2345.0" y="-10587.5">00: SERVICES</actioncontainer>
-    <actioncontainer id="t14" x="-665.0" y="-10622.5">CONTENT-Q</actioncontainer>
-    <actioncontainer id="t15" x="-35.0" y="-10622.5">CREATE FOL</actioncontainer>
-    <conditioncontainer id="t16" x="-35.0" y="-10517.5">FOR MULTI</conditioncontainer>
-    <actioncontainer id="t17" x="245.0" y="-10517.5"> QUERY </actioncontainer>
-    <actioncontainer id="t18" x="420.0" y="-10517.5">  X. c</actioncontainer>
-    <actioncontainer id="t19" x="245.0" y="-10307.5">  CP  </actioncontainer>
-    <actioncontainer id="t20" x="245.0" y="-10202.5">TEST  </actioncontainer>
-    <actioncontainer id="t21" x="-35.0" y="-10202.5">DEL-FOL</actioncontainer>
-    <actioncontainer id="t22" x="-35.0" y="-10097.5">Script: stream_uri="/storage/emulated/0/Android/application/RESOURCE/{type}_{triggertime}.zip"; filename="{type}_{triggertime}.zip";</actioncontainer>
-    <actioncontainer id="t23" x="-35.0" y="-10307.5">ZIP</actioncontainer>
-    <actioncontainer id="t24" x="-665.0" y="-9327.5">GITs
+    <actioncontainer id="t8" x="-1645.0" y="-3132.5">Script: //if(global_device["device"]=="alioth") {sqrt();} skip=true; p1="job_incoming"; p2="spf";</actioncontainer>
+    <actioncontainer id="t9" x="-1645.0" y="-3237.5">Start Activity: android.intent.action.VIEW google.navigation:q=13.697287,100.352603 </actioncontainer>
+    <conditioncontainer id="t10" x="-1505.0" y="-10937.5">SYNC:</conditioncontainer>
+    <conditioncontainer id="t11" x="-1295.0" y="-10587.5">      OK      </conditioncontainer>
+    <actioncontainer id="t12" x="-2345.0" y="-10587.5">00: SERVICES</actioncontainer>
+    <actioncontainer id="t13" x="-665.0" y="-10622.5">CONTENT-Q</actioncontainer>
+    <actioncontainer id="t14" x="-35.0" y="-10622.5">CREATE FOL</actioncontainer>
+    <conditioncontainer id="t15" x="-35.0" y="-10517.5">FOR MULTI</conditioncontainer>
+    <actioncontainer id="t16" x="245.0" y="-10517.5"> QUERY </actioncontainer>
+    <actioncontainer id="t17" x="420.0" y="-10517.5">  X. c</actioncontainer>
+    <actioncontainer id="t18" x="245.0" y="-10307.5">  CP  </actioncontainer>
+    <actioncontainer id="t19" x="245.0" y="-10202.5">TEST  </actioncontainer>
+    <actioncontainer id="t20" x="-35.0" y="-10202.5">DEL-FOL</actioncontainer>
+    <actioncontainer id="t21" x="-35.0" y="-10097.5">Script: stream_uri="/storage/emulated/0/Android/application/RESOURCE/{type}_{triggertime}.zip"; filename="{type}_{triggertime}.zip";</actioncontainer>
+    <actioncontainer id="t22" x="-35.0" y="-10307.5">ZIP</actioncontainer>
+    <actioncontainer id="t23" x="-665.0" y="-9327.5">GITs
 AUTOMAGIC</actioncontainer>
-    <actioncontainer id="t25" x="-665.0" y="-9222.5">GIT UPLOADdm</actioncontainer>
-    <conditioncontainer id="t26" x="-1925.0" y="-10937.5">TEL:</conditioncontainer>
-    <actioncontainer id="t27" x="-1295.0" y="-10762.5">     MENU     </actioncontainer>
-    <conditioncontainer id="t28" x="-1715.0" y="-10937.5">MAP:</conditioncontainer>
-    <actioncontainer id="t29" x="-1470.0" y="-4077.5">GIT UPLOADdfd</actioncontainer>
-    <actioncontainer id="t30" x="-1330.0" y="-3972.5">GET-jSHAs</actioncontainer>
-    <actioncontainer id="t31" x="-1330.0" y="-4077.5">GIT UPLOADd</actioncontainer>
-    <actioncontainer id="t32" x="-560.0" y="-4182.5">Script: xxx="/storage/emulated/0/Android/raw";</actioncontainer>
-    <actioncontainer id="t33" x="-700.0" y="-3972.5">Execute Root Command: curl -F "files[]=@{xxx}" https://uguu.se/upload.php
+    <actioncontainer id="t24" x="-665.0" y="-9222.5">GIT UPLOADdm</actioncontainer>
+    <conditioncontainer id="t25" x="-1925.0" y="-10937.5">TEL:</conditioncontainer>
+    <conditioncontainer id="t26" x="-1715.0" y="-10937.5">MAP:</conditioncontainer>
+    <actioncontainer id="t27" x="-1470.0" y="-4077.5">GIT UPLOADdfd</actioncontainer>
+    <actioncontainer id="t28" x="-1330.0" y="-3972.5">GET-jSHAs</actioncontainer>
+    <actioncontainer id="t29" x="-1330.0" y="-4077.5">GIT UPLOADd</actioncontainer>
+    <actioncontainer id="t30" x="-560.0" y="-4182.5">Script: xxx="/storage/emulated/0/Android/raw";</actioncontainer>
+    <actioncontainer id="t31" x="-700.0" y="-3972.5">Execute Root Command: curl -F "files[]=@{xxx}" https://uguu.se/upload.php
  in </actioncontainer>
-    <actioncontainer id="t34" x="-560.0" y="-3972.5">Execute Root Command: curl -F "reqtype=fileupload" -F "fileToUpload=@{xxx}" https://catbox.moe/user/api.php
+    <actioncontainer id="t32" x="-560.0" y="-3972.5">Execute Root Command: curl -F "reqtype=fileupload" -F "fileToUpload=@{xxx}" https://catbox.moe/user/api.php
  in </actioncontainer>
-    <actioncontainer id="t35" x="-700.0" y="-3832.5">Script: xxx=getDate()-triggertime</actioncontainer>
-    <conditioncontainer id="t36" x="-665.0" y="-3552.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t37" x="-1470.0" y="-4182.5">GITJ SHA2d</actioncontainer>
-    <actioncontainer id="t38" x="-2100.0" y="-3692.5">00: SERVICES</actioncontainer>
-    <conditioncontainer id="t39" x="-2310.0" y="-3657.5">IP!?</conditioncontainer>
-    <actioncontainer id="t40" x="-2170.0" y="-3867.5">NTFY.ATTACH</actioncontainer>
-    <notecontainer id="t41" x="-2275.0" y="-4112.5" w="280.0" h="105.0">place</notecontainer>
-    <conditioncontainer id="t42" x="-2625.0" y="-4112.5">     DEBUG    </conditioncontainer>
-    <conditioncontainer id="t43" x="-2625.0" y="-4252.5">MAPX</conditioncontainer>
-    <conditioncontainer id="t44" x="-2800.0" y="-4252.5">MAP</conditioncontainer>
-    <actioncontainer id="t45" x="-2590.0" y="-3902.5">Message Dialog:  {findAll(text, "http[^\\s]+")[0]}</actioncontainer>
-    <notecontainer id="t46" x="-1802.5" y="-3605.0" w="455.0" h="70.0">url="http://{global_device['ipaddress']}/automagic";
+    <actioncontainer id="t33" x="-700.0" y="-3832.5">Script: xxx=getDate()-triggertime</actioncontainer>
+    <conditioncontainer id="t34" x="-665.0" y="-3552.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t35" x="-1470.0" y="-4182.5">GITJ SHA2d</actioncontainer>
+    <actioncontainer id="t36" x="-2100.0" y="-3692.5">00: SERVICES</actioncontainer>
+    <conditioncontainer id="t37" x="-2310.0" y="-3657.5">IP!?</conditioncontainer>
+    <actioncontainer id="t38" x="-2170.0" y="-3867.5">NTFY.ATTACH</actioncontainer>
+    <notecontainer id="t39" x="-2275.0" y="-4112.5" w="280.0" h="105.0">place</notecontainer>
+    <conditioncontainer id="t40" x="-2625.0" y="-4112.5">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t41" x="-2625.0" y="-4252.5">MAPX</conditioncontainer>
+    <conditioncontainer id="t42" x="-2800.0" y="-4252.5">MAP</conditioncontainer>
+    <actioncontainer id="t43" x="-2590.0" y="-3902.5">Message Dialog:  {findAll(text, "http[^\\s]+")[0]}</actioncontainer>
+    <notecontainer id="t44" x="-1802.5" y="-3605.0" w="455.0" h="70.0">url="http://{global_device['ipaddress']}/automagic";
 
 to_device=removeElementValue(newList("alioth","cupid"), global_device["device"])[0];
 </notecontainer>
-    <notecontainer id="t47" x="-1890.0" y="-3657.5" w="210.0" h="35.0">send / update sync </notecontainer>
-    <actioncontainer id="t48" x="-665.0" y="-9432.5">BASE64x
+    <notecontainer id="t45" x="-1890.0" y="-3657.5" w="210.0" h="35.0">send / update sync </notecontainer>
+    <actioncontainer id="t46" x="-665.0" y="-9432.5">BASE64x
 ENCRYPT</actioncontainer>
-    <actioncontainer id="t49" x="-1330.0" y="-9852.5">TOAST</actioncontainer>
-    <conditioncontainer id="t50" x="-1295.0" y="-10937.5">MENULIST</conditioncontainer>
-    <conditioncontainer id="t51" x="-35.0" y="-10937.5">MULTI-SEND</conditioncontainer>
-    <conditioncontainer id="t52" x="-665.0" y="-10937.5">SINGLE-SEND</conditioncontainer>
-    <actioncontainer id="t53" x="-1995.0" y="-10342.5">  NTFY  </actioncontainer>
-    <actioncontainer id="t54" x="-2135.0" y="-9817.5">RESPONSE</actioncontainer>
-    <actioncontainer id="t55" x="-665.0" y="-9117.5">Script:mm response=fromJSON(response);</actioncontainer>
-    <conditioncontainer id="t56" x="-2135.0" y="-10587.5">IP!?</conditioncontainer>
-    <conditioncontainer id="t57" x="-2135.0" y="-10132.5">RE?</conditioncontainer>
-    <actioncontainer id="t58" x="-2135.0" y="-10342.5">HTTP SEND</actioncontainer>
-    <actioncontainer id="t59" x="-665.0" y="-9012.5">NTFY.ATTmACH</actioncontainer>
-    <actioncontainer id="t60" x="-665.0" y="-9852.5">HTTP FILE</actioncontainer>
-    <actioncontainer id="t61" x="-665.0" y="-9677.5"> WAIT-SEND</actioncontainer>
-    <conditioncontainer id="t62" x="-770.0" y="-10272.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t63" x="-665.0" y="-10517.5">STREAM</actioncontainer>
-    <conditioncontainer id="t64" x="-2135.0" y="-10937.5">SKIP</conditioncontainer>
-    <connection from="t1" to="t64" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t50" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t11" to="t56" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t56" type="TRUE" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t13" to="t58" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t14" to="t63" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t14" to="t63" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t15" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t16" to="t17" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t16" to="t23" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t17" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t17" to="t18" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
+    <actioncontainer id="t47" x="-1330.0" y="-9852.5">TOAST</actioncontainer>
+    <conditioncontainer id="t48" x="-35.0" y="-10937.5">MULTI-SEND</conditioncontainer>
+    <conditioncontainer id="t49" x="-665.0" y="-10937.5">SINGLE-SEND</conditioncontainer>
+    <actioncontainer id="t50" x="-1995.0" y="-10342.5">  NTFY  </actioncontainer>
+    <actioncontainer id="t51" x="-2135.0" y="-9817.5">RESPONSE</actioncontainer>
+    <actioncontainer id="t52" x="-665.0" y="-9117.5">Script:mm response=fromJSON(response);</actioncontainer>
+    <conditioncontainer id="t53" x="-2135.0" y="-10587.5">IP!?</conditioncontainer>
+    <conditioncontainer id="t54" x="-2135.0" y="-10132.5">RE?</conditioncontainer>
+    <actioncontainer id="t55" x="-2135.0" y="-10342.5">HTTP SEND</actioncontainer>
+    <actioncontainer id="t56" x="-665.0" y="-9012.5">NTFY.ATTmACH</actioncontainer>
+    <actioncontainer id="t57" x="-665.0" y="-9852.5">HTTP FILE</actioncontainer>
+    <actioncontainer id="t58" x="-665.0" y="-9677.5"> WAIT-SEND</actioncontainer>
+    <conditioncontainer id="t59" x="-770.0" y="-10272.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t60" x="-665.0" y="-10517.5">STREAM</actioncontainer>
+    <conditioncontainer id="t61" x="-2135.0" y="-10937.5">SKIP</conditioncontainer>
+    <actioncontainer id="t62" x="1155.0" y="-10587.5">Start Activity: android.intent.action.SEND image/png com.google.android.gms/com.google.android.gms.nearby.sharing.send.SendActivity </actioncontainer>
+    <actioncontainer id="t63" x="1154.9998" y="-10692.5">Execute Root Command: cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121 in </actioncontainer>
+    <actioncontainer id="t64" x="1155.0001" y="-10482.5">Control UI: sleep(1000); click("Pixel 5a ของ T A K A");</actioncontainer>
+    <actioncontainer id="t65" x="-1295.0" y="-10762.5">     MENU     </actioncontainer>
+    <conditioncontainer id="t66" x="-1295.0" y="-10937.5">MENULIST</conditioncontainer>
+    <triggercontainer id="t67" x="-2135.0" y="-11742.5">
+      <trigger>MULTI</trigger>
+      <trigger>SINGLE</trigger>
+    </triggercontainer>
+    <actioncontainer id="t68" x="-2275.0" y="-11462.5">Execute Root Command: am force-stop com.anydesk.anydeskandroid &amp;&amp; sleep 0.01 &amp;&amp;  in </actioncontainer>
+    <connection from="t10" to="t66" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t10" to="t53" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t53" type="TRUE" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t12" to="t55" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t60" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t60" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t14" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t16" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t15" to="t22" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t17" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t17" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t18" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t19" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t20" to="t16" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t21" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t60" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t24" to="t25" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t55" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t26" to="t28" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t26" to="t56" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t27" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t28" to="t11" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t28" to="t56" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t32" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t33" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t34" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t35" to="t36" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t37" to="t29" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t39" to="t38" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t43" to="t42" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t48" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t50" to="t27" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t50" to="t52" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t51" to="t15" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t52" to="t14" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t52" to="t51" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t53" to="t57" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t55" to="t59" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t56" to="t13" type="FALSE" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t56" to="t58" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t57" to="t54" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t57" to="t49" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t57" to="t49" type="TRUE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t58" to="t53" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t58" to="t57" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t59" to="t49" type="NORMAL" sourcePosition="WEST" targetPosition="SOUTH" />
-    <connection from="t60" to="t61" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t60" to="t49" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t61" to="t48" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t63" to="t60" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t64" to="t26" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t64" to="t56" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t19" to="t15" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t20" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t21" to="t57" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t20" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t23" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t52" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t26" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t25" to="t53" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t26" to="t10" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t26" to="t53" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t30" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t31" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t32" to="t33" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t33" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t35" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t37" to="t36" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t41" to="t40" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t46" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t48" to="t14" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t49" to="t13" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t49" to="t48" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t50" to="t54" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t52" to="t56" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t53" to="t12" type="FALSE" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t53" to="t55" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t54" to="t51" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t54" to="t47" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t54" to="t47" type="TRUE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t55" to="t50" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t55" to="t54" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t56" to="t47" type="NORMAL" sourcePosition="WEST" targetPosition="SOUTH" />
+    <connection from="t57" to="t58" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t57" to="t47" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t58" to="t46" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t60" to="t57" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t61" to="t25" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t61" to="t53" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t62" to="t64" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t65" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t66" to="t65" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t66" to="t49" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
   </flow>
   <flow type="flow">
     <name>CR13: RECEIVED</name>
@@ -11392,30 +11040,6 @@ ENCRYPT</actioncontainer>
     <actioncontainer id="t3" x="70.0" y="367.5">Message Dialog: Time Out!! Response </actioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
-    <name>Encrypt / Decrypt text</name>
-    <enabled>false</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="-192.5" />
-    <conditioncontainer id="t2" x="70.0" y="1382.5"> Debug Dialog</conditioncontainer>
-    <conditioncontainer id="t3" x="70.0" y="262.5">Expression: if (index != -1) { task = value; removeVariable("value"); return true } return false</conditioncontainer>
-    <actioncontainer id="t4" x="70.0" y="437.5">Input Dialog: Enter text to {task} Multi-line text </actioncontainer>
-    <actioncontainer id="t5" x="175.0" y="997.5">Script: if (task == "encrypt") { encrypted = eval((funparam=newList(function, newList(encrypt, text, password)))[0]); } else if (task == "decrypt") { decrypted = eval((funparam=newList(function, newList(decrypt, text, password)))[0]); } for (v in getVariableNames()) {if (NOT matches(v, "global_.*|flow_name|trigger|encrypted|decrypted")) {removeVariable(v)}; }; removeVariable("v");</actioncontainer>
-    <conditioncontainer id="t6" x="-35.0" y="962.5">Expression: if (value != "") { password = value; removeVariable("value"); return true } return false</conditioncontainer>
-    <actioncontainer id="t7" x="70.0" y="822.5">Input Dialog: Enter password Password </actioncontainer>
-    <conditioncontainer id="t8" x="70.0" y="612.5">Expression: if (value != "") { text = value; removeVariable("value"); return true } return false</conditioncontainer>
-    <actioncontainer id="t9" x="35.0" y="122.5">Input Dialog:  Single Choice Menu encrypt,decrypt</actioncontainer>
-    <actioncontainer id="t10" x="70.0" y="-17.5">Encrypt / Decrypt text</actioncontainer>
-    <connection from="t1" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow1</name>
@@ -11548,26 +11172,26 @@ MENU
     <name>Flow13</name>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="-227.5">
+    <actioncontainer id="t1" x="35.0" y="402.5">Execute Root Command: am force-stop {package_name} in </actioncontainer>
+    <conditioncontainer id="t2" x="70.0" y="-17.5">LONG_BACK</conditioncontainer>
+    <conditioncontainer id="t3" x="315.0" y="-17.5">LONG_HOME</conditioncontainer>
+    <actioncontainer id="t4" x="315.0" y="192.5">Execute Root Command: input keyevent ASSIST in </actioncontainer>
+    <conditioncontainer id="t5" x="105.0" y="227.5">App Task Running: com.anydesk.anydeskandroid,io.github.muntashirakon.AppManager,com.brave.browser,io.github.tehcneko.clipboardwhitelist,com.android.backupconfirm,com.android.cts.ctsshim,com.android.cts.priv.ctsshim,com.android.imsserviceentitlement,com.android.sdksandbox,com.android.systemui.accessibility.accessibilitymenu,com.android.wifi.dialog,com.android.companiondevicemanager,com.weberdo.apps.copy,com.google.android.apps.turbo,com.google.android.apps.work.clouddpc,co.aospa.dolby.xiaomi,io.github.nitsuya.donottryaccessibility,com.shopee.foody.driver.th,com.android.dynsystem,com.android.emergency,com.google.android.apps.emojiwallpaper,co.aospa.sense,com.kooritea.fcmfix,com.google.android.documentsui,com.franco.kernel,com.google.android.inputmethod.latin,com.google.ar.core,com.android.vending,com.android1500.gpssetter,com.android.healthconnect.controller,com.tsng.hidemyapplist,io.github.auag0.imnotadeveloper,com.android.intentresolver,com.rifsxd.ksunext,com.google.audio.hearing.visualization.accessibility.scribe,com.kasikornbank.makebykbank,com.exlyo.mapmarker,com.google.android.apps.maps,com.google.android.markup,com.google.android.apps.messaging,bin.mt.plus,com.fitc.wifihotspot,com.google.android.apps.nexuslauncher,com.android.printspooler,com.google.android.as.oss,com.android.simappdialog,com.android.stk,com.google.android.tts,org.swiftapps.swiftbackup,com.android.uwb.resources,github.tornaco.android.thanos.pro,com.android.vpndialogs,com.google.android.apps.weather,com.google.android.youtube,com.android.camera,com.android.providers.calendar,com.android.devicediagnostics,com.android.carrierdefaultapp,com.google.android.accessibility.switchaccess,com.android.captiveportallogin,com.android.cellbroadcastreceiver.module,com.android.adservices.api,com.android.settings.intelligence,com.android.providers.downloads.ui,com.android.permissioncontroller,com.google.android.apps.setupwizard.searchselector,com.android.wifi.resources,com.android.connectivity.resources,com.android.providers.contacts,com.google.android.deskclock,com.google.android.gms,com.android.bips,com.google.android.settings.intelligence,com.android.phone,com.android.keychain,com.google.android.contacts,com.google.android.apps.aiwallpapers,com.google.android.apps.wallpaper,com.android.credentialmanager,com.google.android.avatarpicker,com.android.providers.media.module,com.google.android.soundpicker,com.google.android.tag,com.android.safetycenter.resources,com.google.android.dialer,com.android.server.telecom,com.google.android.keep,com.google.android.accessibility.soundamplifier,com.android.packageinstaller,com.android.certinstaller,com.android.dreams.phototable,com.android.wallpaper.livepicker,com.android.managedprovisioning,com.google.android.flipendo,com.android.mtp,com.google.android.apps.wellbeing (most recent)</conditioncontainer>
+    <actioncontainer id="t6" x="-140.0" y="192.5">Set Flow State: Disable (15)  NOKILL</actioncontainer>
+    <actioncontainer id="t7" x="-70.0" y="857.5">Set Flow State: Enable (15)  NOKILL</actioncontainer>
+    <actioncontainer id="t8" x="35.0" y="612.5">Notification on Screen: แอพพลิเคชั่นถูกปิด</actioncontainer>
+    <triggercontainer id="t9" x="70.0" y="-227.5">
       <trigger>LONG_HOME</trigger>
       <trigger>LONG_BACK</trigger>
     </triggercontainer>
-    <actioncontainer id="t2" x="35.0" y="402.5">Execute Root Command: am force-stop {package_name} in </actioncontainer>
-    <conditioncontainer id="t3" x="70.0" y="-17.5">LONG_BACK</conditioncontainer>
-    <conditioncontainer id="t4" x="315.0" y="-17.5">LONG_HOME</conditioncontainer>
-    <actioncontainer id="t5" x="315.0" y="192.5">Execute Root Command: input keyevent ASSIST in </actioncontainer>
-    <conditioncontainer id="t6" x="105.0" y="227.5">App Task Running: com.anydesk.anydeskandroid,io.github.muntashirakon.AppManager,com.brave.browser,io.github.tehcneko.clipboardwhitelist,com.android.backupconfirm,com.android.cts.ctsshim,com.android.cts.priv.ctsshim,com.android.imsserviceentitlement,com.android.sdksandbox,com.android.systemui.accessibility.accessibilitymenu,com.android.wifi.dialog,com.android.companiondevicemanager,com.weberdo.apps.copy,com.google.android.apps.turbo,com.google.android.apps.work.clouddpc,co.aospa.dolby.xiaomi,io.github.nitsuya.donottryaccessibility,com.shopee.foody.driver.th,com.android.dynsystem,com.android.emergency,com.google.android.apps.emojiwallpaper,co.aospa.sense,com.kooritea.fcmfix,com.google.android.documentsui,com.franco.kernel,com.google.android.inputmethod.latin,com.google.ar.core,com.android.vending,com.android1500.gpssetter,com.android.healthconnect.controller,com.tsng.hidemyapplist,io.github.auag0.imnotadeveloper,com.android.intentresolver,com.rifsxd.ksunext,com.google.audio.hearing.visualization.accessibility.scribe,com.kasikornbank.makebykbank,com.exlyo.mapmarker,com.google.android.apps.maps,com.google.android.markup,com.google.android.apps.messaging,bin.mt.plus,com.fitc.wifihotspot,com.google.android.apps.nexuslauncher,com.android.printspooler,com.google.android.as.oss,com.android.simappdialog,com.android.stk,com.google.android.tts,org.swiftapps.swiftbackup,com.android.uwb.resources,github.tornaco.android.thanos.pro,com.android.vpndialogs,com.google.android.apps.weather,com.google.android.youtube,com.android.camera,com.android.providers.calendar,com.android.devicediagnostics,com.android.carrierdefaultapp,com.google.android.accessibility.switchaccess,com.android.captiveportallogin,com.android.cellbroadcastreceiver.module,com.android.adservices.api,com.android.settings.intelligence,com.android.providers.downloads.ui,com.android.permissioncontroller,com.google.android.apps.setupwizard.searchselector,com.android.wifi.resources,com.android.connectivity.resources,com.android.providers.contacts,com.google.android.deskclock,com.google.android.gms,com.android.bips,com.google.android.settings.intelligence,com.android.phone,com.android.keychain,com.google.android.contacts,com.google.android.apps.aiwallpapers,com.google.android.apps.wallpaper,com.android.credentialmanager,com.google.android.avatarpicker,com.android.providers.media.module,com.google.android.soundpicker,com.google.android.tag,com.android.safetycenter.resources,com.google.android.dialer,com.android.server.telecom,com.google.android.keep,com.google.android.accessibility.soundamplifier,com.android.packageinstaller,com.android.certinstaller,com.android.dreams.phototable,com.android.wallpaper.livepicker,com.android.managedprovisioning,com.google.android.flipendo,com.android.mtp,com.google.android.apps.wellbeing (most recent)</conditioncontainer>
-    <actioncontainer id="t7" x="-140.0" y="192.5">Set Flow State: Disable (15)  NOKILL</actioncontainer>
-    <actioncontainer id="t8" x="-70.0" y="857.5">Set Flow State: Enable (15)  NOKILL</actioncontainer>
-    <actioncontainer id="t9" x="35.0" y="612.5">Notification on Screen: แอพพลิเคชั่นถูกปิด</actioncontainer>
-    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t6" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t4" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t6" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow14</name>
@@ -11576,30 +11200,11 @@ MENU
     <triggercontainer id="t1" x="70.0" y="52.5" />
     <notecontainer id="t2" x="-210.0" y="787.5" w="140.0" h="105.0">26828d182b04b3fff4f03487521c3f957bae53f2</notecontainer>
     <conditioncontainer id="t3" x="70.0" y="507.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t4" x="70.0" y="227.5">Script: json=toJSON(newMapFromValues( "new_bullet_title", "9999", "new_bullet_note","888", "save_location_url","https://workflowy.com/#/0a3f9866e742" ))</actioncontainer>
-    <actioncontainer id="t5" x="70.0" y="332.5">HTTP Request: POST https://workflowy.com/api/bullets/create/ text/plain {json} store in response</actioncontainer>
-    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
-    <name>Flow16</name>
-    <enabled>false</enabled>
-    <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="210.0" y="-297.5">
-      <trigger>Command Output: ip -4 neigh show | grep -E 'REACHABLE|STALE|DELAY' (root) contains text </trigger>
-    </triggercontainer>
-    <actioncontainer id="t2" x="-350.0" y="367.5">Execute Root Command: ip -4 neigh show | cut -d ' ' -f1  in </actioncontainer>
-    <conditioncontainer id="t3" x="-315.0" y="577.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t4" x="70.0" y="262.5">Notification on Screen: Loop ended</actioncontainer>
-    <actioncontainer id="t5" x="-140.0" y="17.5">HTTP Request: GET http://192.168.1.{step}:5431/automagic   store in response</actioncontainer>
-    <conditioncontainer id="t6" x="70.0" y="-87.5">Expression: Execute 99 times</conditioncontainer>
-    <connection from="t1" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t6" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t4" x="70.0" y="332.5">HTTP Request: POST https://workflowy.com/api/bullets/create/ text/plain {json} store in response</actioncontainer>
+    <actioncontainer id="t5" x="70.00001" y="192.5">Script: json=toJSON(newMapFromValues( "new_bullet_title", "9999", "new_bullet_note","888", "save_location_url","https://workflowy.com/#/0a3f9866e742" ))</actioncontainer>
+    <connection from="t1" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t4" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow17</name>
@@ -11886,6 +11491,110 @@ OSRM ✓</notecontainer>
     <connection from="t30" to="t31" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t31" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t31" to="t29" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
+  </flow>
+  <flow type="flow">
+    <name>♪   ANYDESK REMOTE</name>
+    <description>1.42</description>
+    <group>        🫐</group>
+    <enabled>true</enabled>
+    <executionPolicy>SKIP</executionPolicy>
+    <emergencyStopCount>999999</emergencyStopCount>
+    <actioncontainer id="t1" x="280.0" y="-367.5">H-A</actioncontainer>
+    <triggercontainer id="t2" x="69.99999" y="-892.5">
+      <trigger>START-MP</trigger>
+      <trigger>CAST</trigger>
+      <trigger>STOP-MP</trigger>
+    </triggercontainer>
+    <actioncontainer id="t3" x="70.00001" y="-367.5">ANYDESK_STATUSBAR</actioncontainer>
+    <conditioncontainer id="t4" x="69.999985" y="-647.5">START?</conditioncontainer>
+    <conditioncontainer id="t5" x="280.0" y="-647.5">STOP?</conditioncontainer>
+    <actioncontainer id="t6" x="489.99988" y="-367.5">CAST ENABLE</actioncontainer>
+    <connection from="t2" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t5" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t5" to="t1" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t6" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>♪   BACKUP-API </name>
+    <description>0.51 GITHUB</description>
+    <group>        🫐</group>
+    <enabled>true</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <actioncontainer id="t1" x="-385.0" y="-717.5">BASE64-2</actioncontainer>
+    <actioncontainer id="t2" x="-385.0" y="-612.5">GIT
+CONTENT!</actioncontainer>
+    <actioncontainer id="t3" x="-70.0" y="-1207.5">SIZE</actioncontainer>
+    <actioncontainer id="t4" x="-70.0" y="-822.5">REPLACEKEY</actioncontainer>
+    <actioncontainer id="t5" x="-70.0" y="-717.5">BASE64
+ENCRYPT</actioncontainer>
+    <actioncontainer id="t6" x="-70.0" y="-612.5">GIT
+AUTOMAGIC</actioncontainer>
+    <actioncontainer id="t7" x="-70.0" y="-507.5">GIT UPLOAD</actioncontainer>
+    <actioncontainer id="t8" x="245.0" y="-717.5">GET-SHA</actioncontainer>
+    <actioncontainer id="t9" x="245.0" y="-612.5">GITJ SHA2</actioncontainer>
+    <conditioncontainer id="t10" x="-70.0" y="-332.5">SHA?</conditioncontainer>
+    <conditioncontainer id="t11" x="-70.0" y="-997.5">DIFF SIZE</conditioncontainer>
+    <triggercontainer id="t12" x="-70.0" y="-1697.5">
+      <trigger>1h</trigger>
+    </triggercontainer>
+    <notecontainer id="t13" x="-385.0" y="-1732.5" w="140.0" h="35.0">FROM SOURCE</notecontainer>
+    <actioncontainer id="t14" x="-385.0" y="-1417.5">GET_CONTENT</actioncontainer>
+    <actioncontainer id="t15" x="-385.0" y="-1312.5">EXTERNAL-CV</actioncontainer>
+    <actioncontainer id="t16" x="-70.0" y="-1312.5">EXPORT</actioncontainer>
+    <actioncontainer id="t17" x="-70.0" y="-1417.5">FLOWLIST</actioncontainer>
+    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
+    <connection from="t3" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t10" to="t8" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t11" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t14" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t14" to="t13" type="NOTE" sourcePosition="NORTH" targetPosition="SOUTH" />
+    <connection from="t15" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t17" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>♪   CHARGE-CALC</name>
+    <description>     1.1 bulid 00
+</description>
+    <group>        🫐</group>
+    <enabled>true</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <emergencyStopCount>999999</emergencyStopCount>
+    <actioncontainer id="t1" x="-35.0" y="682.5">5s  </actioncontainer>
+    <notecontainer id="t2" x="245.0" y="-472.5" w="280.0" h="35.0">ICON TEMP</notecontainer>
+    <triggercontainer id="t3" x="-35.00001" y="-437.49988">
+      <trigger>C-C</trigger>
+      <trigger>C-D</trigger>
+    </triggercontainer>
+    <conditioncontainer id="t4" x="-35.0" y="-227.5">CONNECT</conditioncontainer>
+    <actioncontainer id="t5" x="420.0" y="-227.49998">RM15</actioncontainer>
+    <actioncontainer id="t6" x="420.0" y="-122.5">STOP-SELF</actioncontainer>
+    <conditioncontainer id="t7" x="-35.0" y="122.5">BATTERY</conditioncontainer>
+    <actioncontainer id="t8" x="245.0" y="437.5">ALERT-S</actioncontainer>
+    <conditioncontainer id="t9" x="-35.0" y="472.5">LEVEL</conditioncontainer>
+    <actioncontainer id="t10" x="-35.0" y="297.5">Bvar</actioncontainer>
+    <actioncontainer id="t11" x="175.0" y="682.5">STATUS-BATT</actioncontainer>
+    <connection from="t1" to="t7" type="NORMAL" sourcePosition="WEST" targetPosition="WEST" />
+    <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t5" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t4" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t10" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t7" type="NORMAL" sourcePosition="NORTH" targetPosition="EAST" />
+    <connection from="t9" to="t1" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t11" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t1" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t11" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>⚙️  KILLAPPS</name>
