@@ -10741,9 +10741,9 @@ NEXT</conditioncontainer>
     <actioncontainer id="t5" x="350.0" y="1172.5">HS</actioncontainer>
     <actioncontainer id="t6" x="350.0" y="857.5">HSPOT:ON</actioncontainer>
     <actioncontainer id="t7" x="-314.99997" y="367.49997">RENDER SERVER</actioncontainer>
-    <actioncontainer id="t8" x="-105.00001" y="402.5">BATT</actioncontainer>
+    <actioncontainer id="t8" x="-105.0" y="402.5">BATT</actioncontainer>
     <conditioncontainer id="t9" x="70.0" y="227.5">10m </conditioncontainer>
-    <actioncontainer id="t10" x="69.99999" y="402.5">APPOPS ANYDESK</actioncontainer>
+    <actioncontainer id="t10" x="70.0" y="402.5">APPOPS ANYDESK</actioncontainer>
     <actioncontainer id="t11" x="350.0" y="1067.5">ANYDESK</actioncontainer>
     <connection from="t1" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -10889,18 +10889,18 @@ ENCRYPT</actioncontainer>
     <actioncontainer id="t58" x="-665.0" y="-10517.5">STREAM</actioncontainer>
     <conditioncontainer id="t59" x="-2135.0" y="-10937.5">SKIP</conditioncontainer>
     <actioncontainer id="t60" x="1155.0" y="-10587.5">Start Activity: android.intent.action.SEND image/png com.google.android.gms/com.google.android.gms.nearby.sharing.send.SendActivity </actioncontainer>
-    <actioncontainer id="t61" x="1154.9998" y="-10692.5">Execute Root Command: cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121 in </actioncontainer>
-    <actioncontainer id="t62" x="1155.0001" y="-10482.5">Control UI: sleep(1000); click("Pixel 5a ของ T A K A");</actioncontainer>
+    <actioncontainer id="t61" x="1155.0" y="-10692.5">Execute Root Command: cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121 in </actioncontainer>
+    <actioncontainer id="t62" x="1155.0" y="-10482.5">Control UI: sleep(1000); click("Pixel 5a ของ T A K A");</actioncontainer>
     <actioncontainer id="t63" x="-1295.0" y="-10762.5">     MENU     </actioncontainer>
-    <triggercontainer id="t64" x="-2135.0" y="-11742.5">
+    <conditioncontainer id="t64" x="-2170.0" y="-11182.5">     DEBUG    </conditioncontainer>
+    <conditioncontainer id="t65" x="-1925.0" y="-10937.5">TEL:</conditioncontainer>
+    <conditioncontainer id="t66" x="-1505.0" y="-10937.5">SYNC:</conditioncontainer>
+    <conditioncontainer id="t67" x="-1295.0" y="-10937.5">MENULIST</conditioncontainer>
+    <actioncontainer id="t68" x="-2345.0" y="-11252.5">Execute Root Command: am force-stop com.anydesk.anydeskandroid &amp;&amp; sleep 0.01 &amp;&amp; am start -n com.anydesk.anydeskandroid/com.anydesk.anydeskandroid.gui.activity.MainActivity &amp;&amp; sleep 0.01 &amp;&amp; input keyevent 3 in </actioncontainer>
+    <triggercontainer id="t69" x="-2135.0" y="-11742.5">
       <trigger>MULTI</trigger>
       <trigger>SINGLE</trigger>
     </triggercontainer>
-    <conditioncontainer id="t65" x="-2170.0" y="-11182.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t66" x="-2275.0" y="-11462.5">Execute Root Command: am force-stop com.anydesk.anydeskandroid &amp;&amp; sleep 0.01 &amp;&amp; am start -n com.anydesk.anydeskandroid/com.anydesk.anydeskandroid.gui.activity.MainActivity &amp;&amp; sleep 0.01 &amp;&amp; input keyevent 3 in </actioncontainer>
-    <conditioncontainer id="t67" x="-1925.0" y="-10937.5">TEL:</conditioncontainer>
-    <conditioncontainer id="t68" x="-1505.0" y="-10937.5">SYNC:</conditioncontainer>
-    <conditioncontainer id="t69" x="-1295.0" y="-10937.5">MENULIST</conditioncontainer>
     <connection from="t10" to="t51" type="TRUE" sourcePosition="WEST" targetPosition="EAST" />
     <connection from="t11" to="t53" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t12" to="t58" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -10918,7 +10918,7 @@ ENCRYPT</actioncontainer>
     <connection from="t21" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t22" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t23" to="t50" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t24" to="t68" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t24" to="t66" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t24" to="t51" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t28" to="t30" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t29" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -10945,17 +10945,17 @@ ENCRYPT</actioncontainer>
     <connection from="t55" to="t45" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
     <connection from="t56" to="t44" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t58" to="t55" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t59" to="t67" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t59" to="t65" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t59" to="t51" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t60" to="t62" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t63" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t64" to="t66" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t67" to="t24" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t67" to="t51" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t68" to="t69" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t68" to="t51" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t69" to="t63" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t69" to="t47" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t65" to="t24" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t65" to="t51" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t66" to="t67" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t66" to="t51" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t67" to="t63" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t67" to="t47" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t69" to="t59" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>CR13: RECEIVED</name>
@@ -11174,26 +11174,26 @@ MENU
     <name>Flow13</name>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <actioncontainer id="t1" x="35.0" y="402.5">Execute Root Command: am force-stop {package_name} in </actioncontainer>
-    <conditioncontainer id="t2" x="70.0" y="-17.5">LONG_BACK</conditioncontainer>
-    <conditioncontainer id="t3" x="315.0" y="-17.5">LONG_HOME</conditioncontainer>
-    <actioncontainer id="t4" x="315.0" y="192.5">Execute Root Command: input keyevent ASSIST in </actioncontainer>
-    <conditioncontainer id="t5" x="105.0" y="227.5">App Task Running: com.anydesk.anydeskandroid,io.github.muntashirakon.AppManager,com.brave.browser,io.github.tehcneko.clipboardwhitelist,com.android.backupconfirm,com.android.cts.ctsshim,com.android.cts.priv.ctsshim,com.android.imsserviceentitlement,com.android.sdksandbox,com.android.systemui.accessibility.accessibilitymenu,com.android.wifi.dialog,com.android.companiondevicemanager,com.weberdo.apps.copy,com.google.android.apps.turbo,com.google.android.apps.work.clouddpc,co.aospa.dolby.xiaomi,io.github.nitsuya.donottryaccessibility,com.shopee.foody.driver.th,com.android.dynsystem,com.android.emergency,com.google.android.apps.emojiwallpaper,co.aospa.sense,com.kooritea.fcmfix,com.google.android.documentsui,com.franco.kernel,com.google.android.inputmethod.latin,com.google.ar.core,com.android.vending,com.android1500.gpssetter,com.android.healthconnect.controller,com.tsng.hidemyapplist,io.github.auag0.imnotadeveloper,com.android.intentresolver,com.rifsxd.ksunext,com.google.audio.hearing.visualization.accessibility.scribe,com.kasikornbank.makebykbank,com.exlyo.mapmarker,com.google.android.apps.maps,com.google.android.markup,com.google.android.apps.messaging,bin.mt.plus,com.fitc.wifihotspot,com.google.android.apps.nexuslauncher,com.android.printspooler,com.google.android.as.oss,com.android.simappdialog,com.android.stk,com.google.android.tts,org.swiftapps.swiftbackup,com.android.uwb.resources,github.tornaco.android.thanos.pro,com.android.vpndialogs,com.google.android.apps.weather,com.google.android.youtube,com.android.camera,com.android.providers.calendar,com.android.devicediagnostics,com.android.carrierdefaultapp,com.google.android.accessibility.switchaccess,com.android.captiveportallogin,com.android.cellbroadcastreceiver.module,com.android.adservices.api,com.android.settings.intelligence,com.android.providers.downloads.ui,com.android.permissioncontroller,com.google.android.apps.setupwizard.searchselector,com.android.wifi.resources,com.android.connectivity.resources,com.android.providers.contacts,com.google.android.deskclock,com.google.android.gms,com.android.bips,com.google.android.settings.intelligence,com.android.phone,com.android.keychain,com.google.android.contacts,com.google.android.apps.aiwallpapers,com.google.android.apps.wallpaper,com.android.credentialmanager,com.google.android.avatarpicker,com.android.providers.media.module,com.google.android.soundpicker,com.google.android.tag,com.android.safetycenter.resources,com.google.android.dialer,com.android.server.telecom,com.google.android.keep,com.google.android.accessibility.soundamplifier,com.android.packageinstaller,com.android.certinstaller,com.android.dreams.phototable,com.android.wallpaper.livepicker,com.android.managedprovisioning,com.google.android.flipendo,com.android.mtp,com.google.android.apps.wellbeing (most recent)</conditioncontainer>
-    <actioncontainer id="t6" x="-140.0" y="192.5">Set Flow State: Disable (15)  NOKILL</actioncontainer>
-    <actioncontainer id="t7" x="-70.0" y="857.5">Set Flow State: Enable (15)  NOKILL</actioncontainer>
-    <actioncontainer id="t8" x="35.0" y="612.5">Notification on Screen: แอพพลิเคชั่นถูกปิด</actioncontainer>
-    <triggercontainer id="t9" x="70.0" y="-227.5">
+    <triggercontainer id="t1" x="70.0" y="-227.5">
       <trigger>LONG_HOME</trigger>
       <trigger>LONG_BACK</trigger>
     </triggercontainer>
-    <connection from="t1" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t3" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t6" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t2" x="35.0" y="402.5">Execute Root Command: am force-stop {package_name} in </actioncontainer>
+    <conditioncontainer id="t3" x="70.0" y="-17.5">LONG_BACK</conditioncontainer>
+    <conditioncontainer id="t4" x="315.0" y="-17.5">LONG_HOME</conditioncontainer>
+    <actioncontainer id="t5" x="315.0" y="192.5">Execute Root Command: input keyevent ASSIST in </actioncontainer>
+    <conditioncontainer id="t6" x="105.0" y="227.5">App Task Running: com.anydesk.anydeskandroid,io.github.muntashirakon.AppManager,com.brave.browser,io.github.tehcneko.clipboardwhitelist,com.android.backupconfirm,com.android.cts.ctsshim,com.android.cts.priv.ctsshim,com.android.imsserviceentitlement,com.android.sdksandbox,com.android.systemui.accessibility.accessibilitymenu,com.android.wifi.dialog,com.android.companiondevicemanager,com.weberdo.apps.copy,com.google.android.apps.turbo,com.google.android.apps.work.clouddpc,co.aospa.dolby.xiaomi,io.github.nitsuya.donottryaccessibility,com.shopee.foody.driver.th,com.android.dynsystem,com.android.emergency,com.google.android.apps.emojiwallpaper,co.aospa.sense,com.kooritea.fcmfix,com.google.android.documentsui,com.franco.kernel,com.google.android.inputmethod.latin,com.google.ar.core,com.android.vending,com.android1500.gpssetter,com.android.healthconnect.controller,com.tsng.hidemyapplist,io.github.auag0.imnotadeveloper,com.android.intentresolver,com.rifsxd.ksunext,com.google.audio.hearing.visualization.accessibility.scribe,com.kasikornbank.makebykbank,com.exlyo.mapmarker,com.google.android.apps.maps,com.google.android.markup,com.google.android.apps.messaging,bin.mt.plus,com.fitc.wifihotspot,com.google.android.apps.nexuslauncher,com.android.printspooler,com.google.android.as.oss,com.android.simappdialog,com.android.stk,com.google.android.tts,org.swiftapps.swiftbackup,com.android.uwb.resources,github.tornaco.android.thanos.pro,com.android.vpndialogs,com.google.android.apps.weather,com.google.android.youtube,com.android.camera,com.android.providers.calendar,com.android.devicediagnostics,com.android.carrierdefaultapp,com.google.android.accessibility.switchaccess,com.android.captiveportallogin,com.android.cellbroadcastreceiver.module,com.android.adservices.api,com.android.settings.intelligence,com.android.providers.downloads.ui,com.android.permissioncontroller,com.google.android.apps.setupwizard.searchselector,com.android.wifi.resources,com.android.connectivity.resources,com.android.providers.contacts,com.google.android.deskclock,com.google.android.gms,com.android.bips,com.google.android.settings.intelligence,com.android.phone,com.android.keychain,com.google.android.contacts,com.google.android.apps.aiwallpapers,com.google.android.apps.wallpaper,com.android.credentialmanager,com.google.android.avatarpicker,com.android.providers.media.module,com.google.android.soundpicker,com.google.android.tag,com.android.safetycenter.resources,com.google.android.dialer,com.android.server.telecom,com.google.android.keep,com.google.android.accessibility.soundamplifier,com.android.packageinstaller,com.android.certinstaller,com.android.dreams.phototable,com.android.wallpaper.livepicker,com.android.managedprovisioning,com.google.android.flipendo,com.android.mtp,com.google.android.apps.wellbeing (most recent)</conditioncontainer>
+    <actioncontainer id="t7" x="-140.0" y="192.5">Set Flow State: Disable (15)  NOKILL</actioncontainer>
+    <actioncontainer id="t8" x="-70.0" y="857.5">Set Flow State: Enable (15)  NOKILL</actioncontainer>
+    <actioncontainer id="t9" x="35.0" y="612.5">Notification on Screen: แอพพลิเคชั่นถูกปิด</actioncontainer>
+    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t6" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t4" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>Flow14</name>
@@ -11203,7 +11203,7 @@ MENU
     <notecontainer id="t2" x="-210.0" y="787.5" w="140.0" h="105.0">26828d182b04b3fff4f03487521c3f957bae53f2</notecontainer>
     <conditioncontainer id="t3" x="70.0" y="507.5">     DEBUG    </conditioncontainer>
     <actioncontainer id="t4" x="70.0" y="332.5">HTTP Request: POST https://workflowy.com/api/bullets/create/ text/plain {json} store in response</actioncontainer>
-    <actioncontainer id="t5" x="70.00001" y="192.5">Script: json=toJSON(newMapFromValues( "new_bullet_title", "9999", "new_bullet_note","888", "save_location_url","https://workflowy.com/#/0a3f9866e742" ))</actioncontainer>
+    <actioncontainer id="t5" x="70.0" y="192.5">Script: json=toJSON(newMapFromValues( "new_bullet_title", "9999", "new_bullet_note","888", "save_location_url","https://workflowy.com/#/0a3f9866e742" ))</actioncontainer>
     <connection from="t1" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
@@ -11501,20 +11501,20 @@ OSRM ✓</notecontainer>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <actioncontainer id="t1" x="280.0" y="-367.5">H-A</actioncontainer>
-    <triggercontainer id="t2" x="69.99999" y="-892.5">
+    <triggercontainer id="t1" x="70.0" y="-892.5">
       <trigger>START-MP</trigger>
       <trigger>CAST</trigger>
       <trigger>STOP-MP</trigger>
     </triggercontainer>
-    <actioncontainer id="t3" x="70.00001" y="-367.5">ANYDESK_STATUSBAR</actioncontainer>
+    <actioncontainer id="t2" x="280.0" y="-367.5">H-A</actioncontainer>
+    <actioncontainer id="t3" x="70.0" y="-367.5">ANYDESK_STATUSBAR</actioncontainer>
     <conditioncontainer id="t4" x="69.999985" y="-647.5">START?</conditioncontainer>
     <conditioncontainer id="t5" x="280.0" y="-647.5">STOP?</conditioncontainer>
     <actioncontainer id="t6" x="489.99988" y="-367.5">CAST ENABLE</actioncontainer>
-    <connection from="t2" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t5" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t5" to="t1" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t6" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
@@ -11523,44 +11523,44 @@ OSRM ✓</notecontainer>
     <group>        🫐</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <actioncontainer id="t1" x="-385.0" y="-717.5">BASE64-2</actioncontainer>
-    <actioncontainer id="t2" x="-385.0" y="-612.5">GIT
-CONTENT!</actioncontainer>
-    <actioncontainer id="t3" x="-70.0" y="-1207.5">SIZE</actioncontainer>
-    <actioncontainer id="t4" x="-70.0" y="-822.5">REPLACEKEY</actioncontainer>
-    <actioncontainer id="t5" x="-70.0" y="-717.5">BASE64
-ENCRYPT</actioncontainer>
-    <actioncontainer id="t6" x="-70.0" y="-612.5">GIT
-AUTOMAGIC</actioncontainer>
-    <actioncontainer id="t7" x="-70.0" y="-507.5">GIT UPLOAD</actioncontainer>
-    <actioncontainer id="t8" x="245.0" y="-717.5">GET-SHA</actioncontainer>
-    <actioncontainer id="t9" x="245.0" y="-612.5">GITJ SHA2</actioncontainer>
-    <conditioncontainer id="t10" x="-70.0" y="-332.5">SHA?</conditioncontainer>
-    <conditioncontainer id="t11" x="-70.0" y="-997.5">DIFF SIZE</conditioncontainer>
-    <triggercontainer id="t12" x="-70.0" y="-1697.5">
+    <triggercontainer id="t1" x="-70.0" y="-1697.5">
       <trigger>1h</trigger>
     </triggercontainer>
+    <actioncontainer id="t2" x="-385.0" y="-717.5">BASE64-2</actioncontainer>
+    <actioncontainer id="t3" x="-385.0" y="-612.5">GIT
+CONTENT!</actioncontainer>
+    <actioncontainer id="t4" x="-70.0" y="-1207.5">SIZE</actioncontainer>
+    <actioncontainer id="t5" x="-70.0" y="-822.5">REPLACEKEY</actioncontainer>
+    <actioncontainer id="t6" x="-70.0" y="-717.5">BASE64
+ENCRYPT</actioncontainer>
+    <actioncontainer id="t7" x="-70.0" y="-612.5">GIT
+AUTOMAGIC</actioncontainer>
+    <actioncontainer id="t8" x="-70.0" y="-507.5">GIT UPLOAD</actioncontainer>
+    <actioncontainer id="t9" x="245.0" y="-717.5">GET-SHA</actioncontainer>
+    <actioncontainer id="t10" x="245.0" y="-612.5">GITJ SHA2</actioncontainer>
+    <conditioncontainer id="t11" x="-70.0" y="-332.5">SHA?</conditioncontainer>
+    <conditioncontainer id="t12" x="-70.0" y="-997.5">DIFF SIZE</conditioncontainer>
     <notecontainer id="t13" x="-385.0" y="-1732.5" w="140.0" h="35.0">FROM SOURCE</notecontainer>
     <actioncontainer id="t14" x="-385.0" y="-1417.5">GET_CONTENT</actioncontainer>
     <actioncontainer id="t15" x="-385.0" y="-1312.5">EXTERNAL-CV</actioncontainer>
     <actioncontainer id="t16" x="-70.0" y="-1312.5">EXPORT</actioncontainer>
     <actioncontainer id="t17" x="-70.0" y="-1417.5">FLOWLIST</actioncontainer>
-    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
-    <connection from="t3" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
+    <connection from="t4" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t6" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t10" to="t8" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t11" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
+    <connection from="t11" to="t9" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t12" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t14" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t14" to="t13" type="NOTE" sourcePosition="NORTH" targetPosition="SOUTH" />
-    <connection from="t15" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t16" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t17" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
@@ -11571,30 +11571,30 @@ AUTOMAGIC</actioncontainer>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <actioncontainer id="t1" x="-35.0" y="682.5">5s  </actioncontainer>
-    <notecontainer id="t2" x="245.0" y="-472.5" w="280.0" h="35.0">ICON TEMP</notecontainer>
-    <triggercontainer id="t3" x="-35.00001" y="-437.49988">
+    <triggercontainer id="t1" x="-35.000015" y="-437.49988">
       <trigger>C-C</trigger>
       <trigger>C-D</trigger>
     </triggercontainer>
+    <actioncontainer id="t2" x="-35.0" y="682.5">5s  </actioncontainer>
+    <notecontainer id="t3" x="245.0" y="-472.5" w="280.0" h="35.0">ICON TEMP</notecontainer>
     <conditioncontainer id="t4" x="-35.0" y="-227.5">CONNECT</conditioncontainer>
-    <actioncontainer id="t5" x="420.0" y="-227.49998">RM15</actioncontainer>
+    <actioncontainer id="t5" x="420.0" y="-227.5">RM15</actioncontainer>
     <actioncontainer id="t6" x="420.0" y="-122.5">STOP-SELF</actioncontainer>
     <conditioncontainer id="t7" x="-35.0" y="122.5">BATTERY</conditioncontainer>
     <actioncontainer id="t8" x="245.0" y="437.5">ALERT-S</actioncontainer>
     <conditioncontainer id="t9" x="-35.0" y="472.5">LEVEL</conditioncontainer>
     <actioncontainer id="t10" x="-35.0" y="297.5">Bvar</actioncontainer>
     <actioncontainer id="t11" x="175.0" y="682.5">STATUS-BATT</actioncontainer>
-    <connection from="t1" to="t7" type="NORMAL" sourcePosition="WEST" targetPosition="WEST" />
-    <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t7" type="NORMAL" sourcePosition="WEST" targetPosition="WEST" />
     <connection from="t4" to="t5" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
     <connection from="t4" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t7" to="t10" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t8" to="t7" type="NORMAL" sourcePosition="NORTH" targetPosition="EAST" />
-    <connection from="t9" to="t1" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t9" to="t11" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t1" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t2" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t9" to="t11" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t10" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
