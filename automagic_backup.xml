@@ -6020,6 +6020,63 @@ for (i in [0 to length(path)-1]){
    sleep(triggertime4);
 }</script>
   </action>
+  <action type="script">
+    <useDefaultName>false</useDefaultName>
+    <name>PATH PROCESSX</name>
+    <script>if(contains(selection,"⌛")) {
+
+   triggertime2=addMinutes(getDate(), 43-value);}
+
+else {
+
+   triggertime2=addMinutes(getDate(), value);
+}
+
+path=split(decode,"\n");
+triggertime3=triggertime2-getDate();
+triggertime4=triggertime3/length(path);
+rtime=(triggertime3/1000)/60;
+
+
+
+while(true) {
+
+ /*  for (i in [0 to length(path)-1]){
+
+      path[i]=split(path[i],",");
+      act="mock.start";
+      lat=path[i][1];
+      lon=path[i][0];
+
+      comp=callJavaConstructor("android.content.ComponentName", "ComponentName(java.lang.String, java.lang.String)", "com.android1500.gpssetter", "com.android1500.gpssetter.LocationReceiver");
+      it=callJavaConstructor("android.content.Intent", "Intent()");
+      callJavaMethod(it, "android.content.Intent", "setAction(java.lang.String)", act);
+      callJavaMethod(it, "android.content.Intent", "setComponent(android.content.ComponentName)", comp);
+      callJavaMethod(it, "android.content.Intent", "putExtra(java.lang.String, double)", "lat",lat);
+      callJavaMethod(it, "android.content.Intent", "putExtra(java.lang.String, double)", "lon",lon);
+      callJavaMethod(getContext(), "android.content.Context", "sendBroadcast(android.content.Intent)", it);
+      sleep(triggertime4);
+   }*/
+
+   for (i in [length(path)-1 to 0]){
+
+      path[i]=split(path[i],",");
+      act="mock.start";
+      lat=path[i][1];
+      lon=path[i][0];
+
+      comp=callJavaConstructor("android.content.ComponentName", "ComponentName(java.lang.String, java.lang.String)", "com.android1500.gpssetter", "com.android1500.gpssetter.LocationReceiver");
+      it=callJavaConstructor("android.content.Intent", "Intent()");
+      callJavaMethod(it, "android.content.Intent", "setAction(java.lang.String)", act);
+      callJavaMethod(it, "android.content.Intent", "setComponent(android.content.ComponentName)", comp);
+      callJavaMethod(it, "android.content.Intent", "putExtra(java.lang.String, double)", "lat",lat);
+      callJavaMethod(it, "android.content.Intent", "putExtra(java.lang.String, double)", "lon",lon);
+      callJavaMethod(getContext(), "android.content.Context", "sendBroadcast(android.content.Intent)", it);
+      sleep(0.1);
+   }
+   sleep(10);
+}</script>
+  </action>
   <action type="perform_action_notification_status_bar">
     <useDefaultName>false</useDefaultName>
     <name>PERFORM</name>
@@ -10092,7 +10149,7 @@ sqrt();</script>
   <flow type="flow">
     <name>#22A  DENY &lt;MAINACT&gt;</name>
     <description> </description>
-    <group>📌</group>
+    <group>  📌</group>
     <enabled>false</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -10114,7 +10171,7 @@ TAKE, DENY</actioncontainer>
   <flow type="flow">
     <name>#22B  DENY &lt;DIALOG&gt;</name>
     <description> </description>
-    <group>📌</group>
+    <group>  📌</group>
     <enabled>false</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -10134,7 +10191,7 @@ TAKE, DENY</actioncontainer>
   <flow type="flow">
     <name>#23  TAKE</name>
     <description> </description>
-    <group>📌</group>
+    <group>  📌</group>
     <enabled>false</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -10174,7 +10231,7 @@ TAKE, DENY</actioncontainer>
   <flow type="flow">
     <name>#24  FINISHED</name>
     <description> </description>
-    <group>📌</group>
+    <group>  📌</group>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -10187,7 +10244,7 @@ TAKE, DENY</actioncontainer>
   <flow type="flow">
     <name>#30:  CSV-BASE</name>
     <description> </description>
-    <group>📌</group>
+    <group>  📌</group>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -10227,7 +10284,7 @@ ASSIGN/CC</actioncontainer>
   <flow type="flow">
     <name>#33:  LOCATION ENGINE</name>
     <description> </description>
-    <group>📌</group>
+    <group>  📌</group>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -10363,7 +10420,7 @@ AUTOFILL</actioncontainer>
   <flow type="flow">
     <name>#34:  ROUTE PLANNER</name>
     <description> </description>
-    <group>📌</group>
+    <group>  📌</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="-210.0" y="-2607.5">
@@ -10434,7 +10491,7 @@ System.out.println(minutes + " นาที " + seconds + " วินาที")
   <flow type="flow">
     <name>#39: MANUAL</name>
     <description> </description>
-    <group>📌</group>
+    <group>  📌</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="630.0" y="-17.5" />
@@ -10521,7 +10578,7 @@ SEARCH SUGGEST » GEOCODER </notecontainer>
   <flow type="flow">
     <name>#41: MAP MARKER</name>
     <description> </description>
-    <group>📌</group>
+    <group>  📌</group>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -10567,7 +10624,7 @@ SEARCH SUGGEST » GEOCODER </notecontainer>
   <flow type="flow">
     <name>#42: NAVIGATION</name>
     <description> </description>
-    <group>📌</group>
+    <group>  📌</group>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -10628,7 +10685,7 @@ NEXT</conditioncontainer>
   <flow type="flow">
     <name>#43: CONFIG</name>
     <description> </description>
-    <group>📌</group>
+    <group>  📌</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="35.0" y="-192.5" />
@@ -10658,7 +10715,7 @@ NEXT</conditioncontainer>
   <flow type="flow">
     <name>20:  SUPPORT</name>
     <description> </description>
-    <group>📌</group>
+    <group>  📌</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="-105.0" y="17.499992">
@@ -10677,7 +10734,7 @@ NEXT</conditioncontainer>
   <flow type="flow">
     <name>21:  ORDER-INC</name>
     <description>📌</description>
-    <group>📌</group>
+    <group>  📌</group>
     <enabled>true</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
@@ -10791,6 +10848,148 @@ bounds = getBoundsById("com.shopee.foody.driver.th:id/btn_text");</notecontainer
     <connection from="t43" to="t47" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t45" to="t43" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t47" to="t44" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>= LOOP PATH</name>
+    <description> </description>
+    <group>MOCK</group>
+    <enabled>true</enabled>
+    <executionPolicy>SKIP</executionPolicy>
+    <emergencyStopCount>999999</emergencyStopCount>
+    <actioncontainer id="t1" x="420.0" y="367.5">ROUTEP</actioncontainer>
+    <actioncontainer id="t2" x="420.0" y="262.5">MULTPOINT</actioncontainer>
+    <actioncontainer id="t3" x="420.0" y="157.5">B-STOP  </actioncontainer>
+    <actioncontainer id="t4" x="-1540.0" y="-367.5">MOCK POINTn</actioncontainer>
+    <actioncontainer id="t5" x="-1015.0" y="927.5">TIMER</actioncontainer>
+    <actioncontainer id="t6" x="420.0" y="472.5">Script: parameter= 'transportMode=car&amp;'+ 'origin=52.5308,13.3847&amp;'+ 'destination=52.5264,13.3686&amp;'+ 'return=summary,polyline&amp;'+ 'apiKey=nt9ob12ZKWo0hPk18-wL3_KmUtCTtuQT0KwRCUvBIR0'</actioncontainer>
+    <conditioncontainer id="t7" x="630.0" y="892.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t8" x="245.0" y="612.5">RUN SHk</actioncontainer>
+    <notecontainer id="t9" x="315.0" y="437.5" w="140.0" h="35.0">HERE API XXX</notecontainer>
+    <notecontainer id="t10" x="245.0" y="525.0" w="140.0" h="70.0">PATH EXPORT</notecontainer>
+    <actioncontainer id="t11" x="-560.0" y="1032.5">ENCODE</actioncontainer>
+    <actioncontainer id="t12" x="-560.0" y="1872.5">RM PATHTEMP</actioncontainer>
+    <actioncontainer id="t13" x="-560.0" y="1767.5">KML PATH</actioncontainer>
+    <actioncontainer id="t14" x="-560.0" y="752.5">ORS</actioncontainer>
+    <conditioncontainer id="t15" x="-560.0" y="402.5">   OK   </conditioncontainer>
+    <actioncontainer id="t16" x="-560.0" y="1137.5">SHELL CODE</actioncontainer>
+    <actioncontainer id="t17" x="-560.0" y="647.5">Execute Root Command: rm /storage/emulated/0/Android/application/SPFDB/path_polyline.kml &amp;&amp; rm /storage/emulated/0/Android/application/SPFDB/decode.txt in </actioncontainer>
+    <actioncontainer id="t18" x="-560.0" y="927.5">IMPORT
+BASE</actioncontainer>
+    <actioncontainer id="t19" x="-560.0" y="-367.5">DESTINATION</actioncontainer>
+    <actioncontainer id="t20" x="-315.0" y="-52.5">Message Dialog: ไม่สามารถจับตำแหน่งจาก GMAP // </actioncontainer>
+    <conditioncontainer id="t21" x="-560.0" y="-227.5">     OK     </conditioncontainer>
+    <actioncontainer id="t22" x="-560.0" y="-52.5">MAP CONV</actioncontainer>
+    <notecontainer id="t23" x="315.0" y="402.5" w="280.0" h="105.0">Geoapify NON ENCODED
+ORS ✓
+OSRM ✓</notecontainer>
+    <notecontainer id="t24" x="245.0" y="262.5" w="140.0" h="105.0">summary</notecontainer>
+    <actioncontainer id="t25" x="245.0" y="157.5">HTTP Request: GET http://router.project-osrm.org/route/v1/driving/100.349335,13.706248;100.346376,13.719743?geometries=polyline&amp;overview=full   store in response</actioncontainer>
+    <notecontainer id="t26" x="245.0" y="52.5" w="140.0" h="105.0">90</notecontainer>
+    <actioncontainer id="t27" x="-560.0" y="1662.5">KML CMD</actioncontainer>
+    <actioncontainer id="t28" x="-1015.0" y="577.5">CC</actioncontainer>
+    <conditioncontainer id="t29" x="-1015.0" y="752.5">
+
+   ok    
+
+</conditioncontainer>
+    <actioncontainer id="t30" x="-560.0" y="1417.5">DECODE TXT</actioncontainer>
+    <actioncontainer id="t31" x="-560.0" y="1242.5">RUN SH</actioncontainer>
+    <actioncontainer id="t32" x="-1015.0" y="437.5">DECODE TXT</actioncontainer>
+    <triggercontainer id="t33" x="-1084.9999" y="87.50001" />
+    <actioncontainer id="t34" x="-1015.0" y="1032.5">PATH PROCESSX</actioncontainer>
+    <connection from="t5" to="t34" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t14" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t17" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t31" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t17" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t18" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t19" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t21" to="t22" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t20" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t27" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t28" to="t29" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t30" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t30" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t31" to="t30" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t32" to="t28" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t33" to="t32" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>= START-END PATH</name>
+    <description> </description>
+    <group>MOCK</group>
+    <enabled>true</enabled>
+    <executionPolicy>SKIP</executionPolicy>
+    <emergencyStopCount>999999</emergencyStopCount>
+    <triggercontainer id="t1" x="-560.0" y="-542.5" />
+    <actioncontainer id="t2" x="420.0" y="367.5">ROUTEP</actioncontainer>
+    <actioncontainer id="t3" x="420.0" y="262.5">MULTPOINT</actioncontainer>
+    <actioncontainer id="t4" x="420.0" y="157.5">B-STOP  </actioncontainer>
+    <actioncontainer id="t5" x="-1540.0" y="-367.5">MOCK POINTn</actioncontainer>
+    <actioncontainer id="t6" x="-1015.0" y="437.5">DECODE TXT</actioncontainer>
+    <conditioncontainer id="t7" x="-1015.0" y="752.5">
+
+   ok    
+
+</conditioncontainer>
+    <actioncontainer id="t8" x="-1015.0" y="577.5">CC</actioncontainer>
+    <actioncontainer id="t9" x="-1015.0" y="927.5">TIMER</actioncontainer>
+    <actioncontainer id="t10" x="420.0" y="472.5">Script: parameter= 'transportMode=car&amp;'+ 'origin=52.5308,13.3847&amp;'+ 'destination=52.5264,13.3686&amp;'+ 'return=summary,polyline&amp;'+ 'apiKey=nt9ob12ZKWo0hPk18-wL3_KmUtCTtuQT0KwRCUvBIR0'</actioncontainer>
+    <conditioncontainer id="t11" x="630.0" y="892.5">     DEBUG    </conditioncontainer>
+    <actioncontainer id="t12" x="245.0" y="612.5">RUN SHk</actioncontainer>
+    <notecontainer id="t13" x="315.0" y="437.5" w="140.0" h="35.0">HERE API XXX</notecontainer>
+    <notecontainer id="t14" x="245.0" y="525.0" w="140.0" h="70.0">PATH EXPORT</notecontainer>
+    <actioncontainer id="t15" x="-560.0" y="1417.5">DECODE TXT</actioncontainer>
+    <actioncontainer id="t16" x="-560.0" y="1032.5">ENCODE</actioncontainer>
+    <actioncontainer id="t17" x="-560.0" y="1872.5">RM PATHTEMP</actioncontainer>
+    <actioncontainer id="t18" x="-560.0" y="1767.5">KML PATH</actioncontainer>
+    <actioncontainer id="t19" x="-560.0" y="1662.5">KML CMD</actioncontainer>
+    <conditioncontainer id="t20" x="-805.0" y="1417.5">PP</conditioncontainer>
+    <actioncontainer id="t21" x="-560.0" y="752.5">ORS</actioncontainer>
+    <conditioncontainer id="t22" x="-560.0" y="402.5">   OK   </conditioncontainer>
+    <actioncontainer id="t23" x="-560.0" y="1137.5">SHELL CODE</actioncontainer>
+    <actioncontainer id="t24" x="-560.0" y="1242.5">RUN SH</actioncontainer>
+    <actioncontainer id="t25" x="-560.0" y="647.5">Execute Root Command: rm /storage/emulated/0/Android/application/SPFDB/path_polyline.kml &amp;&amp; rm /storage/emulated/0/Android/application/SPFDB/decode.txt in </actioncontainer>
+    <actioncontainer id="t26" x="-560.0" y="927.5">IMPORT
+BASE</actioncontainer>
+    <actioncontainer id="t27" x="-560.0" y="-367.5">DESTINATION</actioncontainer>
+    <actioncontainer id="t28" x="-315.0" y="-52.5">Message Dialog: ไม่สามารถจับตำแหน่งจาก GMAP // </actioncontainer>
+    <conditioncontainer id="t29" x="-560.0" y="-227.5">     OK     </conditioncontainer>
+    <actioncontainer id="t30" x="-560.0" y="-52.5">MAP CONV</actioncontainer>
+    <notecontainer id="t31" x="315.0" y="402.5" w="280.0" h="105.0">Geoapify NON ENCODED
+ORS ✓
+OSRM ✓</notecontainer>
+    <notecontainer id="t32" x="245.0" y="262.5" w="140.0" h="105.0">summary</notecontainer>
+    <actioncontainer id="t33" x="245.0" y="157.5">HTTP Request: GET http://router.project-osrm.org/route/v1/driving/100.349335,13.706248;100.346376,13.719743?geometries=polyline&amp;overview=full   store in response</actioncontainer>
+    <notecontainer id="t34" x="245.0" y="52.5" w="140.0" h="105.0">90</notecontainer>
+    <actioncontainer id="t35" x="-1015.0" y="1032.5">PATH PROCESS</actioncontainer>
+    <connection from="t1" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t15" to="t20" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
+    <connection from="t16" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t18" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t19" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t20" to="t6" type="TRUE" sourcePosition="NORTH" targetPosition="EAST" />
+    <connection from="t21" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t22" to="t25" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t23" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t24" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t25" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t26" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t27" to="t29" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t29" to="t30" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t30" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t30" to="t28" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
   </flow>
   <flow type="flow">
     <name>CR00: BOOT</name>
@@ -11487,78 +11686,6 @@ MENU
     <connection from="t19" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t21" to="t14" type="NORMAL" sourcePosition="WEST" targetPosition="WEST" />
     <connection from="t22" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-  </flow>
-  <flow type="flow">
-    <name>XXX: PATH MOCK</name>
-    <description> </description>
-    <group>📌</group>
-    <enabled>true</enabled>
-    <executionPolicy>SKIP</executionPolicy>
-    <emergencyStopCount>999999</emergencyStopCount>
-    <triggercontainer id="t1" x="-560.0" y="-542.5" />
-    <actioncontainer id="t2" x="420.0" y="367.5">ROUTEP</actioncontainer>
-    <actioncontainer id="t3" x="420.0" y="262.5">MULTPOINT</actioncontainer>
-    <actioncontainer id="t4" x="420.0" y="157.5">B-STOP  </actioncontainer>
-    <actioncontainer id="t5" x="-1540.0" y="-367.5">MOCK POINTn</actioncontainer>
-    <actioncontainer id="t6" x="-1015.0" y="437.5">DECODE TXT</actioncontainer>
-    <conditioncontainer id="t7" x="-1015.0" y="752.5">
-
-   ok    
-
-</conditioncontainer>
-    <actioncontainer id="t8" x="-1015.0" y="577.5">CC</actioncontainer>
-    <actioncontainer id="t9" x="-1015.0" y="927.5">TIMER</actioncontainer>
-    <actioncontainer id="t10" x="420.0" y="472.5">Script: parameter= 'transportMode=car&amp;'+ 'origin=52.5308,13.3847&amp;'+ 'destination=52.5264,13.3686&amp;'+ 'return=summary,polyline&amp;'+ 'apiKey=nt9ob12ZKWo0hPk18-wL3_KmUtCTtuQT0KwRCUvBIR0'</actioncontainer>
-    <conditioncontainer id="t11" x="630.0" y="892.5">     DEBUG    </conditioncontainer>
-    <actioncontainer id="t12" x="245.0" y="612.5">RUN SHk</actioncontainer>
-    <notecontainer id="t13" x="315.0" y="437.5" w="140.0" h="35.0">HERE API XXX</notecontainer>
-    <notecontainer id="t14" x="245.0" y="525.0" w="140.0" h="70.0">PATH EXPORT</notecontainer>
-    <actioncontainer id="t15" x="-560.0" y="1417.5">DECODE TXT</actioncontainer>
-    <actioncontainer id="t16" x="-560.0" y="1032.5">ENCODE</actioncontainer>
-    <actioncontainer id="t17" x="-560.0" y="1872.5">RM PATHTEMP</actioncontainer>
-    <actioncontainer id="t18" x="-560.0" y="1767.5">KML PATH</actioncontainer>
-    <actioncontainer id="t19" x="-560.0" y="1662.5">KML CMD</actioncontainer>
-    <conditioncontainer id="t20" x="-805.0" y="1417.5">PP</conditioncontainer>
-    <actioncontainer id="t21" x="-560.0" y="752.5">ORS</actioncontainer>
-    <conditioncontainer id="t22" x="-560.0" y="402.5">   OK   </conditioncontainer>
-    <actioncontainer id="t23" x="-560.0" y="1137.5">SHELL CODE</actioncontainer>
-    <actioncontainer id="t24" x="-560.0" y="1242.5">RUN SH</actioncontainer>
-    <actioncontainer id="t25" x="-560.0" y="647.5">Execute Root Command: rm /storage/emulated/0/Android/application/SPFDB/path_polyline.kml &amp;&amp; rm /storage/emulated/0/Android/application/SPFDB/decode.txt in </actioncontainer>
-    <actioncontainer id="t26" x="-560.0" y="927.5">IMPORT
-BASE</actioncontainer>
-    <actioncontainer id="t27" x="-560.0" y="-367.5">DESTINATION</actioncontainer>
-    <actioncontainer id="t28" x="-315.0" y="-52.5">Message Dialog: ไม่สามารถจับตำแหน่งจาก GMAP // </actioncontainer>
-    <conditioncontainer id="t29" x="-560.0" y="-227.5">     OK     </conditioncontainer>
-    <actioncontainer id="t30" x="-560.0" y="-52.5">MAP CONV</actioncontainer>
-    <notecontainer id="t31" x="315.0" y="402.5" w="280.0" h="105.0">Geoapify NON ENCODED
-ORS ✓
-OSRM ✓</notecontainer>
-    <notecontainer id="t32" x="245.0" y="262.5" w="140.0" h="105.0">summary</notecontainer>
-    <actioncontainer id="t33" x="245.0" y="157.5">HTTP Request: GET http://router.project-osrm.org/route/v1/driving/100.349335,13.706248;100.346376,13.719743?geometries=polyline&amp;overview=full   store in response</actioncontainer>
-    <notecontainer id="t34" x="245.0" y="52.5" w="140.0" h="105.0">90</notecontainer>
-    <actioncontainer id="t35" x="-1015.0" y="1032.5">PATH PROCESS</actioncontainer>
-    <connection from="t1" to="t27" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t35" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t15" to="t19" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t15" to="t20" type="NORMAL" sourcePosition="WEST" targetPosition="EAST" />
-    <connection from="t16" to="t23" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t18" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t19" to="t18" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t20" to="t6" type="TRUE" sourcePosition="NORTH" targetPosition="EAST" />
-    <connection from="t21" to="t26" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t22" to="t25" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t23" to="t24" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t24" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t25" to="t21" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t26" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t27" to="t29" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t29" to="t30" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t30" to="t22" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t30" to="t28" type="EXCEPTION" sourcePosition="EAST" targetPosition="WEST" />
   </flow>
   <flow type="flow">
     <name>♪   ANYDESK</name>
