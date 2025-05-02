@@ -99,6 +99,21 @@
     <textFilter>แชร์หน้าจอ</textFilter>
     <removeNonPrintableCharacters>false</removeNonPrintableCharacters>
   </trigger>
+  <trigger type="command_output">
+    <useDefaultName>false</useDefaultName>
+    <name>Command Output: logcat | grep "adding package" (root) containggs text </name>
+    <enabled>true</enabled>
+    <command>logcat | grep "adding package"</command>
+    <root>true</root>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <textMatchType>CONTAINS_TEXT</textMatchType>
+    <containedString></containedString>
+    <skipInitialOutput>true</skipInitialOutput>
+    <skipInitialOutputMillis>2000</skipInitialOutputMillis>
+    <keepDeviceAwake>false</keepDeviceAwake>
+    <logOutput>false</logOutput>
+  </trigger>
   <trigger type="file_observer">
     <useDefaultName>false</useDefaultName>
     <name>EX-MAP MAKER</name>
@@ -116,6 +131,21 @@
     <eventTypeMovedTo>false</eventTypeMovedTo>
     <eventTypeMoveSelf>false</eventTypeMoveSelf>
     <eventTypeOpen>false</eventTypeOpen>
+  </trigger>
+  <trigger type="general_broadcast">
+    <useDefaultName>true</useDefaultName>
+    <name>General Broadcast: on android.intent.action.PACKAGE_ADDED</name>
+    <enabled>true</enabled>
+    <action>android.intent.action.PACKAGE_ADDED</action>
+    <categoryList></categoryList>
+    <dataSchemeList></dataSchemeList>
+    <dataAuthorityList></dataAuthorityList>
+    <dataPathLiteralList></dataPathLiteralList>
+    <dataPathPrefixList></dataPathPrefixList>
+    <dataPathGlobList></dataPathGlobList>
+    <dataTypeList></dataTypeList>
+    <extras></extras>
+    <receiveInitialStickyBroadcast>true</receiveInitialStickyBroadcast>
   </trigger>
   <trigger type="http_request">
     <useDefaultName>false</useDefaultName>
@@ -11549,6 +11579,18 @@ MENU
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+  <flow type="flow">
+    <name>Flow5</name>
+    <group>MOCK</group>
+    <enabled>true</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <conditioncontainer id="t1" x="-35.0" y="367.5">     DEBUG    </conditioncontainer>
+    <triggercontainer id="t2" x="70.0" y="52.5">
+      <trigger>General Broadcast: on android.intent.action.PACKAGE_ADDED</trigger>
+      <trigger>Command Output: logcat | grep "adding package" (root) containggs text </trigger>
+    </triggercontainer>
+    <connection from="t2" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>SHOPEE-RESRAURANT</name>
