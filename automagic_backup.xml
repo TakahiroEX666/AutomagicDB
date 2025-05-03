@@ -11895,7 +11895,7 @@ AUTOMAGIC</actioncontainer>
     <triggercontainer id="t1" x="0.0" y="87.5">
       <trigger>TOAST</trigger>
     </triggercontainer>
-    <actioncontainer id="t2" x="-7.6293945E-6" y="262.49997">Sleephh: 1s (keep device awake)</actioncontainer>
+    <actioncontainer id="t2" x="0.0" y="262.5">Sleephh: 1s (keep device awake)</actioncontainer>
     <actioncontainer id="t3" x="0.0" y="367.5">LK</actioncontainer>
     <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
