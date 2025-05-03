@@ -10535,7 +10535,7 @@ System.out.println(minutes + " นาที " + seconds + " วินาที")
     <actioncontainer id="t24" x="70.0" y="-1277.5">Script: route=newMapFromValues("mode","motorcycle","agents",newList(),"jobs",newList()); for (i in [0 to length(file_text)-1]) { if(contains(file_text[i][0],"CUST") and not contains(file_text[i][0],"FIX")) { addElement(route["jobs"],newMapFromValues( "location",newList(toNumber(file_text[i][3]),toNumber(file_text[i][2])), "duration",0) ); } } addElement(route["agents"],newMapFromValues( "start_location",newList(100.350930,13.745119), "end_location", newList(100.344338,13.717727)) ); /*addElement(route["locations"],newMapFromValues( "id","warehouse-0", "location",newList(100.350930,13.745119) ));*/ route=toJSON(route)</actioncontainer>
     <conditioncontainer id="t25" x="35.0" y="-787.5">     DEBUG    </conditioncontainer>
     <actioncontainer id="t26" x="-210.0" y="-1102.5">1-URI</actioncontainer>
-    <actioncontainer id="t27" x="-210.00002" y="-1662.5">SPLITS V3s</actioncontainer>
+    <actioncontainer id="t27" x="-210.0" y="-1662.5">SPLITS V3s</actioncontainer>
     <actioncontainer id="t28" x="70.0" y="-1067.5">Scripbbjt: </actioncontainer>
     <connection from="t1" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t9" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
