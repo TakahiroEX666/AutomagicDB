@@ -11590,6 +11590,15 @@ MENU
       <trigger>General Broadcast: on android.intent.action.PACKAGE_ADDED</trigger>
       <trigger>Command Output: logcat | grep "adding package" (root) containggs text </trigger>
     </triggercontainer>
+    <notecontainer id="t3" x="-280.0" y="-122.5" w="140.0" h="105.0">app.traced_it
+com.dvdb.bergnotes
+com.kin.easynotes
+com.standardnotes
+com.mshdabiola.playnotepad.foss
+com.hearthborn.studios.notingnotes
+com.standardnotes
+com.amplenote
+com.yygg.note.app</notecontainer>
     <connection from="t2" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
