@@ -2973,6 +2973,18 @@ latlng=lat+","+lng
   </action>
   <action type="execute_root_command">
     <useDefaultName>true</useDefaultName>
+    <name>Execute Root Command: am start -a android.intent.action.VIEW -d "wifihotspot://turnon" in </name>
+    <command>am start -a android.intent.action.VIEW -d "wifihotspot://turnon"</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
+  </action>
+  <action type="execute_root_command">
+    <useDefaultName>true</useDefaultName>
     <name>Execute Root Command: cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121 in </name>
     <command>cmd activity start --user 0 -a android.intent.action.SEND -t image/jpeg --eu android.intent.extra.STREAM content://media/external/images/media/1000019537 -f 453509121</command>
     <user></user>
@@ -11060,29 +11072,30 @@ OSRM ✓</notecontainer>
     <group>          ♻️  TKH-CONNECT</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="-17.5">
+    <actioncontainer id="t1" x="350.0" y="402.5">SIM_SELECT-F</actioncontainer>
+    <actioncontainer id="t2" x="350.0" y="507.5">IP-F</actioncontainer>
+    <actioncontainer id="t3" x="350.0" y="1172.5">HS</actioncontainer>
+    <actioncontainer id="t4" x="-315.0" y="367.5">RENDER SERVER</actioncontainer>
+    <actioncontainer id="t5" x="350.0" y="1067.5">ANYDESK</actioncontainer>
+    <conditioncontainer id="t6" x="70.0" y="227.5">10m </conditioncontainer>
+    <actioncontainer id="t7" x="70.0" y="402.5">APPOPS ANYDESK</actioncontainer>
+    <actioncontainer id="t8" x="-105.0" y="402.5">BATT</actioncontainer>
+    <conditioncontainer id="t9" x="350.0" y="682.5">SIM_MAIN</conditioncontainer>
+    <actioncontainer id="t10" x="350.0" y="857.5">HSPOT:ON</actioncontainer>
+    <triggercontainer id="t11" x="34.999996" y="682.5">
       <trigger>10m </trigger>
       <trigger>BOOT</trigger>
     </triggercontainer>
-    <actioncontainer id="t2" x="350.0" y="402.5">SIM_SELECT-F</actioncontainer>
-    <actioncontainer id="t3" x="350.0" y="507.5">IP-F</actioncontainer>
-    <conditioncontainer id="t4" x="350.0" y="682.5">SIM_MAIN</conditioncontainer>
-    <actioncontainer id="t5" x="350.0" y="1172.5">HS</actioncontainer>
-    <actioncontainer id="t6" x="350.0" y="857.5">HSPOT:ON</actioncontainer>
-    <actioncontainer id="t7" x="-315.0" y="367.5">RENDER SERVER</actioncontainer>
-    <actioncontainer id="t8" x="350.0" y="1067.5">ANYDESK</actioncontainer>
-    <conditioncontainer id="t9" x="70.0" y="227.5">10m </conditioncontainer>
-    <actioncontainer id="t10" x="70.0" y="402.5">APPOPS ANYDESK</actioncontainer>
-    <actioncontainer id="t11" x="-105.0" y="402.5">BATT</actioncontainer>
-    <connection from="t1" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t6" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t9" to="t10" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t11" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t12" x="-35.0" y="857.5">Execute Root Command: am start -a android.intent.action.VIEW -d "wifihotspot://turnon" in </actioncontainer>
+    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t1" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t6" to="t7" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t8" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t10" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>CR01: SIM SELECT</name>
