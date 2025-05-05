@@ -11072,30 +11072,30 @@ OSRM ✓</notecontainer>
     <group>          ♻️  TKH-CONNECT</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <actioncontainer id="t1" x="350.0" y="402.5">SIM_SELECT-F</actioncontainer>
-    <actioncontainer id="t2" x="350.0" y="507.5">IP-F</actioncontainer>
-    <actioncontainer id="t3" x="350.0" y="1172.5">HS</actioncontainer>
-    <actioncontainer id="t4" x="-315.0" y="367.5">RENDER SERVER</actioncontainer>
-    <actioncontainer id="t5" x="350.0" y="1067.5">ANYDESK</actioncontainer>
-    <conditioncontainer id="t6" x="70.0" y="227.5">10m </conditioncontainer>
-    <actioncontainer id="t7" x="70.0" y="402.5">APPOPS ANYDESK</actioncontainer>
-    <actioncontainer id="t8" x="-105.0" y="402.5">BATT</actioncontainer>
-    <conditioncontainer id="t9" x="350.0" y="682.5">SIM_MAIN</conditioncontainer>
-    <actioncontainer id="t10" x="350.0" y="857.5">HSPOT:ON</actioncontainer>
-    <triggercontainer id="t11" x="34.999996" y="682.5">
+    <triggercontainer id="t1" x="35.0" y="682.5">
       <trigger>10m </trigger>
       <trigger>BOOT</trigger>
     </triggercontainer>
+    <actioncontainer id="t2" x="350.0" y="402.5">SIM_SELECT-F</actioncontainer>
+    <actioncontainer id="t3" x="350.0" y="507.5">IP-F</actioncontainer>
+    <actioncontainer id="t4" x="350.0" y="1172.5">HS</actioncontainer>
+    <actioncontainer id="t5" x="-315.0" y="367.5">RENDER SERVER</actioncontainer>
+    <actioncontainer id="t6" x="350.0" y="1067.5">ANYDESK</actioncontainer>
+    <conditioncontainer id="t7" x="70.0" y="227.5">10m </conditioncontainer>
+    <actioncontainer id="t8" x="70.0" y="402.5">APPOPS ANYDESK</actioncontainer>
+    <actioncontainer id="t9" x="-105.0" y="402.5">BATT</actioncontainer>
+    <conditioncontainer id="t10" x="350.0" y="682.5">SIM_MAIN</conditioncontainer>
+    <actioncontainer id="t11" x="350.0" y="857.5">HSPOT:ON</actioncontainer>
     <actioncontainer id="t12" x="-35.0" y="857.5">Execute Root Command: am start -a android.intent.action.VIEW -d "wifihotspot://turnon" in </actioncontainer>
-    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t1" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t6" to="t7" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t8" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t10" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t7" to="t8" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t9" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t11" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>CR01: SIM SELECT</name>
