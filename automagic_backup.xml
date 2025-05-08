@@ -868,6 +868,17 @@ dy=screen_y-c_y;
   </condition>
   <condition type="expression">
     <useDefaultName>true</useDefaultName>
+    <name>Expression: apps= "com.trello|" ; findAll(stdout,apps)!="[]"</name>
+    <expression>apps=
+
+
+"com.trello|"
+;
+
+findAll(stdout,apps)!="[]"</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>true</useDefaultName>
     <name>Expression: index &lt; length(files);</name>
     <expression>index &lt; length(files);</expression>
   </condition>
@@ -10289,26 +10300,26 @@ TAKE, DENY</actioncontainer>
     <conditioncontainer id="t7" x="35.0" y="437.5">IGNORE </conditioncontainer>
     <actioncontainer id="t8" x="35.0" y="612.5">=</actioncontainer>
     <notecontainer id="t9" x="210.0" y="612.5" w="140.0" h="105.0">เพิ่ม  previous_income</notecontainer>
-    <actioncontainer id="t10" x="35.0" y="-367.5">SO2</actioncontainer>
-    <actioncontainer id="t11" x="35.0" y="-227.5">
+    <actioncontainer id="t10" x="35.0" y="-227.5">
 
 
 
 
 
     </actioncontainer>
-    <connection from="t1" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <actioncontainer id="t11" x="35.0" y="-367.5">SO2</actioncontainer>
+    <connection from="t1" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t6" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t6" to="t7" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t6" to="t7" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t7" to="t6" type="TRUE" sourcePosition="WEST" targetPosition="WEST" />
     <connection from="t7" to="t8" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t11" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t10" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#24  FINISHED</name>
@@ -11600,12 +11611,12 @@ MENU
     <group>MOCK</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <triggercontainer id="t1" x="70.0" y="52.5">
+    <conditioncontainer id="t1" x="-175.00003" y="157.50002">     DEBUG    </conditioncontainer>
+    <triggercontainer id="t2" x="70.0" y="52.5">
       <trigger>General Broadcast: on android.intent.action.PACKAGE_ADDED</trigger>
       <trigger>Command Output: logcat | grep "adding package" (root) containggs text </trigger>
     </triggercontainer>
-    <conditioncontainer id="t2" x="-35.0" y="367.5">     DEBUG    </conditioncontainer>
-    <notecontainer id="t3" x="-280.0" y="-122.5" w="140.0" h="105.0">app.traced_it
+    <notecontainer id="t3" x="-175.0" y="52.5" w="140.0" h="105.0">app.traced_it
 com.dvdb.bergnotes
 com.kin.easynotes
 com.standardnotes
@@ -11617,7 +11628,8 @@ com.yygg.note.app
 com.splendapps.adler
 com.i3arty.memori_notes
 </notecontainer>
-    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <conditioncontainer id="t4" x="70.0" y="262.5">Expression: apps= "com.trello|" ; findAll(stdout,apps)!="[]"</conditioncontainer>
+    <connection from="t2" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>SHOPEE-RESRAURANT</name>
