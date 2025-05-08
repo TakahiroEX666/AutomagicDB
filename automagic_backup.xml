@@ -110,7 +110,7 @@
     <textMatchType>CONTAINS_TEXT</textMatchType>
     <containedString></containedString>
     <skipInitialOutput>true</skipInitialOutput>
-    <skipInitialOutputMillis>2000</skipInitialOutputMillis>
+    <skipInitialOutputMillis>1000</skipInitialOutputMillis>
     <keepDeviceAwake>false</keepDeviceAwake>
     <logOutput>false</logOutput>
   </trigger>
@@ -868,14 +868,25 @@ dy=screen_y-c_y;
   </condition>
   <condition type="expression">
     <useDefaultName>true</useDefaultName>
-    <name>Expression: apps= "com.trello|" ; findAll(stdout,apps)!="[]"</name>
+    <name>Expression: apps= "app.traced_it|"+ "com.dvdb.bergnotes|"+ "com.kin.easynotes|"+ "com.standardnotes|"+ "com.mshdabiola.playnotepad.foss|"+ "com.hearthborn.studios.notingnotes|"+ "com.standardnotes|"+ "com.amplenote|"+ "com.yygg.note.app|"+ "com.splendapps.adler|"+ "com.i3arty.memori_notes|"+ "com.trello" ; func=findAll(output,apps); func!="[]";</name>
     <expression>apps=
 
-
-"com.trello|"
+"app.traced_it|"+
+"com.dvdb.bergnotes|"+
+"com.kin.easynotes|"+
+"com.standardnotes|"+
+"com.mshdabiola.playnotepad.foss|"+
+"com.hearthborn.studios.notingnotes|"+
+"com.standardnotes|"+
+"com.amplenote|"+
+"com.yygg.note.app|"+
+"com.splendapps.adler|"+
+"com.i3arty.memori_notes|"+
+"com.trello"
 ;
 
-findAll(stdout,apps)!="[]"</expression>
+func=findAll(output,apps);
+func!="[]";</expression>
   </condition>
   <condition type="expression">
     <useDefaultName>true</useDefaultName>
@@ -3062,6 +3073,18 @@ latlng=lat+","+lng
     <useDefaultName>true</useDefaultName>
     <name>Execute Root Command: ls -ltr /storage/emulated/0/ in </name>
     <command>ls -ltr /storage/emulated/0/</command>
+    <user></user>
+    <seContext></seContext>
+    <workingDirectory></workingDirectory>
+    <timeout>300000</timeout>
+    <variableStdout>stdout</variableStdout>
+    <variableStderr>stderr</variableStderr>
+    <variableExitCode>exit_code</variableExitCode>
+  </action>
+  <action type="execute_root_command">
+    <useDefaultName>true</useDefaultName>
+    <name>Execute Root Command: pm uninstall -k --user 0 {func[0]} in </name>
+    <command>pm uninstall -k --user 0 {func[0]}</command>
     <user></user>
     <seContext></seContext>
     <workingDirectory></workingDirectory>
@@ -5537,6 +5560,15 @@ else {
     <buttonLabel></buttonLabel>
     <timeoutEnabled>false</timeoutEnabled>
     <timeout>60000</timeout>
+  </action>
+  <action type="message_dialog">
+    <useDefaultName>true</useDefaultName>
+    <name>Message Dialog: Uninstall Package: {func[0]} </name>
+    <title>Uninstall Package: {func[0]}</title>
+    <message></message>
+    <buttonLabel></buttonLabel>
+    <timeoutEnabled>true</timeoutEnabled>
+    <timeout>5000</timeout>
   </action>
   <action type="message_dialog">
     <useDefaultName>true</useDefaultName>
@@ -8676,6 +8708,13 @@ for (v in getVariableNames()) {if (NOT matches(v, "global_.*|flow_name|trigger|v
 removeVariable("v");
 removeVariable("sTypeOut");</script>
   </action>
+  <action type="send_wake_on_lan_packet">
+    <useDefaultName>true</useDefaultName>
+    <name>Send Wake on LAN Packet: 192.168.1.255:9, 00:00:00:00:00:00</name>
+    <host>192.168.1.255</host>
+    <port>9</port>
+    <macAddress>00:00:00:00:00:00</macAddress>
+  </action>
   <action type="set_flow_state">
     <useDefaultName>true</useDefaultName>
     <name>Set Flow State: Disable (15)  NOKILL</name>
@@ -11611,12 +11650,7 @@ MENU
     <group>MOCK</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <conditioncontainer id="t1" x="-175.00003" y="157.50002">     DEBUG    </conditioncontainer>
-    <triggercontainer id="t2" x="70.0" y="52.5">
-      <trigger>General Broadcast: on android.intent.action.PACKAGE_ADDED</trigger>
-      <trigger>Command Output: logcat | grep "adding package" (root) containggs text </trigger>
-    </triggercontainer>
-    <notecontainer id="t3" x="-175.0" y="52.5" w="140.0" h="105.0">app.traced_it
+    <notecontainer id="t1" x="-175.0" y="52.5" w="140.0" h="105.0">app.traced_it
 com.dvdb.bergnotes
 com.kin.easynotes
 com.standardnotes
@@ -11628,8 +11662,17 @@ com.yygg.note.app
 com.splendapps.adler
 com.i3arty.memori_notes
 </notecontainer>
-    <conditioncontainer id="t4" x="70.0" y="262.5">Expression: apps= "com.trello|" ; findAll(stdout,apps)!="[]"</conditioncontainer>
-    <connection from="t2" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <triggercontainer id="t2" x="70.0" y="52.5">
+      <trigger>General Broadcast: on android.intent.action.PACKAGE_ADDED</trigger>
+      <trigger>Command Output: logcat | grep "adding package" (root) containggs text </trigger>
+    </triggercontainer>
+    <actioncontainer id="t3" x="-349.99994" y="262.50006">Send Wake on LAN Packet: 192.168.1.255:9, 00:00:00:00:00:00</actioncontainer>
+    <actioncontainer id="t4" x="69.99999" y="437.5">Execute Root Command: pm uninstall -k --user 0 {func[0]} in </actioncontainer>
+    <conditioncontainer id="t5" x="70.0" y="262.5">Expression: apps= "app.traced_it|"+ "com.dvdb.bergnotes|"+ "com.kin.easynotes|"+ "com.standardnotes|"+ "com.mshdabiola.playnotepad.foss|"+ "com.hearthborn.studios.notingnotes|"+ "com.standardnotes|"+ "com.amplenote|"+ "com.yygg.note.app|"+ "com.splendapps.adler|"+ "com.i3arty.memori_notes|"+ "com.trello" ; func=findAll(output,apps); func!="[]";</conditioncontainer>
+    <actioncontainer id="t6" x="70.000015" y="647.5">Message Dialog: Uninstall Package: {func[0]} </actioncontainer>
+    <connection from="t2" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>SHOPEE-RESRAURANT</name>
