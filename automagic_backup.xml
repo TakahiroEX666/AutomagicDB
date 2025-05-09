@@ -10327,38 +10327,38 @@ TAKE, DENY</actioncontainer>
     <enabled>false</enabled>
     <executionPolicy>SKIP</executionPolicy>
     <emergencyStopCount>999999</emergencyStopCount>
-    <actioncontainer id="t1" x="-210.0" y="87.5">❌
+    <triggercontainer id="t1" x="35.0" y="-507.5">
+      <trigger>SPF-TAKE</trigger>
+    </triggercontainer>
+    <actioncontainer id="t2" x="-210.0" y="87.5">❌
 TAKE, DENY</actioncontainer>
-    <actioncontainer id="t2" x="-350.0" y="87.5">HIDE DENY,DETAIL</actioncontainer>
-    <conditioncontainer id="t3" x="35.0" y="87.5">ONGOING</conditioncontainer>
-    <conditioncontainer id="t4" x="35.0" y="297.5">..</conditioncontainer>
-    <conditioncontainer id="t5" x="35.0" y="437.5">IGNORE </conditioncontainer>
-    <actioncontainer id="t6" x="35.0" y="612.5">=</actioncontainer>
-    <notecontainer id="t7" x="210.0" y="612.5" w="140.0" h="105.0">เพิ่ม  previous_income</notecontainer>
-    <actioncontainer id="t8" x="-210.0" y="192.5">STOP INC</actioncontainer>
-    <actioncontainer id="t9" x="35.0" y="-227.5">
+    <actioncontainer id="t3" x="-350.0" y="87.5">HIDE DENY,DETAIL</actioncontainer>
+    <conditioncontainer id="t4" x="35.0" y="87.5">ONGOING</conditioncontainer>
+    <conditioncontainer id="t5" x="35.0" y="297.5">..</conditioncontainer>
+    <conditioncontainer id="t6" x="35.0" y="437.5">IGNORE </conditioncontainer>
+    <actioncontainer id="t7" x="35.0" y="612.5">=</actioncontainer>
+    <notecontainer id="t8" x="210.0" y="612.5" w="140.0" h="105.0">เพิ่ม  previous_income</notecontainer>
+    <actioncontainer id="t9" x="-210.0" y="192.5">STOP INC</actioncontainer>
+    <actioncontainer id="t10" x="35.0" y="-227.5">
 
 
 
 
 
     </actioncontainer>
-    <triggercontainer id="t10" x="35.0" y="-507.5">
-      <trigger>SPF-TAKE</trigger>
-    </triggercontainer>
     <actioncontainer id="t11" x="-175.0" y="-367.5">SO2</actioncontainer>
-    <connection from="t1" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t5" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t4" type="TRUE" sourcePosition="WEST" targetPosition="WEST" />
+    <connection from="t5" to="t6" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t6" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t1" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t9" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t11" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t5" type="TRUE" sourcePosition="WEST" targetPosition="WEST" />
+    <connection from="t6" to="t7" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t10" type="EXCEPTION" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t11" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>#24  FINISHED</name>
@@ -11122,30 +11122,30 @@ OSRM ✓</notecontainer>
     <group>          ♻️  TKH-CONNECT</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <actioncontainer id="t1" x="350.0" y="402.5">SIM_SELECT-F</actioncontainer>
-    <actioncontainer id="t2" x="350.0" y="507.5">IP-F</actioncontainer>
-    <actioncontainer id="t3" x="350.0" y="1172.5">HS</actioncontainer>
-    <actioncontainer id="t4" x="350.0" y="1067.5">ANYDESK</actioncontainer>
-    <conditioncontainer id="t5" x="70.0" y="227.5">10m </conditioncontainer>
-    <actioncontainer id="t6" x="70.0" y="402.5">APPOPS ANYDESK</actioncontainer>
-    <actioncontainer id="t7" x="-105.0" y="402.5">BATT</actioncontainer>
-    <actioncontainer id="t8" x="175.00005" y="892.5">HSPOT:ON</actioncontainer>
-    <conditioncontainer id="t9" x="350.0" y="682.5">SIM_MAIN</conditioncontainer>
-    <actioncontainer id="t10" x="349.99997" y="892.5">Execute Root Command: am start -a android.intent.action.VIEW -d "wifihotspot://turnon" in </actioncontainer>
-    <triggercontainer id="t11" x="69.99999" y="52.500008">
+    <triggercontainer id="t1" x="70.0" y="52.500008">
       <trigger>10m </trigger>
       <trigger>BOOT</trigger>
     </triggercontainer>
+    <actioncontainer id="t2" x="350.0" y="402.5">SIM_SELECT-F</actioncontainer>
+    <actioncontainer id="t3" x="350.0" y="507.5">IP-F</actioncontainer>
+    <actioncontainer id="t4" x="350.0" y="1172.5">HS</actioncontainer>
+    <actioncontainer id="t5" x="350.0" y="1067.5">ANYDESK</actioncontainer>
+    <conditioncontainer id="t6" x="70.0" y="227.5">10m </conditioncontainer>
+    <actioncontainer id="t7" x="70.0" y="402.5">APPOPS ANYDESK</actioncontainer>
+    <actioncontainer id="t8" x="-105.0" y="402.5">BATT</actioncontainer>
+    <actioncontainer id="t9" x="175.00005" y="892.5">HSPOT:ON</actioncontainer>
+    <conditioncontainer id="t10" x="350.0" y="682.5">SIM_MAIN</conditioncontainer>
+    <actioncontainer id="t11" x="349.99997" y="892.5">Execute Root Command: am start -a android.intent.action.VIEW -d "wifihotspot://turnon" in </actioncontainer>
     <actioncontainer id="t12" x="-280.0" y="402.5">RENDER SERVER</actioncontainer>
-    <connection from="t1" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t2" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t1" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
-    <connection from="t5" to="t6" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t7" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t10" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t10" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t5" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t2" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t6" to="t7" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t8" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t11" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t11" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
@@ -11651,7 +11651,11 @@ MENU
     <group>MOCK</group>
     <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
-    <notecontainer id="t1" x="-175.0" y="52.5" w="140.0" h="105.0">app.traced_it
+    <triggercontainer id="t1" x="70.0" y="52.5">
+      <trigger>General Broadcast: on android.intent.action.PACKAGE_ADDED</trigger>
+      <trigger>Command Output: logcat | grep "adding package" (root) containggs text </trigger>
+    </triggercontainer>
+    <notecontainer id="t2" x="-175.0" y="52.5" w="140.0" h="105.0">app.traced_it
 com.dvdb.bergnotes
 com.kin.easynotes
 com.standardnotes
@@ -11663,15 +11667,11 @@ com.yygg.note.app
 com.splendapps.adler
 com.i3arty.memori_notes
 </notecontainer>
-    <triggercontainer id="t2" x="70.0" y="52.5">
-      <trigger>General Broadcast: on android.intent.action.PACKAGE_ADDED</trigger>
-      <trigger>Command Output: logcat | grep "adding package" (root) containggs text </trigger>
-    </triggercontainer>
     <actioncontainer id="t3" x="-349.99994" y="262.50006">Send Wake on LAN Packet: 192.168.1.255:9, 00:00:00:00:00:00</actioncontainer>
-    <actioncontainer id="t4" x="69.99999" y="437.5">Execute Root Command: pm uninstall -k --user 0 {func[0]} in </actioncontainer>
+    <actioncontainer id="t4" x="70.0" y="437.5">Execute Root Command: pm uninstall -k --user 0 {func[0]} in </actioncontainer>
     <conditioncontainer id="t5" x="70.0" y="262.5">Expression: apps= "app.traced_it|"+ "com.dvdb.bergnotes|"+ "com.kin.easynotes|"+ "com.standardnotes|"+ "com.mshdabiola.playnotepad.foss|"+ "com.hearthborn.studios.notingnotes|"+ "com.standardnotes|"+ "com.amplenote|"+ "com.yygg.note.app|"+ "com.splendapps.adler|"+ "com.i3arty.memori_notes|"+ "com.trello" ; func=findAll(output,apps); func!="[]";</conditioncontainer>
     <actioncontainer id="t6" x="70.000015" y="647.5">Message Dialog: Uninstall Package: {func[0]} </actioncontainer>
-    <connection from="t2" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t1" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
