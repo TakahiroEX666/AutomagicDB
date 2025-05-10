@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<data version="1.38.0">
+  <trigger type="power_connected">
+    <useDefaultName>false</useDefaultName>
+    <name>C-C</name>
+    <enabled>true</enabled>
+    <powerConnected>true</powerConnected>
+    <chargingACAdapter>true</chargingACAdapter>
+    <chargingUSB>true</chargingUSB>
+    <chargingWireless>true</chargingWireless>
+  </trigger>
+  <trigger type="power_connected">
+    <useDefaultName>false</useDefaultName>
+    <name>C-D</name>
+    <enabled>true</enabled>
+    <powerConnected>false</powerConnected>
+    <chargingACAdapter>true</chargingACAdapter>
+    <chargingUSB>true</chargingUSB>
+    <chargingWireless>true</chargingWireless>
+  </trigger>
+  <condition type="battery_level">
+    <useDefaultName>false</useDefaultName>
+    <name>BATTERY</name>
+    <levelPercentage>50</levelPercentage>
+    <batteryLevelCondition>FULL</batteryLevelCondition>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>CONNECT</name>
+    <expression>calc=newList();
+
+trigger=="C-C" or trigger=="Manual"</expression>
+  </condition>
+  <condition type="expression">
+    <useDefaultName>false</useDefaultName>
+    <name>LEVEL</name>
+    <expression>battery_level&gt;=temp_level</expression>
+  </condition>
+  <action type="sleep">
+    <useDefaultName>false</useDefaultName>
+    <name>5s  </name>
+    <duration>5s</duration>
+    <keepDeviceAwake>true</keepDeviceAwake>
+    <allowWakeupFromDeviceIdle>false</allowWakeupFromDeviceIdle>
+  </action>
+  <action type="sound">
+    <useDefaultName>false</useDefaultName>
+    <name>ALERT-S</name>
+    <soundSourceType>FILE</soundSourceType>
+    <alarmName>Silent</alarmName>
+    <path>https://github.com/TakahiroEX666/AutomagicDB/raw/refs/heads/main/Loudalarm.mp3</path>
+    <audioStreamType>ALARM</audioStreamType>
+    <startPosition></startPosition>
+    <showStopSoundNotification>false</showStopSoundNotification>
+    <waitForSoundToFinish>true</waitForSoundToFinish>
+    <requestAudioFocus>false</requestAudioFocus>
+    <audioFocusType>TRANSIENT</audioFocusType>
+  </action>
+  <action type="script">
+    <useDefaultName>false</useDefaultName>
+    <name>Bvar</name>
+    <script>mAh=(battery_current_now/1000)-(battery_current_now/1000*2);
+temp=battery_temperature/10;
+watt=round((-battery_current_now*battery_voltage/1000000)*10)/10000;
+watt="{watt,numberformat,0.0}";
+
+
+if(temp_level==null) {temp_level=battery_level}
+
+addElement(calc, mAh);
+sum=0;
+
+
+for (i in calc){sum=sum+i;}
+
+yyyy=callJavaMethod(calc, "java.util.List", "size()");
+average=sum/yyyy</script>
+  </action>
+  <action type="remove_notification_status_bar">
+    <useDefaultName>false</useDefaultName>
+    <name>RM15</name>
+    <automagicNotifications>true</automagicNotifications>
+    <all>false</all>
+    <notificationID>15</notificationID>
+    <overall>true</overall>
+    <packageName></packageName>
+    <allOfApp>true</allOfApp>
+    <filterNotificationID></filterNotificationID>
+    <textMatchField>TEXT</textMatchField>
+    <textMatchType>CONTAINS_TEXT</textMatchType>
+    <textFilter></textFilter>
+  </action>
+  <action type="notification_status_bar">
+    <useDefaultName>false</useDefaultName>
+    <name>STATUS-BATT</name>
+    <notificationIconType>BUILTIN</notificationIconType>
+    <notificationIcon>BATTERY</notificationIcon>
+    <customNotificationIcon></customNotificationIcon>
+    <title>[{temp}] {mAh} mA | {average} mA</title>
+    <message></message>
+    <channel>BATTERY</channel>
+    <sound>false</sound>
+    <vibrate>false</vibrate>
+    <flashLED>false</flashLED>
+    <flashLEDColor>#ff00ff00</flashLEDColor>
+    <flashLEDOn>500</flashLEDOn>
+    <flashLEDOff>500</flashLEDOff>
+    <flagLocalOnly>true</flagLocalOnly>
+    <accentColorEnabled>false</accentColorEnabled>
+    <accentColor>#ffff0000</accentColor>
+    <flagOngoing>false</flagOngoing>
+    <flagNoClear>false</flagNoClear>
+    <notificationIDEnabled>true</notificationIDEnabled>
+    <notificationID>15</notificationID>
+    <category>DEFAULT</category>
+    <priority>MIN</priority>
+    <visibility>SECRET</visibility>
+    <messageBigEnabled>false</messageBigEnabled>
+    <messageBig></messageBig>
+    <showProgressbar>true</showProgressbar>
+    <progressbarIndeterminate>false</progressbarIndeterminate>
+    <progressbarValue>{mAh}</progressbarValue>
+    <progressbarMaximum>{average}</progressbarMaximum>
+    <largeIconEnabled>false</largeIconEnabled>
+    <largeIcon></largeIcon>
+    <group>XXX</group>
+    <isGroupSummary>true</isGroupSummary>
+  </action>
+  <action type="stop_flows">
+    <useDefaultName>false</useDefaultName>
+    <name>STOP-SELF</name>
+    <includeFlowNamePatternList>♪   CHARGE-CALC</includeFlowNamePatternList>
+    <excludeFlowNamePatternList></excludeFlowNamePatternList>
+  </action>
+  <flow type="flow">
+    <name>♪   CHARGE-CALC</name>
+    <description>     1.1 bulid 00
+</description>
+    <group>          ♻️  TKH-CONNECT</group>
+    <enabled>true</enabled>
+    <executionPolicy>PARALLEL</executionPolicy>
+    <emergencyStopCount>999999</emergencyStopCount>
+    <triggercontainer id="t1" x="-35.0" y="-437.5">
+      <trigger>C-C</trigger>
+      <trigger>C-D</trigger>
+    </triggercontainer>
+    <notecontainer id="t2" x="245.0" y="-472.5" w="280.0" h="35.0">ICON TEMP</notecontainer>
+    <conditioncontainer id="t3" x="-35.0" y="-227.5">CONNECT</conditioncontainer>
+    <actioncontainer id="t4" x="420.0" y="-227.5">RM15</actioncontainer>
+    <actioncontainer id="t5" x="420.0" y="-122.5">STOP-SELF</actioncontainer>
+    <conditioncontainer id="t6" x="-35.0" y="122.5">BATTERY</conditioncontainer>
+    <actioncontainer id="t7" x="245.0" y="437.5">ALERT-S</actioncontainer>
+    <conditioncontainer id="t8" x="-35.0" y="472.5">LEVEL</conditioncontainer>
+    <actioncontainer id="t9" x="-35.0" y="682.5">5s  </actioncontainer>
+    <actioncontainer id="t10" x="-35.0" y="297.5">Bvar</actioncontainer>
+    <actioncontainer id="t11" x="175.0" y="682.5">STATUS-BATT</actioncontainer>
+    <connection from="t1" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t4" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t3" to="t6" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t10" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t6" type="NORMAL" sourcePosition="NORTH" targetPosition="EAST" />
+    <connection from="t8" to="t9" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t11" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t9" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t8" to="t11" type="FALSE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t9" to="t6" type="NORMAL" sourcePosition="WEST" targetPosition="WEST" />
+    <connection from="t10" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+  </flow>
+</data>
