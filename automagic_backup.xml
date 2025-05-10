@@ -117,7 +117,7 @@
   <trigger type="file_observer">
     <useDefaultName>false</useDefaultName>
     <name>EX-MAP MAKER</name>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <pathList>/storage/emulated/0/Android/application/SPFDB/LOCATION-ENGINE</pathList>
     <eventTypeAccess>false</eventTypeAccess>
     <eventTypeAttrib>false</eventTypeAttrib>
@@ -10553,7 +10553,7 @@ AUTOFILL</actioncontainer>
     <name>#34:  ROUTE PLANNER</name>
     <description> </description>
     <group>  📌</group>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <executionPolicy>PARALLEL</executionPolicy>
     <triggercontainer id="t1" x="-210.0" y="-2607.5">
       <trigger>EX-MAP MAKER</trigger>
