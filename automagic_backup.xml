@@ -11667,10 +11667,10 @@ com.yygg.note.app
 com.splendapps.adler
 com.i3arty.memori_notes
 </notecontainer>
-    <actioncontainer id="t3" x="-349.99994" y="262.50006">Send Wake on LAN Packet: 192.168.1.255:9, 00:00:00:00:00:00</actioncontainer>
+    <actioncontainer id="t3" x="-350.0" y="262.5">Send Wake on LAN Packet: 192.168.1.255:9, 00:00:00:00:00:00</actioncontainer>
     <actioncontainer id="t4" x="70.0" y="437.5">Execute Root Command: pm uninstall -k --user 0 {func[0]} in </actioncontainer>
     <conditioncontainer id="t5" x="70.0" y="262.5">Expression: apps= "app.traced_it|"+ "com.dvdb.bergnotes|"+ "com.kin.easynotes|"+ "com.standardnotes|"+ "com.mshdabiola.playnotepad.foss|"+ "com.hearthborn.studios.notingnotes|"+ "com.standardnotes|"+ "com.amplenote|"+ "com.yygg.note.app|"+ "com.splendapps.adler|"+ "com.i3arty.memori_notes|"+ "com.trello" ; func=findAll(output,apps); func!="[]";</conditioncontainer>
-    <actioncontainer id="t6" x="70.000015" y="647.5">Message Dialog: Uninstall Package: {func[0]} </actioncontainer>
+    <actioncontainer id="t6" x="70.0" y="647.5">Message Dialog: Uninstall Package: {func[0]} </actioncontainer>
     <connection from="t1" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t4" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t4" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
