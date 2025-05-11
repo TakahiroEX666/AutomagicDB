@@ -11864,14 +11864,14 @@ com.i3arty.memori_notes
     </triggercontainer>
     <actioncontainer id="t2" x="280.0" y="-367.5">H-A</actioncontainer>
     <actioncontainer id="t3" x="70.0" y="-367.5">ANYDESK_STATUSBAR</actioncontainer>
-    <conditioncontainer id="t4" x="70.0" y="-647.5">START?</conditioncontainer>
-    <conditioncontainer id="t5" x="280.0" y="-647.5">STOP?</conditioncontainer>
-    <actioncontainer id="t6" x="490.0" y="-367.5">CAST ENABLE</actioncontainer>
-    <connection from="t1" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t4" to="t5" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t5" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t5" to="t6" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <conditioncontainer id="t4" x="280.0" y="-647.5">STOP?</conditioncontainer>
+    <actioncontainer id="t5" x="490.0" y="-367.5">CAST ENABLE</actioncontainer>
+    <conditioncontainer id="t6" x="70.0" y="-647.5">START?</conditioncontainer>
+    <connection from="t1" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t2" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t4" to="t5" type="FALSE" sourcePosition="EAST" targetPosition="NORTH" />
+    <connection from="t6" to="t3" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t4" type="FALSE" sourcePosition="EAST" targetPosition="WEST" />
   </flow>
   <flow type="flow">
     <name>♪   CHARGE-CALC</name>
@@ -11921,38 +11921,38 @@ com.i3arty.memori_notes
     <actioncontainer id="t3" x="-385.0" y="-612.5">GIT
 CONTENT!</actioncontainer>
     <actioncontainer id="t4" x="-70.0" y="-1207.5">SIZE</actioncontainer>
-    <actioncontainer id="t5" x="-70.0" y="-822.5">REPLACEKEY</actioncontainer>
-    <actioncontainer id="t6" x="-70.0" y="-717.5">BASE64
+    <actioncontainer id="t5" x="-70.0" y="-717.5">BASE64
 ENCRYPT</actioncontainer>
-    <actioncontainer id="t7" x="-70.0" y="-612.5">GIT
+    <actioncontainer id="t6" x="-70.0" y="-612.5">GIT
 AUTOMAGIC</actioncontainer>
-    <actioncontainer id="t8" x="-70.0" y="-507.5">GIT UPLOAD</actioncontainer>
-    <conditioncontainer id="t9" x="-70.0" y="-332.5">SHA?</conditioncontainer>
-    <conditioncontainer id="t10" x="-70.0" y="-997.5">DIFF SIZE</conditioncontainer>
-    <notecontainer id="t11" x="-385.0" y="-1732.5" w="140.0" h="35.0">FROM SOURCE</notecontainer>
-    <actioncontainer id="t12" x="-385.0" y="-1417.5">GET_CONTENT</actioncontainer>
-    <actioncontainer id="t13" x="-385.0" y="-1312.5">EXTERNAL-CV</actioncontainer>
-    <actioncontainer id="t14" x="-70.0" y="-1312.5">EXPORT</actioncontainer>
-    <actioncontainer id="t15" x="-70.0" y="-1417.5">FLOWLIST</actioncontainer>
-    <actioncontainer id="t16" x="245.0" y="-612.5">GITJ SHA2</actioncontainer>
-    <actioncontainer id="t17" x="245.0" y="-717.5">GET-SHA</actioncontainer>
-    <connection from="t1" to="t15" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <conditioncontainer id="t7" x="-70.0" y="-332.5">SHA?</conditioncontainer>
+    <conditioncontainer id="t8" x="-70.0" y="-997.5">DIFF SIZE</conditioncontainer>
+    <notecontainer id="t9" x="-385.0" y="-1732.5" w="140.0" h="35.0">FROM SOURCE</notecontainer>
+    <actioncontainer id="t10" x="-385.0" y="-1417.5">GET_CONTENT</actioncontainer>
+    <actioncontainer id="t11" x="-385.0" y="-1312.5">EXTERNAL-CV</actioncontainer>
+    <actioncontainer id="t12" x="-70.0" y="-1312.5">EXPORT</actioncontainer>
+    <actioncontainer id="t13" x="-70.0" y="-1417.5">FLOWLIST</actioncontainer>
+    <actioncontainer id="t14" x="245.0" y="-612.5">GITJ SHA2</actioncontainer>
+    <actioncontainer id="t15" x="245.0" y="-717.5">GET-SHA</actioncontainer>
+    <actioncontainer id="t16" x="-70.0" y="-822.5">REPLACEKEY</actioncontainer>
+    <actioncontainer id="t17" x="-70.0" y="-507.5">GIT UPLOAD</actioncontainer>
+    <connection from="t1" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t2" to="t3" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t3" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
-    <connection from="t4" to="t10" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t3" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="WEST" />
+    <connection from="t4" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
     <connection from="t5" to="t6" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t6" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t7" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t8" to="t9" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t9" to="t17" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
-    <connection from="t10" to="t5" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t13" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t12" to="t11" type="NOTE" sourcePosition="NORTH" targetPosition="SOUTH" />
-    <connection from="t13" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t14" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t6" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t7" to="t15" type="TRUE" sourcePosition="EAST" targetPosition="WEST" />
+    <connection from="t8" to="t16" type="TRUE" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t11" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t10" to="t9" type="NOTE" sourcePosition="NORTH" targetPosition="SOUTH" />
+    <connection from="t11" to="t2" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t12" to="t4" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t13" to="t12" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t14" to="t17" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
     <connection from="t15" to="t14" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
-    <connection from="t16" to="t8" type="NORMAL" sourcePosition="SOUTH" targetPosition="EAST" />
-    <connection from="t17" to="t16" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t16" to="t5" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
+    <connection from="t17" to="t7" type="NORMAL" sourcePosition="SOUTH" targetPosition="NORTH" />
   </flow>
   <flow type="flow">
     <name>♪   GPSSETTER-FIX</name>
